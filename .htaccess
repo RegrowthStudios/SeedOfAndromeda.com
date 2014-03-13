@@ -1,12 +1,20 @@
-RewriteEngine On
-#########################
-# redirect no-www to www
-#########################
-RewriteCond %{HTTP_HOST} !^www\.seedofandromeda\.com$ [NC]
-RewriteRule ^(.*)$ http://www.seedofandromeda.com/$1 [R=301,L]
-
-Redirect 301 /devlog.php http://www.seedofandromeda.com/Blogs.php
-Redirect 301 /videos.php http://www.seedofandromeda.com/Videos.php
-Redirect 301 /login.php http://www.seedofandromeda.com/
-Redirect 301 /create_account.php http://www.seedofandromeda.com/Forums/member.php?action=register
-Redirect 301 /screenshots.php http://www.seedofandromeda.com/Screenshots.php
+RewriteEngine On
+
+
+
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{DOCUMENT_ROOT}/index\.php -f
+RewriteRule ^(.*)$  /index.php?page=$1 [QSA]
+
+
+#########################
+
+# redirect no-www to www
+
+#########################
+
+RewriteCond %{HTTP_HOST} !^www\.seedofandromeda\.com$ [NC]
+RewriteCond %{HTTP_HOST} !^www\.soatest\.local$ [NC]
+RewriteRule ^(.*)$ http://www.seedofandromeda.com/$1 [R=301,L]

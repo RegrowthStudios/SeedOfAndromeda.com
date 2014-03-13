@@ -1,0 +1,9 @@
+.topimg {
+	height: 0;
+	background: none;
+}
+#content-outer {
+	padding: 0;
+	background: #191919;
+	max-height: 593px;
+}

@@ -1,13 +1,6 @@
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-
-
-
 <head>
-
-
-
 <title><?php echo $pagetitle ?></title>
 
 <link rel="shortcut icon" type="image/x-icon"
@@ -18,7 +11,8 @@
 <link rel="stylesheet" href="/styles/Normalise.css" type="text/css" />
 
 <link rel="stylesheet"
-	href="/Assets/Fonts/the_league_of_orbitron/Orbitron.css" type="text/css" />
+	href="/Assets/Fonts/the_league_of_orbitron/Orbitron.css"
+	type="text/css" />
 
 <link href='http://fonts.googleapis.com/css?family=Electrolize'
 	rel='stylesheet' type='text/css'>
@@ -41,8 +35,15 @@
 <meta name="og:url" content="http://www.seedofandromeda.com/">
 
 <meta name="og:image"
-	content="http://www.seedofandromeda.com/Assets/images/HeaderOld.png"><?php
-$loginerr = ( string ) $_GET ['loginerror'];
+	content="http://www.seedofandromeda.com/Assets/images/HeaderOld.png">
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"
+	type="text/javascript"></script>
+
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"
+	type="text/javascript"></script><?php
+$loginerr = ( string ) $_REQUEST ['loginerror'];
 
 if ($loginerr != null) {
 	
@@ -53,7 +54,7 @@ if ($loginerr != null) {
                      </script>";
 }
 
-$logouterr = ( string ) $_GET ['logouterror'];
+$logouterr = ( string ) $_REQUEST ['logouterror'];
 
 if ($logouterr != null) {
 	
@@ -67,7 +68,8 @@ $pagestyle = "styles/pages/" . str_replace ( ".php", ".css", $pagename );
 if (file_exists ( $pagestyle )) {
 	echo '<link rel="stylesheet" href="' . $pagestyle . '" type="text/css" />';
 }
-?></head>
+?>
+</head>
 
 
 
@@ -144,23 +146,18 @@ if (file_exists ( $pagestyle )) {
 
 			<ul id="navigation">
 
-				<li <?php if($cleanpageid == "index"){ ?> class='active'>
-					<a href="#"> <?php } else { ?> > <a
-						href="/"> <?php } ?> Home</a>
-				
-				</li>
+				<li <?php if($cleanpageid == "index"){ ?> class='active'><a href="#"> <?php } else { ?> > <a
+						href="/"> <?php } ?> Home</a></li>
 
 				<li><a href="#">About</a>
 
 					<ul class="dropdown">
 
 						<li <?php if($cleanpageid == "thegame"){ ?> class='active'><a
-							href="#"> <?php } else { ?> > <a
-								href="/thegame"> <?php } ?> The Game</a></li>
+							href="#"> <?php } else { ?> > <a href="/thegame"> <?php } ?> The Game</a></li>
 
 						<li <?php if($cleanpageid == "theteam"){ ?> class='active'><a
-							href="#"> <?php } else { ?> > <a
-								href="/theteam"> <?php } ?> The Team</a></li>
+							href="#"> <?php } else { ?> > <a href="/theteam"> <?php } ?> The Team</a></li>
 
 					</ul></li>
 
@@ -168,17 +165,14 @@ if (file_exists ( $pagestyle )) {
 
 					<ul class="dropdown">
 
-						<li <?php if($cleanpageid == "downloads"){ ?>
-							class='active'><a href="#"> <?php } else { ?> > <a
-								href="/downloads"> <?php } ?> Downloads</a></li>
+						<li <?php if($cleanpageid == "downloads"){ ?> class='active'><a
+							href="#"> <?php } else { ?> > <a href="/downloads"> <?php } ?> Downloads</a></li>
 
 						<li <?php if($cleanpageid == "screenshots"){ ?> class='active'><a
-							href="#"> <?php } else { ?> > <a
-								href="/screenshots"> <?php } ?> Screenshots</a></li>
+							href="#"> <?php } else { ?> > <a href="/screenshots"> <?php } ?> Screenshots</a></li>
 
 						<li <?php if($cleanpageid == "videos"){ ?> class='active'><a
-							href="#"> <?php } else { ?> > <a
-								href="/videos"> <?php } ?> Videos</a></li>
+							href="#"> <?php } else { ?> > <a href="/videos"> <?php } ?> Videos</a></li>
 
 					</ul></li>
 
@@ -186,30 +180,25 @@ if (file_exists ( $pagestyle )) {
 
 					<ul class="dropdown">
 
-						<li <?php if($cleanpageid == "forums"){ ?>
-							class='active'><a href="#"> <?php } else { ?> > <a
-								href="/Forums/"> <?php } ?> Forums</a></li>
+						<li <?php if($cleanpageid == "forums"){ ?> class='active'><a
+							href="#"> <?php } else { ?> > <a href="/Forums/"> <?php } ?> Forums</a></li>
 
 						<li <?php if($cleanpageid == "mods"){ ?> class='active'><a
-							href="#"> <?php } else { ?> > <a
-								href="/underconstruction"> <?php } ?> Mods</a></li>
+							href="#"> <?php } else { ?> > <a href="/underconstruction"> <?php } ?> Mods</a></li>
 
-						<li <?php if($cleanpageid == "irc"){ ?> class='active'><a
-							href="#"> <?php } else { ?> > <a
+						<li <?php if($cleanpageid == "irc"){ ?> class='active'><a href="#"> <?php } else { ?> > <a
 								href="/irc"> <?php } ?> IRC</a></li>
 
-						<li <?php if($cleanpageid == "reddit"){ ?>
-							class='active'><a href="#"> <?php } else { ?> > <a
+						<li <?php if($cleanpageid == "reddit"){ ?> class='active'><a
+							href="#"> <?php } else { ?> > <a
 								href="http://www.reddit.com/r/seedofandromeda/" target="_blank"> <?php } ?> Reddit</a></li>
 
 					</ul></li>
 
-				<li <?php if($cleanpageid == "store"){ ?> class='active'><a
-					href="#"> <?php } else { ?> > <a
+				<li <?php if($cleanpageid == "store"){ ?> class='active'><a href="#"> <?php } else { ?> > <a
 						href="/underconstruction"> <?php } ?> Store</a></li>
 
-				<li <?php if($cleanpageid == "blogs"){ ?> class='active'><a
-					href="#"> <?php } else { ?> > <a
+				<li <?php if($cleanpageid == "blogs"){ ?> class='active'><a href="#"> <?php } else { ?> > <a
 						href="/blogs"> <?php } ?> Dev Blogs</a></li>
 
 			</ul>
@@ -248,9 +237,7 @@ if (file_exists ( $pagestyle )) {
 					</form>
 
 					<div class='register'>
-						<a
-							href="/Forums/member.php?action=register">or
-							Register Now!</a>
+						<a href="/Forums/member.php?action=register">or Register Now!</a>
 					</div>
 
 				</div>

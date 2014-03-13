@@ -23,61 +23,35 @@
 	to build up technologically and regain space flight, with the help of
 	other survivors! The game focusses on modability and customisation,
 	many tools will come packaged with the game, including world, tree,
-	biome and block editors! <br />
-	<br />
-	<a href="http://www.seedofandromeda.com/The%20Game.php"
+	biome and block editors! <br /> <br /> <a
+		href="http://www.seedofandromeda.com/The%20Game.php"
 		style="float: right;">Read more here!</a>
 
 </div>
 
 <div class="tri-double-col">
 
-	<h3>Featured Video</h3>
-<?php
+	<h3>Featured Video</h3>
+	<div id="featured_video"></div>
+	<script type="text/javascript">
+    function showVideo(response) {
+        if(response.data && response.data.items) {
+            var items = response.data.items;
+            if(items.length>0) {
+                var item = items[0];
+                var videoid = "http://www.youtube.com/embed/"+item.id;
+                console.log("Latest ID: '"+videoid+"'");
+                var video = "<iframe width='580' height='326' src='"+videoid+"' frameborder='0' allowfullscreen></iframe>"; 
+                $('#featured_video').html(video);
+            }
+        }
+    }
+    </script>
+	<script type="text/javascript"
+		src="https://gdata.youtube.com/feeds/api/users/UCMlW2qG20hcFYo06rcit4CQ/uploads?max-results=1&orderby=published&v=2&alt=jsonc&callback=showVideo"></script>
 
-// set feed URL
-$feedURL = 'https://gdata.youtube.com/feeds/api/videos?author=UCMlW2qG20hcFYo06rcit4CQ&max-results=1&orderby=published';
 
-// read feed into SimpleXML object
-
-$sxml = simplexml_load_file ( $feedURL );
-
-$i = 0;
-
-foreach ( $sxml->entry as $entry ) {
-	
-	$i ++;
-	
-	if ($i < 2) 
-
-	{
-		
-		// get nodes in media: namespace for media information
-		
-		$media = $entry->children ( 'http://search.yahoo.com/mrss/' );
-		
-		// get video player URL
-		
-		$attrs = $media->group->player->attributes ();
-		
-		$watch = $attrs ['url'];
-		
-		$vars;
-		
-		parse_str ( parse_url ( $watch, PHP_URL_QUERY ), $vars );
-		
-		$id = $vars ['v'];
-		
-		?>
-                    <iframe width="580" height="326"
-		src="https://www.youtube.com/embed/<?php echo $id ?>?wmode=transparent"
-		frameborder="0" allowfullscreen></iframe>
-		<?php
-	}
-}
-
-?>
-                </div>
+</div>
 
 <div class="double-col">
 
@@ -88,7 +62,7 @@ foreach ( $sxml->entry as $entry ) {
 	a side of bugs. Straight after this release, Ben began work on solving
 	reported bugs and bringing performance up to an even more incredible
 	standard than the initial pre-alpha release. <br /> <br /> <img
-		src="Assets/images/Screenshots/Blossoms.jpg" class="clear left image" />
+		src="/Assets/images/Screenshots/Blossoms.jpg" class="clear left image" />
 
 	Meanwhile, the Seed of Andromeda website got an overhaul thanks to the
 	new Website Designer, Matthew, with the assistance of Sebastian's

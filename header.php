@@ -66,7 +66,7 @@ if ($logouterr != null) {
 }
 $pagestyle = "styles/pages/" . str_replace ( ".php", ".css", $pagename );
 if (file_exists ( $pagestyle )) {
-	echo '<link rel="stylesheet" href="' . $pagestyle . '" type="text/css" />';
+	echo '<link rel="stylesheet" href="/' . $pagestyle . '" type="text/css" />';
 }
 ?>
 </head>

@@ -42,7 +42,7 @@
 	<div id="blog-post-footer">
 
 		<p>
-			<a href="http://www.seedofandromeda.com/Blog.php">Read More...</a>
+			<a href="/blog">Read More...</a>
 		</p>
 
 	</div>

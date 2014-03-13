@@ -12,7 +12,7 @@ $pagename = "";
 if (! isset ( $_REQUEST ['page'] )) {
 	$_REQUEST ['page'] = "index";
 }
-$cleanpageid = str_replace ( ".php", "", preg_replace ( '/\s+/', '', strtolower ( $_REQUEST ['page'] ) ) );
+$cleanpageid = preg_replace ( "/[^A-Za-z0-9_]/", '', str_replace ( ".php", "", strtolower ( $_REQUEST ['page'] ) ) );
 $pageurl = $cleanpageid;
 switch ($cleanpageid) {
 	case "index" :

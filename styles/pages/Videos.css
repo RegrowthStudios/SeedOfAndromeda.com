@@ -60,11 +60,11 @@
     position: absolute;
     margin-left: 114px;
     margin-top: -120px;
-    background: url("Assets/images/Video_Play.png");
+    background: url("/Assets/images/Video_Play.png");
     transition: background .2s linear;
 }
 
 .video:hover + .video-play, .video-play:hover {
-    background: url("Assets/images/Video_Play_Hover.png");
+    background: url("/Assets/images/Video_Play_Hover.png");
     cursor: pointer;
 }

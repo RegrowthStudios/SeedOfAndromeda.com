@@ -78,10 +78,12 @@ if ($pageurl != "" && $_REQUEST ['page'] != $pageurl && $page_exists) {
 	echo '<html><body><a href="/' . $pageurl . '/>Page moved</a></body></html>';
 	exit ();
 }
-if(!$page_exists){
+if (! $page_exists) {
 	$pagetitle .= "Not Found";
 }
-include ("header.php");
+if (! isset ( $_REQUEST ['notemplate'] )) {
+	include ("header.php");
+}
 
 if ($page_exists) {
 	include ("pages/" . $pagename);
@@ -90,4 +92,6 @@ if ($page_exists) {
 	include ("pages/404.php");
 }
 
-include ("footer.php");
+if (! isset ( $_REQUEST ['notemplate'] )) {
+	include ("footer.php");
+}

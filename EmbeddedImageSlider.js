@@ -21,16 +21,16 @@
             elem = $(elems.get(0));
             index = 0;
             var src = elem.attr('src');
-            $('.temp-image').attr('src', src).css('display', 'none').show("slide", { direction: "left", easing: "easeInOutCirc" }, "slow");
-            $('.enlarged-image').hide("slide", { direction: "right", easing: "easeInOutCirc" }, "slow", function () {
+            $('.temp-image').attr('src', src).css('display', 'none').show("slide", { direction: "right", easing: "easeInOutCirc" }, "slow");
+            $('.enlarged-image').hide("slide", { direction: "left", easing: "easeInOutCirc" }, "slow", function () {
                 $('.enlarged-image').attr('src', src).fadeIn(0);
             });
         } else {
             elem = $(elems.get(ind + 1));
             index = elems.index(elem);
             var src = elem.attr('src');
-            $('.temp-image').attr('src', src).css('display', 'none').show("slide", { direction: "left", easing: "easeInOutCirc" }, "slow");
-            $('.enlarged-image').hide("slide", { direction: "right", easing: "easeInOutCirc" }, "slow", function () {
+            $('.temp-image').attr('src', src).css('display', 'none').show("slide", { direction: "right", easing: "easeInOutCirc" }, "slow");
+            $('.enlarged-image').hide("slide", { direction: "left", easing: "easeInOutCirc" }, "slow", function () {
                 $('.enlarged-image').attr('src', src).fadeIn(0);
             });
         }
@@ -45,7 +45,7 @@
             index = elems.index(elem);
             var src = elem.attr('src');
             $('.temp-image').attr('src', src).css('display', 'none').show("slide", { direction: "right", easing: "easeInOutCirc" }, "slow");
-            $('.enlarged-image').hide("slide", { direction: "left", easing: "easeInOutCirc" }, "slow", function () {
+            $('.enlarged-image').hide("slide", { direction: "right", easing: "easeInOutCirc" }, "slow", function () {
                 $('.enlarged-image').attr('src', src).fadeIn(0);
             });
         } else {
@@ -53,7 +53,7 @@
             index = elems.index(elem);
             var src = elem.attr('src');
             $('.temp-image').attr('src', src).css('display', 'none').show("slide", { direction: "right", easing: "easeInOutCirc" }, "slow");
-            $('.enlarged-image').hide("slide", { direction: "left", easing: "easeInOutCirc" }, "slow", function () {
+            $('.enlarged-image').hide("slide", { direction: "right", easing: "easeInOutCirc" }, "slow", function () {
                 $('.enlarged-image').attr('src', src).fadeIn(0);
             });
         }

@@ -156,11 +156,11 @@ if (file_exists ( $pagestyle )) {
 
 						<li <?php if($cleanpageid == "thegame"){ ?> class='active'><a
 							href="#"> <?php } else { ?> > <a
-								href="/TheGame"> <?php } ?> The Game</a></li>
+								href="/thegame"> <?php } ?> The Game</a></li>
 
 						<li <?php if($cleanpageid == "theteam"){ ?> class='active'><a
 							href="#"> <?php } else { ?> > <a
-								href="/TheTeam"> <?php } ?> The Team</a></li>
+								href="/theteam"> <?php } ?> The Team</a></li>
 
 					</ul></li>
 
@@ -170,15 +170,15 @@ if (file_exists ( $pagestyle )) {
 
 						<li <?php if($cleanpageid == "downloads"){ ?>
 							class='active'><a href="#"> <?php } else { ?> > <a
-								href="/Downloads"> <?php } ?> Downloads</a></li>
+								href="/downloads"> <?php } ?> Downloads</a></li>
 
 						<li <?php if($cleanpageid == "screenshots"){ ?> class='active'><a
 							href="#"> <?php } else { ?> > <a
-								href="Screenshots"> <?php } ?> Screenshots</a></li>
+								href="/screenshots"> <?php } ?> Screenshots</a></li>
 
 						<li <?php if($cleanpageid == "videos"){ ?> class='active'><a
 							href="#"> <?php } else { ?> > <a
-								href="/Videos"> <?php } ?> Videos</a></li>
+								href="/videos"> <?php } ?> Videos</a></li>
 
 					</ul></li>
 
@@ -192,11 +192,11 @@ if (file_exists ( $pagestyle )) {
 
 						<li <?php if($cleanpageid == "mods"){ ?> class='active'><a
 							href="#"> <?php } else { ?> > <a
-								href="/UnderConstruction"> <?php } ?> Mods</a></li>
+								href="/underconstruction"> <?php } ?> Mods</a></li>
 
 						<li <?php if($cleanpageid == "irc"){ ?> class='active'><a
 							href="#"> <?php } else { ?> > <a
-								href="/IRC"> <?php } ?> IRC</a></li>
+								href="/irc"> <?php } ?> IRC</a></li>
 
 						<li <?php if($cleanpageid == "reddit"){ ?>
 							class='active'><a href="#"> <?php } else { ?> > <a
@@ -206,11 +206,11 @@ if (file_exists ( $pagestyle )) {
 
 				<li <?php if($cleanpageid == "store"){ ?> class='active'><a
 					href="#"> <?php } else { ?> > <a
-						href="/UnderConstruction"> <?php } ?> Store</a></li>
+						href="/underconstruction"> <?php } ?> Store</a></li>
 
 				<li <?php if($cleanpageid == "blogs"){ ?> class='active'><a
 					href="#"> <?php } else { ?> > <a
-						href="/Blogs"> <?php } ?> Dev Blogs</a></li>
+						href="/blogs"> <?php } ?> Dev Blogs</a></li>
 
 			</ul>
     			<?php

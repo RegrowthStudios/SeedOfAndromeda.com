@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<block block_id="StatusUpdates" title="Member Status Updates" version_string="1.0.0" version_id="1" url="http://8wayrun.com/" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="" cache="+1 hours">
+  <admin_templates/>
+  <listeners/>
+  <options>
+    <option option_id="statusupdates_limit" edit_format="spinbox" data_type="unsigned_integer" display_order="1">
+      <option_value>5</option_value>
+      <edit_format_params>min=1</edit_format_params>
+      <sub_options></sub_options>
+      <title>Status Update Limit</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+  </options>
+  <phrases>
+    <phrase title="EWRblock_StatusUpdates_recent"><![CDATA[Recent Status Updates]]></phrase>
+  </phrases>
+  <route_prefixes/>
+  <templates>
+    <template title="EWRblock_StatusUpdates"><![CDATA[<xen:require css="EWRblock_StatusUpdates.css" />
+
+<div class="section avatarList">
+	<div class="secondaryContent" id="statusUpdates">
+		<h3>{xen:phrase EWRblock_StatusUpdates_recent}</h3>
+
+		<xen:if hascontent="true">
+		<ul>
+			<xen:contentcheck>
+			<xen:foreach loop="$StatusUpdates" value="$update">
+				<li>
+					<xen:avatar user="$update" size="s" img="true" />
+					<a href="{xen:link members, $update}" class="username" style="display: inline;">{xen:helper richUserName, $update}</a>
+					<span class="userTitle">{$update.message} (<xen:datetime time="$update.post_date" />)</span>
+				</li>
+			</xen:foreach>
+			</xen:contentcheck>
+		</ul>
+		</xen:if>
+
+		<xen:if is="{$visitor.permissions.profilePost.post}">
+		<div id="AccountMenu" style="width: 100%; margin-top: 10px;" class="findMember">
+			<form action="{xen:link members/post, $visitor}" method="post" class="statusPoster" data-optInOut="OptIn">
+				<textarea style="width: 100%;" name="message" class="textCtrl StatusEditor Elastic" placeholder="{xen:phrase update_your_status}..." rows="1" data-statusEditorCounter="#statusUpdateCount"></textarea>
+				<div class="submitUnit">
+					<span id="statusUpdateCount" title="{xen:phrase characters_remaining}"></span>
+					<input type="submit" class="button primary MenuCloser" value="{xen:phrase post}" accesskey="s" />
+					<input type="hidden" name="_xfToken" value="{$visitor.csrf_token_page}" />
+					<input type="hidden" name="return" value="1" /> 
+				</div>
+			</form>
+		</div>
+		</xen:if>
+	</div>
+</div>]]></template>
+    <template title="EWRblock_StatusUpdates.css"><![CDATA[#statusUpdates #AccountMenu { background: transparent; }]]></template>
+  </templates>
+</block>

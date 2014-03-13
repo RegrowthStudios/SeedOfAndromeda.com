@@ -1,0 +1,62 @@
+#image-frame-inner {
+    width: 700px;
+    height: 480px;
+    background: rgba(255,255,255,0.2);
+    overflow: hidden;
+    margin-left: 98px;
+    float: none;
+    border: 2px #39AECF solid;
+}
+
+#content-outer .image-col > img {
+    width: 202px;
+    height: 162px;
+    box-sizing: border-box;
+    border: 1px #39AECF solid;
+    margin: 0px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    box-shadow: 0px 0px 7px 4px rgba(57,174,207,0.5);
+}
+
+.enlarged-image {
+    width: 700px;
+    height: 480px;
+    z-index: 2;
+}
+
+.temp-image {
+    width: 700px;
+    height: 480px;
+    position: absolute;
+}
+
+.img-next, .img-prev {
+    height: 480px;
+    width: 40px;
+    background: rgba(255,255,255,0.3);
+    transition: background .2s linear;
+    line-height: 480px;
+    text-align: center;
+}
+
+.img-next {
+    margin-top: -480px;
+    margin-right: 38px;
+	float: right;
+}
+
+.img-prev {
+    margin-left: 38px;
+	float: left;
+    margin-top: 4px;
+}
+
+.img-next:hover, .img-prev:hover {
+    background: rgba(255,255,255,0.5);
+    cursor: pointer;
+}
+
+.image:hover {
+    cursor: pointer;
+}

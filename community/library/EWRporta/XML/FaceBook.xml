@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<block block_id="FaceBook" title="Facebook FanBox" version_string="1.0.0" version_id="1" url="http://8wayrun.com/" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="" cache="+1 days">
+  <admin_templates/>
+  <listeners/>
+  <options>
+    <option option_id="facebook_profile" edit_format="textbox" data_type="string" display_order="1">
+      <option_value>https://www.facebook.com/soulcalibur</option_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <title>Facebook Fan Page Link</title>
+      <explain><![CDATA[This is the URL to your fan page.]]></explain>
+    </option>
+  </options>
+  <phrases>
+    <phrase title="EWRblock_FaceBook_group"><![CDATA[Facebook Group]]></phrase>
+  </phrases>
+  <route_prefixes/>
+  <templates>
+    <template title="EWRblock_FaceBook"><![CDATA[<xen:require css="EWRblock_FaceBook.css" />
+
+<div class="section">
+	<div class="secondaryContent" id="facebook">
+		<h3>{xen:phrase EWRblock_FaceBook_group}</h3>
+		<script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script>
+		
+		<div class="facebookOuter">
+			<div class="fb-like-box" data-href="{$option.profile}" data-width="232" data-height="280" data-show-border="false" data-show-faces="true" data-colorscheme="{xen:property fbColorScheme}" data-stream="false" data-header="false" data-footer="false"></div>
+		</div>
+	</div>
+</div>]]></template>
+    <template title="EWRblock_FaceBook.css"><![CDATA[.facebookOuter { margin-top: -5px; height: 258px; overflow: hidden; }]]></template>
+  </templates>
+</block>

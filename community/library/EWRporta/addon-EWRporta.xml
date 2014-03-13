@@ -1,0 +1,1889 @@
+<?xml version="1.0" encoding="utf-8"?>
+<addon addon_id="EWRporta" title="[8wayRun.Com] XenPorta (Portal)" version_string="1.6.0" version_id="60" url="http://xenforo.com/community/resources/90/" install_callback_class="EWRporta_Install" install_callback_method="installCode" uninstall_callback_class="EWRporta_Install" uninstall_callback_method="uninstallCode">
+  <admin_navigation>
+    <navigation navigation_id="EWRporta" parent_navigation_id="setup" display_order="900" link="" admin_permission_id="option" debug_only="0" hide_no_children="1"/>
+    <navigation navigation_id="EWRporta_blocks" parent_navigation_id="EWRporta" display_order="2" link="ewrporta/blocks" admin_permission_id="option" debug_only="0" hide_no_children="0"/>
+    <navigation navigation_id="EWRporta_categories" parent_navigation_id="EWRporta" display_order="3" link="ewrporta/categories" admin_permission_id="option" debug_only="0" hide_no_children="0"/>
+    <navigation navigation_id="EWRporta_layouts" parent_navigation_id="EWRporta" display_order="4" link="ewrporta/layouts" admin_permission_id="node" debug_only="0" hide_no_children="0"/>
+    <navigation navigation_id="EWRporta_options" parent_navigation_id="EWRporta" display_order="1" link="options/list/EWRporta" admin_permission_id="option" debug_only="0" hide_no_children="0"/>
+    <navigation navigation_id="EWRporta_portal" parent_navigation_id="EWRporta_layouts" display_order="1" link="ewrporta/layouts/portal/edit" admin_permission_id="node" debug_only="0" hide_no_children="0"/>
+  </admin_navigation>
+  <admin_permissions/>
+  <admin_style_properties/>
+  <admin_templates>
+    <template title="EWRporta.css"><![CDATA[.userGroups li { float: left; width: 40%; }
+{xen:helper clearfix, '.userGroups'}
+
+.adminModules { width: 100%; }
+.adminModules td { vertical-align: top; }
+
+.adminModules .sortColumn { height: 50px; padding-bottom: 0px; }
+.adminModules .sortColumn .portlet { text-align: center; margin-bottom: 10px; border: 1px dotted {xen:property mutedTextColor}; }
+.adminModules .sortColumn .portlet.solid { border: 1px solid {xen:property contentText}; }
+.adminModules .sortColumn .portlet-placeholder { margin-bottom: 10px; border: 2px dashed {xen:property contentText}; height: 35px; }
+.adminModules .sortColumn .portlet-placeholder * { visibility: hidden; }
+.adminModules .sortColumn .portlet .delete { display: none; padding-top: 10px; }
+
+.adminModules .sortDisabled .portlet { text-align: center; font-size: 3em; padding: 100px 0px; border: 5px solid {xen:property contentText}; }
+
+.adminModules #disabled.sortColumn { padding-right: 0px; }
+.adminModules #disabled.sortColumn .portlet,
+.adminModules #disabled.sortColumn .portlet-placeholder { float: left; width: 145px; margin-right: 10px; }
+.adminModules #disabled.sortColumn .portlet .clear { display: none; }
+.adminModules #disabled.sortColumn .portlet .delete { display: inline; }]]></template>
+    <template title="EWRporta_Block"><![CDATA[<div class="portlet secondaryContent {xen:if '{$block.locked}', 'solid'}">
+	{$block.block_id}
+	<input type="hidden" class="position" name="blocks[{$block.block_id}]" value="{$block.position}" />
+</div>]]></template>
+    <template title="EWRporta_BlockOptions"><![CDATA[<xen:title>{xen:phrase options}: {$block.block_id}</xen:title>
+<xen:h1>{$block.block_id}</xen:h1>
+
+<xen:navigation>
+	<xen:breadcrumb href="{xen:adminlink 'ewrporta/blocks'}">{xen:phrase blocks}</xen:breadcrumb>
+</xen:navigation>
+
+<xen:if is="{$canEdit}">
+	<xen:topctrl>
+		<a href="{xen:adminlink 'ewrporta/options/add', '', "block_id={$block.block_id}"}" class="button">+ {xen:phrase add_option}</a>
+		<a class="button" href="{xen:adminlink 'ewrporta/blocks/edit', $block}">{xen:phrase edit_block}</a>
+	</xen:topctrl>
+</xen:if>
+
+<xen:require css="EWRporta.css" />
+
+<xen:form action="{xen:adminlink 'ewrporta/blocks/update', $block}">
+	
+	<div class="topChoosers">
+		<div class="Popup">
+			<span class="muted">{xen:phrase option_groups}:</span> <a rel="Menu">{$block.block_id}</a>
+			<div class="Menu">
+				<div class="primaryContent menuHeader"><h3>{xen:phrase blocks}</h3></div>
+				<ul class="secondaryContent blockLinksList">
+				<xen:foreach loop="$blocks" value="$_block">
+					<li><a href="{xen:adminlink 'ewrporta/blocks/options', $_block}">{$_block.block_id}</a></li>
+				</xen:foreach>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<xen:if hascontent="true"><div class="optionGroupDescription muted"><i><xen:contentcheck>{xen:raw $block.title}</xen:contentcheck></i></div></xen:if>
+
+	<xen:foreach loop="$renderedOptions" value="$_group">
+		<xen:if hascontent="true">
+		<fieldset>
+			<xen:contentcheck>
+			<xen:foreach loop="$_group" value="$renderedOption">
+				{xen:raw $renderedOption}
+			</xen:foreach>
+			</xen:contentcheck>
+		</fieldset>
+		</xen:if>
+	</xen:foreach>
+
+	<fieldset>
+		<dl class="ctrlUnit">
+			<dt>{xen:phrase block_cache_time}</dt>
+			<dd>
+				<ul>
+					<li>
+						<label for="ctrl_cache"><input type="checkbox" name="cache" value="1" id="ctrl_cache" class="Disabler" {$block.cached} /> {xen:phrase enable_caching_of_data_every}:</label>
+						<div class="hint" id="ctrl_cache_Disabler">
+							+ <input type="text" size="1" name="cache_time" value="{$block.cache_time}" class="textCtrl autoSize SpinBox" step="1" min="1" max="48" />
+							<select name="cache_unit" class="textCtrl autoSize">
+								<option value="minutes" {$block.unit.mins}>minutes</option>
+								<option value="hours" {$block.unit.hour}>hours</option>
+								<option value="days" {$block.unit.days}>days</option>
+							</select>
+						</div>
+					</li>
+				</ul>
+				<p class="explain">{xen:phrase enable_caching_of_data_every_hint}</p>
+			</dd>
+		</dl>
+		<dl class="ctrlUnit">
+			<dt></dt>
+			<dd>
+				<ul>
+					<li><label for="ctrl_block_locked"><input type="checkbox" name="locked" value="1" id="ctrl_block_locked" {xen:if {$block.locked}, 'checked'} /> {xen:phrase lock_block_position}</label></li>
+				</ul>
+			</dd>
+		</dl>
+	</fieldset>
+
+	<fieldset>
+		<dl class="ctrlUnit">
+			<dt>Group Selection Type</dt>
+			<dd>
+				<ul>
+					<li><label for="ctrl_group_display_show"><input type="radio" name="display" value="show" id="ctrl_group_display_show" {xen:if '{$block.display} == "show"', 'checked'} /> {xen:phrase show_to_selected_usergroups}</label></li>
+					<li><label for="ctrl_group_display_hide"><input type="radio" name="display" value="hide" id="ctrl_group_display_hide" {xen:if '{$block.display} == "hide"', 'checked'} /> {xen:phrase hide_from_selected_usergroups}</label></li>
+				</ul>
+				<p class="explain">{xen:phrase show_hide_selected_usergroups_hint}</p>
+			</dd>
+		</dl>
+
+		<div class="ctrlUnit">
+			<dt>Usergroups</dt>
+			<dd>
+				<ul class="userGroups">
+					<xen:foreach loop="$groups" value="$group">
+					<li>
+						<label for="ctrl_group[{$group.value}]">
+							<input type="checkbox" name="groups[{$group.value}]" value="{$group.value}" id="ctrl_group[{$group.value}]" {xen:if '{$group.selected}', 'checked'} />
+							<xen:if is="{$group.selected}"><b>{$group.label}</b><xen:else/>{$group.label}</xen:if>
+						</label>
+					</li>
+					</xen:foreach>
+				</ul>
+				<p class="explain">{xen:phrase show_hide_selected_usergroups_none}</p>
+			</dd>
+		</div>
+	</fieldset>
+
+	<xen:submitunit save="{xen:phrase save_changes}">
+		<input type="reset" class="button" value="{xen:phrase cancel}" accesskey="r" />
+	</xen:submitunit>
+
+</xen:form>]]></template>
+    <template title="EWRporta_Blocks"><![CDATA[<xen:title>{xen:phrase installed_blocks}</xen:title>
+
+<xen:navigation>
+	<xen:breadcrumb href="{xen:adminlink 'ewrporta/blocks'}">{xen:phrase blocks}</xen:breadcrumb>
+</xen:navigation>
+
+<xen:topctrl>
+	<a href="{xen:adminlink 'ewrporta/blocks/install-confirm'}" class="button">+ {xen:phrase install_block}</a>
+	<xen:if is="{$debugMode}"><a href="{xen:adminlink 'ewrporta/blocks/add'}" class="button">+ {xen:phrase create_block}</a></xen:if>
+</xen:topctrl>
+
+<xen:require css="filter_list.css" />
+<xen:require js="js/xenforo/filter_list.js" />
+
+<xen:form action="{xen:adminlink 'ewrporta/blocks/toggle'}" class="section">
+
+	<xen:if is="{$blocks}">
+		<h2 class="subHeading">
+			<xen:include template="filter_list_controls" />
+			{xen:phrase installed_blocks}
+		</h2>
+
+		<ol class="FilterList">
+			<xen:foreach loop="$blocks" key="$blockId" value="$block">
+				<xen:listitem id="{$block.block_id}"
+					label="{$block.block_id}"
+					labelclass="{xen:if '!{$block.active}', 'disabled'}"
+					snippet="{$block.title} (v{$block.version_string})"
+					href="{xen:adminlink 'ewrporta/blocks/options', $block}"
+					delete="{xen:adminlink 'ewrporta/blocks/empty', $block}"
+					deletehint="{xen:phrase empty_block_cache}">
+					<xen:beforelabel>
+						<label class="Tooltip" title="{xen:phrase enable_disable_x, 'title={$block.block_id}'}">
+							<input type="checkbox" name="block[{$blockId}]" value="1" {xen:checked {$block.active}} class="SubmitOnChange" />
+						</label>
+						<input type="hidden" name="blockExists[{$blockId}]" value="1" />
+					</xen:beforelabel>
+					<xen:popup title="{xen:phrase controls}" ctrlclass="toolsCtrl">
+						<xen:link href="{xen:adminlink 'ewrporta/blocks/disable', $block, '_xfToken={$visitor.csrf_token_page}'}" displayif="{$block.active}">{xen:phrase disable}</xen:link>
+						<xen:link href="{xen:adminlink 'ewrporta/blocks/enable', $block, '_xfToken={$visitor.csrf_token_page}'}" displayif="!{$block.active}">{xen:phrase enable}</xen:link>
+						<xen:link href="{xen:adminlink 'ewrporta/blocks/delete', $block}">{xen:phrase uninstall}</xen:link>
+						<xen:link href="{xen:adminlink 'ewrporta/blocks/edit', $block}">{xen:phrase edit}</xen:link>
+						<xen:link href="{xen:adminlink 'ewrporta/blocks/export', $block}">{xen:phrase export}</xen:link>
+					</xen:popup>
+				</xen:listitem>
+			</xen:foreach>
+		</ol>
+
+		<p class="sectionFooter">{xen:phrase showing_x_of_y_items, 'count=<span class="FilterListCount">{xen:count $blocks}</span>', 'total={xen:count $blocks}'}</p>
+
+	<xen:else />
+		<div class="noResults">{xen:phrase no_blocks_have_been_installed_yet}</div>
+	</xen:if>
+
+</xen:form>]]></template>
+    <template title="EWRporta_Categories"><![CDATA[<xen:title>{xen:phrase categories}</xen:title>
+
+<xen:navigation>
+	<xen:breadcrumb href="{xen:adminlink 'ewrporta/categories'}">{xen:phrase categories}</xen:breadcrumb>
+</xen:navigation>
+
+<xen:topctrl>
+	<a href="{xen:adminlink 'ewrporta/categories/add'}" class="button">+ {xen:phrase create_new_category}</a>
+</xen:topctrl>
+
+<xen:require css="filter_list.css" />
+<xen:require js="js/xenforo/filter_list.js" />
+
+<div class="section">
+
+	<xen:if is="{$categories.major}">
+		<h2 class="subHeading">{xen:phrase major_categories}</h2>
+
+		<ol class="FilterList">
+			<xen:foreach loop="$categories.major" key="$categoryId" value="$category">
+				<xen:listitem id="{$category.category_id}"
+					label="{$category.category_name} {xen:if '{$category.style_id}', '({$category.style_id})'}"
+					href="{xen:adminlink 'ewrporta/categories/edit', $category}"
+					delete="{xen:adminlink 'ewrporta/categories/delete', $category}"
+					deletehint="{xen:phrase delete_category}">
+					<xen:popup title="{xen:phrase controls}" ctrlclass="toolsCtrl">
+						<xen:link href="{xen:adminlink 'ewrporta/categories/edit', $category}">{xen:phrase edit_category}</xen:link>
+						<xen:link href="{xen:adminlink 'ewrporta/categories/delete', $category}">{xen:phrase delete_category}</xen:link>
+					</xen:popup>
+				</xen:listitem>
+			</xen:foreach>
+		</ol>
+
+		<p class="sectionFooter">{xen:phrase showing_x_of_y_items, 'count=<span class="FilterListCount">{xen:count $categories.major}</span>', 'total={xen:count $categories.major}'}</p>
+	</xen:if>
+
+	<xen:if is="{$categories.minor}">
+		<h2 class="subHeading">{xen:phrase minor_categories}</h2>
+
+		<ol class="FilterList">
+			<xen:foreach loop="$categories.minor" key="$categoryId" value="$category">
+				<xen:listitem id="{$category.category_id}"
+					label="{$category.category_name}"
+					href="{xen:adminlink 'ewrporta/categories/edit', $category}"
+					delete="{xen:adminlink 'ewrporta/categories/delete', $category}"
+					deletehint="{xen:phrase delete_category}">
+					<xen:popup title="{xen:phrase controls}" ctrlclass="toolsCtrl">
+						<xen:link href="{xen:adminlink 'ewrporta/categories/edit', $category}">{xen:phrase edit_category}</xen:link>
+						<xen:link href="{xen:adminlink 'ewrporta/categories/delete', $category}">{xen:phrase delete_category}</xen:link>
+					</xen:popup>
+				</xen:listitem>
+			</xen:foreach>
+		</ol>
+
+		<p class="sectionFooter">{xen:phrase showing_x_of_y_items, 'count=<span class="FilterListCount">{xen:count $categories.minor}</span>', 'total={xen:count $categories.minor}'}</p>
+	</xen:if>
+
+</div>]]></template>
+    <template title="EWRporta_DeleteBlock"><![CDATA[<xen:title>{xen:phrase confirm_uninstallation_of_block}: {$block.block_id}</xen:title>
+<xen:h1>{xen:phrase confirm_uninstallation_of_block}</xen:h1>
+
+<xen:navigation>
+	<xen:breadcrumb href="{xen:adminlink 'ewrporta/blocks'}">{xen:phrase blocks}</xen:breadcrumb>
+	<xen:breadcrumb href="{xen:adminlink 'ewrporta/blocks/edit', $block}">{$block.title}</xen:breadcrumb>
+</xen:navigation>
+
+<xen:require css="delete_confirmation.css" />
+
+<xen:form action="{xen:adminlink 'ewrporta/blocks/delete', $block}" class="deleteConfirmForm formOverlay">
+
+	<p>{xen:phrase please_confirm_that_you_want_to_uninstall_following_block}:</p>
+	<strong><a href="{xen:adminlink 'ewrporta/blocks/edit', $block}">{$block.title}</a></strong>
+
+	<xen:submitunit save="{xen:phrase uninstall_block}" />
+	
+	<input type="hidden" name="_xfConfirm" value="1" />
+</xen:form>]]></template>
+    <template title="EWRporta_DeleteCategory"><![CDATA[<xen:title>{xen:phrase confirm_delete_of_category}: {$category.category_name}</xen:title>
+<xen:h1>{xen:phrase confirm_delete_of_category}</xen:h1>
+
+<xen:navigation>
+	<xen:breadcrumb href="{xen:adminlink 'ewrporta/categories'}">{xen:phrase categories}</xen:breadcrumb>
+	<xen:breadcrumb href="{xen:adminlink 'ewrporta/categories/edit', $category}">{$category.category_name}</xen:breadcrumb>
+</xen:navigation>
+
+<xen:require css="delete_confirmation.css" />
+
+<xen:form action="{xen:adminlink 'ewrporta/categories/delete', $category}" class="deleteConfirmForm formOverlay">
+
+	<p>{xen:phrase please_confirm_that_you_want_to_delete_following_category}:</p>
+	<strong><a href="{xen:adminlink 'ewrporta/categories/edit', $category}">{$category.category_name}</a></strong>
+
+	<xen:submitunit save="{xen:phrase delete_category}" />
+	
+	<input type="hidden" name="_xfConfirm" value="1" />
+</xen:form>]]></template>
+    <template title="EWRporta_DeleteLayout"><![CDATA[<xen:title>{xen:phrase confirm_delete_of_layout}: {$layout.layout_id}</xen:title>
+<xen:h1>{xen:phrase confirm_delete_of_layout}</xen:h1>
+
+<xen:navigation>
+	<xen:breadcrumb href="{xen:adminlink 'ewrporta/layouts'}">{xen:phrase layouts}</xen:breadcrumb>
+	<xen:breadcrumb href="{xen:adminlink 'ewrporta/layouts/edit', $layout}">{$layout.layout_id}</xen:breadcrumb>
+</xen:navigation>
+
+<xen:require css="delete_confirmation.css" />
+
+<xen:form action="{xen:adminlink 'ewrporta/layouts/delete', $layout}" class="deleteConfirmForm formOverlay">
+
+	<p>{xen:phrase please_confirm_that_you_want_to_delete_following_layout}:</p>
+	<strong><a href="{xen:adminlink 'ewrporta/layouts/edit', $layout}">{$layout.layout_id}</a></strong>
+
+	<xen:submitunit save="{xen:phrase delete_layout}" />
+	
+	<input type="hidden" name="_xfConfirm" value="1" />
+</xen:form>]]></template>
+    <template title="EWRporta_DeleteOption"><![CDATA[<xen:title>{xen:phrase confirm_deletion_of_option}: {$option.title}</xen:title>
+<xen:h1>{xen:phrase confirm_deletion_of_option} </xen:h1>
+
+<xen:navigation>
+	<xen:breadcrumb href="{xen:adminlink 'ewrporta/blocks'}">{xen:phrase blocks}</xen:breadcrumb>
+	<xen:breadcrumb href="{xen:adminlink 'ewrporta/blocks/options', $option}">{$option.block_id}</xen:breadcrumb>
+	<xen:breadcrumb href="{xen:adminlink 'ewrporta/options/edit', $option}">{$option.title}</xen:breadcrumb>
+</xen:navigation>
+
+<xen:require css="delete_confirmation.css" />
+
+<xen:form action="{xen:adminlink 'ewrporta/options/delete'}" class="deleteConfirmForm formOverlay">
+
+	<p>{xen:phrase please_confirm_that_you_want_to_delete_following_option}:</p>
+	<strong><a href="{xen:adminlink 'ewrporta/options/edit', $option}">{$option.title}</a></strong>
+
+	<input type="hidden" name="option_id" value="{$option.option_id}" />
+
+	<xen:submitunit save="{xen:phrase delete_option}" />
+	<input type="hidden" name="_xfConfirm" value="1" />
+	
+</xen:form>]]></template>
+    <template title="EWRporta_EditBlock"><![CDATA[<xen:title>{xen:if '{$block.block_id}', '{xen:phrase edit_block}: {$block.title}', '{xen:phrase create_new_block}'}</xen:title>
+
+<xen:if is="{$block.block_id}">
+	<xen:navigation>
+		<xen:breadcrumb href="{xen:adminlink 'ewrporta/blocks'}">{xen:phrase blocks}</xen:breadcrumb>
+		<xen:breadcrumb href="{xen:adminlink 'ewrporta/blocks/options', $block}">{$block.title}</xen:breadcrumb>
+	</xen:navigation>
+</xen:if>
+
+<xen:form action="{xen:adminlink 'ewrporta/blocks/save'}">
+
+	<xen:textboxunit label="{xen:phrase block_id}:" name="block_id" value="{$block.block_id}" />
+	<xen:textboxunit label="{xen:phrase title}:" name="title" value="{$block.title}" data-liveTitleTemplate="{xen:if {$block.block_id},
+		'{xen:phrase edit_block}: <em>%s</em>',
+		'{xen:phrase create_new_block}: <em>%s</em>'}" />
+	<xen:textboxunit label="{xen:phrase version_string}:" name="version_string" value="{$block.version_string}">
+		<xen:explain>{xen:phrase this_string_will_be_displayed_to_end_user}</xen:explain>
+	</xen:textboxunit>
+	<xen:spinboxunit label="{xen:phrase version_id}:" name="version_id" value="{$block.version_id}" min="0">
+		<xen:explain>{xen:phrase this_integer_will_be_used_for_internal_version_comparisons}</xen:explain>
+	</xen:spinboxunit>
+	<xen:textboxunit label="{xen:phrase url}:" name="url" value="{$block.url}" />
+		
+	<xen:controlunit label="{xen:phrase installation_code}:">
+		<xen:textbox placeholder="{xen:phrase class}" name="install_callback_class" value="{$block.install_callback_class}" size="25" />
+		::
+		<xen:textbox placeholder="{xen:phrase method}" name="install_callback_method" value="{$block.install_callback_method}" size="25" />
+	</xen:controlunit>
+	
+	<xen:controlunit label="{xen:phrase uninstallation_code}:">
+		<xen:textbox placeholder="{xen:phrase class}" name="uninstall_callback_class" value="{$block.uninstall_callback_class}" size="25" />
+		::
+		<xen:textbox placeholder="{xen:phrase method}" name="uninstall_callback_method" value="{$block.uninstall_callback_method}" size="25" />
+	</xen:controlunit>
+
+	<input type="hidden" name="original_block_id" value="{$block.block_id}" />
+	
+	<xen:submitunit save="{xen:phrase save_block}">
+		<xen:if is="{$block.block_id}">
+			<input type="button" value="{xen:phrase uninstall_block}..." accesskey="d" class="button OverlayTrigger"
+				data-href="{xen:adminlink ewrporta/blocks/delete, $block}" />
+		</xen:if>
+	</xen:submitunit>
+</xen:form>]]></template>
+    <template title="EWRporta_EditCategory"><![CDATA[<xen:title>{xen:if '{$category.category_id}', '{xen:phrase edit_category}: {$category.category_name}', '{xen:phrase create_new_category}'}</xen:title>
+
+<xen:if is="{$category.category_id}">
+	<xen:navigation>
+		<xen:breadcrumb href="{xen:adminlink 'ewrporta/categories'}">{xen:phrase categories}</xen:breadcrumb>
+	</xen:navigation>
+</xen:if>
+
+<xen:require js="js/8wayrun/slugit.js" />
+<xen:require js="js/8wayrun/EWRporta_ajax.js" />
+
+<xen:form action="{xen:adminlink 'ewrporta/categories/save'}">
+
+	<dl class="ctrlUnit">
+		<dt><label for="ctrl_category_name">{xen:phrase category}:</label></dt>
+		<dd>
+			<input type="text" name="category_name" value="{$category.category_name}" class="textCtrl SlugIn" id="ctrl_category_name">
+		</dd>
+	</dl>
+
+	<dl class="ctrlUnit">
+		<dt><label for="ctrl_category_slug">{xen:phrase link_url}:</label></dt>
+		<dd>
+			<input type="text" name="category_slug" value="{$category.category_slug}" class="textCtrl SlugEdit SlugOut" id="ctrl_category_slug">
+		</dd>
+	</dl>
+
+	<dl class="ctrlUnit">
+		<dt><label for="ctrl_category_type">{xen:phrase category_type}:</label></dt>
+		<dd>
+			<select name="category_type" id="ctrl_active" class="textCtrl autoSize" id="ctrl_category_type">
+				<option value="major" {xen:selected "{$category.category_type} == 'major'"}>{xen:phrase major}</option>
+				<option value="minor" {xen:selected "{$category.category_type} == 'minor'"}>{xen:phrase minor}</option>
+			</select>
+		</dd>
+	</dl>
+
+	<dl class="ctrlUnit">
+		<dt><label for="ctrl_style_id">{xen:phrase style_chooser}:</label></dt>
+		<dd><ul>
+			<li><label for="ctrl_style_id"><input type="checkbox" name="style_disabler" value="1" class="Disabler" id="ctrl_style_id" {xen:checked "{$category.style_id}"}> {xen:phrase override_user_style_choice}</label>
+				<ul id="ctrl_style_id_Disabler" disabled="true" class="disabled">
+					<li><select name="style_id" class="textCtrl autoSize disabled" disabled="">
+						<xen:foreach loop="$styles" value="$style">
+							<option value="{$style.value}" {xen:selected "{$style.selected}"}>{xen:raw $style.indent}{$style.label}</option>
+						</xen:foreach>
+					</select></li>
+				</ul>
+			</li>
+		</ul></dd>
+	</dl>
+
+	<input type="hidden" name="category_id" value="{$category.category_id}" />
+	
+	<xen:submitunit save="{xen:phrase save_category}">
+		<xen:if is="{$category.category_id}">
+			<input type="button" value="{xen:phrase delete_category}..." accesskey="d" class="button OverlayTrigger"
+				data-href="{xen:adminlink ewrporta/categories/delete, $category}" />
+		</xen:if>
+	</xen:submitunit>
+</xen:form>]]></template>
+    <template title="EWRporta_EditLayout"><![CDATA[<xen:title>{xen:phrase layout}: {$content}</xen:title>
+<xen:h1>{xen:phrase layout}: {$content}</xen:h1>
+
+<xen:navigation>
+	<xen:breadcrumb href="{xen:adminlink 'ewrporta/layouts'}">{xen:phrase layouts}</xen:breadcrumb>
+</xen:navigation>
+
+<xen:require css="EWRporta.css" />
+<xen:require js="js/8wayrun/EWRporta_ajax.js" />
+<xen:require js="js/8wayrun/EWRporta_jqui.js" />
+
+<xen:form action="{xen:adminlink 'ewrporta/layouts/save', $layout}" class="section AutoValidator">
+
+	<table class="adminModules">
+	<tr>
+		<td class="subHeading">{xen:phrase position}: Top-Left</td>
+		<td class="subHeading">{xen:phrase position}: Top-Right</td>
+		<td class="subHeading">{xen:phrase position}: Sidebar</td>
+	</tr>
+	<tr>
+		<td class="sectionMain sortColumn" id="top-left">
+			<xen:foreach loop="$blocks.top-left" value="$block">
+				<xen:include template="EWRporta_Block" />
+			</xen:foreach>
+		</td>
+		<td class="sectionMain sortColumn" id="top-right">
+			<xen:foreach loop="$blocks.top-right" value="$block">
+				<xen:include template="EWRporta_Block" />
+			</xen:foreach>
+		</td>
+		<td class="sectionMain sortColumn" rowspan="5" id="sidebar">
+			<xen:foreach loop="$blocks.sidebar" value="$block">
+				<xen:include template="EWRporta_Block" />
+			</xen:foreach>
+		</td>
+	</tr>
+	<tr>
+		<td class="subHeading">{xen:phrase position}: Mid-Left</td>
+		<td class="subHeading">{xen:phrase position}: Mid-Right</td>
+	</tr>
+	<tr>
+
+		<xen:if is="{$isPortal}">
+			<td class="sectionMain sortColumn" id="mid-left">
+				<xen:foreach loop="$blocks.mid-left" value="$block">
+					<xen:include template="EWRporta_Block" />
+				</xen:foreach>
+			</td>
+			<td class="sectionMain sortColumn" id="mid-right">
+				<xen:foreach loop="$blocks.mid-right" value="$block">
+					<xen:include template="EWRporta_Block" />
+				</xen:foreach>
+			</td>
+		<xen:else />
+			<td class="sectionMain sortDisabled" colspan="2" id="center">
+				<div class="portlet secondaryContent">{$content}</div>
+			</td>
+		</xen:if>
+
+	</tr>
+	<tr>
+		<td class="subHeading">{xen:phrase position}: Btm-Left</td>
+		<td class="subHeading">{xen:phrase position}: Btm-Right</td>
+	</tr>
+	<tr>
+		<td class="sectionMain sortColumn" id="btm-left">
+			<xen:foreach loop="$blocks.btm-left" value="$block">
+				<xen:include template="EWRporta_Block" />
+			</xen:foreach>
+		</td>
+		<td class="sectionMain sortColumn" id="btm-right">
+			<xen:foreach loop="$blocks.btm-right" value="$block">
+				<xen:include template="EWRporta_Block" />
+			</xen:foreach>
+		</td>
+	</tr>
+	</table>
+
+	<br />
+
+	<table class="adminModules">
+	<tr>
+		<td class="subHeading">{xen:phrase disabled_blocks}</td>
+	</tr>
+	<tr>
+		<td class="sectionMain sortColumn" id="disabled">
+			<xen:foreach loop="$blocks.disabled" value="$block">
+				<xen:include template="EWRporta_Block" />
+			</xen:foreach>
+		</td>
+	</tr>
+	</table>
+
+	<xen:submitunit save="{xen:phrase save_changes}">
+		<xen:if is="{$layout.layout_id} != 'portal'">
+			<a class="button OverlayTrigger" href="{xen:adminlink 'ewrporta/layouts/delete', $layout}">{xen:phrase delete_layout}</a>
+		</xen:if>
+	</xen:submitunit>
+</xen:form>]]></template>
+    <template title="EWRporta_EditOption"><![CDATA[<xen:title>{xen:if '{$option.option_id}', '{xen:phrase edit_option}: {$option.option_id}', '{xen:phrase create_new_option}'}</xen:title>
+
+<xen:if is="{$option.option_id}">
+	<xen:navigation>
+		<xen:breadcrumb href="{xen:adminlink 'ewrporta/blocks'}">{xen:phrase blocks}</xen:breadcrumb>
+		<xen:breadcrumb href="{xen:adminlink 'ewrporta/blocks/options', $option}">{$option.block_id}</xen:breadcrumb>
+	</xen:navigation>
+</xen:if>
+
+<xen:form action="{xen:adminlink 'ewrporta/options/save'}">
+
+	<xen:textboxunit label="{xen:phrase option_id}:" name="option_id" value="{$option.option_id}" hint="{xen:phrase a_z_0_9_and_underscore_only}" />
+
+	<xen:selectunit label="{xen:phrase blocks}:" name="block_id" value="{$blockSelected}">
+		<xen:options source="$blockOptions" />
+	</xen:selectunit>
+	<input type="hidden" name="block_id" value="{$blockSelected}" />
+	
+	<fieldset>
+		<xen:textboxunit label="{xen:phrase title}:" name="title" value="{$option.title}" data-liveTitleTemplate="{xen:if {$option.option_id},
+			'{xen:phrase edit_option}: <em>%s</em>',
+			'{xen:phrase create_new_option}: <em>%s</em>'}" />
+		<xen:textboxunit label="{xen:phrase explanation}:" name="explain" value="{$option.explain}" rows="2" hint="{xen:phrase you_may_use_html}" inputclass="Elastic" />
+	</fieldset>
+
+	<fieldset>
+		<xen:selectunit label="{xen:phrase edit_format}:" name="edit_format" value="{$option.edit_format}">
+			<xen:option value="textbox">{xen:phrase text_box}</xen:option>
+			<xen:option value="spinbox">{xen:phrase spin_box}</xen:option>
+			<xen:option value="onoff">{xen:phrase on_off_check_box}</xen:option>
+			<xen:option value="radio">{xen:phrase radio_buttons}</xen:option>
+			<xen:option value="select">{xen:phrase select_menu}</xen:option>
+			<xen:option value="checkbox">{xen:phrase check_boxes}</xen:option>
+			<xen:option value="template">{xen:phrase named_template}</xen:option>
+			<xen:option value="callback">{xen:phrase php_callback}</xen:option>
+		</xen:selectunit>
+	
+		<xen:textboxunit label="{xen:phrase format_parameters}:" name="edit_format_params" value="{$option.edit_format_params}" rows="2" inputclass="Elastic" />
+	</fieldset>
+	
+	<fieldset>
+		<xen:selectunit label="{xen:phrase data_type}:" name="data_type" value="{$option.data_type}">
+			<xen:option value="boolean">{xen:phrase boolean}</xen:option>
+			<xen:option value="string">{xen:phrase string}</xen:option>
+			<xen:option value="integer">{xen:phrase integer}</xen:option>
+			<xen:option value="unsigned_integer">{xen:phrase unsigned_integer}</xen:option>
+			<xen:option value="positive_integer">{xen:phrase positive_integer}</xen:option>
+			<xen:option value="numeric">{xen:phrase numeric}</xen:option>
+			<xen:option value="unsigned_numeric">{xen:phrase unsigned_numeric}</xen:option>
+			<xen:option value="array">{xen:phrase array}</xen:option>
+		</xen:selectunit>
+		
+		<xen:textboxunit label="{xen:phrase array_sub_options}:" name="sub_options" value="{$option.sub_options}" rows="2" inputclass="Elastic" />
+		
+		<xen:controlunit label="{xen:phrase validation_callback}:">
+			<xen:textbox placeholder="{xen:phrase class}" name="validation_class" value="{$option.validation_class}" size="25" />
+			::
+			<xen:textbox placeholder="{xen:phrase method}" name="validation_method" value="{$option.validation_method}" size="25" />
+		</xen:controlunit>
+	</fieldset>
+
+	<fieldset>
+		<xen:spinboxunit label="{xen:phrase display_order}:" name="display_order" value="{$option.display_order}" />	
+	</fieldset>
+
+	<input type="hidden" name="original_option_id" value="{$option.option_id}" />
+	
+	<xen:submitunit save="{xen:phrase save_option}">
+		<xen:if is="{$option.option_id}">
+			<input type="button" value="{xen:phrase delete_option}..." accesskey="d" class="button OverlayTrigger"
+				data-href="{xen:adminlink 'ewrporta/options/delete', $option}" />
+		</xen:if>
+	</xen:submitunit>
+</xen:form>]]></template>
+    <template title="EWRporta_InstallBlock"><![CDATA[<xen:title>{xen:phrase install_block}</xen:title>
+
+<xen:navigation>
+	<xen:breadcrumb href="{xen:adminlink 'ewrporta/blocks'}">{xen:phrase blocks}</xen:breadcrumb>
+</xen:navigation>
+
+<xen:form action="{xen:adminlink 'ewrporta/blocks/install'}" upload="true">
+	<xen:uploadunit label="{xen:phrase install_from_uploaded_file}:" name="upload_file" />
+	<xen:textboxunit label="{xen:phrase install_from_file_on_server}:" name="server_file" />
+		
+	<xen:submitunit save="{xen:phrase install_block}" />
+</xen:form>]]></template>
+    <template title="EWRporta_InstallLayout"><![CDATA[<xen:title>{xen:phrase install_layout}</xen:title>
+
+<xen:navigation>
+	<xen:breadcrumb href="{xen:adminlink 'ewrporta/layouts'}">{xen:phrase layouts}</xen:breadcrumb>
+</xen:navigation>
+
+<xen:form action="{xen:adminlink 'ewrporta/layouts/install'}" upload="true">
+	<xen:uploadunit label="{xen:phrase install_from_uploaded_file}:" name="upload_file" />
+	<xen:textboxunit label="{xen:phrase install_from_file_on_server}:" name="server_file" />
+		
+	<xen:submitunit save="{xen:phrase install_layout}" />
+</xen:form>]]></template>
+    <template title="EWRporta_Layouts"><![CDATA[<xen:title>{xen:phrase customized_layouts}</xen:title>
+
+<xen:navigation>
+	<xen:breadcrumb href="{xen:adminlink 'ewrporta/layouts'}">{xen:phrase layouts}</xen:breadcrumb>
+</xen:navigation>
+
+<xen:topctrl>
+	<a href="{xen:adminlink 'ewrporta/layouts/install-confirm'}" class="button">+ {xen:phrase install_layout}</a>
+</xen:topctrl>
+
+<xen:require css="filter_list.css" />
+<xen:require js="js/xenforo/filter_list.js" />
+
+<div class="section">
+
+	<xen:if is="{$layouts}">
+		<h2 class="subHeading">
+			<xen:include template="filter_list_controls" />
+			{xen:phrase customized_layouts}
+		</h2>
+
+		<ol class="FilterList">
+			<xen:foreach loop="$layouts" key="$layoutId" value="$layout">
+				<xen:listitem id="{$layout.layout_id}"
+					label="{$layout.layout_id}"
+					href="{xen:adminlink 'ewrporta/layouts/edit', $layout}"
+					delete="{xen:if '{$layoutId} != "portal"', {xen:adminlink 'ewrporta/layouts/delete', $layout}}"
+					deletehint="{xen:phrase delete_layout}">
+					<xen:popup title="{xen:phrase controls}" ctrlclass="toolsCtrl">
+						<xen:link href="{xen:adminlink 'ewrporta/layouts/export', $layout}">{xen:phrase export}</xen:link>
+					</xen:popup>
+				</xen:listitem>
+			</xen:foreach>
+		</ol>
+
+		<p class="sectionFooter">{xen:phrase showing_x_of_y_items, 'count=<span class="FilterListCount">{xen:count $layouts}</span>', 'total={xen:count $layouts}'}</p>
+
+	<xen:else />
+		<div class="noResults">{xen:phrase no_layouts_have_been_customized_yet}</div>
+	</xen:if>
+
+</div>
+
+<xen:form action="{xen:adminlink 'ewrporta/layouts/edit'}" class="section" style="margin-top: 40px;">
+	<xen:if hascontent="true">
+	<dl class="ctrlUnit">
+		<dt>{xen:phrase layout}</dt>
+		<dd>
+			<select name="layout_type" class="textCtrl autoSize">
+				<option value="0">(type)</option>
+				<xen:contentcheck>
+					<xen:if is="{$xenOptions.EWRporta_globalize.article}"><option value="portal">portal</option>
+						<option value="article">article</option>
+						<option value="articles">articles</option></xen:if>
+					<xen:if is="{$xenOptions.EWRporta_globalize.index}"><option value="index">index</option></xen:if>
+					<xen:if is="{$xenOptions.EWRporta_globalize.forum}"><option value="forum">forum-##</option></xen:if>
+					<xen:if is="{$xenOptions.EWRporta_globalize.thread}"><option value="thread">thread-##</option>
+						<option value="thread-forum">thread-forum-##</option></xen:if>
+				</xen:contentcheck>
+			</select>
+			<input type="text" name="layout_id" class="textCtrl" placeholder="(ID)" style="width: 100px;" /> &nbsp; &nbsp;
+			<input type="submit" value="{xen:phrase customize_new_layout}" name="submit" accesskey="s" class="button primary" />
+		</dd>
+	</dl>
+	<dl class="ctrlUnit fullWidth">
+		<dt></dt>
+		<dd><p class="explain" style="text-align: center;">{xen:phrase customize_new_layout_hint}</p></dd>
+	</dl>
+	</xen:if>
+</xen:form>]]></template>
+    <template title="option_list_option_multi_EWRporta"><![CDATA[<xen:selectunit label="{$preparedOption.title}" name="{$fieldPrefix}[{$preparedOption.option_id}]" value="{xen:raw $preparedOption.option_value}"
+hint="{$preparedOption.hint}" size="10" multiple="true">
+	<xen:options source="$formatParams" />
+	<xen:explain>{xen:raw $preparedOption.explain}</xen:explain>
+	<xen:html>
+		<input type="hidden" name="{$listedFieldName}" value="{$preparedOption.option_id}" />
+		{xen:raw $editLink}
+	</xen:html>
+</xen:selectunit>]]></template>
+    <template title="option_template_multiEntries_EWRporta"><![CDATA[<xen:require js="js/xenforo/options_censor.js" />
+
+<xen:controlunit label="{$preparedOption.title}" hint="{$preparedOption.hint}">
+	<xen:explain>{xen:raw $preparedOption.explain}</xen:explain>
+	<xen:html>
+		<ul>
+			<xen:foreach loop="$entries" key="$counter" value="$entry">
+			<li>
+				<xen:textbox name="{$fieldPrefix}[{$preparedOption.option_id}][{$counter}]" value="{$entry}" placeholder="{xen:phrase new}" size="20" />
+			</li>
+			</xen:foreach>
+		
+			<li class="CensorWordOptionListener">
+				<xen:textbox name="{$fieldPrefix}[{$preparedOption.option_id}][{$nextCounter}]" value="" placeholder="{xen:phrase new}" size="20" />
+			</li>
+		</ul>
+		
+		<input type="hidden" name="{$listedFieldName}" value="{$preparedOption.option_id}" />
+		{xen:raw $editLink}
+	</xen:html>
+</xen:controlunit>]]></template>
+    <template title="option_template_styleChooser_EWRporta"><![CDATA[<xen:checkboxunit label="{$preparedOption.title}">
+	<xen:option name="{$fieldPrefix}[{$preparedOption.option_id}][force]" selected="{$preparedOption.option_value.force}" label="{$preparedOption.title}">
+		<xen:select name="{$fieldPrefix}[{$preparedOption.option_id}][style]" value="{$preparedOption.option_value.style}" inputclass="autoSize">
+			<xen:options source="$formatParams" />
+		</xen:select>
+	</xen:option>
+
+	<xen:html>
+		<input type="hidden" name="{$listedFieldName}" value="{$preparedOption.option_id}" />
+		{xen:raw $editLink}
+	</xen:html>
+
+	<xen:explain>{xen:raw $preparedOption.explain}</xen:explain>
+</xen:checkboxunit>]]></template>
+  </admin_templates>
+  <admin_template_modifications/>
+  <code_events/>
+  <code_event_listeners>
+    <listener event_id="load_class_bb_code" execute_order="10" callback_class="EWRporta_Listener_BbCode" callback_method="formatter" active="1" hint="" description="BBCode"/>
+    <listener event_id="load_class_controller" execute_order="10" callback_class="EWRporta_Listener_Controller" callback_method="controller" active="1" hint="" description="Controller"/>
+    <listener event_id="load_class_datawriter" execute_order="10" callback_class="EWRporta_Listener_DataWriter" callback_method="datawriter" active="1" hint="" description="DataWriter"/>
+    <listener event_id="load_class_model" execute_order="10" callback_class="EWRporta_Listener_Model" callback_method="model" active="1" hint="" description="Model"/>
+    <listener event_id="load_class_route_prefix" execute_order="10" callback_class="EWRporta_Listener_Route" callback_method="route" active="1" hint="" description="Route Prefix"/>
+    <listener event_id="load_class_view" execute_order="10" callback_class="EWRporta_Listener_ViewPublic" callback_method="view" active="1" hint="" description="View"/>
+    <listener event_id="navigation_tabs" execute_order="1" callback_class="EWRporta_Listener_NavTabs" callback_method="listen" active="1" hint="" description="Navigation Tabs"/>
+    <listener event_id="template_hook" execute_order="10" callback_class="EWRporta_Listener_Template" callback_method="template_hook" active="1" hint="" description="Template Hooks"/>
+  </code_event_listeners>
+  <cron/>
+  <email_templates/>
+  <email_template_modifications/>
+  <optiongroups>
+    <group group_id="EWRporta" display_order="10000" debug_only="0"/>
+    <option option_id="EWRporta_breakout" edit_format="onoff" data_type="boolean" can_backup="1">
+      <default_value>0</default_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <relation group_id="EWRporta" display_order="2"/>
+    </option>
+    <option option_id="EWRporta_globalize" edit_format="checkbox" data_type="array" can_backup="1">
+      <default_value>a:4:{s:7:"article";b:0;s:5:"index";b:0;s:5:"forum";b:0;s:6:"thread";b:0;}</default_value>
+      <edit_format_params>article=Article (article-# &gt; article &gt; portal)&lt;br /&gt; &amp;nbsp; &amp;nbsp; Categories (articles-#slug &gt; articles &gt; portal)
+index=Index (index &gt; portal)
+forum=Forum (forum-# &gt; forum)
+thread=Thread (thread-# &gt; thread-forum-# &gt; thread)</edit_format_params>
+      <sub_options>article
+index
+forum
+thread</sub_options>
+      <relation group_id="EWRporta" display_order="101"/>
+    </option>
+    <option option_id="EWRporta_shownavtab" edit_format="onoff" data_type="boolean" can_backup="1">
+      <default_value>1</default_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <relation group_id="EWRporta" display_order="1"/>
+    </option>
+    <option option_id="EWRporta_stylechoice" edit_format="callback" data_type="array" can_backup="1">
+      <default_value>a:2:{s:5:"force";b:0;s:5:"style";b:0;}</default_value>
+      <edit_format_params>EWRporta_Option_StyleChooser::renderOption</edit_format_params>
+      <sub_options>force
+style</sub_options>
+      <relation group_id="EWRporta" display_order="201"/>
+    </option>
+  </optiongroups>
+  <permissions>
+    <permission_groups>
+      <permission_group permission_group_id="EWRporta"/>
+    </permission_groups>
+    <permissions>
+      <permission permission_group_id="EWRporta" permission_id="canCustom" permission_type="flag" default_value="unset" interface_group_id="EWRporta" display_order="1"/>
+      <permission permission_group_id="EWRporta" permission_id="canPromote" permission_type="flag" default_value="unset" interface_group_id="EWRporta" display_order="2"/>
+    </permissions>
+    <interface_groups>
+      <interface_group interface_group_id="EWRporta" display_order="1000"/>
+    </interface_groups>
+  </permissions>
+  <phrases>
+    <phrase title="admin_navigation_EWRporta" version_id="45" version_string="1.4.5"><![CDATA[XenPorta]]></phrase>
+    <phrase title="admin_navigation_EWRporta_blocks" version_id="50" version_string="1.5.0"><![CDATA[Blocks]]></phrase>
+    <phrase title="admin_navigation_EWRporta_categories" version_id="52" version_string="1.5.2"><![CDATA[Categories]]></phrase>
+    <phrase title="admin_navigation_EWRporta_layouts" version_id="50" version_string="1.5.0"><![CDATA[Layouts]]></phrase>
+    <phrase title="admin_navigation_EWRporta_options" version_id="45" version_string="1.4.5"><![CDATA[Options]]></phrase>
+    <phrase title="admin_navigation_EWRporta_portal" version_id="50" version_string="1.5.0"><![CDATA[- Portal]]></phrase>
+    <phrase title="articles" version_id="58" version_string="1.5.8"><![CDATA[Articles]]></phrase>
+    <phrase title="blocks" version_id="45" version_string="1.4.5"><![CDATA[Blocks]]></phrase>
+    <phrase title="block_cache_time" version_id="45" version_string="1.4.5"><![CDATA[Block Cache Time]]></phrase>
+    <phrase title="block_id" version_id="45" version_string="1.4.5"><![CDATA[Block ID]]></phrase>
+    <phrase title="by_x_at_y" version_id="45" version_string="1.4.5"><![CDATA[by {user} at {date}]]></phrase>
+    <phrase title="by_x_date_y" version_id="41" version_string="1.4.1"><![CDATA[by {name}, {date}]]></phrase>
+    <phrase title="category_tags" version_id="56" version_string="1.5.6"><![CDATA[Categories]]></phrase>
+    <phrase title="category_type" version_id="58" version_string="1.5.8"><![CDATA[Category Type]]></phrase>
+    <phrase title="center" version_id="4" version_string="1.0.4"><![CDATA[Center]]></phrase>
+    <phrase title="confirm_delete_of_layout" version_id="45" version_string="1.4.5"><![CDATA[Confirm Delete of Layout]]></phrase>
+    <phrase title="confirm_uninstallation_of_block" version_id="45" version_string="1.4.5"><![CDATA[Confirm Uninstallation of Block]]></phrase>
+    <phrase title="create_block" version_id="45" version_string="1.4.5"><![CDATA[Create Block]]></phrase>
+    <phrase title="create_new_block" version_id="45" version_string="1.4.5"><![CDATA[Create New Block]]></phrase>
+    <phrase title="customized_layouts" version_id="45" version_string="1.4.5"><![CDATA[Customized Layouts]]></phrase>
+    <phrase title="customize_new_layout" version_id="45" version_string="1.4.5"><![CDATA[Customize New Layout]]></phrase>
+    <phrase title="customize_new_layout_hint" version_id="50" version_string="1.5.0"><![CDATA[In addition to selecting a "Layout Type", you may also define an "Layout ID". The ID is the ID relating to the type. For instance, if you select the layout type of "forum", with the layout ID of "53", that means you will customize the layout for "forum-53". The layout for "forum-53" will apply to the forum with the node "53". Only layout types that end with "-##" support layout IDs.
+<br /><br />
+If you choose to define a layout, without an ID, that layout will become the GLOBAL layout for all pages of that type. For instance, if you select the type of "forum", and do not enter an ID, you will customize the layout for "forum". The layout for "forum" will apply to ALL forums that do not have their own specific layout. Globalized Custom Layout hierarchy is explained in <a href="admin.php?options/list/EWRporta">XenPorta Options</a>.]]></phrase>
+    <phrase title="customize_this_page" version_id="37" version_string="1.3.7"><![CDATA[Customize This Page]]></phrase>
+    <phrase title="delete_layout" version_id="45" version_string="1.4.5"><![CDATA[Delete Layout]]></phrase>
+    <phrase title="disabled_blocks" version_id="45" version_string="1.4.5"><![CDATA[Disabled Blocks]]></phrase>
+    <phrase title="edit_block" version_id="45" version_string="1.4.5"><![CDATA[Edit Block]]></phrase>
+    <phrase title="edit_block_options" version_id="45" version_string="1.4.5"><![CDATA[Edit Block Options]]></phrase>
+    <phrase title="embedded_images" version_id="45" version_string="1.4.5"><![CDATA[Embedded Images]]></phrase>
+    <phrase title="empty_block_cache" version_id="45" version_string="1.4.5"><![CDATA[Empty Block Cache]]></phrase>
+    <phrase title="enable_caching_of_data_every" version_id="50" version_string="1.5.0"><![CDATA[Enable caching of data every]]></phrase>
+    <phrase title="enable_caching_of_data_every_hint" version_id="50" version_string="1.5.0"><![CDATA[A module that is cached, will store data generated by the block's <b>getModule()</b> function.<br />Some blocks may make use of the <b>getBypass()</b> function which ignores any caching rules.]]></phrase>
+    <phrase title="hide_from_selected_usergroups" version_id="45" version_string="1.4.5"><![CDATA[Hide From Selected Usergroups]]></phrase>
+    <phrase title="index" version_id="28" version_string="1.2.8"><![CDATA[index]]></phrase>
+    <phrase title="installed_blocks" version_id="45" version_string="1.4.5"><![CDATA[Installed Blocks]]></phrase>
+    <phrase title="install_block" version_id="45" version_string="1.4.5"><![CDATA[Install Block]]></phrase>
+    <phrase title="install_layout" version_id="45" version_string="1.4.5"><![CDATA[Install Layout]]></phrase>
+    <phrase title="layouts" version_id="45" version_string="1.4.5"><![CDATA[Layouts]]></phrase>
+    <phrase title="layout_id" version_id="50" version_string="1.5.0"><![CDATA[Layout ID]]></phrase>
+    <phrase title="lock_block_position" version_id="45" version_string="1.4.5"><![CDATA[Lock Block in Position to Prevent Customization]]></phrase>
+    <phrase title="major" version_id="58" version_string="1.5.8"><![CDATA[Major]]></phrase>
+    <phrase title="major_categories" version_id="58" version_string="1.5.8"><![CDATA[Major Categories]]></phrase>
+    <phrase title="minor" version_id="58" version_string="1.5.8"><![CDATA[Minor]]></phrase>
+    <phrase title="minor_categories" version_id="58" version_string="1.5.8"><![CDATA[Minor Categories]]></phrase>
+    <phrase title="most_users_ever_x" version_id="43" version_string="1.4.3"><![CDATA[Most users ever: {total}]]></phrase>
+    <phrase title="no_blocks_have_been_installed_yet" version_id="45" version_string="1.4.5"><![CDATA[No blocks have been installed yet.]]></phrase>
+    <phrase title="no_layouts_have_been_customized_yet" version_id="45" version_string="1.4.5"><![CDATA[No layouts have been customized yet.]]></phrase>
+    <phrase title="option_EWRporta_breakout" version_id="26" version_string="1.2.6"><![CDATA[Break Out of Content Container]]></phrase>
+    <phrase title="option_EWRporta_breakout_explain" version_id="26" version_string="1.2.6"><![CDATA[Selecting this option will break the portal out of the content container.]]></phrase>
+    <phrase title="option_EWRporta_globalize" version_id="45" version_string="1.4.5"><![CDATA[Globalized Custom Layouts]]></phrase>
+    <phrase title="option_EWRporta_globalize_explain" version_id="45" version_string="1.4.5"><![CDATA[By default, only the Portal uses the Layout Framework. You can enable the framework for various sections of your website (as well as enable articles mode). If you enable the framework for a section, you must define a custom layout for that section, or it's fallback. 
+<br /><br />
+So if you enable the framework for "Forum", you can start defining custom layouts for each forum individually using "forum-#", where "#" is the node-id of that forum. If it can't find a custom layout defined for a forum, it will look for the fallback layout called "forum". 
+<br /><br />
+In other words, "forum-3" would the layout for the forum node of 3. While "forum" will be the layout for <b>ALL</b> forums that don't have custom layouts. You can chose not to have a layout called "forum" at all, so that your forums don't have layouts unless explicitly defined.]]></phrase>
+    <phrase title="option_EWRporta_shownavtab" version_id="2" version_string="1.0.1"><![CDATA[Show Navigation Tab?]]></phrase>
+    <phrase title="option_EWRporta_shownavtab_explain" version_id="20" version_string="1.2.0"><![CDATA[You can choose to disable the navigation tab.]]></phrase>
+    <phrase title="option_EWRporta_stylechoice" version_id="45" version_string="1.4.5"><![CDATA[Override User Style Choice]]></phrase>
+    <phrase title="option_EWRporta_stylechoice_explain" version_id="20" version_string="1.2.0"><![CDATA[If specified, all visitors will view this item and its contents using the selected style, regardless of their personal style preference.]]></phrase>
+    <phrase title="option_group_EWRporta" version_id="1" version_string="1.0.0"><![CDATA[[8wayRun.Com] XenPorta (Portal)]]></phrase>
+    <phrase title="option_group_EWRporta_description" version_id="1" version_string="1.0.0"><![CDATA[[8wayRun.Com] XenPorta (Portal)]]></phrase>
+    <phrase title="permission_EWRporta_canCustom" version_id="38" version_string="1.3.8"><![CDATA[Can Customize Portal]]></phrase>
+    <phrase title="permission_EWRporta_canPromote" version_id="24" version_string="1.2.4"><![CDATA[Can Promote Threads]]></phrase>
+    <phrase title="permission_group_EWRporta" version_id="1" version_string="1.0.0"><![CDATA[[8wayRun.Com] XenPorta (Portal)]]></phrase>
+    <phrase title="permission_interface_EWRporta" version_id="1" version_string="1.0.0"><![CDATA[[8wayRun.Com] XenPorta (Portal)]]></phrase>
+    <phrase title="please_confirm_that_you_want_to_delete_following_layout" version_id="45" version_string="1.4.5"><![CDATA[Please confirm that you want to delete the following layout]]></phrase>
+    <phrase title="please_confirm_that_you_want_to_uninstall_following_block" version_id="45" version_string="1.4.5"><![CDATA[Please confirm that you want to uninstall the following block]]></phrase>
+    <phrase title="promote_date" version_id="24" version_string="1.2.4"><![CDATA[Promotion Date]]></phrase>
+    <phrase title="promote_date_hint" version_id="24" version_string="1.2.4"><![CDATA[Promotions are ordered by the time of their promotion.]]></phrase>
+    <phrase title="promote_delete" version_id="24" version_string="1.2.4"><![CDATA[Delete Promotion]]></phrase>
+    <phrase title="promote_icon" version_id="45" version_string="1.4.5"><![CDATA[Promotion Icon]]></phrase>
+    <phrase title="promote_icon_default" version_id="45" version_string="1.4.5"><![CDATA[Default Promotion Hierarchy
+
+]]></phrase>
+    <phrase title="promote_icon_disabled" version_id="45" version_string="1.4.5"><![CDATA[Disable Promotion Icon]]></phrase>
+    <phrase title="promote_options" version_id="28" version_string="1.2.8"><![CDATA[Promote Options]]></phrase>
+    <phrase title="promote_thread" version_id="24" version_string="1.2.4"><![CDATA[Promote Thread]]></phrase>
+    <phrase title="provided_file_is_not_a_block_xml_file" version_id="45" version_string="1.4.5"><![CDATA[The provided file is not a block XML file.]]></phrase>
+    <phrase title="provided_file_is_not_a_layout_xml_file" version_id="45" version_string="1.4.5"><![CDATA[The provided file is not a layout XML file.]]></phrase>
+    <phrase title="save_block" version_id="45" version_string="1.4.5"><![CDATA[Save Block]]></phrase>
+    <phrase title="show_hide_selected_usergroups_hint" version_id="45" version_string="1.4.5"><![CDATA[Block is either shown, or hidden to selected usergroups below.]]></phrase>
+    <phrase title="show_hide_selected_usergroups_none" version_id="45" version_string="1.4.5"><![CDATA[If no usergroups are selected, block will be shown to all visitors.]]></phrase>
+    <phrase title="show_to_selected_usergroups" version_id="45" version_string="1.4.5"><![CDATA[Show to Selected Usergroups]]></phrase>
+    <phrase title="uninstall_block" version_id="45" version_string="1.4.5"><![CDATA[Uninstall Block]]></phrase>
+    <phrase title="viewing_portal" version_id="28" version_string="1.2.8"><![CDATA[Viewing portal]]></phrase>
+  </phrases>
+  <route_prefixes>
+    <route_type type="admin">
+      <prefix original_prefix="ewrporta" class="EWRporta_Route_EWRporta" build_link="data_only"/>
+    </route_type>
+    <route_type type="public">
+      <prefix original_prefix="articles" class="EWRporta_Route_Articles" build_link="data_only"/>
+      <prefix original_prefix="portal" class="EWRporta_Route_Portal" build_link="data_only"/>
+    </route_type>
+  </route_prefixes>
+  <style_properties/>
+  <templates>
+    <template title="EWRporta.css" version_id="60" version_string="1.6.0"><![CDATA[.topRightBlocks,
+.midRightBlocks,
+.btmRightBlocks { float: none; width: auto; }
+.topLeftBlocks,
+.midLeftBlocks,
+.btmLeftBlocks { float: left; }
+{xen:helper clearfix, '.topRightBlocks'}
+{xen:helper clearfix, '.midRightBlocks'}
+{xen:helper clearfix, '.btmRightBlocks'}
+
+.centerShift { margin-left: {xen:calc '{xen:property sidebar.width} + 10'}px; }
+.forum_list .btmRightBlocks.centerShift .section:first-child { margin-top: 20px; }
+
+.articleCategories li { display: inline-block; width: 49%; }
+
+.EWRporta_ArticleView .categorySummary
+{
+	{xen:property messageLikesSummary}
+	margin-top: -10px;
+	margin-bottom: 15px;
+}
+.EWRporta_ArticleView .categorySummary .categoryEdit { float: right; }
+.EWRporta_ArticleView .categorySummary ul { display: inline; }
+.EWRporta_ArticleView .categorySummary li { display: inline; }
+
+.EWRporta_ArticleView .messageArticle .messageAuthor { padding-bottom: 10px; }
+.EWRporta_ArticleView .messageArticle .messageAuthor .avatar { float: left; }
+.EWRporta_ArticleView .messageArticle .messageAuthor .messageInfo { margin-left: 65px; padding-top: 30px; }
+.EWRporta_ArticleView .messageArticle .messageAuthor .shareControl { float: right; padding-top: 25px; }
+{xen:helper clearfix, '.EWRporta_ArticleView .messageArticle .messageAuthor'}
+
+.EWRporta_ArticleView .messageArticle .message { padding-bottom: 20px; }
+.EWRporta_ArticleView .messageArticle .messageUserInfo { display: none; }
+.EWRporta_ArticleView .messageArticle .messageInfo { margin-left: 0px; }
+
+.EWRporta_ArticleView .mainComments { margin-top: 15px; }
+.EWRporta_ArticleView .mainComments .bbCodeImage { vertical-align: top; }
+.EWRporta_ArticleView .mainComments .pageNavLinkGroup { border-bottom: 1px solid {xen:property primaryLighterStill}; }
+.EWRporta_ArticleView .mainComments .quickReply { border-top: none; }
+.EWRporta_ArticleView .mainComments .bbCodeBlock blockquote { display: block; }
+.EWRporta_ArticleView .mainComments .messageSimple .newIndicator
+{
+	{xen:property messageNewIndicator}
+	
+	margin-right: 0px;
+	margin-top: 0px;
+}
+
+.adminModules { width: 100%; }
+.adminModules td { vertical-align: top; }
+
+.adminModules .sortColumn { height: 50px; padding-bottom: 0px; }
+.adminModules .sortColumn .portlet { text-align: center; margin-bottom: 10px; border: 1px dotted {xen:property mutedTextColor}; }
+.adminModules .sortColumn .portlet.locked { border: 1px solid {xen:property contentText}; }
+.adminModules .sortColumn .portlet-placeholder { margin-bottom: 10px; border: 2px dashed {xen:property contentText}; height: 35px; }
+.adminModules .sortColumn .portlet-placeholder * { visibility: hidden; }
+.adminModules .sortColumn .portlet .delete { display: none; padding-top: 10px; }
+
+.adminModules #disabled.sortColumn { padding-right: 0px; }
+.adminModules #disabled.sortColumn .portlet,
+.adminModules #disabled.sortColumn .portlet-placeholder { float: left; width: 150px; margin-right: 10px; }
+.adminModules #disabled.sortColumn .portlet .clear { display: none; }
+.adminModules #disabled.sortColumn .portlet .delete { display: inline; }
+
+.xenOverlay .xenForm { width: auto !important; margin: 0px; }
+.xenOverlay .xenForm .ctrlUnit dt label { margin-left: 0px; }
+
+.xenForm .date
+{
+	background-image: url("styles/8wayrun/calendar.png");
+	background-position: right center;
+	background-repeat: no-repeat;
+}
+
+.copyright { text-align: center; font-size: 11px; margin: 10px; }
+
+<xen:if is="{xen:property enableResponsive}">
+	@media (max-width:{xen:property maxResponsiveNarrowWidth})
+	{
+		.mainComments .primaryContent.messageSimple .avatar { display: none; }
+		.mainComments .primaryContent.messageSimple .messageInfo { margin-left: 0; }
+	}
+</xen:if>]]></template>
+    <template title="EWRporta_ArticleMessage" version_id="51" version_string="1.5.1"><![CDATA[<xen:require css="message_simple.css" />
+<xen:require css="bb_code.css" />
+
+<li id="{$messageId}" class="primaryContent messageSimple {xen:if $message.isDeleted, 'deleted'} {xen:if '{$message.is_admin} OR {$message.is_moderator}', 'staff'} {xen:if $message.isIgnored, ignored}" data-author="{$message.username}">
+
+	<xen:avatar user="$message" size="s" />
+	
+	<div class="messageInfo">
+		<xen:if is="{$message.isNew}"><strong class="newIndicator"><span></span>{xen:phrase new}</strong></xen:if>
+
+		<xen:if hascontent="true">
+			<ul class="messageNotices">
+				<xen:contentcheck>
+					<xen:hook name="message_simple_notices" params="{xen:array 'message={$message}'}">
+						<xen:if is="{$message.warning_message}">
+							<li class="warningNotice"><span class="icon Tooltip" title="{xen:phrase warning}" data-tipclass="iconTip flipped"></span>{$message.warning_message}</li>
+						</xen:if>
+						<xen:if is="{$message.isDeleted}">
+							<li class="deletedNotice"><span class="icon Tooltip" title="{xen:phrase deleted}" data-tipclass="iconTip flipped"></span>{xen:phrase this_message_has_been_removed_from_public_view}</li>
+						<xen:elseif is="{$message.isModerated}" />
+							<li class="moderatedNotice"><span class="icon Tooltip" title="{xen:phrase awaiting_moderation}" data-tipclass="iconTip flipped"></span>{xen:phrase this_message_is_awaiting_moderator_approval_and_is_invisible_to_normal}</li>
+						</xen:if>
+						<xen:if is="{$message.isIgnored}">
+							<li>{xen:phrase you_are_ignoring_content_by_this_member} <a href="javascript:" class="jsOnly DisplayIgnoredContent">{xen:phrase show_ignored_content}</a></li>
+						</xen:if>
+					</xen:hook>
+				</xen:contentcheck>
+			</ul>
+		</xen:if>
+
+		<div class="messageContent">
+			<xen:username user="$message" class="poster" />
+			<article><blockquote class="ugc baseHtml{xen:if $message.isIgnored, ' ignored'}">{xen:raw $message.messageHtml}</blockquote></article>
+
+			{xen:raw $messageContentAfterTemplate}
+		</div>
+
+		{xen:raw $messageAfterTemplate}
+
+		<div id="likes-{$messageId}"><xen:if is="{$message.likes}"><xen:include template="likes_summary" /></xen:if></div>
+	</div>
+</li>
+]]></template>
+    <template title="EWRporta_ArticlePost" version_id="51" version_string="1.5.1"><![CDATA[<xen:include template="EWRporta_ArticleMessage">
+
+	<xen:map from="$post" to="$message" />
+
+	<xen:set var="$messageId">post-{$post.post_id}</xen:set>
+	
+	<xen:set var="$likesUrl">{xen:link posts/likes, $post}</xen:set>
+	
+	<xen:set var="$messageContentAfterTemplate"><xen:if is="{$post.attachments}"><xen:include template="attached_files" /></xen:if></xen:set>
+	
+	<xen:set var="$messageAfterTemplate">
+				
+		<div class="messageMeta">
+			
+			<div class="privateControls">
+				<xen:if is="{$post.canInlineMod}"><input type="checkbox" name="posts[]" value="{$post.post_id}" class="InlineModCheck item" data-target="#post-{$post.post_id}" title="{xen:phrase select_this_post_by_x, 'name={$post.username}'}" /></xen:if>
+				<span class="item muted">
+					<xen:username user="$post" class="author" />,
+					<a href="{xen:link threads/post-permalink, $thread, 'post={$post}'}" title="{xen:phrase permalink}" class="datePermalink"><xen:datetime time="$post.post_date" /></a>
+				</span>
+				<xen:hook name="post_private_controls" params="{xen:array 'post={$post}'}">
+				<xen:if is="{$post.canEdit}">
+					<a href="{xen:link posts/edit, $post}" class="item control edit {xen:if $xenOptions.messageInlineEdit, OverlayTrigger}"
+						data-href="{xen:link posts/edit-inline, $post}" data-overlayOptions="{&quot;fixed&quot;:false}"
+						data-messageSelector="#post-{$post.post_id}"><span></span>{xen:phrase edit}</a>
+					<xen:require js="js/xenforo/discussion.js" />
+				</xen:if>
+				<xen:if is="{$post.canDelete}"><a href="{xen:link posts/delete, $post}" class="item control delete OverlayTrigger"><span></span>{xen:phrase delete}</a></xen:if>
+				<xen:if is="{$post.canCleanSpam}"><a href="{xen:link spam-cleaner, $post}" class="item control deleteSpam OverlayTrigger"><span></span>{xen:phrase spam}</a></xen:if>
+				<xen:if is="{$canViewIps} AND {$post.ip_id}"><a href="{xen:link posts/ip, $post}" class="item control ip OverlayTrigger"><span></span>{xen:phrase ip}</a></xen:if>
+				
+				<xen:if is="{$post.canWarn}">
+					<a href="{xen:link members/warn, $post, 'content_type=post', 'content_id={$post.post_id}'}" class="item control warn"><span></span>{xen:phrase warn}</a>
+				<xen:elseif is="{$post.warning_id} && {$canViewWarnings}" />
+					<a href="{xen:link warnings, $post}" class="OverlayTrigger item control viewWarning"><span></span>{xen:phrase view_warning}</a>
+				</xen:if>
+				<xen:if is="{$post.canReport}">
+					<a href="{xen:link posts/report, $post}" class="OverlayTrigger item control report" data-cacheOverlay="false"><span></span>{xen:phrase report}</a>
+				</xen:if>
+				
+				</xen:hook>
+			</div>
+			
+			<div class="publicControls">
+				<a href="{xen:link threads/post-permalink, $thread, 'post={$post}'}" title="{xen:phrase permalink}" class="item muted postNumber hashPermalink OverlayTrigger" data-href="{xen:link posts/permalink, $post}">#{xen:calc '{$post.position} + 1'}</a>
+				<xen:hook name="post_public_controls" params="{xen:array 'post={$post}'}">
+				<xen:if is="{$post.canLike}">
+					<a href="{xen:link posts/like, $post}" class="LikeLink item control {xen:if $post.like_date, unlike, like}" data-container="#likes-post-{$post.post_id}"><span></span><span class="LikeLabel">{xen:if $post.like_date, {xen:phrase unlike}, {xen:phrase like}}</span></a>
+				</xen:if>
+				<xen:if is="{$canReply}">
+					<a href="{xen:link threads/reply, $thread, 'quote={$post.post_id}'}" data-postUrl="{xen:link posts/quote, $post}" class="ReplyQuote item control reply" title="{xen:phrase reply_quoting_this_message}"><span></span>{xen:phrase reply}</a>
+				</xen:if>
+				</xen:hook>
+			</div>
+		</div>
+	</xen:set>
+	
+</xen:include>
+]]></template>
+    <template title="EWRporta_ArticleView" version_id="58" version_string="1.5.8"><![CDATA[<xen:title>{xen:helper threadPrefix, $thread, escaped}{$thread.title}{xen:helper pagenumber, $page}</xen:title>
+<xen:h1>{xen:helper threadPrefix, $thread}{$thread.title}</xen:h1>
+
+<xen:description>
+	{xen:phrase discussion_in_x_started_by_y_date_z,
+		'forum=<a href="{xen:link forums, $forum}">{$forum.title}</a>',
+		'name={xen:helper username, $thread}',
+		'date=<a href="{xen:link threads, $thread}">{xen:datetime $thread.post_date, html}</a>'}
+</xen:description>
+
+<xen:navigation>
+	<xen:breadcrumb source="$nodeBreadCrumbs" />
+</xen:navigation>
+
+<xen:container var="$head.canonical">
+	<link rel="canonical" href="{xen:link 'canonical:threads', $thread, 'page={$page}'}" /></xen:container>
+<xen:container var="$head.description">
+	<meta name="description" content="{xen:helper snippet, $firstPost.message, 155}" /></xen:container>
+<xen:container var="$head.openGraph"><xen:include template="open_graph_meta">
+		<xen:set var="$url">{xen:link 'canonical:threads', $thread}</xen:set>
+		<xen:set var="$title">{xen:helper threadPrefix, $thread, escaped}{$thread.title}</xen:set>
+		<xen:set var="$avatar">{xen:helper avatar, $thread, m, 0, 1}</xen:set>
+	</xen:include></xen:container>
+<xen:container var="$bodyClasses">{xen:helper nodeClasses, $nodeBreadCrumbs, $forum}</xen:container>
+<xen:container var="$searchBar.thread"><xen:include template="search_bar_thread_only" /></xen:container>
+<xen:container var="$searchBar.forum"><xen:include template="search_bar_forum_only" /></xen:container>
+
+<xen:if is="{$canReply}">
+	<xen:comment><xen:topctrl>
+		<a href="{xen:link 'threads/reply', $thread}" class="callToAction"><span>{xen:phrase reply_to_thread}</span></a>
+	</xen:topctrl></xen:comment>
+</xen:if>
+
+<xen:require css="thread_view.css" />
+
+<xen:edithint template="EWRporta_ArticleMessage" />
+
+<ul class="messageList messageArticle" id="messageArticle">
+	<li class="messageAuthor">	
+		<xen:if is="{$xenOptions.facebookLike}">
+			<div class="facebookLike shareControl">
+				<xen:container var="$facebookSdk">1</xen:container>
+				<fb:like href="{xen:link 'canonical:threads', $thread}" layout="button_count" action="{$xenOptions.facebookLikeAction}" font="trebuchet ms" colorscheme="{xen:property fbColorScheme}"></fb:like>
+			</div>
+		</xen:if>
+		<xen:if is="{$xenOptions.plusone}">
+			<div class="plusone shareControl">
+				<div class="g-plusone" data-size="medium" data-count="true" data-url="{xen:link 'canonical:threads', $thread}" data-lang="{$visitorLanguage.language_code}"></div>
+			</div>
+		</xen:if>
+		<xen:if is="{$xenOptions.tweet.enabled}">
+			<div class="tweet shareControl">
+				<a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal"
+					data-lang="{xen:helper twitterLang, $visitorLanguage.language_code}"
+					data-url="{xen:link 'canonical:threads', $thread}"
+					{xen:if {$xenOptions.tweet.via}, 'data-via="{$xenOptions.tweet.via}"'}
+					{xen:if {$xenOptions.tweet.related}, 'data-related="{$xenOptions.tweet.related}"'}>{xen:phrase tweet}</a>
+			</div>
+		</xen:if>	
+
+		<xen:avatar user="$posts.{$thread.first_post_id}" size="s" />
+
+		<div class="messageInfo">
+			{xen:phrase by_x_date_y, 'name={xen:helper username, $thread}', 'date={xen:datetime $thread.post_date, static}'}
+		</div>
+	</li>
+
+	<xen:include template="post">
+		<xen:map from="$posts.{$thread.first_post_id}" to="$post" />
+	</xen:include>
+
+	<div class="categorySummary secondaryContent">
+		<xen:if is="{$canEditThread}">
+			<div class="categoryEdit">
+				<a href="{xen:link 'threads/category', $thread}" class="button OverlayTrigger">{xen:phrase edit}</a>
+			</div>
+		</xen:if>
+
+		{xen:phrase category_tags}: 
+
+		<xen:if is="{$categories}">
+			<ul>
+			<xen:foreach loop="$categories" value="$category">
+				<li><a href="{xen:link 'articles', $category}" class="button">{$category.category_name}</a></li>
+			</xen:foreach>
+			</ul>
+		<xen:else />
+			Uncategorized
+		</xen:if>
+	</div>
+</ul>
+
+</div><div class="mainContent mainComments">
+
+<div class="titleBar">
+	<h1>{xen:phrase comments}</h1>
+	<p id="pageDescription" class="muted">
+	{xen:phrase discussion_in_x_started_by_y_date_z,
+		'forum=<a href="{xen:link forums, $forum}">{$forum.title}</a>',
+		'name={xen:helper username, $thread}',
+		'date=<a href="{xen:link threads, $thread}">{xen:datetime $thread.post_date, html}</a>'}
+	</p>
+</div>
+
+<xen:if is="{$poll}">
+	<xen:include template="poll_block">
+		<xen:set var="$options">
+			<xen:if is="{$poll.canVote}">
+				<xen:include template="poll_block_vote" />
+			<xen:else />
+				<xen:include template="poll_block_result" />
+			</xen:if>
+		</xen:set>
+	</xen:include>
+</xen:if>
+
+<xen:if is="{$showPostedNotice}">
+	<div class="importantMessage">{xen:phrase message_submitted_displayed_pending_approval}</div>
+</xen:if>
+
+<xen:set var="$threadStatusHtml">
+	<xen:if hascontent="true">
+		<dl class="threadAlerts secondaryContent">
+			<dt>{xen:phrase thread_status}:</dt>
+			<xen:contentcheck>
+				<xen:if is="{$thread.discussion_state} == 'deleted'">
+					<dd class="deletedAlert">
+						<span class="icon Tooltip" title="{xen:phrase deleted}" data-tipclass="iconTip"></span>
+							{xen:phrase removed_from_public_view}</dd>
+				<xen:elseif is="{$thread.discussion_state} == 'moderated'" />
+					<dd class="moderatedAlert">
+						<span class="icon Tooltip" title="{xen:phrase awaiting_moderation}" data-tipclass="iconTip"></span>
+							{xen:phrase awaiting_moderation_before_being_displayed_publicly}</dd>
+				</xen:if>
+	
+				<xen:if is="!{$thread.discussion_open}">
+					<dd class="lockedAlert">
+						<span class="icon Tooltip" title="{xen:phrase locked}" data-tipclass="iconTip"></span>
+							{xen:phrase not_open_for_further_replies}</dd>
+				</xen:if>
+			</xen:contentcheck>
+		</dl>
+	</xen:if>
+</xen:set>
+{xen:raw $threadStatusHtml}
+
+<xen:hook name="thread_view_pagenav_before" params="{xen:array 'thread={$thread}'}" />
+
+<div class="pageNavLinkGroup">
+	<div class="linkGroup SelectionCountContainer">
+		<xen:if hascontent="true">
+			<div class="Popup">
+				<a rel="Menu">{xen:phrase thread_tools}</a>
+				<div class="Menu">
+					<div class="primaryContent menuHeader"><h3>{xen:phrase thread_tools}</h3></div>
+					<ul class="secondaryContent blockLinksList">
+						<xen:contentcheck>
+							<xen:if is="{$canEditThread}">
+								<li><a href="{xen:link 'threads/edit', $thread}" class="OverlayTrigger">{xen:phrase edit_thread}</a></li>
+							</xen:if>
+							<xen:if is="{$canDeleteThread}">
+								<li><a href="{xen:link 'threads/delete', $thread}" class="OverlayTrigger">{xen:phrase delete_thread}</a></li>
+							</xen:if>
+							<xen:if is="{$canMoveThread}">
+								<li><a href="{xen:link 'threads/move', $thread}" class="OverlayTrigger">{xen:phrase move_thread}</a></li>
+							</xen:if>
+							<xen:if is="{$deletedPosts}">
+								<li><a href="{xen:link threads/show-posts, $thread, 'page={$page}'}" class="MessageLoader" data-messageSelector="#messageList .message.deleted.placeholder">{xen:phrase show_deleted_posts}</a></li>
+							</xen:if>
+						</xen:contentcheck>
+					</ul>
+					<xen:if hascontent="true">
+					<form action="{xen:link threads/quick-update, $thread}" method="post" class="AutoValidator">
+						<ul class="secondaryContent blockLinksList checkboxColumns">
+						<xen:contentcheck>
+							<xen:if is="{$canLockUnlockThread}">
+							<li><label><input type="checkbox" name="discussion_open" value="1" class="SubmitOnChange" {xen:checked $thread.discussion_open} />
+								{xen:phrase open_thread}</label>
+								<input type="hidden" name="set[discussion_open]" value="1" /></li></xen:if>
+							<xen:if is="{$canStickUnstickThread}"> 
+							<li><label><input type="checkbox" name="sticky" value="1" class="SubmitOnChange" {xen:checked $thread.sticky} />
+								{xen:phrase sticky}</label>
+								<input type="hidden" name="set[sticky]" value="1" /></li></xen:if>
+						</xen:contentcheck>
+						</ul>
+						<input type="hidden" name="_xfToken" value="{$visitor.csrf_token_page}" />
+					</form>
+					</xen:if>
+					<xen:if is="{$thread.canInlineMod}">
+					<form action="{xen:link inline-mod/thread/switch}" method="post" class="InlineModForm sectionFooter" id="threadViewThreadCheck"
+						data-cookieName="threads">
+						<label><input type="checkbox" name="threads[]" value="{$thread.thread_id}" class="InlineModCheck" /> {xen:phrase select_for_thread_moderation}</label>
+						<input type="hidden" name="_xfToken" value="{$visitor.csrf_token_page}" />
+					</form>
+					</xen:if>
+				</div>
+			</div>
+		</xen:if>
+		<xen:if is="{$canWatchThread}">
+			<a href="{xen:link 'threads/watch-confirm', $thread}" class="OverlayTrigger" data-cacheOverlay="false">{xen:if $thread.thread_is_watched, '{xen:phrase unwatch_thread}', '{xen:phrase watch_thread}'}</a>
+		</xen:if>
+	</div>
+
+	<xen:pagenav link="threads" linkdata="{$thread}"
+		page="{$page}" perpage="{$postsPerPage}" total="{$totalPosts}"
+		unreadlink="{$unreadLink}" />
+</div>
+
+<xen:include template="ad_thread_view_above_messages" />
+
+<xen:hook name="thread_view_form_before" params="{xen:array 'thread={$thread}'}" />
+
+<form action="{xen:link 'inline-mod/post/switch'}" method="post"
+	class="InlineModForm section"
+	data-cookieName="posts"
+	data-controls="#InlineModControls"
+	data-imodOptions="#ModerationSelect option">
+
+	<ol class="messageList" id="messageList">
+		<xen:foreach loop="$posts" value="$post">
+			<xen:if is="{$post.message_state} == 'deleted'">
+				<xen:include template="post_deleted_placeholder" />
+			<xen:else />
+				<xen:if is="{$post.post_id} != {$thread.first_post_id}"><xen:include template="EWRporta_ArticlePost" /></xen:if>
+			</xen:if>
+		</xen:foreach>
+		<xen:edithint template="attached_files" />
+	</ol>
+
+	<xen:if is="{$inlineModOptions}">
+		<div class="sectionFooter InlineMod Hide">
+			<label for="ModerationSelect">{xen:phrase perform_action_with_selected_posts}...</label>
+
+			<xen:include template="inline_mod_controls">
+				<xen:set var="$text">{xen:phrase post_moderation}</xen:set>
+				<xen:set var="$options">
+					<xen:if is="{$inlineModOptions.delete}"><option value="delete">{xen:phrase delete_posts}...</option></xen:if>
+					<xen:if is="{$inlineModOptions.undelete}"><option value="undelete">{xen:phrase undelete_posts}</option></xen:if>
+					<xen:if is="{$inlineModOptions.approve}"><option value="approve">{xen:phrase approve_posts}</option></xen:if>
+					<xen:if is="{$inlineModOptions.unapprove}"><option value="unapprove">{xen:phrase unapprove_posts}</option></xen:if>
+					<xen:if is="{$inlineModOptions.move}"><option value="move">{xen:phrase move_posts}...</option></xen:if>
+					<xen:if is="{$inlineModOptions.merge}"><option value="merge">{xen:phrase merge_posts}...</option></xen:if>
+					<option value="deselect">{xen:phrase deselect_posts}</option>
+				</xen:set>
+				<xen:set var="$checkboxTitle">{xen:phrase select_deselect_all_posts_on_this_page}</xen:set>
+				<xen:set var="$selectedItemsPhrase">{xen:phrase selected_posts}</xen:set>
+			</xen:include>
+		</div>
+	</xen:if>
+
+	<input type="hidden" name="_xfToken" value="{$visitor.csrf_token_page}" />
+
+</form>
+
+<xen:if hascontent="true">
+	<div class="pageNavLinkGroup">
+		<xen:contentcheck>
+			<xen:if is="{$canQuickReply}">
+				<xen:if is="{$postsRemaining}">
+					<div class="linkGroup">
+						<xen:if is="{$postsRemaining} == 1">
+							<a href="{xen:link threads, $thread, 'page={xen:calc "{$page} + 1"}'}" class="postsRemaining">{xen:phrase 1_more_message}...</a>
+						<xen:else />
+							<a href="{xen:link threads, $thread, 'page={xen:calc "{$page} + 1"}'}" class="postsRemaining">{xen:phrase x_more_messages, 'count={xen:number $postsRemaining}'}...</a>
+						</xen:if>
+					</div>
+				</xen:if>
+			<xen:else />
+				<div class="linkGroup">
+					<xen:if is="{$canReply}">
+						<a href="{xen:link 'threads/reply', $thread}" class="callToAction"><span>{xen:phrase reply_to_thread}</span></a>
+					<xen:elseif is="{$visitor.user_id}" />
+						({xen:phrase no_permission_to_reply})
+					<xen:else />
+						<label for="LoginControl"><a href="{xen:link login}" class="concealed">({xen:phrase log_in_or_sign_up_to_reply})</a></label>
+					</xen:if>
+				</div>
+			</xen:if>
+			<div class="linkGroup"{xen:if '!{$ignoredNames}', ' style="display: none"'}><a href="javascript:" class="muted jsOnly DisplayIgnoredContent Tooltip" title="{xen:phrase show_hidden_content_by_x, "names={xen:helper implode, $ignoredNames, ', '}"}">{xen:phrase show_ignored_content}</a></div>
+
+			<xen:pagenav link="threads" linkdata="{$thread}"
+				page="{$page}" perpage="{$postsPerPage}" total="{$totalPosts}"
+				unreadlink="{$unreadLink}"
+			/>
+		</xen:contentcheck>
+	</div>
+</xen:if>
+
+<xen:include template="ad_thread_view_below_messages" />
+
+<xen:hook name="thread_view_qr_before" params="{xen:array 'thread={$thread}'}" />
+
+<xen:if is="{$canQuickReply}">
+	<xen:include template="quick_reply">
+		<xen:set var="$formAction">{xen:link 'threads/add-reply', $thread}</xen:set>
+		<xen:set var="$lastDate">{$lastPost.post_date}</xen:set>
+		<xen:set var="$showMoreOptions">1</xen:set>
+	</xen:include>
+</xen:if>
+
+<xen:hook name="thread_view_qr_after" params="{xen:array 'thread={$thread}'}" />
+
+{xen:raw $threadStatusHtml}
+
+<xen:include template="share_page">
+	<xen:set var="$url">{xen:link 'canonical:threads', $thread}</xen:set>
+</xen:include>
+
+<xen:hook name="thread_view_share_after" params="{xen:array 'thread={$thread}'}" />
+]]></template>
+    <template title="EWRporta_Block" version_id="45" version_string="1.4.5"><![CDATA[<div class="portlet secondaryContent {xen:if '{$block.locked}', 'locked'}">
+	{$block.block_id}
+	<input type="hidden" class="position" name="blocks[{$block.block_id}]" value="{$block.position}" />
+</div>]]></template>
+    <template title="EWRporta_Blocks" version_id="52" version_string="1.5.2"><![CDATA[<xen:title>{xen:phrase customize_this_page}</xen:title>
+<xen:h1>{xen:phrase customize_this_page}</xen:h1>
+
+<xen:require css="EWRporta.css" />
+<xen:require js="js/8wayrun/EWRporta_ajax.js" />
+<xen:require js="js/8wayrun/EWRporta_jqui.js" />
+
+<form action="{xen:link 'portal/blocks'}" method="post" class="AutoValidator">
+
+	<div class="sectionMain">
+		<table class="adminModules">
+		<tr>
+			<td class="subHeading">{xen:phrase position}: Top-Left</td>
+			<td class="subHeading">{xen:phrase position}: Top-Right</td>
+			<td class="subHeading">{xen:phrase position}: Sidebar</td>
+		</tr>
+		<tr>
+			<td class="sectionMain sortColumn" id="top-left">
+				<xen:foreach loop="$blocks.top-left" value="$block">
+					<xen:include template="EWRporta_Block" />
+				</xen:foreach>
+			</td>
+			<td class="sectionMain sortColumn" id="top-right">
+				<xen:foreach loop="$blocks.top-right" value="$block">
+					<xen:include template="EWRporta_Block" />
+				</xen:foreach>
+			</td>
+			<td class="sectionMain sortColumn" rowspan="5" id="sidebar">
+				<xen:foreach loop="$blocks.sidebar" value="$block">
+					<xen:include template="EWRporta_Block" />
+				</xen:foreach>
+			</td>
+		</tr>
+		<tr>
+			<td class="subHeading">{xen:phrase position}: Mid-Left</td>
+			<td class="subHeading">{xen:phrase position}: Mid-Right</td>
+		</tr>
+		<tr>
+			<td class="sectionMain sortColumn" id="mid-left">
+				<xen:foreach loop="$blocks.mid-left" value="$block">
+					<xen:include template="EWRporta_Block" />
+				</xen:foreach>
+			</td>
+			<td class="sectionMain sortColumn" id="mid-right">
+				<xen:foreach loop="$blocks.mid-right" value="$block">
+					<xen:include template="EWRporta_Block" />
+				</xen:foreach>
+			</td>
+		</tr>
+		<tr>
+			<td class="subHeading">{xen:phrase position}: Btm-Left</td>
+			<td class="subHeading">{xen:phrase position}: Btm-Right</td>
+		</tr>
+		<tr>
+			<td class="sectionMain sortColumn" id="btm-left">
+				<xen:foreach loop="$blocks.btm-left" value="$block">
+					<xen:include template="EWRporta_Block" />
+				</xen:foreach>
+			</td>
+			<td class="sectionMain sortColumn" id="btm-right">
+				<xen:foreach loop="$blocks.btm-right" value="$block">
+					<xen:include template="EWRporta_Block" />
+				</xen:foreach>
+			</td>
+		</tr>
+		</table>
+
+		<br />
+
+		<table class="adminModules">
+		<tr>
+			<td class="subHeading">{xen:phrase disabled_blocks}</td>
+		</tr>
+		<tr>
+			<td class="sectionMain sortColumn" id="disabled">
+				<xen:foreach loop="$blocks.disabled" value="$block">
+					<xen:include template="EWRporta_Block" />
+				</xen:foreach>
+			</td>
+		</tr>
+		</table>
+
+		<br />
+
+		<div class="secondaryContent" style="text-align: center;">
+			<input type="submit" value="{xen:phrase save_changes}" name="submit" accesskey="s" class="button primary" />
+			<a href="{xen:link 'portal/revert'}" class="button">{xen:phrase revert_all}</a>
+		</div>
+	</div>
+
+	<input type="hidden" name="_xfToken" value="{$visitor.csrf_token_page}" />
+</form>
+
+<xen:include template="EWRporta_Footer" />]]></template>
+    <template title="EWRporta_BreakOut.css" version_id="54" version_string="1.5.4"><![CDATA[#content.EWRporta_Portal .breadBoxTop,
+#content.EWRporta_Portal .titleBar { display: none; }
+
+#content.EWRporta_Portal .mainContent
+{
+	background-color: transparent;
+	border: 0px;
+	border-radius: 0px;
+	box-shadow: none !important;
+	-moz-box-shadow: none !important;
+	padding: 0px;
+}
+
+#content.EWRporta_Portal .footerBreakout .copyright { margin: 0px; }]]></template>
+    <template title="EWRporta_Category" version_id="58" version_string="1.5.8"><![CDATA[<xen:title>{xen:phrase categories}: {$thread.title}</xen:title>
+
+<xen:navigation>
+	<xen:breadcrumb source="$nodeBreadCrumbs" />
+	<xen:breadcrumb href="{xen:link full:threads, $thread}">{$thread.title}</xen:breadcrumb>
+</xen:navigation>
+
+<xen:require css="EWRporta.css" />
+
+<form action="{xen:link 'threads/category', $thread}" method="post" class="xenForm formOverlay">
+	<fieldset>
+		<xen:if hascontent="true">
+		<dl class="ctrlUnit articleCategories">
+			<dt></dt>
+			<dd>
+				<ul>
+				<xen:contentcheck>
+				<xen:foreach loop="$catlinks" value="$catlink">
+					<li>
+						<label for="ctrl_catlink[{$catlink.catlink_id}]">
+							<input type="checkbox" name="catlinks[{$catlink.catlink_id}]" value="{$catlink.category_name}" id="ctrl_catlink[{$catlink.catlink_id}]" checked="checked">
+							<input type="hidden" name="oldlinks[{$catlink.catlink_id}]" value="{$catlink.category_name}">
+							{$catlink.category_name}
+						</label>
+					</li>
+				</xen:foreach>
+				</xen:contentcheck>
+				</ul>
+			</dd>
+		</dl>
+		</xen:if>
+
+		<xen:if hascontent="true">
+		<dl class="ctrlUnit articleCategories">
+			<dt>{xen:phrase major_categories}:</dt>
+			<dd>
+				<ul>
+				<xen:contentcheck>
+				<xen:foreach loop="$categories.major" value="$category">
+					<li>
+						<label for="ctrl_newlinks[{$category.category_id}]">
+							<input type="checkbox" name="newlinks[{$category.category_id}]" value="{$category.category_id}" id="ctrl_newlinks[{$category.category_id}]">
+							{$category.category_name}
+						</label>
+					</li>
+				</xen:foreach>
+				</xen:contentcheck>
+				</ul>
+			</dd>
+		</dl>
+		</xen:if>
+
+		<xen:if hascontent="true">
+		<dl class="ctrlUnit articleCategories">
+			<dt>{xen:phrase minor_categories}:</dt>
+			<dd>
+				<ul>
+				<xen:contentcheck>
+				<xen:foreach loop="$categories.minor" value="$category">
+					<li>
+						<label for="ctrl_newlinks[{$category.category_id}]">
+							<input type="checkbox" name="newlinks[{$category.category_id}]" value="{$category.category_id}" id="ctrl_newlinks[{$category.category_id}]">
+							{$category.category_name}
+						</label>
+					</li>
+				</xen:foreach>
+				</xen:contentcheck>
+				</ul>
+			</dd>
+		</dl>
+		</xen:if>
+	</fieldset>
+
+	<dl class="ctrlUnit submitUnit">
+		<dt></dt>
+		<dd>
+			<input type="submit" value="Update Categories" class="button primary" />
+		</dd>
+	</dl>
+
+	<input type="hidden" name="_xfToken" value="{$visitor.csrf_token_page}" />
+</form>]]></template>
+    <template title="EWRporta_Custom_Btm" version_id="53" version_string="1.5.3"><![CDATA[<xen:require css="EWRporta.css" />
+
+<xen:if is="{$blocks.btm-left}">
+<div class="sidebar btmLeftBlocks">
+	<xen:foreach loop="$blocks.btm-left" value="$block">
+		{xen:raw $block}
+	</xen:foreach>
+</div>
+</xen:if>
+
+<xen:if is="{$blocks.btm-right}">
+<div class="sidebar btmRightBlocks {xen:if '{$blocks.btm-left}', 'centerShift'}">
+	<xen:foreach loop="$blocks.btm-right" value="$block">
+		{xen:raw $block}
+	</xen:foreach>
+</div>
+</xen:if>
+
+<xen:if is="{$blocks.sidebar}">
+	<xen:sidebar>
+		<xen:foreach loop="$blocks.sidebar" value="$block">
+			{xen:raw $block}
+		</xen:foreach>
+	</xen:sidebar>
+</xen:if>
+
+<xen:include template="EWRporta_Footer" />]]></template>
+    <template title="EWRporta_Custom_Side" version_id="45" version_string="1.4.5"><![CDATA[<xen:require css="EWRporta.css" />
+
+<xen:if is="{$blocks.sidebar}">
+	<xen:foreach loop="$blocks.sidebar" value="$block">
+		{xen:raw $block}
+	</xen:foreach>
+</xen:if>
+]]></template>
+    <template title="EWRporta_Custom_Top" version_id="53" version_string="1.5.3"><![CDATA[<xen:require css="EWRporta.css" />
+
+<xen:if is="{$blocks.top-left}">
+<div class="sidebar topLeftBlocks">
+	<xen:foreach loop="$blocks.top-left" value="$block">
+		{xen:raw $block}
+	</xen:foreach>
+</div>
+</xen:if>
+
+<xen:if is="{$blocks.top-right}">
+<div class="sidebar topRightBlocks {xen:if '{$blocks.top-left}', 'centerShift'}">
+	<xen:foreach loop="$blocks.top-right" value="$block">
+		{xen:raw $block}
+	</xen:foreach>
+</div>
+</xen:if>]]></template>
+    <template title="EWRporta_Footer" version_id="54" version_string="1.5.4"><![CDATA[<div class="portaCopy copyright muted">
+	<a href="http://xenforo.com/community/resources/90/">XenPorta</a>
+	&copy; Jason Axelrod from <a href="http://8wayrun.com/">8WAYRUN.COM</a>
+</div>]]></template>
+    <template title="EWRporta_Navtabs" version_id="45" version_string="1.4.5"><![CDATA[<ul class="secondaryContent blockLinksList">
+	<xen:if is="{$visitor.user_id}"><li><a href="{xen:link 'watched/threads'}">{xen:phrase watched_threads}</a></li></xen:if>
+	<li><a href="{xen:link 'recent-activity'}">{xen:phrase recent_activity}</a></li>
+	<li><a href="{xen:link 'find-new/threads'}">{xen:phrase whats_new}</a></li>
+	<li><a href="{xen:link 'help'}">{xen:phrase help}</a></li>
+	<xen:if is="{$perms.custom}">
+		<li style="width: 50px; height: 10px;"></li>
+		<li><a href="{xen:link 'portal/blocks'}">{xen:phrase customize_this_page}</a></li>
+	</xen:if>
+</ul>]]></template>
+    <template title="EWRporta_Portal" version_id="58" version_string="1.5.8"><![CDATA[<xen:if is="{$title}">
+	<xen:title>{$title}</xen:title>
+	<xen:h1>{$title}</xen:h1>
+<xen:else />
+	<xen:h1>{$xenOptions.boardTitle}</xen:h1>
+</xen:if>
+
+
+<xen:container var="$head.canonical"><link rel="canonical" href="{xen:link 'canonical:portal'}" /></xen:container>
+<xen:if is="{$xenOptions.boardDescription}"><xen:container var="$head.description">
+	<meta name="description" content="{$xenOptions.boardDescription}" /></xen:container></xen:if>
+<xen:container var="$head.rss">
+	<link rel="alternate" type="application/rss+xml" title="{xen:phrase rss_feed_for_x, 'title={$xenOptions.boardTitle}'}" href="{xen:link portal/index.rss}" /></xen:container>
+<xen:container var="$head.openGraph">
+	<xen:include template="open_graph_meta">
+		<xen:set var="$url">{xen:link 'canonical:portal'}</xen:set>
+		<xen:set var="$title">{$xenOptions.boardTitle}</xen:set>
+	</xen:include></xen:container>
+<xen:container var="$quickNavSelected">portal</xen:container>
+
+<xen:navigation>
+	<xen:breadcrumb source="$breadCrumbs" />
+</xen:navigation>
+
+<xen:require css="EWRporta.css" />
+<xen:if is="{$xenOptions.EWRporta_breakout}"><xen:require css="EWRporta_BreakOut.css" /></xen:if>
+
+<xen:if is="{$blocks.top-left}">
+<div class="sidebar topLeftBlocks">
+	<xen:foreach loop="$blocks.top-left" value="$block">
+		{xen:raw $block}
+	</xen:foreach>
+</div>
+</xen:if>
+
+<xen:if is="{$blocks.top-right}">
+<div class="sidebar topRightBlocks {xen:if '{$blocks.top-left}', 'centerShift'}">
+	<xen:foreach loop="$blocks.top-right" value="$block">
+		{xen:raw $block}
+	</xen:foreach>
+</div>
+</xen:if>
+
+<xen:if is="{$blocks.mid-left}">
+<div class="sidebar midLeftBlocks">
+	<xen:foreach loop="$blocks.mid-left" value="$block">
+		{xen:raw $block}
+	</xen:foreach>
+</div>
+</xen:if>
+
+<xen:if is="{$blocks.mid-right}">
+<div class="midRightBlocks {xen:if '{$blocks.mid-left}', 'centerShift'}">
+	<xen:foreach loop="$blocks.mid-right" value="$block">
+		{xen:raw $block}
+	</xen:foreach>
+</div>
+</xen:if>
+
+<xen:if is="{$blocks.btm-left}">
+<div class="sidebar btmLeftBlocks">
+	<xen:foreach loop="$blocks.btm-left" value="$block">
+		{xen:raw $block}
+	</xen:foreach>
+</div>
+</xen:if>
+
+<xen:if is="{$blocks.btm-right}">
+<div class="sidebar btmRightBlocks {xen:if '{$blocks.btm-left}', 'centerShift'}">
+	<xen:foreach loop="$blocks.btm-right" value="$block">
+		{xen:raw $block}
+	</xen:foreach>
+</div>
+</xen:if>
+
+<xen:if is="{$blocks.sidebar}">
+<xen:sidebar>
+	<xen:foreach loop="$blocks.sidebar" value="$block">
+		{xen:raw $block}
+	</xen:foreach>
+</xen:sidebar>
+</xen:if>
+
+<xen:if is="{$xenOptions.EWRporta_breakout}">
+	<div class="sectionMain footerBreakout portaCopy"><xen:include template="EWRporta_Footer" /></div>
+<xen:else />
+	<xen:include template="EWRporta_Footer" />
+</xen:if>]]></template>
+    <template title="EWRporta_Promote" version_id="58" version_string="1.5.8"><![CDATA[<xen:title>{xen:phrase promote_thread}: {$thread.title}</xen:title>
+
+<xen:navigation>
+	<xen:breadcrumb source="$nodeBreadCrumbs" />
+	<xen:breadcrumb href="{xen:link full:threads, $thread}">{$thread.title}</xen:breadcrumb>
+</xen:navigation>
+
+<xen:require css="EWRporta.css" />
+
+<form action="{xen:link 'threads/promote', $thread}" method="post" class="xenForm formOverlay">
+
+	<dl class="ctrlUnit">
+		<dt><label>{xen:phrase promote_icon}:</label></dt>
+		<dd><ul>
+			<li>
+				<label for="ctrl_default"><input type="radio" name="promote_icon" value="default" id="ctrl_default" {xen:checked "{$threadPromote.promote_icon} == 'default'"} /> {xen:phrase promote_icon_default}</label>
+			</li>
+			<li>
+				<label for="ctrl_avatar"><input type="radio" name="promote_icon" value="avatar" id="ctrl_avatar" {xen:checked "{$threadPromote.promote_icon} == 'avatar'"} /> {xen:phrase avatar}: <xen:username user="$thread" /></label>
+			</li>
+
+			<xen:if hascontent="true">
+			<li><label for="ctrl_attach"><input type="radio" name="promote_icon" value="attach" class="Disabler" id="ctrl_attach" {xen:checked "{$threadPromote.promote_icon} == 'attach'"} /> {xen:phrase attached_files}:</label>
+				<ul id="ctrl_attach_Disabler">
+					<li>
+						<select name="attach_data" class="textCtrl autoSize">
+							<xen:contentcheck>
+							<xen:foreach loop="$icons.attachments" value="$attach">
+								<option value="{$attach.attachment_id}" {xen:if '{$threadPromote.promote_data} == {$attach.attachment_id}', 'selected=selected'}>{$attach.attachment_id} -> {$attach.filename}</option>
+							</xen:foreach>
+							</xen:contentcheck>
+						</select>
+					</li>
+				</ul>
+			</li>
+			</xen:if>
+
+			<xen:if hascontent="true">
+			<li><label for="ctrl_image"><input type="radio" name="promote_icon" value="image" class="Disabler" id="ctrl_image" {xen:checked "{$threadPromote.promote_icon} == 'image'"} /> {xen:phrase embedded_images}:</label>
+				<ul id="ctrl_image_Disabler">
+					<li>
+						<select name="image_data" class="textCtrl autoSize">
+							<xen:contentcheck>
+							<xen:foreach loop="$icons.imageEmbeds" value="$image">
+								<option value="{$image.imageurl}" {xen:if '{$threadPromote.promote_data} == {$image.imageurl}', 'selected=selected'}>{$image.server} -> {$image.filename}</option>
+							</xen:foreach>
+							</xen:contentcheck>
+						</select>
+					</li>
+				</ul>
+			</li>
+			</xen:if>
+
+			<xen:if hascontent="true">
+			<li><label for="ctrl_medio"><input type="radio" name="promote_icon" value="medio" class="Disabler" id="ctrl_medio" {xen:checked "{$threadPromote.promote_icon} == 'medio'"} /> XenMedio {xen:phrase media}:</label>
+				<ul id="ctrl_medio_Disabler">
+					<li>
+						<select name="medio_data" class="textCtrl autoSize">
+							<xen:contentcheck>
+							<xen:foreach loop="$icons.medioEmbeds" value="$media">
+								<option value="{$media.media_id}" {xen:if '{$threadPromote.promote_data} == {$media.media_id}', 'selected=selected'}>{$media.media_id} -> {$media.media_title}</option>
+							</xen:foreach>
+							</xen:contentcheck>
+						</select>
+					</li>
+				</ul>
+			</li>
+			</xen:if>
+
+			<li>
+				<label for="ctrl_disabled"><input type="radio" name="promote_icon" value="disabled" id="ctrl_disabled" {xen:checked "{$threadPromote.promote_icon} == 'disabled'"} /> {xen:phrase promote_icon_disabled}</label>
+			</li>
+		</ul></dd>
+	</dl>
+
+	<dl class="ctrlUnit">
+		<dt><label>{xen:phrase promote_date}:</label></dt>
+		<dd>
+			<input type="hidden" name="zone" value="{$datetime.zone}" />
+			<input type="date" size="10" name="date" class="textCtrl autoSize" value="{$datetime.date}" />
+
+			<select name="hour" class="textCtrl autoSize">
+				<option value="12" {xen:selected "{$datetime.hour} == '12'"}>12</option>
+				<option value="01" {xen:selected "{$datetime.hour} == '01'"}>01</option>
+				<option value="02" {xen:selected "{$datetime.hour} == '02'"}>02</option>
+				<option value="03" {xen:selected "{$datetime.hour} == '03'"}>03</option>
+				<option value="04" {xen:selected "{$datetime.hour} == '04'"}>04</option>
+				<option value="05" {xen:selected "{$datetime.hour} == '05'"}>05</option>
+				<option value="06" {xen:selected "{$datetime.hour} == '06'"}>06</option>
+				<option value="07" {xen:selected "{$datetime.hour} == '07'"}>07</option>
+				<option value="08" {xen:selected "{$datetime.hour} == '08'"}>08</option>
+				<option value="09" {xen:selected "{$datetime.hour} == '09'"}>09</option>
+				<option value="10" {xen:selected "{$datetime.hour} == '10'"}>10</option>
+				<option value="11" {xen:selected "{$datetime.hour} == '11'"}>11</option>
+			</select>:<input type="text" size="1" name="mins" value="{$datetime.mins}" class="textCtrl autoSize SpinBox" step="15" max="59" min="0" />
+
+			<select name="ampm" class="textCtrl autoSize">
+				<option value="AM" {xen:selected "{$datetime.meri} == 'AM'"}>AM</option>
+				<option value="PM" {xen:selected "{$datetime.meri} == 'PM'"}>PM</option>
+			</select>
+
+			{$datetime.zone}
+
+			<p class="explain">{xen:phrase promote_date_hint}</p>
+		</dd>
+	</dl>
+
+	<dl class="ctrlUnit submitUnit">
+		<dt></dt>
+		<dd>
+			<input type="submit" value="{xen:phrase promote_thread}" class="button primary" />
+
+			<xen:if is="{$threadPromote}">
+				<input type="submit" value="{xen:phrase promote_delete}" name="delete" class="button" />
+			</xen:if>
+		</dd>
+	</dl>
+
+	<input type="hidden" name="_xfToken" value="{$visitor.csrf_token_page}" />
+</form>]]></template>
+    <template title="EWRporta_ThreadView" version_id="45" version_string="1.4.5"><![CDATA[<xen:topctrl>
+	<a href="{xen:link 'threads/promote', $thread}" class="callToAction OverlayTrigger" data-cacheOverlay="false">
+		<span><xen:if is="{$promotion}">{xen:phrase promote_options}<xen:else />{xen:phrase promote_thread}</xen:if></span>
+	</a>
+</xen:topctrl>]]></template>
+  </templates>
+  <public_template_modifications/>
+  <bb_code_media_sites/>
+</addon>

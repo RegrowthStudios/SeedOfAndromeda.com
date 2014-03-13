@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<addon addon_id="El_MarkForumReadIcon" title="[Extra License] Mark Forum Read Link" version_string="1.0.0" version_id="1000070" url="" install_callback_class="El_MarkForumReadIcon_Install_Controller" install_callback_method="install" uninstall_callback_class="" uninstall_callback_method="">
+  <admin_navigation/>
+  <admin_permissions/>
+  <admin_style_properties/>
+  <admin_templates/>
+  <admin_template_modifications/>
+  <code_events/>
+  <code_event_listeners/>
+  <cron/>
+  <email_templates/>
+  <email_template_modifications/>
+  <optiongroups/>
+  <permissions>
+    <permission_groups/>
+    <permissions/>
+    <interface_groups/>
+  </permissions>
+  <phrases/>
+  <route_prefixes/>
+  <style_properties/>
+  <templates/>
+  <public_template_modifications>
+    <modification template="node_forum_level_2" modification_key="add markread link" description="add markread link" execution_order="10" enabled="1" action="str_replace">
+      <find><![CDATA[<span class="nodeIcon" title="{xen:if $forum.hasNew, '{xen:phrase unread_messages}', ''}"></span>]]></find>
+      <replace><![CDATA[<xen:require js="js/el/markforumread.js" />
+
+<span class="nodeIcon" title="{xen:if $forum.hasNew, '{xen:phrase unread_messages}', ''}"
+<xen:if is="{$visitor.user_id} AND {$forum.hasNew}">
+    data-markreadlink="{xen:link 'forums/-/mark-read', $forum, 'date={$serverTime}'}"
+</xen:if>
+></span>]]></replace>
+    </modification>
+  </public_template_modifications>
+  <bb_code_media_sites/>
+</addon>

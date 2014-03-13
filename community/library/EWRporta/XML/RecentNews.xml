@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<block block_id="RecentNews" title="Recent News Article" version_string="1.0.0" version_id="1" url="http://8wayrun.com/" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="" cache="+1 hours">
+  <admin_templates/>
+  <listeners/>
+  <options>
+    <option option_id="recentnews_forum" edit_format="callback" data_type="array" display_order="1">
+      <option_value>a:1:{i:0;s:2:"78";}</option_value>
+      <edit_format_params>EWRporta_Option_ForumChooser::renderOption</edit_format_params>
+      <sub_options>*</sub_options>
+      <title>News Source Forums</title>
+      <explain><![CDATA[Only selected forums will be searched. (unspecify to disable)]]></explain>
+    </option>
+    <option option_id="recentnews_limit" edit_format="spinbox" data_type="unsigned_integer" display_order="2">
+      <option_value>10</option_value>
+      <edit_format_params>min=1
+max=20</edit_format_params>
+      <sub_options></sub_options>
+      <title>News Posts Per Page</title>
+      <explain><![CDATA[The maximum number of articles to display on each page of the portal.]]></explain>
+    </option>
+    <option option_id="recentnews_truncate" edit_format="spinbox" data_type="unsigned_integer" display_order="3">
+      <option_value>1000</option_value>
+      <edit_format_params>step=100</edit_format_params>
+      <sub_options></sub_options>
+      <title>Max Summary Length</title>
+      <explain><![CDATA[Articles not containing a [prebreak], will be cut after this many characters.]]></explain>
+    </option>
+    <option option_id="recentnews_social" edit_format="onoff" data_type="boolean" display_order="4">
+      <option_value>0</option_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <title>Show Social Media Options</title>
+      <explain><![CDATA[Your social media settings can be individually enabled and disabled <a href="admin.php?options/list/seo">here</a>.]]></explain>
+    </option>
+    <option option_id="recentnews_pagenav" edit_format="onoff" data_type="boolean" display_order="5">
+      <option_value>1</option_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <title>Show History Navigation</title>
+      <explain><![CDATA[If selected, a page navigation block will be displayed below your recent news block.<br />Previous pages are not cached and will naturally run slower than the first page.]]></explain>
+    </option>
+    <option option_id="recentnews_leftdate" edit_format="onoff" data_type="boolean" display_order="6">
+      <option_value>1</option_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <title>Push Date out of Block</title>
+      <explain><![CDATA[If selected, the Month/Day div will be pushed slighly outside the block.]]></explain>
+    </option>
+    <option option_id="recentnews_sticky" edit_format="onoff" data_type="boolean" display_order="7">
+      <option_value>0</option_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <title>Use Sticky Threads</title>
+      <explain><![CDATA[If enabled, sticky threads will be pinned to the top regardless of promote date.]]></explain>
+    </option>
+  </options>
+  <phrases/>
+  <route_prefixes/>
+  <templates>
+    <template title="EWRblock_RecentNews"><![CDATA[<xen:require css="message_user_info.css" />
+<xen:require css="bb_code.css" />
+<xen:require css="EWRblock_RecentNews.css" />
+
+<div id="recentNews">
+	<xen:foreach loop="$RecentNews" value="$news">
+		<div class="section sectionMain recentNews" id="{$news.thread_id}">
+
+			<div class="primaryContent {xen:if {$option.leftdate}, 'leftDate'}">
+				<div class="subHeading">
+					<div style="float: right; white-space: nowrap;">
+						<a href="{xen:link threads, $news}"><xen:datetime time="$news.promote_date" /></a>
+						<xen:if is="{$visitor.permissions.EWRporta.canPromote}">
+							&nbsp; (<a href="{xen:link 'threads/edit', $news}" class="OverlayTrigger">{xen:phrase edit}</a>)
+						</xen:if>
+					</div>
+
+					<h2><a href="{xen:link threads, $news}" class="newsTitle">{xen:helper threadPrefix, $news}{$news.title}</a></h2>
+				</div>
+
+				<div class="newsDate secondaryContent">
+					<div class="newsMonth heading">{$news.month}</div>
+					<div class="newsDay">{$news.day}</div>
+				</div>
+
+				<xen:if is="{$news.promote_icon} != 'disabled'">
+				<xen:if hascontent="true">
+					<div class="messageUserBlock">
+						<div class="avatarHolder">
+							<xen:contentcheck>
+							<xen:if is="{$news.attach}">
+								<a href="{xen:link threads, $news}"><img src="{$news.attach.thumbnailUrl}" alt="{$news.attach.filename}" /></a>
+							<xen:elseif is="{$news.medio}" />
+								<div style="background: url('{xen:helper medio, $news.medio}') no-repeat;">
+									<a href="{xen:link 'full:media/media/popout', $news.medio}" class="OverlayTrigger"><img src="styles/8wayrun/EWRmedio_play.png" width="160" height="90" /></a>
+								</div>
+							<xen:elseif is="{$news.image}" />
+								<a href="{xen:link threads, $news}"><img src="{$news.image}" alt="{$news.image}" style="max-height: 150px; max-width: 150px;" /></a>
+							<xen:else />
+								<xen:avatar user="$news" size="m" itemprop="photo" />
+							</xen:if>
+							</xen:contentcheck>
+						</div>
+					</div>
+				</xen:if>
+				</xen:if>
+
+				<div class="messageContent baseHtml">
+					<div class="postedBy">
+						<span class="posted iconKey"><div class="sticky"></div>{xen:phrase by_x_at_y,
+							'user=<a href="{xen:link members, $news}" class="username">{$news.username}</a>',
+							'date=<a href="{xen:link threads, $news}">{xen:time $news.post_date, 'absolute'}</a>'}</span>
+						<span class="views">({xen:number $news.view_count} {xen:phrase views} / {xen:number $news.first_post_likes} {xen:phrase likes})</span>
+						<span class="comments iconKey"><div class="new"></div><a href="{xen:link threads/unread, $news}">{xen:number $news.reply_count} {xen:phrase comments}</a></span>
+					</div>
+
+					<div class="newsText">{xen:raw $news.messageHtml}</div>
+					<div class="clearFix"></div>
+				</div>
+
+				<div class="sectionFooter">
+					<xen:if is="{$option.social}">
+						<xen:if hascontent="true">
+							<div class="sharePage">
+								<xen:require css="share_page.css" />
+
+								<xen:contentcheck>
+									<xen:hook name="recentnews_share_page_options" params="{xen:array 'url={xen:link canonical:threads, $news}'}">
+									<xen:if is="{$xenOptions.tweet.enabled}">
+										<div class="tweet shareControl">
+											<a href="http://twitter.com/share" class="twitter-share-button"
+												data-count="horizontal"
+												data-lang="{xen:helper twitterLang, $visitorLanguage.language_code}"
+												data-url="{xen:link canonical:threads, $news}"
+												{xen:if {$news.title}, 'data-text="{$news.title}"'}
+												{xen:if {$xenOptions.tweet.via}, 'data-via="{$xenOptions.tweet.via}"'}
+												{xen:if {$xenOptions.tweet.related}, 'data-related="{$xenOptions.tweet.related}"'}>{xen:phrase tweet}</a>
+										</div>
+									</xen:if>
+									<xen:if is="{$xenOptions.plusone}">
+										<div class="plusone shareControl">
+											<div class="g-plusone" data-size="medium" data-count="true" data-href="{xen:link canonical:threads, $news}" data-lang="{$visitorLanguage.language_code}"></div>
+										</div>
+									</xen:if>
+									<xen:if is="{$xenOptions.facebookLike}">
+										<div class="facebookLike shareControl">
+											<xen:container var="$facebookSdk">1</xen:container>
+											<fb:like href="{xen:link canonical:threads, $news}" layout="button_count" action="{$xenOptions.facebookLikeAction}" font="trebuchet ms" colorscheme="{xen:property fbColorScheme}"></fb:like>
+										</div>
+									</xen:if>
+									</xen:hook>
+								</xen:contentcheck>
+							</div>
+						</xen:if>
+					<xen:else />
+						<div class="categories">
+							<ul>
+								<xen:if is="{$visitor.permissions.EWRporta.canPromote}">
+									<a href="{xen:link 'threads/category', $news}" class="button OverlayTrigger">+</a>
+								</xen:if>
+								<xen:foreach loop="$news.categories" value="$subCat">
+									<li><a href="{xen:link 'articles', $subCat}" class="button">{$subCat.category_name}</a></li>
+								</xen:foreach>
+							</ul>
+						</div>
+					</xen:if>
+
+					<div class="continue">
+						<a class="iconKey button" href="{xen:link threads, $news}">
+							<div class="redirect"></div>
+							{xen:phrase continue_reading}
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</xen:foreach>
+
+	<xen:if hascontent="true">
+	<div class="section sectionMain">
+		<xen:contentcheck>
+		<xen:if is="{$option.pagenav} && {$option.count} > {$option.limit}">
+			<xen:pagenav link="articles" linkdata="{$category}" page="{$page}" perpage="{$option.limit}" total="{$option.count}" />
+		</xen:if>
+		</xen:contentcheck>
+	</div>
+	</xen:if>
+</div>]]></template>
+    <template title="EWRblock_RecentNews.css"><![CDATA[.recentNews .subHeading { margin: -10px -10px 10px; }
+.recentNews .subHeading a { color: {xen:property subHeading.color}; }
+.recentNews .subHeading h2 { font-size: 1.5em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.recentNews .messageUserBlock { float: right; margin-left: 10px; }
+
+.recentNews .newsDate { float: left; margin: 0px 10px 10px 0px; padding: 0px 10px 5px; width: 35px; font-weight: bold; text-align: center; }
+.recentNews .newsDate .newsMonth { padding: 10px 0px 5px !important; margin: 0px -10px 5px !important; text-transform: uppercase; }
+.recentNews .newsDate .newsDay { font-size: 26px; }
+
+.recentNews .leftDate .newsDate { margin-left: -45px; }
+.recentNews .leftDate .newsText { margin-left: 25px; }
+
+.recentNews .messageContent { font-size: 13px; }
+.recentNews .messageContent .postedBy { margin-bottom: 10px; padding-bottom: 5px; border-bottom: 1px dashed {xen:property primaryLighterStill}; }
+.recentNews .messageContent .username { font-weight: bold; }
+.recentNews .messageContent .comments { float: right; font-weight: bold; }
+.recentNews .messageContent .clearFix { clear: right; }
+
+.recentNews .iconKey div
+{
+	background: transparent url('{xen:property imagePath}/xenforo/xenforo-ui-sprite.png') no-repeat 10000px 0;
+	width: 16px;
+	height: 16px;
+	float: left;
+	margin-right: 4px;
+}
+.recentNews .iconKey .sticky    { background-position:   0px -16px; }
+.recentNews .iconKey .redirect  { background-position: -48px -16px; }
+.recentNews .iconKey .new       { background-position: -64px -16px; }
+
+.recentNews .sectionFooter { margin: 10px -10px -10px; text-align: right; position: relative; }
+.recentNews .sectionFooter .continue { padding-top: 5px; font-size: 12px; }
+.recentNews .sectionFooter .continue .redirect { margin: 3px 4px 0px 0px; }
+
+.recentNews .sectionFooter .categories { padding-top: 5px; float: left; }
+.recentNews .sectionFooter .categories li { display: inline; }
+
+.recentNews .sectionFooter .sharePage { position: absolute; }
+.recentNews .sectionFooter .shareControl { margin-top: 6px !important; }]]></template>
+  </templates>
+</block>

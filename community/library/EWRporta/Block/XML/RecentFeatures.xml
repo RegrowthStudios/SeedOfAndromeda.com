@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<block block_id="RecentFeatures" title="Recent Feature Slider" version_string="1.0.0" version_id="1" url="http://8wayrun.com/" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="" cache="+1 hours">
+  <admin_templates/>
+  <listeners/>
+  <options>
+    <option option_id="recentfeatures_filename" edit_format="textbox" data_type="string" display_order="1">
+      <option_value>slide.jpg</option_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <title>Slide Filename</title>
+      <explain><![CDATA[The feature slider will search for this image attached to articles.]]></explain>
+    </option>
+    <option option_id="recentfeatures_limit" edit_format="spinbox" data_type="unsigned_integer" display_order="2">
+      <option_value>10</option_value>
+      <edit_format_params>min=1</edit_format_params>
+      <sub_options></sub_options>
+      <title>Slide Limit</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+    <option option_id="recentfeatures_height" edit_format="spinbox" data_type="unsigned_integer" display_order="3" validation_class="EWRporta_Block_Option_RecentFeatures" validation_method="verifyHeight">
+      <option_value>300</option_value>
+      <edit_format_params>step=50</edit_format_params>
+      <sub_options></sub_options>
+      <title>Slide Height</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+    <option option_id="recentfeatures_trimtitle" edit_format="spinbox" data_type="unsigned_integer" display_order="7">
+      <option_value>60</option_value>
+      <edit_format_params>step=5</edit_format_params>
+      <sub_options></sub_options>
+      <title>Max Length of Titles</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+    <option option_id="recentfeatures_trimexcerpt" edit_format="spinbox" data_type="unsigned_integer" display_order="8">
+      <option_value>150</option_value>
+      <edit_format_params>step=10</edit_format_params>
+      <sub_options></sub_options>
+      <title>Max Length of Story</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+    <option option_id="recentfeatures_transmode" edit_format="select" data_type="string" display_order="101">
+      <option_value>fade</option_value>
+      <edit_format_params>fade=Cross-Fade
+horizontal=Horizontal Slide
+vertical=Vertical Slide</edit_format_params>
+      <sub_options></sub_options>
+      <title>Transition Mode</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+    <option option_id="recentfeatures_transspeed" edit_format="spinbox" data_type="unsigned_integer" display_order="102">
+      <option_value>1000</option_value>
+      <edit_format_params>step=100</edit_format_params>
+      <sub_options></sub_options>
+      <title>Transition Speed</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+    <option option_id="recentfeatures_bullets" edit_format="onoff" data_type="unsigned_integer" display_order="103">
+      <option_value>1</option_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <title>Display Page Bullets</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+    <option option_id="recentfeatures_controls" edit_format="onoff" data_type="unsigned_integer" display_order="104">
+      <option_value>1</option_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <title>Display &lt; &gt; Controls</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+    <option option_id="recentfeatures_autorotate" edit_format="onoff" data_type="unsigned_integer" display_order="105">
+      <option_value>1</option_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <title>Auto Rotate Slides</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+    <option option_id="recentfeatures_autospeed" edit_format="spinbox" data_type="unsigned_integer" display_order="106">
+      <option_value>5000</option_value>
+      <edit_format_params>step=100</edit_format_params>
+      <sub_options></sub_options>
+      <title>Auto Rotate Speed</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+  </options>
+  <phrases/>
+  <route_prefixes/>
+  <templates>
+    <template title="EWRblock_RecentFeatures"><![CDATA[<xen:require css="EWRblock_RecentFeatures.css" />
+
+<div class="section sectionMain" id="recentFeatures">
+	<div class="recentFeatures">
+		<xen:require js="js/8wayrun/EWRporta_slider.js" />
+
+		<script type="text/javascript">
+		jQuery(document).ready(function() {
+			$('.recentFeatures ul').bxSlider({
+				mode: '{$option.transmode}',
+				speed: {$option.transspeed},
+				pager: {$option.bullets},
+				controls: {$option.controls},
+				auto: {$option.autorotate},
+				autoHover: true,
+				pause: {$option.autospeed},
+			});
+		});
+		</script>
+		
+		<ul class="heightFix">
+		<xen:foreach loop="$RecentFeatures" value="$news">
+			<li style="background-image: url('{xen:link attachments, $news}');">
+				<a href="{xen:link threads, $news}">
+					<div class="heightFix">
+						<div class="summary">
+							<div class="title">{xen:helper wordtrim, $news.title, {$option.trimtitle}}</div>
+							<div class="excerpt">{xen:helper wordtrim, $news.messageText, {$option.trimexcerpt}}</div>
+						</div>
+					</div>
+				</a>
+			</li>
+		</xen:foreach>
+		</ul>
+	</div>
+</div>]]></template>
+    <template title="EWRblock_RecentFeatures.css"><![CDATA[#recentFeatures .recentFeatures
+{
+	position: relative;
+	border: 1px solid #333;
+	background-color: #000;
+	overflow: hidden; 
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+#recentFeatures ul li { background-repeat: no-repeat; background-position: center center; }
+#recentFeatures ul li a { text-decoration: none !important; color: #EEE; }
+#recentFeatures ul li .summary { position: absolute; bottom: 0px; width: 100%; background-color: rgba(0,0,0,0.5); }
+#recentFeatures ul li .summary .title { padding: 15px 15px 0px; font-size: 18px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#recentFeatures ul li .summary .excerpt { padding: 0px 15px 15px; font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+
+/*---------------------------------------*/
+/*           BXSLIDER LAYOUT             */
+/*---------------------------------------*/
+
+/* ITEM CONTROLS */
+
+.bx-wrapper .bx-pager { position: absolute; top: 10px; z-index: 9999; width: 100%; text-align: center; }
+.bx-wrapper .bx-pager .bx-pager-item,
+.bx-wrapper .bx-controls-auto .bx-controls-auto-item { display: inline-block; }
+
+.bx-wrapper .bx-pager.bx-default-pager a
+{
+	width: 10px;
+	height: 10px;
+	margin: 3px;
+	display: block;
+	text-indent: -9999px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	box-shadow: 0px 0px 1px #FFF inset;
+}
+.bx-wrapper .bx-pager.bx-default-pager a { background-color: rgba(128, 128, 128, 0.7); }
+.bx-wrapper .bx-pager.bx-default-pager a:hover { background-color: rgba(64, 64, 64, 0.7); }
+.bx-wrapper .bx-pager.bx-default-pager a.active { background-color: rgba(0, 0, 0, 1); }
+
+/* DIRECTION CONTROLS */
+
+.bx-wrapper .bx-prev { left: 10px; background: url('styles/8wayrun/EWRporta_slider.png') no-repeat 0 -32px; }
+.bx-wrapper .bx-next { right: 10px; background: url('styles/8wayrun/EWRporta_slider.png') no-repeat -43px -32px; }
+.bx-wrapper .bx-prev:hover { background-position: 0 0; }
+.bx-wrapper .bx-next:hover { background-position: -43px 0; }
+
+.bx-wrapper .bx-controls-direction a
+{
+	position: absolute;
+	top: 50%;
+	width: 32px;
+	height: 32px;
+	margin-top: -16px;
+	text-indent: -9999px;
+	z-index: 100;
+}
+.bx-wrapper .bx-controls-direction a.disabled { display: none; }
+
+/*---------------------------------------*/
+/* DO NOT TOUCH ANYTHING BELOW THIS LINE */
+/*---------------------------------------*/
+
+#recentFeatures .heightFix { height: 300px; } /*HEIGHT*/]]></template>
+  </templates>
+</block>

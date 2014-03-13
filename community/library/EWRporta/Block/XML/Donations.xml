@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<block block_id="Donations" title="Paypal Donations" version_string="1.0.0" version_id="1" url="http://8wayrun.com/" install_callback_class="EWRporta_Block_Install_Donations" install_callback_method="installCode" uninstall_callback_class="EWRporta_Block_Install_Donations" uninstall_callback_method="uninstallCode" cache="+1 days">
+  <admin_templates>
+    <template title="EWRblock_Donations_option"><![CDATA[<xen:require js="js/xenforo/options_censor.js" />
+
+<xen:controlunit label="{$preparedOption.title}" hint="{$preparedOption.hint}">
+	<xen:explain>{xen:raw $preparedOption.explain}</xen:explain>
+	<xen:html>
+		<ul>
+			<xen:foreach loop="$donations" key="$counter" value="$donation">
+			<li>
+				<xen:textbox name="{$fieldPrefix}[{$preparedOption.option_id}][{$counter}][id]" value="{$donation.id}" placeholder="{xen:phrase EWRblock_Donations_id}" size="10" />
+				<xen:textbox name="{$fieldPrefix}[{$preparedOption.option_id}][{$counter}][title]" value="{$donation.title}" placeholder="{xen:phrase EWRblock_Donations_title}" size="35" />
+				<xen:textbox name="{$fieldPrefix}[{$preparedOption.option_id}][{$counter}][goal]" value="{$donation.goal}" placeholder="{xen:phrase EWRblock_Donations_goal}" size="3" /><br />
+				&nbsp;&nbsp; {xen:phrase EWRblock_Donations_paypal}:
+				<xen:textbox name="{$fieldPrefix}[{$preparedOption.option_id}][{$counter}][email]" value="{$donation.email}" placeholder="{xen:phrase EWRblock_Donations_paypal}" size="36" />
+			</li>
+			</xen:foreach>
+		
+			<li class="CensorWordOptionListener">
+				<xen:textbox name="{$fieldPrefix}[{$preparedOption.option_id}][{$nextCounter}][id]" value="" placeholder="{xen:phrase EWRblock_Donations_id}" size="10" />
+				<xen:textbox name="{$fieldPrefix}[{$preparedOption.option_id}][{$nextCounter}][title]" value="" placeholder="{xen:phrase EWRblock_Donations_title}" size="35" />
+				<xen:textbox name="{$fieldPrefix}[{$preparedOption.option_id}][{$nextCounter}][goal]" value="" placeholder="{xen:phrase EWRblock_Donations_goal}" size="3" /><br />
+				&nbsp;&nbsp; {xen:phrase EWRblock_Donations_paypal}:
+				<xen:textbox name="{$fieldPrefix}[{$preparedOption.option_id}][{$nextCounter}][email]" value="" placeholder="{xen:phrase EWRblock_Donations_paypal}" size="36" />
+			</li>
+		</ul>
+		
+		<input type="hidden" name="{$listedFieldName}" value="{$preparedOption.option_id}" />
+		{xen:raw $editLink}
+	</xen:html>
+</xen:controlunit>]]></template>
+  </admin_templates>
+  <listeners/>
+  <options>
+    <option option_id="donations_drives" edit_format="callback" data_type="array" display_order="1" validation_class="EWRporta_Block_Option_Donations" validation_method="verifyOption">
+      <option_value>a:1:{i:0;a:4:{s:2:"id";s:7:"8wayrun";s:5:"title";s:30:"Donate to Support 8WAYRUN.COM!";s:4:"goal";i:0;s:5:"email";s:17:"jaxel@8wayrun.com";}}</option_value>
+      <edit_format_params>EWRporta_Block_Option_Donations::renderOption</edit_format_params>
+      <sub_options>*</sub_options>
+      <title>Donations Drives</title>
+      <explain><![CDATA[Each donation drive should have its own unique Drive ID. Every donation and calculations towards goals will be handled using these IDs. Drives are not required to have goals.]]></explain>
+    </option>
+    <option option_id="donations_amounts" edit_format="textbox" data_type="string" display_order="2">
+      <option_value>0=$USD
+10=$10
+25=$25
+50=$50
+100=$100
+200=$200</option_value>
+      <edit_format_params>rows=2
+inputclass=Elastic</edit_format_params>
+      <sub_options></sub_options>
+      <title>Valid Amounts</title>
+      <explain><![CDATA[Users will be presented with a drop down list asking how much they wish to donate. Values should be entered in the format of "float=string". Separate multiple values with a line break.]]></explain>
+    </option>
+    <option option_id="donations_currency" edit_format="select" data_type="string" display_order="3">
+      <option_value>USD</option_value>
+      <edit_format_params>USD=USD
+CAD=CAD
+AUD=AUD
+GBP=GBP
+EUR=EUR</edit_format_params>
+      <sub_options></sub_options>
+      <title>Currency Type</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+    <option option_id="donations_rotation" edit_format="textbox" data_type="numeric" display_order="101">
+      <option_value>-1.57079633</option_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <title>Radian Orientation</title>
+      <explain><![CDATA[A floating point value describing how many radians to rotate the chart clockwise.]]></explain>
+    </option>
+    <option option_id="donations_color" edit_format="textbox" data_type="string" display_order="102">
+      <option_value>FF9900</option_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <title>Series Color Fill</title>
+      <explain><![CDATA[Specify a single series color and all slices in that series will be colored in gradations of that color from darkest (first data member) to lightest (last data member).]]></explain>
+    </option>
+  </options>
+  <phrases>
+    <phrase title="EWRblock_Donations_credit"><![CDATA[Currently logged in as <b>{user}</b>.<br />Donations will be credited to this user.]]></phrase>
+    <phrase title="EWRblock_Donations_donate"><![CDATA[Donate]]></phrase>
+    <phrase title="EWRblock_Donations_donations"><![CDATA[Donation(s)]]></phrase>
+    <phrase title="EWRblock_Donations_drive"><![CDATA[Donation Drive]]></phrase>
+    <phrase title="EWRblock_Donations_goal"><![CDATA[Goal]]></phrase>
+    <phrase title="EWRblock_Donations_id"><![CDATA[Drive ID]]></phrase>
+    <phrase title="EWRblock_Donations_paypal"><![CDATA[Paypal Email Address]]></phrase>
+    <phrase title="EWRblock_Donations_received"><![CDATA[Donation Received]]></phrase>
+    <phrase title="EWRblock_Donations_received_x"><![CDATA[We've received a total {sum} in donations!]]></phrase>
+    <phrase title="EWRblock_Donations_received_x_of_y"><![CDATA[We've received {sum} out {goal}]]></phrase>
+    <phrase title="EWRblock_Donations_thanks"><![CDATA[Thank you for your donation!]]></phrase>
+    <phrase title="EWRblock_Donations_title"><![CDATA[Drive Title]]></phrase>
+  </phrases>
+  <route_prefixes/>
+  <templates>
+    <template title="EWRblock_Donations"><![CDATA[<xen:if hascontent="true">
+	<xen:require css="EWRblock_Donations.css" />
+
+	<div class="section">
+		<div class="secondaryContent donations" id="donations">
+			<h3>{xen:phrase EWRblock_Donations_drive}</h3>
+
+			<ul>
+				<xen:contentcheck>
+				<xen:foreach loop="$option.drives" value="$drive">
+				<li>
+					<form action="{$option.payPalUrl}" method="post" class="upgradeForm">
+						<input type="hidden" name="business" value="{$drive.email}" />
+						<input type="hidden" name="currency_code" value="{$option.currency}" />
+						<input type="hidden" name="item_name" value="{$drive.title}" />
+						<input type="hidden" name="quantity" value="1" />
+						<input type="hidden" name="no_note" value="1" />
+						<input type="hidden" name="no_shipping" value="1" />
+						<input type="hidden" name="custom" value="{$visitor.user_id},{$drive.drive_id},token,{$visitor.csrf_token_page}" />
+
+						<input type="hidden" name="charset" value="utf-8" />
+						<input type="hidden" name="email" value="{$visitor.email}" />
+
+						<input type="hidden" name="cmd" value="_donations" />	
+						<input type="hidden" name="return" value="{$requestPaths.fullBasePath}{xen:link donations/thanks}" />	
+						<input type="hidden" name="cancel_return" value="{$requestPaths.fullBasePath}" />
+						<input type="hidden" name="notify_url" value="{$xenOptions.boardUrl}/donation_callback.php" />
+
+						<xen:if is="{$drive.goal}">
+							<img class="pieChart" src="http://chart.apis.google.com/chart?chf=bg,s,00000000&chs=150x150&chco={$option.color}&chp={$option.rotation}&cht=p&chd=t:{$drive.data1},{$drive.data2}" />
+
+							<b>{$drive.title}</b><br />
+							<select name="amount" class="textCtrl autoSize amount">
+								<xen:foreach loop="$option.amounts" value="$amount">
+									<option value="{$amount.value}">{$amount.text}</option>
+								</xen:foreach>
+							</select><br />
+							<input type="submit" value="{xen:phrase EWRblock_Donations_donate}!" class="button donate" /><br />
+							{xen:phrase EWRblock_Donations_received_x_of_y, 'sum=<a href="{xen:link 'donations', $drive}" class="OverlayTrigger">${$drive.sum}</a>', 'goal=${$drive.goal}'}
+						<xen:else />
+							<b>{$drive.title}</b><br />
+							<select name="amount" class="textCtrl autoSize amount">
+								<xen:foreach loop="$option.amounts" value="$amount">
+									<option value="{$amount.value}">{$amount.text}</option>
+								</xen:foreach>
+							</select> &nbsp;
+							<input type="submit" value="{xen:phrase EWRblock_Donations_donate}!" class="button donate" /><br />
+							{xen:phrase EWRblock_Donations_received_x, 'sum=<a href="{xen:link 'donations', $drive}" class="OverlayTrigger">${$drive.sum}</a>'}
+						</xen:if>
+					</form>
+				</li>
+				</xen:foreach>
+				</xen:contentcheck>
+			</ul>
+			<div class="loggedIn">
+				{xen:phrase EWRblock_Donations_credit, 'user={xen:if '{$visitor.user_id}', '{xen:helper username, $visitor}', '{xen:phrase guest}'}'}
+			</div>
+		</div>
+	</div>
+</xen:if>]]></template>
+    <template title="EWRblock_Donations.css"><![CDATA[.donations ul li { text-align: center; padding: 10px 0px; border-bottom: 1px solid {xen:property primaryLighterStill}; }
+.donations ul li:first-child { padding-top: 0px; }
+.donations .pieChart { float: left; margin: -10px; }
+.donations .amount { margin: 10px 0px 4px; }
+.donations .donate { margin: 4px 0px 10px; }
+.donations .loggedIn { text-align: center; margin-top: 10px; }
+{xen:helper clearfix, '.donations ul li'}]]></template>
+    <template title="EWRblock_Donations_list"><![CDATA[<xen:if is="{$drive.goal}">
+	<xen:title>{xen:phrase EWRblock_Donations_received_x_of_y, 'sum=${$drive.sum}', 'goal=${$drive.goal}'}</xen:title>
+	<xen:h1>{xen:phrase EWRblock_Donations_received_x_of_y, 'sum=${$drive.sum}', 'goal=${$drive.goal}'}</xen:h1>
+<xen:else />
+	<xen:title>{xen:phrase EWRblock_Donations_received_x, 'sum=${$drive.sum}'}</xen:title>
+	<xen:h1>{xen:phrase EWRblock_Donations_received_x, 'sum=${$drive.sum}'}</xen:h1>
+</xen:if>
+
+<div class="section">
+	<div class="subHeading">{xen:phrase EWRblock_Donations_donations}</div>
+
+	<ol class="overlayScroll">
+	<xen:foreach loop="$donations" value="$user">
+		<xen:include template="member_list_item">
+			<xen:set var="$extraTemplate">${$user.amount} ({xen:date $user.log_date})</xen:set>
+		</xen:include>
+	</xen:foreach>
+	</ol>
+
+	<div class="sectionFooter overlayOnly"><a class="button primary OverlayCloser">{xen:phrase close}</a></div>
+</div>]]></template>
+    <template title="EWRblock_Donations_thanks"><![CDATA[<xen:title>{xen:phrase EWRblock_Donations_received}</xen:title>
+
+<p>{xen:phrase EWRblock_Donations_thanks}</p>]]></template>
+  </templates>
+</block>

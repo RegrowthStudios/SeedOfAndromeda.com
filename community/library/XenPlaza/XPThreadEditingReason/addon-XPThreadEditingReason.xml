@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<addon addon_id="XPThreadEditingReason" title="[XenPlaza] Thread Editing Reason" version_string="1.0.0" version_id="0" url="" install_callback_class="XenPlaza_XPThreadEditingReason_Install" install_callback_method="install" uninstall_callback_class="XenPlaza_XPThreadEditingReason_Install" uninstall_callback_method="uninstall">
+  <admin_navigation/>
+  <admin_permissions/>
+  <admin_style_properties/>
+  <admin_templates/>
+  <code_events/>
+  <code_event_listeners>
+    <listener event_id="load_class_controller" execute_order="10" callback_class="XenPlaza_XPThreadEditingReason_Listener_LoadClass" callback_method="loadClassListener" active="1" description="loadClassListener"/>
+    <listener event_id="load_class_datawriter" execute_order="10" callback_class="XenPlaza_XPThreadEditingReason_Listener_LoadClass" callback_method="loadClassDatawriter" active="1" description="loadClassDatawriter"/>
+    <listener event_id="template_hook" execute_order="10" callback_class="XenPlaza_XPThreadEditingReason_Listener_LoadClass" callback_method="templateHook" active="1" description="templateHook"/>
+    <listener event_id="template_post_render" execute_order="10" callback_class="XenPlaza_XPThreadEditingReason_Listener_LoadClass" callback_method="templatePostRender" active="1" description="templatePostRender"/>
+  </code_event_listeners>
+  <cron/>
+  <email_templates/>
+  <optiongroups/>
+  <permissions>
+    <permission_groups/>
+    <permissions/>
+    <interface_groups/>
+  </permissions>
+  <phrases>
+    <phrase title="XP_last_edited_by" version_id="0" version_string="1.0.0"><![CDATA[Last edited by ]]></phrase>
+    <phrase title="XP_reason" version_id="0" version_string="1.0.0"><![CDATA[Edit reason]]></phrase>
+  </phrases>
+  <route_prefixes/>
+  <style_properties/>
+  <templates>
+    <template title="Xp_edit_reason_show" version_id="0" version_string="1.0.0"><![CDATA[<xen:if is="{$post.XP_editor}">
+<br/>
+<span class="item muted" style="margin-top:10px;">
+	{xen:phrase XP_last_edited_by }<xen:username user="$post.XP_editor" class="author" />: {$post.XP_edit_reason} ; at <xen:datetime time="$post.XP_edit_date" />
+</span>
+</xen:if>]]></template>
+    <template title="XP_reason_edit" version_id="0" version_string="1.0.0"><![CDATA[<dl class="ctrlUnit">
+	<dt style="padding-top: 4px;
+padding-right: 15px;
+text-align: right;
+vertical-align: top;
+float: left;"><label for="XP_edit_reason">{xen:phrase XP_reason}:</label></dt>
+	<dd style="padding-top: 4px;
+float: left;"><input type="text" name="XP_edit_reason" value="" id="XP_edit_reason" class="textCtrl" style="width: 462px;" /></dd>
+</dl>]]></template>
+  </templates>
+  <bb_code_media_sites/>
+  <template_modifications/>
+</addon>

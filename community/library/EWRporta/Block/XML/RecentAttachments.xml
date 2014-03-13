@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<block block_id="RecentAttachments" title="Recently Uploaded Attachments" version_string="1.0.0" version_id="1" url="http://8wayrun.com/" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="" cache="+1 hours">
+  <admin_templates/>
+  <listeners>
+    <listener description="EWRblock_RecentAttachments" event_id="load_class_controller" execute_order="10" callback_class="EWRporta_Block_Listener_RecentAttachments" callback_method="controller" active="1"/>
+  </listeners>
+  <options>
+    <option option_id="recentattachments_forum" edit_format="callback" data_type="array" display_order="1">
+      <option_value>a:1:{i:0;s:2:"59";}</option_value>
+      <edit_format_params>EWRporta_Option_ForumChooser::renderOption</edit_format_params>
+      <sub_options>*</sub_options>
+      <title>Attachment Source Forums</title>
+      <explain><![CDATA[Only selected forums will be searched. (unspecify to select all)]]></explain>
+    </option>
+    <option option_id="recentattachments_height" edit_format="spinbox" data_type="unsigned_integer" display_order="2" validation_class="EWRporta_Block_Option_RecentAttachments" validation_method="verifyHeight">
+      <option_value>116</option_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <title>Thumbnail Size</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+    <option option_id="recentattachments_limit" edit_format="spinbox" data_type="unsigned_integer" display_order="3">
+      <option_value>40</option_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <title>Attachments Limit</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+    <option option_id="recentattachments_perrow" edit_format="spinbox" data_type="unsigned_numeric" display_order="4">
+      <option_value>8</option_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <title>Attachments Per Row</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+    <option option_id="recentattachments_auto" edit_format="spinbox" data_type="unsigned_integer" display_order="5">
+      <option_value>5000</option_value>
+      <edit_format_params>step=500</edit_format_params>
+      <sub_options></sub_options>
+      <title>Transition Frequency</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+    <option option_id="recentattachments_speed" edit_format="spinbox" data_type="unsigned_integer" display_order="6">
+      <option_value>1000</option_value>
+      <edit_format_params>step=500</edit_format_params>
+      <sub_options></sub_options>
+      <title>Transition Speed</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+    <option option_id="recentattachments_link" edit_format="radio" data_type="string" display_order="7">
+      <option_value>post</option_value>
+      <edit_format_params>lbox=XenForo Light Box
+post=Referenced Post</edit_format_params>
+      <sub_options></sub_options>
+      <title>Link Reference</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+    <option option_id="recentattachments_fullheight" edit_format="spinbox" data_type="unsigned_numeric" display_order="101" validation_class="EWRporta_Block_Option_RecentAttachments" validation_method="verifyFullHeight">
+      <option_value>115</option_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <title>Full: Thumbnail Size</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+    <option option_id="recentattachments_fulllimit" edit_format="spinbox" data_type="unsigned_integer" display_order="102">
+      <option_value>64</option_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <title>Full: Attachments Per Page</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+    <option option_id="recentattachments_fulllink" edit_format="radio" data_type="string" display_order="103">
+      <option_value>lbox</option_value>
+      <edit_format_params>lbox=XenForo Light Box
+post=Referenced Post</edit_format_params>
+      <sub_options></sub_options>
+      <title>Full: Link Reference</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+  </options>
+  <phrases>
+    <phrase title="EWRblock_RecentAttachments_title"><![CDATA[Recent Attachments]]></phrase>
+  </phrases>
+  <route_prefixes/>
+  <templates>
+    <template title="EWRblock_RecentAttachments"><![CDATA[<xen:require css="EWRblock_RecentAttachments.css" />
+<xen:require js="js/8wayrun/EWRporta_carousel.js" />
+
+<div class="section secondaryContent" id="recentAttachments">
+
+	<script type="text/javascript">
+		jQuery(document).ready(function() {
+			$("ul.recentAttachments").simplecarousel({
+				width: {$option.height},
+				height: {$option.height},
+				visible: {$option.perrow},
+				auto: {$option.auto},
+				slidespeed: {$option.speed},
+				next: $('.carouselButton.next'),
+				prev: $('.carouselButton.prev')
+			});
+		});
+	</script>
+
+	<ul class="recentAttachments">
+	<xen:foreach loop="$RecentAttachments" value="$attach">
+		<li data-author="{$attach.username}">
+			<div class="imageCropper">
+				<div class="imageMeta">
+					<xen:avatar user="$attach" size="s" />
+					<xen:datetime time="{$attach.attach_date}" />
+				</div>
+
+				<div class="imageHolder image{$attach.alignment}" style="background-image: url({$attach.thumbnailUrl})">
+					<xen:if is="{$option.link} == 'lbox'">
+						<xen:if is="{$attach.canView}">
+							<a href="{xen:link attachments, $attach}" target="_blank" class="LbTrigger" data-href="{xen:link misc/lightbox}">
+								<img src="{$attach.thumbnailUrl}" alt="{$attach.filename}" title="{$attach.filename}" class="LbImage Tooltip" />
+							</a>	
+						<xen:else />
+							<a href="{xen:link attachments, $attach}" target="_blank">
+								<img src="{$attach.thumbnailUrl}" alt="{$attachment.filename}" title="{$attach.filename}" class="Tooltip" />
+							</a>
+						</xen:if>
+					<xen:else />
+						<a href="{xen:link posts, $attach}">
+							<img src="{$attach.thumbnailUrl}" alt="{$attach.filename}" title="{$attach.filename}" class="Tooltip" />
+						</a>
+					</xen:if>
+				</div>
+			</div>
+		</li>
+	</xen:foreach>
+	</ul>
+
+	<div class="carouselButton prev">&laquo;</div>
+	<div class="carouselButton next">&raquo;</div>
+
+</div>]]></template>
+    <template title="EWRblock_RecentAttachments.css"><![CDATA[#recentAttachments { position: relative; padding: 5px; }
+#recentAttachments .carousel-frame { margin: 0 auto; }
+
+#recentAttachments ul { overflow: hidden; }
+
+#recentAttachments .carouselButton
+{
+	color: #CCC;
+	background-color: rgba(0,0,0,0.7);
+	position: absolute; top: 37px;
+	font-size: 30px;
+	padding: 0px 5px 5px;
+	cursor: pointer;
+}
+#recentAttachments .carouselButton:hover { background-color: rgba(255,255,255,0.5); }
+#recentAttachments .carouselButton.prev { left: -10px; border-top-left-radius: 15px; border-bottom-left-radius: 15px; }
+#recentAttachments .carouselButton.next { right: -10px; border-top-right-radius: 15px; border-bottom-right-radius: 15px; }
+
+{xen:helper clearfix, 'ul.attachmentsFull'}
+.recentAttachments li { float: left; }
+
+.recentAttachments .imageCropper { color: #CCC; background-color: rgba(0,0,0,0.7); border: 1px solid #000; border-radius: 4px; }
+.recentAttachments .imageCropper:hover { background-color: rgba(255,255,255,0.5); }
+.recentAttachments .imageMeta { display: none; }
+
+.recentAttachments .imageHolder
+{
+	overflow: hidden;
+	background-position: center center;
+	background-repeat: no-repeat;
+	position: relative;
+}
+.recentAttachments .imageHolder img { opacity: 0; }
+.recentAttachments .imageHolder.imageHorz { background-size: 100% auto; }
+.recentAttachments .imageHolder.imageVert { background-size: auto 100%; }
+
+
+/*---------------------------------------*/
+/* DO NOT TOUCH ANYTHING BELOW THIS LINE */
+/*---------------------------------------*/
+
+.recentAttachments .imageCropper { padding: 2px; margin: 2px; }
+
+#recentAttachments ul { height: 116px; } /*HEIGHT*/
+#recentAttachments .imageHolder,
+#recentAttachments .imageHolder img { height: 106px; width: 106px; } /*WIDTH*/
+
+.recentAttachments ul { height: 115px; } /*FULLHEIGHT*/
+.recentAttachments .imageHolder,
+.recentAttachments .imageHolder img { height: 105px; width: 105px; } /*FULLWIDTH*/]]></template>
+    <template title="EWRblock_RecentAttachments_Simple"><![CDATA[<xen:title>{xen:phrase EWRblock_RecentAttachments_title}</xen:title>
+<xen:h1>{xen:phrase EWRblock_RecentAttachments_title}</xen:h1>
+
+<xen:require css="EWRporta.css" />
+<xen:require css="EWRblock_RecentAttachments.css" />
+
+<xen:pagenav link="portal/recent-attachments" page="{$start}" perpage="{$stop}" total="{$count}" />
+
+<div class="section sectionMain secondaryContent">
+
+	<ul class="recentAttachments attachmentsFull">
+	<xen:foreach loop="$attachments" value="$attach">
+		<li data-author="{$attach.username}">
+			<div class="imageCropper">
+				<div class="imageMeta">
+					<xen:avatar user="$attach" size="s" />
+					<xen:datetime time="{$attach.attach_date}" />
+				</div>
+
+				<div class="imageHolder image{$attach.alignment}" style="background-image: url({$attach.thumbnailUrl})">
+					<xen:if is="{$linkType} == 'lbox'">
+						<xen:if is="{$attach.canView}">
+							<a href="{xen:link attachments, $attach}" target="_blank" class="LbTrigger" data-href="{xen:link misc/lightbox}">
+								<img src="{$attach.thumbnailUrl}" alt="{$attach.filename}" title="{$attach.filename}" class="LbImage Tooltip" />
+							</a>	
+						<xen:else />
+							<a href="{xen:link attachments, $attach}" target="_blank">
+								<img src="{$attach.thumbnailUrl}" alt="{$attachment.filename}" title="{$attach.filename}" class="Tooltip" />
+							</a>
+						</xen:if>
+					<xen:else />
+						<a href="{xen:link posts, $attach}">
+							<img src="{$attach.thumbnailUrl}" alt="{$attach.filename}" title="{$attach.filename}" class="Tooltip" />
+						</a>
+					</xen:if>
+				</div>
+			</div>
+		</li>
+	</xen:foreach>
+	</ul>
+
+</div>
+
+<xen:pagenav link="portal/recent-attachments" page="{$start}" perpage="{$stop}" total="{$count}" />
+
+<xen:include template="EWRporta_Footer" />]]></template>
+  </templates>
+</block>

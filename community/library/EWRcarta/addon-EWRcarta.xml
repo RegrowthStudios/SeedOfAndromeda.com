@@ -1,0 +1,1768 @@
+<?xml version="1.0" encoding="utf-8"?>
+<addon addon_id="EWRcarta" title="[8wayRun.Com] XenCarta (Wiki)" version_string="1.3.9" version_id="39" url="http://xenforo.com/community/resources/98/" install_callback_class="EWRcarta_Install" install_callback_method="installCode" uninstall_callback_class="EWRcarta_Install" uninstall_callback_method="uninstallCode">
+  <admin_navigation/>
+  <admin_permissions/>
+  <admin_style_properties/>
+  <admin_templates>
+    <template title="option_list_option_multi_EWRcarta"><![CDATA[<xen:selectunit label="{$preparedOption.title}" name="{$fieldPrefix}[{$preparedOption.option_id}]" value="{xen:raw $preparedOption.option_value}"
+hint="{$preparedOption.hint}" size="10" multiple="true">
+	<xen:options source="$formatParams" />
+	<xen:explain>{xen:raw $preparedOption.explain}</xen:explain>
+	<xen:html>
+		<input type="hidden" name="{$listedFieldName}" value="{$preparedOption.option_id}" />
+		{xen:raw $editLink}
+	</xen:html>
+</xen:selectunit>]]></template>
+  </admin_templates>
+  <code_events/>
+  <code_event_listeners>
+    <listener event_id="init_dependencies" execute_order="10" callback_class="EWRcarta_Listener_Init" callback_method="listen" active="1" description="Denormalization"/>
+    <listener event_id="load_class_bb_code" execute_order="10" callback_class="EWRcarta_Listener_BbCode" callback_method="formatter" active="1" description="BBCode"/>
+    <listener event_id="load_class_model" execute_order="10" callback_class="EWRcarta_Listener_Model" callback_method="post" active="1" description="Post Model"/>
+    <listener event_id="navigation_tabs" execute_order="99" callback_class="EWRcarta_Listener_NavTabs" callback_method="listen" active="1" description="Navigation Tabs"/>
+    <listener event_id="template_hook" execute_order="10" callback_class="EWRcarta_Listener_Template" callback_method="template_hook" active="1" description="Template Hooks"/>
+  </code_event_listeners>
+  <cron>
+    <entry entry_id="EWRcarta_cleanUpDaily" cron_class="EWRcarta_CronEntry_CleanUp" cron_method="runDailyCleanUp" active="1"><![CDATA[{"day_type":"dom","dom":["-1"],"hours":["3"],"minutes":["45"]}]]></entry>
+  </cron>
+  <email_templates>
+    <template title="watched_wiki_update">
+      <subject><![CDATA[{xen:phrase update_to_watched_page_x, "title={$page.page_name}"}]]></subject>
+      <body_text><![CDATA[{xen:phrase watched_page_update_email_text, 
+	"receiver_username={$receiver.username}",
+	"username={$reply.username}",
+	"title={$page.page_name}",
+	"view_link={xen:link 'canonical:wiki', $page}",
+	"manage_link={xen:link 'canonical:watched/wiki/all'}",
+	"watch_link={xen:link 'canonical:wiki/watch-confirm', $page}",
+	"board_link={xen:link 'canonical:index'}",
+	"board_title={$xenOptions.boardTitle}"
+}]]></body_text>
+      <body_html><![CDATA[<p style="margin-top: 0">{xen:phrase watched_page_update_email_html,
+	'receiver={$receiver.username}',
+	'replier=<a href="{xen:link canonical:members, $reply}" style="color: #176093; text-decoration: none">{$reply.username}</a>',
+	'board=<a href="{xen:link canonical:index}" style="color: #176093; text-decoration: none">{$xenOptions.boardTitle}</a>'}</p>
+
+<h2 style="font-size: 18pt; font-weight: normal; margin: 10px 0"><a href="{xen:link canonical:wiki, $page}" style="color: #141414; text-decoration: none">{$page.page_name}<br />
+	<span style="color: #176093; font-size: 10px">{xen:link canonical:wiki, $page}</span></a></h2>
+
+<table cellpadding="10" cellspacing="0" border="0" width="100%" style="margin: 20px 0; background-color: #f0f7fc; border-top: 1px solid #d7edfc">
+<tr>
+	<td>
+		<a href="{xen:link canonical:wiki, $page}" style="
+			display: block;
+			float: left;
+			padding: 5px 10px;
+			background-color: #65a5d1;
+			border: none;
+			border-radius: 3px;
+			font-family: 'Trebuchet MS', Helvetica, Arial, sans-serif;
+			font-size: 11px;
+			color: white;
+			text-decoration: none">{xen:phrase view_this_page_on_the_wiki}</a>
+	</td>
+	<td align="right">
+		<a href="{xen:link canonical:watched/wiki}" style="
+			display: block;
+			padding: 5px 0;
+			font-family: 'Trebuchet MS', Helvetica, Arial, sans-serif;
+			font-size: 11px;
+			color: #176093;
+			text-decoration: none">{xen:phrase unread_watched_pages}</a>
+	</td>
+</tr>
+</table>
+
+<p style="font-size: 11px; color: #969696">{xen:phrase watched_page_email_html_footer_1,
+	'title=<a href="{xen:link canonical:wiki, $page}" style="color: #969696">{$page.page_name}</a>',
+	'board=<a href="{xen:link canonical:index}" style="color: #969696">{$xenOptions.boardTitle}</a>'}</p>
+
+<p style="font-size: 11px; color: #969696">{xen:phrase watched_page_email_html_footer_2,
+	'watch_link={xen:link canonical:wiki/watch-confirm, $page}',
+	'manage_link={xen:link canonical:watched/wiki/all}',
+	'link_style=color: #969696'}</p>]]></body_html>
+    </template>
+  </email_templates>
+  <optiongroups>
+    <group group_id="EWRcarta" display_order="10000" debug_only="0"/>
+    <option option_id="EWRcarta_autolink" edit_format="spinbox" data_type="integer" can_backup="1">
+      <default_value>-1</default_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <relation group_id="EWRcarta" display_order="11"/>
+    </option>
+    <option option_id="EWRcarta_cache" edit_format="textbox" data_type="string" can_backup="1">
+      <default_value>+7 days</default_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <relation group_id="EWRcarta" display_order="111"/>
+    </option>
+    <option option_id="EWRcarta_restricttree" edit_format="onoff" data_type="boolean" can_backup="1">
+      <default_value>1</default_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <relation group_id="EWRcarta" display_order="4"/>
+    </option>
+    <option option_id="EWRcarta_tocnumber" edit_format="onoff" data_type="boolean" can_backup="1">
+      <default_value>0</default_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <relation group_id="EWRcarta" display_order="2"/>
+    </option>
+    <option option_id="EWRcarta_tocreq" edit_format="spinbox" data_type="unsigned_integer" can_backup="1">
+      <default_value>1</default_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <relation group_id="EWRcarta" display_order="1"/>
+    </option>
+    <option option_id="EWRcarta_wikiforum" edit_format="callback" data_type="array" can_backup="1">
+      <default_value>a:1:{i:0;s:1:"0";}</default_value>
+      <edit_format_params>EWRcarta_Option_ForumChooser::renderOption</edit_format_params>
+      <sub_options>*</sub_options>
+      <relation group_id="EWRcarta" display_order="101"/>
+    </option>
+    <option option_id="EWRcarta_wysiwyg" edit_format="onoff" data_type="boolean" can_backup="1">
+      <default_value>1</default_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <relation group_id="EWRcarta" display_order="102"/>
+    </option>
+  </optiongroups>
+  <permissions>
+    <permission_groups>
+      <permission_group permission_group_id="EWRcarta"/>
+    </permission_groups>
+    <permissions>
+      <permission permission_group_id="EWRcarta" permission_id="canAdmin" permission_type="flag" default_value="unset" interface_group_id="EWRcarta" display_order="9"/>
+      <permission permission_group_id="EWRcarta" permission_id="canAttach" permission_type="flag" default_value="unset" interface_group_id="EWRcarta" display_order="8"/>
+      <permission permission_group_id="EWRcarta" permission_id="canCreate" permission_type="flag" default_value="unset" interface_group_id="EWRcarta" display_order="5"/>
+      <permission permission_group_id="EWRcarta" permission_id="canDelete" permission_type="flag" default_value="unset" interface_group_id="EWRcarta" display_order="7"/>
+      <permission permission_group_id="EWRcarta" permission_id="canEdit" permission_type="flag" default_value="unset" interface_group_id="EWRcarta" display_order="4"/>
+      <permission permission_group_id="EWRcarta" permission_id="canHistory" permission_type="flag" default_value="unset" interface_group_id="EWRcarta" display_order="2"/>
+      <permission permission_group_id="EWRcarta" permission_id="canLike" permission_type="flag" default_value="unset" interface_group_id="EWRcarta" display_order="3"/>
+      <permission permission_group_id="EWRcarta" permission_id="canManage" permission_type="flag" default_value="unset" interface_group_id="EWRcarta" display_order="6"/>
+      <permission permission_group_id="EWRcarta" permission_id="canView" permission_type="flag" default_value="unset" interface_group_id="EWRcarta" display_order="1"/>
+    </permissions>
+    <interface_groups>
+      <interface_group interface_group_id="EWRcarta" display_order="1000"/>
+    </interface_groups>
+  </permissions>
+  <phrases>
+    <phrase title="administrate_wiki" version_id="21" version_string="1.2.1"><![CDATA[Administrate Wiki]]></phrase>
+    <phrase title="compare" version_id="1" version_string="1.0.0"><![CDATA[Compare]]></phrase>
+    <phrase title="contributing_editors" version_id="38" version_string="1.3.8"><![CDATA[Contributing Editors]]></phrase>
+    <phrase title="create_new_php_page" version_id="21" version_string="1.2.1"><![CDATA[Create New PHP Page]]></phrase>
+    <phrase title="cron_entry_EWRcarta_cleanUpDaily" version_id="38" version_string="1.3.8"><![CDATA[XenCarta: Daily Clean Up]]></phrase>
+    <phrase title="current" version_id="1" version_string="1.0.0"><![CDATA[Current]]></phrase>
+    <phrase title="delete_page_archive" version_id="37" version_string="1.3.7"><![CDATA[Delete Page Archive]]></phrase>
+    <phrase title="delete_page_archive_hint" version_id="37" version_string="1.3.7"><![CDATA[Are you sure you wish to delete this archived page?]]></phrase>
+    <phrase title="delete_page_hint" version_id="35" version_string="1.3.5"><![CDATA[Are you sure you wish to delete this page?<br />
+Child pages will be moved to the parent node.]]></phrase>
+    <phrase title="delete_template_hint" version_id="35" version_string="1.3.5"><![CDATA[Are you sure you wish to delete this template?]]></phrase>
+    <phrase title="discussion" version_id="38" version_string="1.3.8"><![CDATA[Discussion]]></phrase>
+    <phrase title="discussion_thread" version_id="38" version_string="1.3.8"><![CDATA[Discussion Thread]]></phrase>
+    <phrase title="editors" version_id="38" version_string="1.3.8"><![CDATA[Editors]]></phrase>
+    <phrase title="edits" version_id="1" version_string="1.0.0"><![CDATA[Edits]]></phrase>
+    <phrase title="empty_page_cache" version_id="1" version_string="1.0.0"><![CDATA[Empty Page Cache]]></phrase>
+    <phrase title="historical" version_id="1" version_string="1.0.0"><![CDATA[Historical]]></phrase>
+    <phrase title="history" version_id="1" version_string="1.0.0"><![CDATA[History]]></phrase>
+    <phrase title="ip_information_for_edit" version_id="3" version_string="1.0.3"><![CDATA[IP address information for edit by {user}]]></phrase>
+    <phrase title="like_wiki" version_id="30" version_string="1.3.0"><![CDATA[Like Wiki]]></phrase>
+    <phrase title="mark_page_as_protected" version_id="20" version_string="1.2.0"><![CDATA[Mark Page as Protected]]></phrase>
+    <phrase title="mark_page_as_protected_hint" version_id="20" version_string="1.2.0"><![CDATA[Page can only be edited by an administrator.]]></phrase>
+    <phrase title="members_who_liked_this_wiki" version_id="30" version_string="1.3.0"><![CDATA[Members Who Liked this Wiki]]></phrase>
+    <phrase title="news_feed_wiki_update" version_id="30" version_string="1.3.0"><![CDATA[{username} updated the wiki.]]></phrase>
+    <phrase title="option_EWRcarta_autolink" version_id="3" version_string="1.0.3"><![CDATA[Autolink Limit]]></phrase>
+    <phrase title="option_EWRcarta_autolink_explain" version_id="3" version_string="1.0.3"><![CDATA[This option limits the number of autolinks per page. (0 to disable, -1 for no limit)]]></phrase>
+    <phrase title="option_EWRcarta_cache" version_id="24" version_string="1.2.4"><![CDATA[Cache Expiration]]></phrase>
+    <phrase title="option_EWRcarta_cache_explain" version_id="24" version_string="1.2.4"><![CDATA[After the allotted time has passed, the cache for that page will be refreshed.<br />(Accepts PHP <a href="http://php.net/manual/en/function.strtotime.php" target="_blank">strtotime</a> values - Use "now" to disable the cache completely)]]></phrase>
+    <phrase title="option_EWRcarta_restricttree" version_id="37" version_string="1.3.7"><![CDATA[Restrict Family Tree]]></phrase>
+    <phrase title="option_EWRcarta_restricttree_explain" version_id="37" version_string="1.3.7"><![CDATA[If enabled, the family tree will only show the immediate parent and siblings.]]></phrase>
+    <phrase title="option_EWRcarta_tocnumber" version_id="31" version_string="1.3.1"><![CDATA[Prepend Numbers to TOC Anchors]]></phrase>
+    <phrase title="option_EWRcarta_tocnumber_explain" version_id="31" version_string="1.3.1"><![CDATA[If selected, numbers will be prepended to the links for table of contents.]]></phrase>
+    <phrase title="option_EWRcarta_tocreq" version_id="3" version_string="1.0.3"><![CDATA[TOC Requirement]]></phrase>
+    <phrase title="option_EWRcarta_tocreq_explain" version_id="3" version_string="1.0.3"><![CDATA[The number of header &lt;h#&gt; tags required to generate a TOC. (0 to disable)]]></phrase>
+    <phrase title="option_EWRcarta_wikiforum" version_id="38" version_string="1.3.8"><![CDATA[Wiki Thread Forum]]></phrase>
+    <phrase title="option_EWRcarta_wikiforum_explain" version_id="38" version_string="1.3.8"><![CDATA[Discussion threads may be created for wiki pages in this forum. (unspecify to disable)]]></phrase>
+    <phrase title="option_EWRcarta_wysiwyg" version_id="30" version_string="1.3.0"><![CDATA[Permit WYSIWYG Editing]]></phrase>
+    <phrase title="option_EWRcarta_wysiwyg_explain" version_id="30" version_string="1.3.0"><![CDATA[You may choose to disable full WYSIWYG editing in the wiki.]]></phrase>
+    <phrase title="option_group_EWRcarta" version_id="3" version_string="1.0.3"><![CDATA[[8wayRun.Com] XenCarta (Wiki)]]></phrase>
+    <phrase title="option_group_EWRcarta_description" version_id="3" version_string="1.0.3"><![CDATA[[8wayRun.Com] XenCarta (Wiki)]]></phrase>
+    <phrase title="page" version_id="3" version_string="1.0.3"><![CDATA[Page]]></phrase>
+    <phrase title="pages" version_id="1" version_string="1.0.0"><![CDATA[Pages]]></phrase>
+    <phrase title="page_has_been_edited" version_id="37" version_string="1.3.7"><![CDATA[This page has been modified by another user since you initially opened it. Your changes have not been saved. Please reload the page and try again.]]></phrase>
+    <phrase title="page_list" version_id="1" version_string="1.0.0"><![CDATA[Page List]]></phrase>
+    <phrase title="permission_EWRcarta_canAdmin" version_id="1" version_string="1.0.0"><![CDATA[Can Administrate Wiki]]></phrase>
+    <phrase title="permission_EWRcarta_canAttach" version_id="31" version_string="1.3.1"><![CDATA[Can Manage Attachments]]></phrase>
+    <phrase title="permission_EWRcarta_canCreate" version_id="1" version_string="1.0.0"><![CDATA[Can Create Wiki Content]]></phrase>
+    <phrase title="permission_EWRcarta_canDelete" version_id="1" version_string="1.0.0"><![CDATA[Can Delete Wiki Content]]></phrase>
+    <phrase title="permission_EWRcarta_canEdit" version_id="1" version_string="1.0.0"><![CDATA[Can Edit Wiki Content]]></phrase>
+    <phrase title="permission_EWRcarta_canHistory" version_id="24" version_string="1.2.4"><![CDATA[Can View Wiki History]]></phrase>
+    <phrase title="permission_EWRcarta_canLike" version_id="30" version_string="1.3.0"><![CDATA[Can Like Wiki Content]]></phrase>
+    <phrase title="permission_EWRcarta_canManage" version_id="37" version_string="1.3.7"><![CDATA[Can Manage Wiki Content]]></phrase>
+    <phrase title="permission_EWRcarta_canView" version_id="1" version_string="1.0.0"><![CDATA[Can View Wiki Content]]></phrase>
+    <phrase title="permission_group_EWRcarta" version_id="2" version_string="1.0.1"><![CDATA[[8wayRun.Com] XenCarta (Wiki)]]></phrase>
+    <phrase title="permission_interface_EWRcarta" version_id="2" version_string="1.0.1"><![CDATA[[8wayRun.Com] XenCarta (Wiki)]]></phrase>
+    <phrase title="permission_masks" version_id="38" version_string="1.3.8"><![CDATA[Permission Masks]]></phrase>
+    <phrase title="php_file" version_id="1" version_string="1.0.0"><![CDATA[PHP File]]></phrase>
+    <phrase title="redirected_from_x" version_id="36" version_string="1.3.6"><![CDATA[redirected from {page}]]></phrase>
+    <phrase title="revert" version_id="37" version_string="1.3.7"><![CDATA[Revert]]></phrase>
+    <phrase title="revert_page_archive" version_id="37" version_string="1.3.7"><![CDATA[Revert Page Archive]]></phrase>
+    <phrase title="revert_page_archive_hint" version_id="37" version_string="1.3.7"><![CDATA[Are you sure you wish to revert this archived page?]]></phrase>
+    <phrase title="search_wiki" version_id="1" version_string="1.0.0"><![CDATA[Search Wiki]]></phrase>
+    <phrase title="selected_users_permissions_to_admin_wiki" version_id="38" version_string="1.3.8"><![CDATA[Selected users will be able to administrate the editor permission masks to this page.]]></phrase>
+    <phrase title="selected_users_permissions_to_edit_wiki" version_id="38" version_string="1.3.8"><![CDATA[Selected users/usergroups will be able to edit this page, regardless of their usergroup's default editing permissions. They will also be able to edit this page even if it is marked as "protected".]]></phrase>
+    <phrase title="show_page_children_list" version_id="30" version_string="1.3.0"><![CDATA[Show Page Children List]]></phrase>
+    <phrase title="show_page_sidebar_block" version_id="30" version_string="1.3.0"><![CDATA[Show Page Sidebar Block]]></phrase>
+    <phrase title="stop_watching_this_page" version_id="38" version_string="1.3.8"><![CDATA[Stop Watching This Page]]></phrase>
+    <phrase title="unlike_wiki" version_id="30" version_string="1.3.0"><![CDATA[Unlike Wiki]]></phrase>
+    <phrase title="unread_watched_pages" version_id="38" version_string="1.3.8"><![CDATA[Unread Watched Pages]]></phrase>
+    <phrase title="unwatch_page" version_id="38" version_string="1.3.8"><![CDATA[Unwatch Page]]></phrase>
+    <phrase title="update_to_watched_page_x" version_id="38" version_string="1.3.8"><![CDATA[{title} - New update to watched page]]></phrase>
+    <phrase title="viewing_wiki" version_id="24" version_string="1.2.4"><![CDATA[Viewing wiki]]></phrase>
+    <phrase title="view_this_page_on_the_wiki" version_id="21" version_string="1.2.1"><![CDATA[View this Page on the Wiki]]></phrase>
+    <phrase title="watched_page_email_html_footer_1" version_id="38" version_string="1.3.8"><![CDATA[This message was sent to you because you opted to watch the page {title} at {board} with email notification of new updates.]]></phrase>
+    <phrase title="watched_page_email_html_footer_2" version_id="38" version_string="1.3.8"><![CDATA[To stop receiving email, please <a href="{watch_link}" style="{link_style}">change your watching options for this page</a>. You may also <a href="{manage_link}" style="{link_style}">review all your watched pages</a>.]]></phrase>
+    <phrase title="watched_page_update_email_html" version_id="38" version_string="1.3.8"><![CDATA[{receiver}, {replier} updated a page you are watching at {board}.]]></phrase>
+    <phrase title="watched_page_update_email_text" version_id="38" version_string="1.3.8"><![CDATA[{receiver_username},
+
+{username} replied to a page you are watching at {board_title}.
+
+	"{title}"
+
+----------------------------------------------------------------------
+
+To view this page, click here:
+{view_link}
+
+----------------------------------------------------------------------
+
+This message was sent to you because you opted to watch the page "{title}" at {board_title} with email notification of new updates.
+
+To stop receiving email, please change your watching options for this page.
+{watch_link}
+
+You may also review all your watched pages.
+{manage_link}
+
+{board_link}]]></phrase>
+    <phrase title="watch_page" version_id="38" version_string="1.3.8"><![CDATA[Watch Page]]></phrase>
+    <phrase title="watch_page_button" version_id="38" version_string="1.3.8"><![CDATA[Watch Page]]></phrase>
+    <phrase title="watch_this_page" version_id="38" version_string="1.3.8"><![CDATA[Watch this page]]></phrase>
+    <phrase title="watch_this_page_sentence" version_id="38" version_string="1.3.8"><![CDATA[Watch this page]]></phrase>
+    <phrase title="wiki" version_id="1" version_string="1.0.0"><![CDATA[Wiki]]></phrase>
+    <phrase title="wiki_contains_total_number_of_pages" version_id="35" version_string="1.3.5"><![CDATA[This wiki contains a total of <b>{total}</b> pages.]]></phrase>
+    <phrase title="wiki_file_path" version_id="21" version_string="1.2.1"><![CDATA[File Path]]></phrase>
+    <phrase title="wiki_file_path_hint" version_id="21" version_string="1.2.1"><![CDATA[The absolute path to the PHP file on server in which you want to use to build this page.<br />
+Pages based on PHP files are not cached as they are more suited to dynamic content.<br />
+As well, these pages are marked as protected and only editable by wiki administrators.<br />
+<br />
+The creators of XenCarta offer no support for wiki pages generated using PHP files,<br />
+and thusly declare zero responsibility for any damage done to your website or server.]]></phrase>
+    <phrase title="wiki_index_rating" version_id="20" version_string="1.2.0"><![CDATA[Wiki Index Rating]]></phrase>
+    <phrase title="wiki_index_rating_hint" version_id="0" version_string=""><![CDATA[Use "0" to leave a page off the index.]]></phrase>
+    <phrase title="wiki_navigation" version_id="1" version_string="1.0.0"><![CDATA[Wiki Navigation]]></phrase>
+    <phrase title="wiki_protected" version_id="20" version_string="1.2.0"><![CDATA[LOCKED]]></phrase>
+    <phrase title="wiki_statistics" version_id="1" version_string="1.0.0"><![CDATA[Wiki Statistics]]></phrase>
+    <phrase title="wiki_thread_deleted" version_id="38" version_string="1.3.8"><![CDATA[[QUOTE][CENTER][SIZE=4]An administrator has deleted this page from the wiki.[/SIZE][/CENTER]
+
+[CENTER][SIZE=6][B]This thread has now been automatically locked.[/B][/SIZE][/CENTER][/QUOTE]]]></phrase>
+    <phrase title="x_liked_the_wiki_y" version_id="30" version_string="1.3.0"><![CDATA[{name} liked the wiki <a href="{link}">{title}</a>.]]></phrase>
+    <phrase title="x_updated_page_y_may_be_more" version_id="38" version_string="1.3.8"><![CDATA[{name} updated the wiki page {title}. There may be more updates after this.]]></phrase>
+    <phrase title="you_are_watching_this_page_use_button_to_stop" version_id="38" version_string="1.3.8"><![CDATA[You are watching this page. Use the button below if you would like to stop watching this page.]]></phrase>
+    <phrase title="you_sure_you_want_to_like_this_wiki" version_id="30" version_string="1.3.0"><![CDATA[Are you sure you want to like this wiki?]]></phrase>
+    <phrase title="you_sure_you_want_to_unlike_this_wiki" version_id="30" version_string="1.3.0"><![CDATA[Are you sure you want to unlike this wiki?]]></phrase>
+  </phrases>
+  <route_prefixes>
+    <route_type type="public">
+      <prefix original_prefix="wiki" class="EWRcarta_Route_Wiki" build_link="data_only"/>
+    </route_type>
+  </route_prefixes>
+  <style_properties/>
+  <templates>
+    <template title="alert_wiki_update" version_id="38" version_string="1.3.8"><![CDATA[{xen:phrase x_updated_page_y_may_be_more,
+	'name={xen:helper username, $user, 'subject'}',
+	'title=<a href="{xen:link wiki, $content}" class="PopupItemLink">{$content.page_name}</a>'}]]></template>
+    <template title="EWRcarta.css" version_id="38" version_string="1.3.8"><![CDATA[.wikiNav ul { text-align: center; }
+.wikiNav li { margin-bottom: 5px; position: relative; display: inline-block; width: 49%; }
+.wikiSub li { margin-left: 5px; margin-top: 5px; }
+
+.wikiPage { font-size: 13px; line-height: 1.27; }
+{xen:helper clearfix, '.wikiPage .wikiContent'}
+
+.wikiPage table { text-align: center; }
+.wikiPage .wikiContent table { margin-bottom: 0px; width: 100%; }
+.wikiPage .wikiContent td { border: 0px; padding: 5px; margin: 0px; font-weight: normal; }
+.wikiPage .wikiContent td .bbCodeImage { max-width: 293px; }
+
+.wikiPage .wikiContent h2 { margin: 5px 0px; text-decoration: underline; font-weight: bold; font-size: 1.5em; }
+.wikiPage .wikiContent h3 { margin: 5px 0px; text-decoration: underline; font-weight: bold; font-size: 1.2em; }
+.wikiPage .wikiContent h4 { margin: 5px 0px; text-decoration: underline; font-weight: bold; font-size: 1.0em; }
+.wikiPage .wikiContent h5 { margin: 5px 0px; text-decoration: underline; font-weight: bold; font-size: 0.85em; }
+.wikiPage .wikiContent h6 { margin: 5px 0px; text-decoration: underline; font-weight: bold; font-size: 0.7em; }
+.wikiPage .wikiContent .gototop,
+.wikiPage .wikiContent .toggle { margin-left: 5px; text-decoration: none; font-size: 10px; display: inline-block; }
+
+.wikiPage .wikiContent li { margin: 5px 0px 5px 30px; list-style: disc; }
+.wikiPage .wikiContent li.col2 { margin-left: 10px; list-style: none; }
+.wikiPage .wikiContent li.col3 { margin-left: 30px; }
+.wikiPage .wikiContent li.col4 { margin-left: 50px; }
+.wikiPage .wikiContent li.col5 { margin-left: 70px; }
+.wikiPage .wikiContent li.col6 { margin-left: 90px; }
+
+.wikiPage .wikiContent .iconList { text-align: center; }
+.wikiPage .wikiContent .iconList ul { text-align: center; }
+.wikiPage .wikiContent .iconList li { margin: 10px 2px 0px; position: relative; display: inline-block; width: 96px; }
+.wikiPage .wikiContent .iconList li .secondaryContent { padding: 5px; font-size: 0.9em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.wikiPage .letterGrid { float: left; width: 33.3%; }
+.wikiPage .letterGrid h2 { margin-top: 15px; }
+.wikiPage .letterGrid .pageGrid { margin-left: 10px; }
+
+.wikiPage .attachedFiles { margin: 0px; }
+.wikiPage .attachmentList { padding-right: 0px !important; }
+.wikiPage .attachment { width: 33.3%; }
+
+.wikiPage .tabs { padding: 0 {xen:property profilePageTabInset}; background: transparent; }
+.wikiPage .tabs li a { font-weight: bold; padding-left: {xen:property profilePageTabHeight}; padding-right: {xen:property profilePageTabHeight}; }
+.wikiPage .tabs.mainTabs { margin-bottom: -{xen:property subHeading.margin-top}; }
+.wikiPage .tabs.controlTabs { margin-bottom: -{xen:calc '{xen:property subHeading.margin-top} + {xen:property profilePageTabHeight} - 1'}px; }
+.wikiPage .tabs.controlTabs li { float: right; }
+.wikiPage .jsOnly { display: block; padding: 20px; }
+.wikiThread .tabs.mainTabs { margin-bottom: -{xen:property section.margin-top}; }
+
+.wikiHistory .reverted { text-decoration: line-through; font-size: 0.8em; }
+
+.wikiEdit .userGroups li { float: left; width: 33%; }
+{xen:helper clearfix, '.wikiEdit .userGroups'}
+
+.wikiEditors .editorAcitivy { float: right; padding: 10px; font-size: 11px; }
+.wikiEditors .editorUser { float: left; position: relative; display: inline-block; width: 180px; }
+.wikiEditors .editorUser .userInfo { margin-left: 35px; padding: 10px; }
+.wikiEditors .avatar { float: left; }
+.wikiEditors .avatar img { height: 30px; width: 30px; }
+
+.wikiEditors .editorInfo { margin: 0px 0px 0px 200px; padding: 10px; border-bottom: 1px solid {xen:property primaryLighterStill}; }
+{xen:helper clearfix, '.wikiEditors .editor'}
+
+.Differences { width: 100%; }
+.Differences td { padding: 3px; font-size: 0.8em; }
+.Differences th { padding: 3px; text-align: center; font-weight: bold; }
+.Differences del { color: #FF0000; font-weight: bold; }
+.Differences ins { color: #0000FF; font-weight: bold; }
+.Differences .ChangeReplace .Left, .Differences .ChangeDelete .Left { border: 1px dashed #FF0000; }
+.Differences .ChangeReplace .Right, .Differences .ChangeInsert .Right { border: 1px dashed #0000FF; }
+
+.framedata { color: #000000; }
+.fdatk, .fdcmd, .fdlvl { white-space: nowrap; }
+.string { background-color: #FFFFCC; }
+.neutral { background-color: #CCFFCC; }
+.positive { background-color: #CCCCFF; }
+.negative { background-color: #FFCCCC; }
+
+.LbTrigger .bbCodeImage { border: 2px solid silver; max-height: 120px; }
+.LbTrigger:hover .bbCodeImage { border-color: gray; }
+
+.redirect
+{
+	{xen:property dicussionListIcon}
+	background-position: -48px -16px;
+	float: left;
+	margin-right: 5px;
+}
+
+.ctrlUnit dd .hint
+{
+	font-size: 11px;
+	color: {xen:property mutedTextColor};
+	margin-left: {xen:property formCtrlIndent};
+	margin-top: 2px;
+}
+
+.copyright { text-align: center; font-size: 11px; margin: 10px; }]]></template>
+    <template title="EWRcarta_Administrate" version_id="35" version_string="1.3.5"><![CDATA[<xen:title>{xen:phrase administrate_wiki}</xen:title>
+<xen:h1>{xen:phrase administrate_wiki}</xen:h1>
+
+<xen:require css="EWRcarta.css" />
+
+<div class="sectionMain">
+	<div class="wikiPage">
+		<div class="primaryContent" style="text-align: right;">
+			<h3 style="float: left; text-decoration: none;">{xen:phrase template_list}</h3>
+			<a href="{xen:link 'wiki/special/create-page', '', 'page_type=phpfile'}" class="button primary">{xen:phrase create_new_php_page}</a> &nbsp;
+			<a href="{xen:link 'wiki/special/create-template/'}" class="button primary">{xen:phrase create_new_template}</a> &nbsp;
+			<a href="{xen:link 'wiki/special/empty-cache/'}" class="button primary">{xen:phrase empty_page_cache}</a>
+		</div>
+		<xen:foreach loop="$fullList" value="$template">
+			<div class="primaryContent">
+				<a href="{xen:link 'wiki/special/edit-template', $template}">{xen:raw $template.template_name}</a>
+			</div>
+		</xen:foreach>
+	</div>
+</div>
+
+<xen:include template="EWRcarta_Footer" />]]></template>
+    <template title="EWRcarta_attach.css" version_id="31" version_string="1.3.1"><![CDATA[.Smallbutton,
+.smallButton.AttachmentDeleter
+{
+	display: none !important;
+}]]></template>
+    <template title="EWRcarta_BBcode" version_id="33" version_string="1.3.3"><![CDATA[<xen:require css="EWRcarta.css" />
+<xen:require js="js/8wayrun/EWRcarta_ajax.js" />
+<xen:require js="js/8wayrun/sortable.js" />
+
+<div class="sectionMain wikiPage">
+	<div class="subHeading">{$page.page_name}</div>
+
+	<div class="wikiContent primaryContent">{xen:raw $page.HTML}</div>
+
+	<div class="sectionFooter" style="text-align: right">
+		<div style="float: left;">
+			(<a href="{xen:link 'wiki', $page}">{xen:phrase view_this_page_on_the_wiki}</a>)
+		</div>
+		{xen:phrase last_modified}: {xen:phrase date_x_at_time_y, 'date={xen:date $page.page_date}', 'time={xen:time $page.page_date}'} (Cached)
+	</div>
+</div>]]></template>
+    <template title="EWRcarta_Editor_Bit" version_id="38" version_string="1.3.8"><![CDATA[<div class="editor">
+	<div class="editorAcitivy">
+		<span class="muted">{xen:phrase last_activity}: {xen:datetime $user.date}</span>
+	</div>
+
+	<div class="editorUser">
+		<xen:avatar user="$user" size="s" img="true" />
+		<div class="userInfo"><xen:username user="$user" rich="true" /></div>
+	</div>
+
+	<div class="editorInfo">
+		<span class="muted">{xen:phrase edits}: {$user.count}</span>
+	</div>
+</div>]]></template>
+    <template title="EWRcarta_Footer" version_id="38" version_string="1.3.8"><![CDATA[<div class="cartaCopy copyright muted">
+	<a href="http://xenforo.com/community/resources/98/">XenCarta</a>
+	&copy; Jason Axelrod from <a href="http://8wayrun.com/">8WAYRUN.COM</a>
+</div>]]></template>
+    <template title="EWRcarta_History_Bit" version_id="38" version_string="1.3.8"><![CDATA[<tr {xen:if {$history.history_revert}, 'class="reverted"'}>
+<xen:if is="{$history.history_current}">
+	<td>(<a href="{xen:link 'wiki', $history}">{xen:phrase current}</a>)</td>
+<xen:else />
+	<td>
+		(<a href="{xen:link 'wiki/archive/compare', $history}">{xen:phrase compare}</a>)
+		(<a href="{xen:link 'wiki/archive', $history}">{xen:phrase view}</a>)
+	</td>
+</xen:if>
+	<td><a href="{xen:link 'wiki', $history}">{$history.page_name}</a></td>
+	<td>{xen:phrase date_x_at_time_y, 'date={xen:date $history.history_date}', 'time={xen:time $history.history_date}'}</td>
+	<td>
+		<xen:if is="{$history.user_id}">
+			<a href="{xen:link members, $history}" class="username">{$history.username}</a>
+		<xen:else />
+			{$history.username}
+		</xen:if>
+	</td>
+	<td>
+		<xen:if is="{$perms.admin} && {$history.ip}">
+			(<a href="{xen:link 'wiki/archive/ipinfo', $history}" class="OverlayTrigger item">{xen:phrase ip}</a>)
+		</xen:if>
+	</td>
+	<td>{xen:phrase x_bytes, 'size={xen:raw $history.size}'}</td>
+<xen:if is="{$history.history_current}">
+	<td>(<a href="{xen:link 'wiki', $history}">{xen:phrase current}</a>)</td>
+<xen:else />
+	<td>
+		<xen:if is="{$perms.edit}">(<a href="{xen:link 'wiki/archive/revert', $history}" class="OverlayTrigger">{xen:phrase revert}</a>)</xen:if>
+		<xen:if is="{$perms.delete}">(<a href="{xen:link 'wiki/archive/delete', $history}" class="OverlayTrigger">x</a>)</xen:if>
+	</td>
+</xen:if>
+</tr>]]></template>
+    <template title="EWRcarta_Navtabs" version_id="35" version_string="1.3.5"><![CDATA[<ul class="secondaryContent blockLinksList">
+	<li><a href="{xen:link 'wiki'}">{xen:raw $index.page_name}</a></li>
+	<li><a href="{xen:link 'wiki/special/pages'}">{xen:phrase page_list}</a></li>
+	<xen:if is="{$perms.history}">
+		<li><a href="{xen:link 'wiki/special/recent'}">{xen:phrase recent_activity}</a></li>
+	</xen:if>
+	<xen:if is="{$perms.create}">
+		<li><a href="{xen:link 'wiki/special/create-page'}">{xen:phrase create_new_page}</a></li>
+	</xen:if>
+	<xen:if is="{$perms.admin}">
+		<li style="width: 50px; height: 10px;"></li>
+		<li><a href="{xen:link 'wiki/special/administrate'}">{xen:phrase administrate_wiki}</a></li>
+	</xen:if>
+</ul>]]></template>
+    <template title="EWRcarta_PageArchive" version_id="38" version_string="1.3.8"><![CDATA[<xen:title>{$page.page_name}</xen:title>
+<xen:h1>{$page.page_name} - {xen:phrase historical}</xen:h1>
+<xen:description>{xen:phrase applied_by} 
+	<xen:if is="{$history.user_id}"><a href="{xen:link members, $history}" class="username">{$history.username}</a><xen:else />{$history.username}</xen:if>: 
+	{xen:phrase date_x_at_time_y, 'date={xen:date $history.history_date}', 'time={xen:time $history.history_date}'}
+</xen:description>
+
+<xen:container var="$quickNavSelected">wiki-{$page.page_id}</xen:container>
+
+<xen:navigation>
+	<xen:breadcrumb source="$breadCrumbs" />
+	<xen:breadcrumb href="{xen:link 'full:wiki/history', $page}">{xen:phrase history}</xen:breadcrumb>
+</xen:navigation>
+
+<xen:require css="EWRcarta.css" />
+<xen:require js="js/8wayrun/EWRcarta_ajax.js" />
+<xen:require js="js/8wayrun/sortable.js" />
+
+<div class="sectionMain wikiPage">
+	<div class="subHeading">
+		<div style="float: right;">
+			(<a href="{xen:link 'wiki/history', $page}">{xen:phrase history}</a>)
+			<xen:if is="{$perms.edit}">
+				<xen:if is="{$page.page_protect}">
+					(<a href="{xen:link 'wiki/edit', $page}">{xen:phrase wiki_protected}</a>)
+				<xen:else />
+					(<a href="{xen:link 'wiki/edit', $page}">{xen:phrase edit}</a>)
+				</xen:if>
+			</xen:if>
+		</div>
+		{$page.page_name}
+	</div>
+
+	<xen:if hascontent="true">
+	<div class="secondaryContent">
+		<xen:contentcheck>
+		<xen:foreach loop="$subList" value="$subPage">
+			<div style="margin-left: 5px">
+				{xen:raw $subPage.page_indent}<a href="{xen:link 'wiki', $subPage}">{$subPage.page_name}</a>
+			</div>
+		</xen:foreach>
+		</xen:contentcheck>
+	</div>
+	</xen:if>
+
+	<div class="wikiContent primaryContent">
+		{xen:raw $history.HTML}
+	</div>
+
+	<div class="sectionFooter">
+		{xen:phrase applied_by} {$history.username}: {xen:phrase date_x_at_time_y, 'date={xen:date $history.history_date}', 'time={xen:time $history.history_date}'}
+	</div>
+</div>
+
+<div class="sectionMain" style="padding-right: 18px; padding-bottom: 5px;">
+	<textarea name="history_content" style="height:260px; width:100%;" class="textCtrl">{xen:raw $history.history_content}</textarea>
+</div>
+
+<xen:include template="EWRcarta_Sidebar" />
+<xen:include template="EWRcarta_Footer" />]]></template>
+    <template title="EWRcarta_PageArchiveDelete" version_id="37" version_string="1.3.7"><![CDATA[<xen:title>{xen:phrase delete_page_archive}: {$page.page_name}</xen:title>
+
+<form action="{xen:link 'wiki/archive/delete', $history}" method="post" class="xenForm formOverlay">
+
+	<dl class="ctrlUnit">
+		<dt>{xen:phrase delete_page_archive}</dt>
+		<dd>
+			{$page.page_name}
+			<p class="explain">{xen:phrase delete_page_archive_hint}</p>
+		</dd>
+	</dl>
+
+	<dl class="ctrlUnit submitUnit">
+		<dt></dt>
+		<dd><input type="submit" value="{xen:phrase delete_page_archive}" class="button primary" /></dd>
+	</dl>
+
+	<input type="hidden" name="_xfToken" value="{$visitor.csrf_token_page}" />
+</form>]]></template>
+    <template title="EWRcarta_PageArchiveRevert" version_id="37" version_string="1.3.7"><![CDATA[<xen:title>{xen:phrase revert_page_archive}: {$page.page_name}</xen:title>
+
+<form action="{xen:link 'wiki/archive/revert', $history}" method="post" class="xenForm formOverlay">
+
+	<dl class="ctrlUnit">
+		<dt>{xen:phrase revert_page_archive}</dt>
+		<dd>
+			{$page.page_name}
+			<p class="explain">{xen:phrase revert_page_archive_hint}</p>
+		</dd>
+	</dl>
+
+	<dl class="ctrlUnit submitUnit">
+		<dt></dt>
+		<dd><input type="submit" value="{xen:phrase revert_page_archive}" class="button primary" /></dd>
+	</dl>
+
+	<input type="hidden" name="_xfToken" value="{$visitor.csrf_token_page}" />
+</form>]]></template>
+    <template title="EWRcarta_PageArchive_NoSide" version_id="2" version_string="1.0.1"><![CDATA[<xen:include template="EWRcarta_PageArchive" />]]></template>
+    <template title="EWRcarta_PageAttachments" version_id="38" version_string="1.3.8"><![CDATA[<xen:title>{$page.page_name} - {xen:phrase attachments}</xen:title>
+<xen:h1>{$page.page_name} - {xen:phrase attachments}</xen:h1>
+
+<xen:container var="$quickNavSelected">wiki-{$page.page_id}</xen:container>
+
+<xen:require css="EWRcarta.css" />
+
+<xen:navigation>
+	<xen:breadcrumb source="$breadCrumbs" />
+</xen:navigation>
+
+<div class="sectionMain">
+	<div class="primaryContent wikiPage wikiAttachments" data-author="{$xenOptions.boardTitle}">
+		<div style="display: none;">
+			<a href="{xen:link wiki}" class="avatar"><span class="img" style="background-image: url('{xen:property imagePath}/xenforo/logo.og.png')"></span></a>
+			<xen:datetime time="{$page.page_date}" />
+		</div>
+
+		<xen:if is="{$page.attachments}">
+			<xen:include template="attached_files">
+				<xen:map from="$page" to="$post" />
+			</xen:include>
+		<xen:else />
+			{xen:phrase requested_attachment_not_found}
+		</xen:if>
+	</div>
+</div>
+
+<xen:include template="EWRcarta_Footer" />]]></template>
+    <template title="EWRcarta_PageAttachments_Simple" version_id="38" version_string="1.3.8"><![CDATA[<div class="primaryContent" data-author="{$xenOptions.boardTitle}">
+	<xen:if is="{$page.attachments}">
+		<xen:include template="attached_files">
+			<xen:map from="$page" to="$post" />
+		</xen:include>
+	<xen:else />
+		{xen:phrase requested_attachment_not_found}
+	</xen:if>
+</div>]]></template>
+    <template title="EWRcarta_PageCompare" version_id="23" version_string="1.2.3"><![CDATA[<xen:title>{$page.page_name}</xen:title>
+<xen:h1>{$page.page_name} - {xen:phrase historical}</xen:h1>
+<xen:description>{xen:phrase applied_by} 
+	<xen:if is="{$history.user_id}"><a href="{xen:link members, $history}" class="username">{$history.username}</a><xen:else />{$history.username}</xen:if>: 
+	{xen:phrase date_x_at_time_y, 'date={xen:date $history.history_date}', 'time={xen:time $history.history_date}'}
+</xen:description>
+
+<xen:container var="$quickNavSelected">wiki-{$page.page_id}</xen:container>
+
+<xen:navigation>
+	<xen:breadcrumb source="$breadCrumbs" />
+	<xen:breadcrumb href="{xen:link 'full:wiki/history', $page}">{xen:phrase history}</xen:breadcrumb>
+</xen:navigation>
+
+<xen:require css="EWRcarta.css" />
+
+<xen:if is="{$compare}">
+<div class="sectionMain">
+	<div class="subHeading">
+		<div style="float: right;">
+			(<a href="{xen:link 'wiki/history', $page}">{xen:phrase history}</a>)
+			<xen:if is="{$perms.edit}">
+				<xen:if is="{$page.page_protect}">
+					(<a href="{xen:link 'wiki/edit', $page}">{xen:phrase wiki_protected}</a>)
+				<xen:else />
+					(<a href="{xen:link 'wiki/edit', $page}">{xen:phrase edit}</a>)
+				</xen:if>
+			</xen:if>
+		</div>
+		{$page.page_name}
+	</div>
+	{xen:raw $compare}
+</div>
+</xen:if>
+
+<div class="sectionMain" style="padding-right: 18px; padding-bottom: 5px;">
+	<textarea name="history_content" style="height:260px; width:100%;" class="textCtrl">{xen:raw $history.history_content}</textarea>
+</div>
+
+<xen:include template="EWRcarta_Footer" />]]></template>
+    <template title="EWRcarta_PageCreate" version_id="38" version_string="1.3.8"><![CDATA[<xen:title>{xen:phrase create_new_page}</xen:title>
+<xen:h1>{xen:phrase create_new_page}</xen:h1>
+
+<xen:if is="{$input.page_type} == 'phpfile'">
+	<xen:navigation>
+		<xen:breadcrumb href="{xen:link 'full:wiki/special/administrate'}">{xen:phrase administrate_wiki}</xen:breadcrumb>
+	</xen:navigation>
+</xen:if>
+
+<xen:require css="EWRcarta.css" />
+<xen:require js="js/8wayrun/slugit.js" />
+<xen:require js="js/8wayrun/EWRcarta_ajax.js" />
+
+<xen:if is="{$input.page_content}">
+	<xen:require css="lightbox.css" />
+	<xen:require js="js/xenforo/lightbox.js" />
+	<xen:require js="js/8wayrun/sortable.js" />
+
+	<div class="sectionMain wikiPage">
+		<div class="subHeading">{$input.page_name}</div>
+		<div class="primaryContent wikiContent">{xen:raw $input.HTML}</div>
+		<div class="sectionFooter" style="text-align: right">{xen:phrase preview}</div>
+	</div>
+</xen:if>
+
+<div class="sectionMain wikiEdit">
+	<form action="{xen:link 'wiki/special/create-page'}" method="post" class="xenForm">
+		<fieldset>
+			<dl class="ctrlUnit">
+				<dt><label for="ctrl_name">{xen:phrase title}:</label></dt>
+				<dd><input type="text" name="page_name" class="textCtrl SlugIn" id="ctrl_name" maxlength="50" value="{$input.page_name}" /></dd>
+			</dl>
+
+			<dl class="ctrlUnit">
+				<dt><label for="ctrl_slug">{xen:phrase link_url}:</label></dt>
+				<dd><input type="text" name="page_slug" class="textCtrl SlugEdit SlugOut" id="ctrl_slug" maxlength="50" value="{$input.page_slug}" /></dd>
+			</dl>
+
+			<xen:if is="{$input.page_type} == 'phpfile'">
+				<input type="hidden" name="page_type" value="phpfile" />
+
+				<dl class="ctrlUnit">
+					<dt><label for="ctrl_content">{xen:phrase wiki_file_path}:</label></dt>
+					<dd><input type="text" name="page_content" class="textCtrl" id="ctrl_content" value="{$input.page_content}" /></dd>
+				</dl>
+
+				<dl class="ctrlUnit">
+					<dt></dt>
+					<dd><div class="muted" style="font-size: 11px; margin: -5px 10px 0px;">{xen:phrase wiki_file_path_hint}</div></dd>
+				</dl>
+			<xen:else />
+				<dl class="ctrlUnit">
+					<dt><label for="ctrl_type">{xen:phrase data_type}:</label></dt>
+					<dd><select name="page_type" id="ctrl_type" class="textCtrl autoSize">
+						<option value="bbcode" {xen:selected "{$input.page_type} == 'bbcode'"}>{xen:phrase bb_codes}</option>
+						<xen:if is="{$perms.admin}"><option value="html" {xen:selected "{$input.page_type} == 'html'"}>{xen:phrase html}</option></xen:if>
+					</select></dd>
+				</dl>
+
+				<dl class="ctrlUnit fullWidth">
+					<dt></dt>
+					<dd>{xen:raw $editorTemplate}</dd>
+				</dl>
+			</xen:if>
+
+			<dl class="ctrlUnit">
+				<dt><label for="ctrl_parent">{xen:phrase parent_node}:</label></dt>
+				<dd><select name="page_parent" id="ctrl_parent" class="textCtrl autoSize">
+					<option value="0">({xen:phrase unspecified})</option>
+					<xen:foreach loop="$fullList" value="$list">
+						<option value="{$list.page_id}" {xen:selected "{$input.page_parent} == {$list.page_id}"}>
+							&nbsp; {xen:raw $list.page_indent}{xen:raw $list.page_name}
+						</option>
+					</xen:foreach>
+				</select></dd>
+			</dl>
+		</fieldset>
+
+		<xen:include template="helper_captcha_unit" />
+
+		<dl class="ctrlUnit submitUnit">
+			<dt></dt>
+			<dd>
+				<input type="submit" value="{xen:phrase create_new_page}" name="submit" accesskey="s" class="button primary" />
+				<xen:if is="{$perms.attach}">
+					<xen:include template="attachment_upload_button" />
+				<xen:else />
+					<xen:require css="EWRcarta_attach.css" />
+				</xen:if>
+				<input type="submit" value="{xen:phrase preview}" name="preview" accesskey="p" class="button" />
+			</dd>
+		</dl>
+
+	<xen:if is="{$attachmentParams}">
+		<dl class="ctrlUnit AttachedFilesUnit">
+			<dt><label for="ctrl_uploader">{xen:phrase attached_files}:</label></dt>
+			<dd><xen:include template="attachment_editor" /></dd>
+		</dl>
+	</xen:if>
+
+		<xen:if is="{$perms.admin}">
+			<fieldset>
+				<dl class="ctrlUnit">
+					<dt>{xen:phrase options}:</dt>
+					<dd><ul>
+						<li>
+							<label for="ctrl_index"><input type="text" name="page_index" class="textCtrl" id="ctrl_index" maxlength="2" value="{$input.page_index}" style="width: 18px;" /> {xen:phrase wiki_index_rating}</label>
+							<p class="hint">{xen:phrase wiki_index_rating_hint}</p>
+						</li>
+
+						<li>
+							<label for="ctrl_sidebar"><input type="checkbox" name="page_sidebar" value="1" id="ctrl_sidebar" {xen:checked "{$input.page_sidebar}"} /> {xen:phrase show_page_sidebar_block}</label>
+						</li>
+						<li>
+							<label for="ctrl_sublist"><input type="checkbox" name="page_sublist" value="1" id="ctrl_sublist" {xen:checked "{$input.page_sublist}"} /> {xen:phrase show_page_children_list}</label>
+						</li>
+						<li>
+							<label for="ctrl_protect"><input type="checkbox" name="page_protect" value="1" id="ctrl_protect" {xen:checked "{$input.page_protect}"} /> {xen:phrase mark_page_as_protected}</label>
+							<p class="hint">{xen:phrase mark_page_as_protected_hint}</p>
+						</li>
+					</ul></dd>
+				</dl>
+			</fieldset>
+
+			<h3 class="textHeading">{xen:phrase permission_masks}</h3>
+			
+			<dl class="ctrlUnit">
+				<dt><label for="ctrl_user">{xen:phrase administrators}:</label></dt>
+				<dd><input type="search" name="administrators" placeholder="{xen:phrase name}..." value="{$input.administrators}" results="0" class="textCtrl AutoComplete" />
+					<p class="hint">{xen:phrase selected_users_permissions_to_admin_wiki}</p></dd>
+			</dl>
+			
+			<fieldset>
+				<dl class="ctrlUnit">
+					<dt><label for="ctrl_user">{xen:phrase editors}:</label></dt>
+					<dd><input type="search" name="usernames" placeholder="{xen:phrase name}..." value="{$input.usernames}" results="0" class="textCtrl AutoComplete" /></dd>
+				</dl>
+
+				<dl class="ctrlUnit">
+					<dt>{xen:phrase user_groups}:</dt>
+					<dd>
+						<ul class="userGroups">
+							<xen:foreach loop="$groups" value="$group">
+							<li>
+								<label for="ctrl_group[{$group.value}]">
+									<input type="checkbox" name="page_groups[{$group.value}]" value="{$group.value}" id="ctrl_group[{$group.value}]" {xen:if '{$group.selected}', 'checked'} />
+									<xen:if is="{$group.selected}"><b>{$group.label}</b><xen:else/>{$group.label}</xen:if>
+								</label>
+							</li>
+							</xen:foreach>
+						</ul>
+						<p class="hint">{xen:phrase selected_users_permissions_to_edit_wiki}</p>
+					</dd>
+				</dl>
+			</fieldset>
+		</xen:if>
+
+		<dl class="ctrlUnit submitUnit">
+			<dt></dt>
+			<dd>
+				<input type="submit" value="{xen:phrase create_new_page}" name="submit" accesskey="s" class="button primary" />
+				<input type="submit" value="{xen:phrase preview}" name="preview" accesskey="p" class="button" />
+			</dd>
+		</dl>
+
+		<input type="hidden" name="_xfToken" value="{$visitor.csrf_token_page}" />
+	</form>
+</div>
+
+<xen:include template="EWRcarta_Footer" />]]></template>
+    <template title="EWRcarta_PageDelete" version_id="35" version_string="1.3.5"><![CDATA[<xen:title>{xen:phrase delete_page}: {$page.page_name}</xen:title>
+
+<form action="{xen:link 'wiki/delete', $page}" method="post" class="xenForm formOverlay">
+
+	<dl class="ctrlUnit">
+		<dt>{xen:phrase delete_page}</dt>
+		<dd>
+			{$page.page_name}
+			<p class="explain">{xen:phrase delete_page_hint}</p>
+		</dd>
+		<br /><br /><br />
+		<dl class="ctrlUnit">
+			<dt><label for="ctrl_parent">{xen:phrase parent_node}:</label></dt>
+			<dd><select name="page_parent" id="ctrl_parent" class="textCtrl autoSize" {xen:if "{$page.page_slug} == 'index'", 'disabled'}>
+				<option value="0">({xen:phrase unspecified})</option>
+				<xen:foreach loop="$fullList" value="$list">
+					<option value="{$list.page_id}"
+						{xen:if '{$list.page_id}=={$page.page_parent}', 'selected'}
+						{xen:if '{$list.disabled}', 'disabled'}>
+						&nbsp; {xen:raw $list.page_indent}{xen:raw $list.page_name}
+					</option>
+				</xen:foreach>
+			</select></dd>
+		</dl>
+	</dl>
+
+	<dl class="ctrlUnit submitUnit">
+		<dt></dt>
+		<dd><input type="submit" value="{xen:phrase delete_page}" class="button primary" /></dd>
+	</dl>
+
+	<input type="hidden" name="_xfToken" value="{$visitor.csrf_token_page}" />
+</form>]]></template>
+    <template title="EWRcarta_PageEdit" version_id="38" version_string="1.3.8"><![CDATA[<xen:title>{$page.page_name} - {xen:phrase edit}</xen:title>
+<xen:h1>{$page.page_name} - {xen:phrase edit}</xen:h1>
+
+<xen:container var="$quickNavSelected">wiki-{$page.page_id}</xen:container>
+
+<xen:navigation>
+	<xen:breadcrumb source="$breadCrumbs" />
+</xen:navigation>
+
+<xen:require css="EWRcarta.css" />
+<xen:require js="js/8wayrun/slugit.js" />
+<xen:require js="js/8wayrun/EWRcarta_ajax.js" />
+
+<xen:if is="{$input.page_content}">
+	<xen:require css="lightbox.css" />
+	<xen:require js="js/xenforo/lightbox.js" />
+	<xen:require js="js/8wayrun/sortable.js" />
+
+	<div class="sectionMain wikiPage">
+		<div class="subHeading">{$input.page_name}</div>
+		<div class="primaryContent wikiContent">{xen:raw $input.HTML}</div>
+		<div class="sectionFooter" style="text-align: right">{xen:phrase preview}</div>
+	</div>
+</xen:if>
+
+<div class="sectionMain wikiEdit">
+	<form action="{xen:link 'wiki/edit', $page}" method="post" class="xenForm">
+		<fieldset>
+			<dl class="ctrlUnit">
+				<dt><label for="ctrl_name">{xen:phrase title}:</label></dt>
+				<dd><input type="text" name="page_name" class="textCtrl SlugIn" id="ctrl_name" maxlength="50" value="{$page.page_name}" /></dd>
+			</dl>
+
+			<dl class="ctrlUnit">
+				<dt><label for="ctrl_slug">{xen:phrase link_url}:</label></dt>
+				<dd>
+					<xen:if is="{$page.page_slug} == 'index'">
+						<input type="text" name="page_slugNew" class="textCtrl" id="ctrl_slug" maxlength="50" value="{$page.page_slug}" READONLY />
+					<xen:else />
+						<input type="text" name="page_slugNew" class="textCtrl SlugEdit SlugOut" id="ctrl_slug" maxlength="50" value="{xen:if {$input.page_slug}, {$input.page_slug}, {$page.page_slug}}" />
+					</xen:if>
+				</dd>
+			</dl>
+
+			<xen:if is="{$page.page_type} == 'phpfile'">
+				<input type="hidden" name="page_type" value="phpfile" />
+
+				<dl class="ctrlUnit">
+					<dt><label for="ctrl_content">{xen:phrase wiki_file_path}:</label></dt>
+					<dd><input type="text" name="page_content" class="textCtrl" id="ctrl_content" maxlength="50" value="{$page.page_content}" /></dd>
+				</dl>
+
+				<dl class="ctrlUnit">
+					<dt></dt>
+					<dd><div class="muted" style="font-size: 11px; margin: -5px 10px 0px;">{xen:phrase wiki_file_path_hint}</div></dd>
+				</dl>
+			<xen:else />
+				<dl class="ctrlUnit">
+					<dt><label for="ctrl_type">{xen:phrase data_type}:</label></dt>
+					<dd><select name="page_type" id="ctrl_type" class="textCtrl autoSize">
+						<option value="bbcode" {xen:selected "{$page.page_type} == 'bbcode'"}>{xen:phrase bb_codes}</option>
+						<xen:if is="{$perms.admin}"><option value="html" {xen:selected "{$page.page_type} == 'html'"}>{xen:phrase html}</option></xen:if>
+					</select></dd>
+				</dl>
+
+				<dl class="ctrlUnit fullWidth">
+					<dt></dt>
+					<dd>{xen:raw $editorTemplate}</dd>
+				</dl>
+			</xen:if>
+
+			<dl class="ctrlUnit">
+				<dt><label for="page_parent">{xen:phrase parent_node}:</label></dt>
+				<dd><select name="page_parent" id="ctrl_parent" class="textCtrl autoSize" {xen:if "{$page.page_slug} == 'index'", 'disabled'}>
+					<option value="0">({xen:phrase unspecified})</option>
+					<xen:foreach loop="$fullList" value="$list">
+						<option value="{$list.page_id}"
+							{xen:selected "{$page.page_parent} == {$list.page_id}"}
+							{xen:if '{$list.disabled}', 'disabled'}>
+							&nbsp; {xen:raw $list.page_indent}{xen:raw $list.page_name}
+						</option>
+					</xen:foreach>
+				</select></dd>
+			</dl>
+		</fieldset>
+
+		<xen:include template="helper_captcha_unit" />
+
+		<dl class="ctrlUnit submitUnit">
+			<dt></dt>
+			<dd>
+				<input type="submit" value="{xen:phrase save_page}" name="submit" accesskey="s" class="button primary" />
+				<xen:if is="{$perms.attach}">
+					<xen:include template="attachment_upload_button" />
+				<xen:else />
+					<xen:require css="EWRcarta_attach.css" />
+				</xen:if>
+				<input type="submit" value="{xen:phrase preview}" name="preview" accesskey="p" class="button" />
+				<xen:if is="{$perms.delete} && {$page.page_slug} != 'index'">
+					<a href="{xen:link 'wiki/delete', $page}" type="button" class="button OverlayTrigger">{xen:phrase delete_page}...</a>
+				</xen:if>
+			</dd>
+		</dl>
+
+	<xen:if is="{$attachmentParams}">
+		<dl class="ctrlUnit AttachedFilesUnit">
+			<dt><label for="ctrl_uploader">{xen:phrase attached_files}:</label></dt>
+			<dd><xen:include template="attachment_editor" /></dd>
+		</dl>
+	</xen:if>
+
+		<xen:if is="{$perms.admin}">
+			<fieldset>
+				<dl class="ctrlUnit">
+					<dt>{xen:phrase options}:</dt>
+					<dd><ul>
+						<li>
+							<label for="ctrl_index"><input type="text" name="page_index" class="textCtrl" id="ctrl_index" maxlength="2" value="{$page.page_index}" style="width: 18px;" /> {xen:phrase wiki_index_rating}</label>
+							<p class="hint">{xen:phrase wiki_index_rating_hint}</p>
+						</li>
+
+						<li>
+							<label for="ctrl_sidebar"><input type="checkbox" name="page_sidebar" value="1" id="ctrl_sidebar" {xen:checked "{$page.page_sidebar}"} /> {xen:phrase show_page_sidebar_block}</label>
+						</li>
+						<li>
+							<label for="ctrl_sublist"><input type="checkbox" name="page_sublist" value="1" id="ctrl_sublist" {xen:checked "{$page.page_sublist}"} /> {xen:phrase show_page_children_list}</label>
+						</li>
+						<li>
+							<label for="ctrl_protect"><input type="checkbox" name="page_protect" value="1" id="ctrl_protect" {xen:checked "{$page.page_protect}"} /> {xen:phrase mark_page_as_protected}</label>
+							<p class="hint">{xen:phrase mark_page_as_protected_hint}</p>
+						</li>
+					</ul></dd>
+				</dl>
+			</fieldset>
+		</xen:if>
+		
+		<xen:if is="{$perms.admin} || {$perms.masks}">
+			<h3 class="textHeading">{xen:phrase permission_masks}</h3>
+			
+			<dl class="ctrlUnit">
+				<dt><label for="ctrl_user">{xen:phrase administrators}:</label></dt>
+				<dd><input type="search" name="administrators" placeholder="{xen:phrase name}..." value="{$page.page_admins}" results="0" class="textCtrl AutoComplete" />
+					<p class="hint">{xen:phrase selected_users_permissions_to_admin_wiki}</p></dd>
+			</dl>
+			
+			<fieldset>
+				<dl class="ctrlUnit">
+					<dt><label for="ctrl_user">{xen:phrase editors}:</label></dt>
+					<dd><input type="search" name="usernames" placeholder="{xen:phrase name}..." value="{$page.page_users}" results="0" class="textCtrl AutoComplete" /></dd>
+				</dl>
+
+				<dl class="ctrlUnit">
+					<dt>{xen:phrase user_groups}:</dt>
+					<dd>
+						<ul class="userGroups">
+							<xen:foreach loop="$groups" value="$group">
+							<li>
+								<label for="ctrl_group[{$group.value}]">
+									<input type="checkbox" name="page_groups[{$group.value}]" value="{$group.value}" id="ctrl_group[{$group.value}]" {xen:if '{$group.selected}', 'checked'} />
+									<xen:if is="{$group.selected}"><b>{$group.label}</b><xen:else/>{$group.label}</xen:if>
+								</label>
+							</li>
+							</xen:foreach>
+						</ul>
+						<p class="hint">{xen:phrase selected_users_permissions_to_edit_wiki}</p>
+					</dd>
+				</dl>
+			</fieldset>
+			
+			<dl class="ctrlUnit submitUnit">
+				<dt></dt>
+				<dd>
+					<input type="submit" value="{xen:phrase save_page}" name="submit" accesskey="s" class="button primary" />
+					<input type="submit" value="{xen:phrase preview}" name="preview" accesskey="p" class="button" />
+					<xen:if is="{$perms.delete} && {$page.page_slug} != 'index'">
+						<a href="{xen:link 'wiki/delete', $page}" type="button" class="button OverlayTrigger">{xen:phrase delete_page}...</a>
+					</xen:if>
+				</dd>
+			</dl>
+		</xen:if>
+
+		<input type="hidden" name="timestamp" value="{$page.timestamp}" />
+		<input type="hidden" name="_xfToken" value="{$visitor.csrf_token_page}" />
+	</form>
+</div>
+
+<xen:if is="{$perms.admin} && {$forums}">
+<div class="sectionMain">
+	<form action="{xen:link 'wiki/create-thread', $page}" method="post" class="xenForm">
+		<dl class="ctrlUnit">
+			<dt><label for="ctrl_name">{xen:phrase discussion_thread}:</label></dt>
+			<dd>
+				<xen:if is="{$thread}">
+					<a href="{xen:link threads, $thread}">{$thread.title}</a>
+				<xen:else />
+					<select name="wiki_node" class="textCtrl autoSize">
+					<xen:foreach loop="$forums" value="$forum">
+						<option value="{$forum.node_id}">{$forum.title}</option>
+					</xen:foreach>
+					</select>
+					 &nbsp; &nbsp; 
+					<input type="submit" value="{xen:phrase create_thread}" name="submit" accesskey="s" class="button primary" />
+				</xen:if>
+			</dd>
+		</dl>
+
+		<input type="hidden" name="_xfToken" value="{$visitor.csrf_token_page}" />
+	</form>
+</div>
+</xen:if>
+
+<xen:include template="EWRcarta_Footer" />]]></template>
+    <template title="EWRcarta_PageEditors" version_id="38" version_string="1.3.8"><![CDATA[<xen:title>{$page.page_name} - {xen:phrase editors}</xen:title>
+<xen:h1>{$page.page_name} - {xen:phrase editors}</xen:h1>
+
+<xen:container var="$quickNavSelected">wiki-{$page.page_id}</xen:container>
+
+<xen:require css="EWRcarta.css" />
+
+<xen:navigation>
+	<xen:breadcrumb source="$breadCrumbs" />
+</xen:navigation>
+
+<div class="sectionMain">
+	<div class="subHeading">{xen:phrase contributing_editors}</div>
+	<div class="secondaryContent wikiPage wikiEditors">
+		<table style="width: 100%;">
+			<xen:foreach loop="$editors" value="$user">
+				<xen:include template="EWRcarta_Editor_Bit" />
+			</xen:foreach>
+		</table>
+	</div>
+</div>
+
+<xen:include template="EWRcarta_Footer" />]]></template>
+    <template title="EWRcarta_PageEditors_Simple" version_id="38" version_string="1.3.8"><![CDATA[<div class="primaryContent">
+	<div class="subHeading">{xen:phrase contributing_editors}</div>
+	<div class="secondaryContent wikiPage wikiEditors">
+		<table style="width: 100%;">
+			<xen:foreach loop="$editors" value="$user">
+				<xen:include template="EWRcarta_Editor_Bit" />
+			</xen:foreach>
+		</table>
+	</div>
+</div>]]></template>
+    <template title="EWRcarta_PageHistory" version_id="38" version_string="1.3.8"><![CDATA[<xen:title>{$page.page_name} - {xen:phrase history}</xen:title>
+<xen:h1>{$page.page_name} - {xen:phrase history}</xen:h1>
+
+<xen:container var="$quickNavSelected">wiki-{$page.page_id}</xen:container>
+
+<xen:require css="EWRcarta.css" />
+
+<xen:navigation>
+	<xen:breadcrumb source="$breadCrumbs" />
+</xen:navigation>
+
+<div class="sectionMain">
+
+	<div class="primaryContent wikiPage wikiHistory">
+	<table style="width: 100%;">
+		<xen:foreach loop="$fullList" value="$history" i="$i" count="$count">
+			<xen:include template="EWRcarta_History_Bit" />
+		</xen:foreach>
+	</table>
+	</div>
+
+	<xen:pagenav link="wiki/history" linkdata="{$page}" page="{$start}" perpage="{$stop}" total="{$count}" />
+</div>
+
+<xen:include template="EWRcarta_Footer" />]]></template>
+    <template title="EWRcarta_PageHistory_Simple" version_id="38" version_string="1.3.8"><![CDATA[<div class="primaryContent">
+	<table style="width: 100%;">
+		<xen:foreach loop="$fullList" value="$history" i="$i" count="$count">
+			<xen:include template="EWRcarta_History_Bit" />
+		</xen:foreach>
+	</table>
+
+	<xen:pagenav link="wiki/history" linkdata="{$page}" page="{$start}" perpage="{$stop}" total="{$count}" />
+</div>]]></template>
+    <template title="EWRcarta_PageIpInfo" version_id="22" version_string="1.2.2"><![CDATA[<xen:title>{xen:phrase ip_information_for_edit, 'user={$history.username}'}</xen:title>
+
+<xen:container var="$quickNavSelected">wiki-{$page.page_id}</xen:container>
+
+<xen:navigation>
+	<xen:breadcrumb href="{xen:link 'full:wiki', $page}">{$page.page_name}</xen:breadcrumb>
+</xen:navigation>
+
+<div class="section">
+	<h3 class="subHeading">{xen:phrase page}: {$page.page_name}</h3>
+	<xen:include template="content_ip">
+		<xen:map from="$history" to="$content" />
+	</xen:include>
+</div>]]></template>
+    <template title="EWRcarta_PageLike" version_id="30" version_string="1.3.0"><![CDATA[<xen:title>{$page.page_name} - {xen:if $like, '{xen:phrase unlike_wiki}', '{xen:phrase like_wiki}'}</xen:title>
+
+<xen:navigation>
+	<xen:breadcrumb source="$breadCrumbs" />
+</xen:navigation>
+
+<form action="{xen:link 'wiki/like', $page}" method="post" class="xenForm">
+
+	<dl class="ctrlUnit fullWidth">
+		<dt></dt>
+		<dd>
+			<xen:if is="{$like}">
+				{xen:phrase you_sure_you_want_to_unlike_this_wiki}
+			<xen:else />
+				{xen:phrase you_sure_you_want_to_like_this_wiki}
+			</xen:if>
+		</dd>
+	</dl>
+
+	<dl class="ctrlUnit submitUnit">
+		<dt></dt>
+		<dd><input type="submit" value="{xen:if $like, '{xen:phrase unlike_wiki}', '{xen:phrase like_wiki}'}" accesskey="s" class="button primary" autofocus="true" /></dd>
+	</dl>
+
+	<input type="hidden" name="_xfToken" value="{$visitor.csrf_token_page}" />
+</form>]]></template>
+    <template title="EWRcarta_PageLikes" version_id="30" version_string="1.3.0"><![CDATA[<xen:title>{$page.page_name} - {xen:phrase members_who_liked_this_wiki}</xen:title>
+<xen:h1>{xen:phrase members_who_liked_this_wiki}</xen:h1>
+
+<xen:container var="$head.noindex">
+	<meta name="robots" content="noindex" /></xen:container>
+
+<xen:navigation>
+	<xen:breadcrumb source="$breadCrumbs" />
+	<xen:breadcrumb href="{xen:link full:wiki, $page}">{$page.page_name}</xen:breadcrumb>
+</xen:navigation>
+
+<div class="section">
+	<dl class="subHeading pairsInline"><dt>{xen:phrase media}:</dt> <dd><a href="{xen:link wiki, $page}">{$page.page_name}</a></dd></dl>
+	<ol class="overlayScroll">
+	<xen:foreach loop="$likes" value="$like">
+		<xen:include template="member_list_item">
+			<xen:set var="$extraTemplate"><xen:datetime time="$like.like_date" /></xen:set>
+			<xen:map from="$like" to="$user" />
+		</xen:include>
+	</xen:foreach>
+	</ol>
+	<div class="sectionFooter overlayOnly"><a class="button primary OverlayCloser">{xen:phrase close}</a></div>
+</div>]]></template>
+    <template title="EWRcarta_PageNull" version_id="33" version_string="1.3.3"><![CDATA[<xen:title>{$page.page_slug}</xen:title>
+<xen:h1>{$page.page_slug}</xen:h1>
+
+<xen:require css="EWRcarta.css" />
+
+<div class="sectionMain">
+	<div class="subHeading">
+		{$page.page_slug}
+	</div>
+
+	<div class="primaryContent">
+		{xen:phrase requested_page_not_found}<br />
+		<br />
+		<a href="{xen:link 'search/search/?keywords={$page.page_slug}&type=wiki'}">{xen:phrase search_wiki}: {$page.page_slug}</a><br />
+		<a href="{xen:link 'search/search/?keywords={$page.page_slug}&type=forums'}">{xen:phrase search_forums}: {$page.page_slug}</a><br />
+		<a href="{xen:link 'search/search/?keywords={$page.page_slug}'}">{xen:phrase search_everything}: {$page.page_slug}</a>
+	</div>
+
+	<xen:if is="{$perms.create}">
+	<div class="secondaryContent">
+		<form action="{xen:link 'wiki/special/create-page'}" method="post">
+			<input type="submit" value="{xen:phrase create_new_page}" name="submit" accesskey="s" class="button primary" />
+			<input type="hidden" name="page_name" value="{$page.page_slug}" />
+			<input type="hidden" name="page_slug" value="{$page.page_slug}" />
+			<input type="hidden" name="_xfToken" value="{$visitor.csrf_token_page}" />
+		</form>
+	</div>
+	</xen:if>
+</div>
+
+<xen:include template="EWRcarta_Sidebar" />
+<xen:include template="EWRcarta_Footer" />]]></template>
+    <template title="EWRcarta_Pages" version_id="35" version_string="1.3.5"><![CDATA[<xen:title>{xen:phrase page_list}</xen:title>
+<xen:h1>{xen:phrase page_list}</xen:h1>
+
+<xen:require css="EWRcarta.css" />
+<xen:require js="js/8wayrun/EWRcarta_ajax.js" />
+
+<div class="sectionMain wikiPage">
+	<div class="primaryContent wikiContent">
+		<div>{xen:phrase wiki_contains_total_number_of_pages, 'total={$pageCount}'}</div>
+		<div class="letterGrid">
+			<xen:foreach loop="$fullList" key="$key" value="$letter">
+				<xen:if is="{$letter} == 'break'">
+					</div><div class="letterGrid">
+				<xen:else />
+					<div class="ToggleContents">
+						<h2>{$key}</h2>
+						<div class="contents">
+							<xen:foreach loop="$letter" value="$page">
+							<div class="pageGrid">
+								{xen:raw $page.page_indent}<a href="{xen:link 'wiki', $page}">{xen:raw $page.page_name}</a>
+							</div>
+							</xen:foreach>
+						</div>
+					</div>
+				</xen:if>
+			</xen:foreach>
+		</div>
+	</div>
+</div>
+
+<xen:include template="EWRcarta_Footer" />]]></template>
+    <template title="EWRcarta_PageView" version_id="38" version_string="1.3.8"><![CDATA[<xen:title>{$page.page_name}</xen:title>
+<xen:h1>{$page.page_name}</xen:h1>
+<xen:if is="{$redirect}">
+	<xen:description>
+		<span class="redirect"></span>
+		{xen:phrase redirected_from_x, 'page=<b><a href="{xen:link wiki, $redirect, 'noRedirect=1'}">{$redirect.page_name}</a></b>'}
+	</xen:description>
+</xen:if>
+
+<xen:container var="$head.canonical"><link rel="canonical" href="{xen:link 'canonical:wiki', $page}" /></xen:container>
+
+<xen:if is="{$xenOptions.boardDescription}">
+	<xen:container var="$head.description"><meta name="description" content="{$xenOptions.boardDescription}" /></xen:container>
+</xen:if>
+
+<xen:container var="$quickNavSelected">wiki-{$page.page_id}</xen:container>
+
+<xen:navigation>
+	<xen:breadcrumb source="$breadCrumbs" />
+</xen:navigation>
+
+<xen:require css="EWRcarta.css" />
+<xen:require css="lightbox.css" />
+<xen:require js="js/xenforo/lightbox.js" />
+<xen:require js="js/8wayrun/EWRcarta_ajax.js" />
+<xen:require js="js/8wayrun/sortable.js" />
+
+<div class="sectionMain wikiPage" id="wikiPage" data-author="{$xenOptions.boardTitle}">
+	<div style="display: none;">
+		<a href="{xen:link wiki}" class="avatar"><span class="img" style="background-image: url('{xen:property imagePath}/xenforo/logo.og.png')"></span></a>
+		<xen:datetime time="{$page.page_date}" />
+	</div>
+
+	<xen:if hascontent="true">
+	<ul class="tabs controlTabs">
+		<xen:contentcheck>
+		<xen:if is="{$perms.edit}"><li><a href="{xen:link 'wiki/edit', $page}"><xen:if is="{$page.page_protect}">{xen:phrase wiki_protected}<xen:else />{xen:phrase edit}</xen:if></a></li></xen:if>
+		<xen:if is="{$thread}"><li><a href="{xen:link 'threads/unread', $thread}">{xen:phrase discussion} ({$thread.reply_count})</a></li></xen:if>
+		</xen:contentcheck>
+	</ul>
+	</xen:if>
+	
+	<ul class="tabs mainTabs Tabs" data-panes="#WikiPanes > li" data-history="on">
+		<li><a href="{$requestPaths.requestUri}#wikiContent">{xen:phrase page}</a></li>
+		<xen:if is="{$page.attachments}"><li><a href="{$requestPaths.requestUri}#attachments">{xen:phrase attachments} ({xen:count $page.attachments})</a></li></xen:if>
+		<xen:if is="{$perms.history}">
+			<li><a href="{$requestPaths.requestUri}#history">{xen:phrase history}</a></li>
+			<li><a href="{$requestPaths.requestUri}#editors">{xen:phrase editors}</a></li>
+		</xen:if>
+	</ul>
+
+	<div class="subHeading">
+		<div style="float: right;">
+			<xen:if is="{$visitor.user_id}">
+				(<a href="{xen:link 'wiki/watch-confirm', $page}" class="OverlayTrigger" data-cacheOverlay="false">{xen:if $page.page_is_watched, '{xen:phrase unwatch_page}', '{xen:phrase watch_page}'}</a>)
+			</xen:if>
+		</div>
+		{$page.page_name}
+	</div>
+
+	<ul id="WikiPanes">
+		<li id="wikiContent" class="wikiContent">
+			<xen:if hascontent="true">
+			<div class="secondaryContent">
+				<xen:contentcheck>
+				<xen:foreach loop="$subList" value="$subPage">
+					<div style="margin-left: 5px">
+						{xen:raw $subPage.page_indent}<a href="{xen:link 'wiki', $subPage}">{$subPage.page_name}</a>
+					</div>
+				</xen:foreach>
+				</xen:contentcheck>
+			</div>
+			</xen:if>
+
+			<div class="primaryContent">
+				{xen:raw $page.HTML}
+			</div>
+		</li>
+		
+		<xen:if is="{$page.attachments}">
+			<li id="attachments" class="wikiAttachments" data-loadUrl="{xen:link wiki/attachments, $page}">
+				<span class="jsOnly">{xen:phrase loading}...</span>
+				<noscript><a href="{xen:link wiki/attachments, $page}">{xen:phrase view}</a></noscript>
+			</li>
+		</xen:if>
+		
+		<xen:if is="{$perms.history}">
+			<li id="history" class="wikiHistory" data-loadUrl="{xen:link wiki/history, $page}">
+				<span class="jsOnly">{xen:phrase loading}...</span>
+				<noscript><a href="{xen:link wiki/history, $page}">{xen:phrase view}</a></noscript>
+			</li>
+			<li id="history" class="wikiEditors" data-loadUrl="{xen:link wiki/editors, $page}">
+				<span class="jsOnly">{xen:phrase loading}...</span>
+				<noscript><a href="{xen:link wiki/editors, $page}">{xen:phrase view}</a></noscript>
+			</li>
+		</xen:if>
+	</ul>
+
+	<div id="likes-wiki-{$page.page_id}">
+		<xen:if is="{$page.page_likes}">
+			<xen:include template="likes_summary">
+				<xen:map from="$page" to="$message" />
+				<xen:set var="$likesUrl">{xen:link wiki/likes, $page}</xen:set>
+			</xen:include>
+		</xen:if>
+	</div>
+
+	<div class="sectionFooter">
+		<div style="float: right;">
+			<xen:if is="{$perms.like}">
+				(<a href="{xen:link 'wiki/like', $page}" class="LikeLink item control {xen:if $wiki.like_date, unlike, like}" data-container="#likes-wiki-{$page.page_id}"><span></span><span class="LikeLabel">{xen:if $page.like_date, {xen:phrase unlike}, {xen:phrase like}}</span></a>)
+			</xen:if>
+			({$page.page_views} {xen:phrase views})
+		</div>
+		{xen:phrase last_modified}: {xen:phrase date_x_at_time_y, 'date={xen:date $page.page_date}', 'time={xen:time $page.page_date}'}
+		<xen:if is="{$page.cache}">(Cached)</xen:if>
+	</div>
+</div>
+
+<xen:include template="EWRcarta_Sidebar" />
+<xen:include template="EWRcarta_Footer" />]]></template>
+    <template title="EWRcarta_PageView_NoSide" version_id="24" version_string="1.2.4"><![CDATA[<xen:include template="EWRcarta_PageView" />
+
+<xen:include template="share_page">
+	<xen:set var="$url">{xen:link canonical:wiki, $page}</xen:set>
+</xen:include>]]></template>
+    <template title="EWRcarta_PageWatch" version_id="38" version_string="1.3.8"><![CDATA[<xen:if is="{$pageWatch}">
+	<xen:title>{xen:phrase stop_watching_this_page}</xen:title>
+<xen:else />
+	<xen:title>{xen:phrase watch_this_page}</xen:title>
+</xen:if>
+
+<xen:navigation>
+	<xen:breadcrumb href="{xen:link 'full:wiki', $page}">{$page.page_name}</xen:breadcrumb>
+</xen:navigation>
+
+<form action="{xen:link 'wiki/watch', $page}" method="post" class="xenForm formOverlay AutoValidator">
+
+	<xen:if is="{$pageWatch}">
+		<p>{xen:phrase you_are_watching_this_page_use_button_to_stop}</p>
+		<dl class="ctrlUnit submitUnit">
+			<dt></dt>
+			<dd>
+				<input type="hidden" name="stop" value="stop" />
+				<input type="submit" value="{xen:phrase stop_watching}" class="button primary" />
+			</dd>
+		</dl>
+	<xen:else />
+		<dl class="ctrlUnit">
+			<dt><label>{xen:phrase watch_this_page_sentence}...</label></dt>
+			<dd>
+				<ul>
+					<li>
+						<label for="ctrl_email_subscribe_1">
+							<input type="radio" name="email_subscribe" value="1" id="ctrl_email_subscribe_1" />
+							{xen:phrase and_receive_email_notifications}
+						</label>
+					</li>
+					<li>
+						<label for="ctrl_email_subscribe_0">
+							<input type="radio" name="email_subscribe" value="0" id="ctrl_email_subscribe_0" checked="checked" autofocus="true" />
+							 {xen:phrase without_receiving_email_notifications}
+						</label>
+					</li>
+				</ul>
+			</dd>
+		</dl>
+		<dl class="ctrlUnit submitUnit">
+			<dt></dt>
+			<dd>
+				<input type="submit" value="{xen:phrase watch_page_button}" class="button primary" />
+			</dd>
+		</dl>
+	</xen:if>
+
+	<input type="hidden" name="_xfToken" value="{$visitor.csrf_token_page}" />
+</form>]]></template>
+    <template title="EWRcarta_Recent" version_id="23" version_string="1.2.3"><![CDATA[<xen:title>{xen:phrase recent_activity}</xen:title>
+<xen:h1>{xen:phrase recent_activity}</xen:h1>
+
+<xen:require css="EWRcarta.css" />
+
+<div class="sectionMain">
+	<xen:pagenav link="wiki/special/recent" page="{$start}" perpage="{$stop}" total="{$count}" />
+
+	<div class="primaryContent wikiPage">
+	<table style="width: 100%;">
+		<xen:foreach loop="$fullList" value="$history" i="$i" count="$count">
+			<xen:include template="EWRcarta_History_Bit" />
+		</xen:foreach>
+	</table>
+	</div>
+</div>
+
+<xen:include template="EWRcarta_Footer" />]]></template>
+    <template title="EWRcarta_Search" version_id="20" version_string="1.2.0"><![CDATA[<xen:title>{xen:phrase search_results_for_query}: {$keywords}</xen:title>
+<xen:h1>{xen:phrase search_results_for_query}: <em>{$keywords}</em></xen:h1>
+
+<xen:navigation>
+	<xen:breadcrumb href="{xen:link 'full:wiki/special/search'}">{xen:phrase search}</xen:breadcrumb>
+</xen:navigation>
+
+<xen:require css="search_results.css" />
+<xen:require css="EWRcarta.css" />
+
+<div class="section sectionMain searchResults">
+	<ol class="searchResultsList">
+	<xen:foreach loop="$results" value="$result">
+		<li id="{$result.page_slug}" class="searchResult post primaryContent">
+			<div class="listBlock main" style="margin-left: 0px;">
+				<div class="titleText" style="float: right;"><h3 class="title">{$result.score_match}%</h3></div>
+				<div class="titleText">
+					<h3 class="title"><a href="{xen:link 'wiki', $result}">{xen:helper highlight, $result.page_name, $keywords, 'highlight'}</a></h3>
+				</div>
+				<div class="meta">{xen:phrase last_modified}: <xen:datetime time="{$result.page_date}" /></div>
+				<blockquote class="snippet"><a href="{xen:link 'wiki', $result}">{xen:helper snippet, $result.page_content, 300, {xen:array 'term={$keywords}', 'emClass=highlight'}}</a></blockquote>
+			</div>
+		</li>
+	</xen:foreach>
+	</ol>
+</div>
+
+<xen:include template="EWRcarta_Footer" />]]></template>
+    <template title="EWRcarta_Search_Form" version_id="30" version_string="1.3.0"><![CDATA[<xen:title>{xen:phrase search_wiki}</xen:title>
+
+<xen:navigation>
+	<xen:breadcrumb href="{xen:link full:search}">{xen:phrase search}</xen:breadcrumb>
+</xen:navigation>
+
+<form action="{xen:link 'search/search'}" method="post" class="xenForm AutoValidator" data-optInOut="optIn" data-redirect="true">
+
+	<xen:include template="search_form_tabs" />
+	
+	<dl class="ctrlUnit">
+		<dt><label for="ctrl_keywords">{xen:phrase keywords}:</label></dt>
+		<dd>
+			<ul>
+				<li><input type="search" name="keywords" value="{$search.keywords}" results="0" class="textCtrl" id="ctrl_keywords" autofocus="true" /></li>
+				<li><label for="ctrl_title_only"><input type="checkbox" name="title_only" id="ctrl_title_only" value="1" {xen:checked '{$search.title_only}'} /> {xen:phrase search_titles_only}</label></li>
+			</ul>
+		</dd>
+	</dl>
+
+	<dl class="ctrlUnit submitUnit">
+		<dt></dt>
+		<dd><input type="submit" value="{xen:phrase search}" accesskey="s" class="button primary" /></dd>
+	</dl>
+
+	<input type="hidden" name="type" value="wiki" />
+	<input type="hidden" name="_xfToken" value="{$visitor.csrf_token_page}" />
+</form>]]></template>
+    <template title="EWRcarta_Search_Result" version_id="36" version_string="1.3.6"><![CDATA[<li id="wiki-{$wiki.page_id}" class="searchResult wiki primaryContent">
+
+	<div class="listBlock main">
+		<div class="titleText">
+			<h3 class="title">{$i} <a href="{xen:link wiki, $wiki}">{xen:helper highlight, $wiki.page_name, $search.search_query, 'highlight'}</a></h3>
+		</div>
+
+		<div class="meta">
+			{xen:phrase wiki}, {xen:phrase last_modified}: <xen:datetime time="{$wiki.page_date}" />
+		</div>
+
+		<blockquote class="snippet"><a href="{xen:link wiki, $wiki}">{xen:helper snippet, $wiki.page_content, 150, {xen:array 'term={$search.search_query}', 'emClass=highlight', 'stripQuote=1'}}</a></blockquote>
+
+	</div>
+</li>]]></template>
+    <template title="EWRcarta_Search_Tab" version_id="30" version_string="1.3.0"><![CDATA[<li{xen:if "{$searchType} == 'wiki'", ' class="active"'}><a href="{xen:link search, '', 'type=wiki'}">{xen:phrase search_wiki}</a></li>]]></template>
+    <template title="EWRcarta_Sidebar" version_id="35" version_string="1.3.5"><![CDATA[<xen:if is="{$sidebar}">
+<xen:require css="member_list.css" />
+
+<xen:sidebar>
+
+	<xen:if is="{$sidebar.related}">
+	<div class="section wikiSub" id="SubPages">
+		<div class="secondaryContent">
+			<h3>{xen:phrase wiki_navigation}</h3>
+
+			<ul>
+			<xen:foreach loop="$sidebar.related" value="$subPage">
+				<li>
+					{xen:raw $subPage.page_indent}
+					<xen:if is="{$page.page_slug} != {$subPage.page_slug}">
+						<a href="{xen:link 'wiki', $subPage}">{$subPage.page_name}</a>
+					<xen:else />
+						<b>{$subPage.page_name}</b>
+					</xen:if>
+				</li>
+			</xen:foreach>
+			</ul>
+		</div>
+	</div>
+	</xen:if>
+
+	<div class="section wikiNav">
+		<div class="secondaryContent" id="wikiNav">
+			<h3><a href="{xen:link 'wiki'}">{$sidebar.index.page_name}</a></h3>
+
+			<xen:if hascontent="true">
+			<ul>
+				<xen:contentcheck>
+				<xen:foreach loop="$sidebar.pages" value="$subPage">
+					<li>
+						<xen:if is="{$page.page_slug} != {$subPage.page_slug}">
+							<a href="{xen:link 'wiki', $subPage}">{$subPage.page_name}</a>
+						<xen:else />
+							<b>{$subPage.page_name}</b>
+						</xen:if>
+					</li>
+				</xen:foreach>
+				</xen:contentcheck>
+			</ul>
+			</xen:if>
+
+			<div style="margin-top: 10px;" class="findMember">
+				<form action="{xen:link 'search/search'}" method="post" class="AutoValidator" data-optInOut="optIn" data-redirect="true">
+					<input type="search" name="keywords" class="textCtrl" placeholder="{xen:phrase search_wiki}..." results="0" title="{xen:phrase enter_your_search_and_hit_enter}" id="searchBar_keywords" value="{$search.keywords}" />
+					<input type="hidden" name="type" value="wiki" />
+					<input type="hidden" name="_xfToken" value="{$visitor.csrf_token_page}" />
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<xen:include template="sidebar_share_page">
+		<xen:set var="$url">{xen:link canonical:wiki, $page}</xen:set>
+	</xen:include>
+
+	<div class="section">
+		<div class="secondaryContent" id="wikiStats">
+			<h3>{xen:phrase wiki_statistics}</h3>
+			<div class="pairsJustified">
+				<dl>
+					<dt>{xen:phrase pages}:</dt>
+					<dd>{xen:number $sidebar.count}</dd>
+				</dl>
+				<dl>
+					<dt>{xen:phrase edits}:</dt>
+					<dd>{xen:number $sidebar.edits}</dd>
+				</dl>
+				<dl>
+					<dt>{xen:phrase likes}:</dt>
+					<dd>{xen:number $sidebar.likes}</dd>
+				</dl>
+				<dl>
+					<dt>{xen:phrase views}:</dt>
+					<dd>{xen:number $sidebar.views}</dd>
+				</dl>
+				<dl>
+					<dt>{xen:phrase attached_files}:</dt>
+					<dd>{xen:number $sidebar.files.count} ({xen:number $sidebar.files.size, size})</dd>
+				</dl>
+			</div>
+		</div>
+	</div>
+
+</xen:sidebar>
+
+</xen:if>]]></template>
+    <template title="EWRcarta_TemplateCreate" version_id="35" version_string="1.3.5"><![CDATA[<xen:title>{xen:phrase create_new_template}</xen:title>
+<xen:h1>{xen:phrase create_new_template}</xen:h1>
+
+<xen:navigation>
+	<xen:breadcrumb href="{xen:link 'full:wiki/special/administrate'}">{xen:phrase administrate_wiki}</xen:breadcrumb>
+</xen:navigation>
+
+<xen:require css="EWRcarta.css" />
+<xen:require js="js/8wayrun/slugit.js" />
+<xen:require js="js/8wayrun/EWRcarta_ajax.js" />
+
+<div class="sectionMain">
+	<form action="{xen:link 'wiki/special/create-template'}" method="post" class="xenForm">
+		<fieldset>
+			<dl class="ctrlUnit">
+				<dt><label for="ctrl_name">{xen:phrase title}:</label></dt>
+				<dd><input type="text" name="template_newname" class="textCtrl SlugEdit SlugOut" id="ctrl_name" maxlength="50" value="" /></dd>
+			</dl>
+
+			<dl class="ctrlUnit fullWidth">
+				<dt></dt>
+				<dd>{xen:raw $editorTemplate}</dd>
+			</dl>
+		</fieldset>
+
+		<dl class="ctrlUnit submitUnit">
+			<dt></dt>
+			<dd>
+				<input type="submit" value="{xen:phrase create_new_template}" name="submit" accesskey="s" class="button primary" />
+			</dd>
+		</dl>
+
+		<input type="hidden" name="_xfToken" value="{$visitor.csrf_token_page}" />
+	</form>
+</div>
+
+<xen:include template="EWRcarta_Footer" />]]></template>
+    <template title="EWRcarta_TemplateDelete" version_id="35" version_string="1.3.5"><![CDATA[<xen:title>{xen:phrase delete_template}: {$template.template_name}</xen:title>
+
+<form action="{xen:link 'wiki/special/delete-template', $template}" method="post" class="xenForm formOverlay">
+
+	<dl class="ctrlUnit">
+		<dt>{xen:phrase delete_template}</dt>
+		<dd>
+			{$template.template_name}
+			<p class="explain">{xen:phrase delete_template_hint}</p>
+		</dd>
+	</dl>
+
+	<dl class="ctrlUnit submitUnit">
+		<dt></dt>
+		<dd><input type="submit" value="{xen:phrase delete_template}" class="button primary" /></dd>
+	</dl>
+
+	<input type="hidden" name="_xfToken" value="{$visitor.csrf_token_page}" />
+</form>]]></template>
+    <template title="EWRcarta_TemplateEdit" version_id="35" version_string="1.3.5"><![CDATA[<xen:title>{$template.template_name} - {xen:phrase edit}</xen:title>
+<xen:h1>{$template.template_name} - {xen:phrase edit}</xen:h1>
+
+<xen:navigation>
+	<xen:breadcrumb href="{xen:link 'full:wiki/special/administrate'}">{xen:phrase administrate_wiki}</xen:breadcrumb>
+</xen:navigation>
+
+<xen:require css="EWRcarta.css" />
+<xen:require js="js/8wayrun/slugit.js" />
+<xen:require js="js/8wayrun/EWRcarta_ajax.js" />
+
+<div class="sectionMain">
+	<form action="{xen:link 'wiki/special/edit-template', $template}" method="post" class="xenForm">
+		<fieldset>
+			<dl class="ctrlUnit">
+				<dt><label for="ctrl_name">{xen:phrase title}:</label></dt>
+				<dd><input type="text" name="template_newname" class="textCtrl SlugEdit SlugOut" id="ctrl_name" maxlength="50" value="{$template.template_name}" /></dd>
+			</dl>
+
+			<dl class="ctrlUnit fullWidth">
+				<dt></dt>
+				<dd>{xen:raw $editorTemplate}</dd>
+			</dl>
+		</fieldset>
+
+		<dl class="ctrlUnit submitUnit">
+			<dt></dt>
+			<dd>
+				<input type="submit" value="{xen:phrase save_page}" name="submit" accesskey="s" class="button primary" />
+				<a href="{xen:link 'wiki/special/delete-template', $template}" type="button" class="button OverlayTrigger">{xen:phrase delete_template}...</a>
+			</dd>
+		</dl>
+
+		<input type="hidden" name="template_name" value="{$template.template_name}" />
+		<input type="hidden" name="_xfToken" value="{$visitor.csrf_token_page}" />
+	</form>
+
+</div>
+
+<xen:include template="EWRcarta_Footer" />]]></template>
+    <template title="EWRcarta_Thread_Tabs" version_id="38" version_string="1.3.8"><![CDATA[<div class="wikiPage wikiThread">
+	<xen:if hascontent="true">
+	<ul class="tabs controlTabs">
+		<xen:contentcheck>
+		<xen:if is="{$perms.edit}"><li><a href="{xen:link 'wiki/edit', $page}"><xen:if is="{$page.page_protect}">{xen:phrase wiki_protected}<xen:else />{xen:phrase edit}</xen:if></a></li></xen:if>
+		<li class="active"><a href="{xen:link 'threads/unread', $thread}">{xen:phrase discussion} ({$thread.reply_count})</a></li>
+		</xen:contentcheck>
+	</ul>
+	</xen:if>
+
+	<ul class="tabs mainTabs">
+		<li><a href="{xen:link wiki, $page}#wikiContent">{xen:phrase page}</a></li>
+		<xen:if is="{$page.attachments}"><li><a href="{xen:link wiki, $page}#attachments">{xen:phrase attachments} ({xen:count $page.attachments})</a></li></xen:if>
+		<xen:if is="{$perms.history}">
+			<li><a href="{xen:link wiki, $page}#history">{xen:phrase history}</a></li>
+			<li><a href="{xen:link wiki, $page}#editors">{xen:phrase editors}</a></li>
+		</xen:if>
+	</ul>
+</div>]]></template>
+    <template title="news_feed_item_wiki_like" version_id="34" version_string="1.3.4"><![CDATA[<h3 class="description">
+
+	<xen:comment><!-- $user liked the wiki --></xen:comment>
+	{xen:phrase x_liked_the_wiki_y,
+		'name={xen:helper username, $user, 'primaryText'}',
+		'title={$content.page_name}',
+		'link={xen:link wiki, $content}'
+	}
+
+</h3>
+
+<p class="snippet">{xen:helper snippet, $content.page_content, 100, {xen:array 'stripQuote=1'}}</p>]]></template>
+    <template title="news_feed_item_wiki_update" version_id="30" version_string="1.3.0"><![CDATA[<p class="description">{xen:phrase news_feed_wiki_update, 'username={xen:helper username, $user, 'primaryText'}'}</p>
+
+<h3 class="title thread"><a href="{xen:link wiki, $content}">{$content.page_name}</a></h3>
+
+<p class="snippet post">{xen:helper snippet, $content.page_content, 100}</p>]]></template>
+  </templates>
+  <bb_code_media_sites/>
+</addon>

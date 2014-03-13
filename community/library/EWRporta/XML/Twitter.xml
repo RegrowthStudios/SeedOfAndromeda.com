@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<block block_id="Twitter" title="Twitter Social Search" version_string="1.0.0" version_id="1" url="http://8wayrun.com/" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="" cache="+1 days">
+  <admin_templates/>
+  <listeners/>
+  <options>
+    <option option_id="twitter_widgetid" edit_format="textbox" data_type="string" display_order="1">
+      <option_value>357594237698711553</option_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <title>Widget ID</title>
+      <explain><![CDATA[You must create a custom twitter widget and get an ID from <a href="https://twitter.com/settings/widgets" target="_blank">here</a>.]]></explain>
+    </option>
+    <option option_id="twitter_related" edit_format="textbox" data_type="string" display_order="2">
+      <option_value>8wayrun,xenforo</option_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <title>Related Users</title>
+      <explain><![CDATA[After posting a tweet, suggested to follow these users (comma delimited).]]></explain>
+    </option>
+    <option option_id="twitter_height" edit_format="spinbox" data_type="unsigned_integer" display_order="3">
+      <option_value>250</option_value>
+      <edit_format_params>step=10</edit_format_params>
+      <sub_options></sub_options>
+      <title>Twitter Widget Height</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+    <option option_id="twitter_features" edit_format="checkbox" data_type="array" display_order="4">
+      <option_value>a:5:{s:6:"scroll";b:0;s:6:"header";s:1:"1";s:6:"footer";s:1:"1";s:6:"border";s:1:"1";s:11:"transparent";s:1:"1";}</option_value>
+      <edit_format_params>scroll=Hide Scrollbar
+header=Hide Header
+footer=Hide Footer
+border=Hide Borders
+transparent=Transparent</edit_format_params>
+      <sub_options>scroll
+header
+footer
+border
+transparent</sub_options>
+      <title>Widget Features</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+  </options>
+  <phrases>
+    <phrase title="EWRblock_Twitter_feed"><![CDATA[Twitter Feed]]></phrase>
+    <phrase title="EWRblock_Twitter_join"><![CDATA[Join the conversation]]></phrase>
+  </phrases>
+  <route_prefixes/>
+  <templates>
+    <template title="EWRblock_Twitter"><![CDATA[<div class="section">
+	<div class="secondaryContent" id="twitter">
+		<h3>{xen:phrase EWRblock_Twitter_feed}</h3>
+
+		<a class="twitter-timeline" href="http://twitter.com" height="{$option.height}"
+			data-dnt="true"
+			data-theme="{xen:property fbColorScheme}"
+			data-widget-id="{$option.widgetid}"
+			data-related="{$option.related}"
+			data-chrome="{$option.features}">
+			{xen:phrase EWRblock_Twitter_feed}
+		</a>
+		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+	</div>
+</div>]]></template>
+  </templates>
+</block>

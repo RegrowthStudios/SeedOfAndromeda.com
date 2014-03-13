@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<block block_id="OnlineUsers" title="Members Online Now" version_string="1.0.0" version_id="1" url="http://8wayrun.com/" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="" cache="now">
+  <admin_templates/>
+  <listeners/>
+  <options>
+    <option option_id="onlineusers_staff" edit_format="onoff" data_type="boolean" display_order="1">
+      <option_value>0</option_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <title>Show Staff Online Now</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+  </options>
+  <phrases/>
+  <route_prefixes/>
+  <templates>
+    <template title="EWRblock_OnlineUsers"><![CDATA[<xen:include template="sidebar_online_users">
+	<xen:map from="$OnlineUsers" to="$onlineUsers" />
+</xen:include>]]></template>
+  </templates>
+</block>

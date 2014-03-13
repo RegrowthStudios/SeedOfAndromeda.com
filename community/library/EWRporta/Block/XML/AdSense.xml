@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<block block_id="AdSense" title="Google Adsense" version_string="1.0.0" version_id="1" url="http://8wayrun.com/" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="" cache="+1 days">
+  <admin_templates/>
+  <listeners/>
+  <options>
+    <option option_id="adsense_client" edit_format="textbox" data_type="string" display_order="1">
+      <option_value>ca-pub-</option_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <title>AdSense Client ID</title>
+      <explain><![CDATA[The unique publisher ID of your Google Adsense account.]]></explain>
+    </option>
+    <option option_id="adsense_adslot" edit_format="textbox" data_type="string" display_order="2">
+      <option_value></option_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <title>AdSense Ad Slot ID</title>
+      <explain><![CDATA[The ad unit ID of the specific ad unit you want to display.]]></explain>
+    </option>
+    <option option_id="adsense_width" edit_format="spinbox" data_type="unsigned_integer" display_order="3">
+      <option_value>200</option_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <title>Advert Width</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+    <option option_id="adsense_height" edit_format="spinbox" data_type="unsigned_integer" display_order="4">
+      <option_value>200</option_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <title>Advert Height</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+  </options>
+  <phrases>
+    <phrase title="EWRblock_AdSense_advertisement"><![CDATA[Advertisement]]></phrase>
+  </phrases>
+  <route_prefixes/>
+  <templates>
+    <template title="EWRblock_AdSense"><![CDATA[<xen:require css="EWRblock_AdSense.css" />
+
+<div class="section">
+    <div class="secondaryContent" id="adSense">
+        <h3>{xen:phrase EWRblock_AdSense_advertisement}</h3>
+        <script type="text/javascript"><!--
+            google_ad_client = "{$option.client}";
+            google_ad_slot = "{$option.adslot}";
+            google_ad_width = {$option.width};
+            google_ad_height = {$option.height};
+        //-->
+        </script>
+        <div>
+            <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+        </div>
+    </div>
+</div>]]></template>
+    <template title="EWRblock_AdSense.css"><![CDATA[#adSense div { text-align: center; }]]></template>
+  </templates>
+</block>

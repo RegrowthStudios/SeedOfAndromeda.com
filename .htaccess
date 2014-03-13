@@ -1,0 +1,12 @@
+RewriteEngine On
+#########################
+# redirect no-www to www
+#########################
+RewriteCond %{HTTP_HOST} !^www\.seedofandromeda\.com$ [NC]
+RewriteRule ^(.*)$ http://www.seedofandromeda.com/$1 [R=301,L]
+
+Redirect 301 /devlog.php http://www.seedofandromeda.com/Blogs.php
+Redirect 301 /videos.php http://www.seedofandromeda.com/Videos.php
+Redirect 301 /login.php http://www.seedofandromeda.com/
+Redirect 301 /create_account.php http://www.seedofandromeda.com/Forums/member.php?action=register
+Redirect 301 /screenshots.php http://www.seedofandromeda.com/Screenshots.php

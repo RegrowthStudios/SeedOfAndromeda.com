@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<block block_id="RawHyperText1" title="Raw HTML Block 1" version_string="1.0.0" version_id="1" url="http://8wayrun.com/" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="" cache="+1 days">
+  <admin_templates/>
+  <listeners/>
+  <options>
+    <option option_id="rawhypertext1_html" edit_format="textbox" data_type="string" display_order="1" validation_class="EWRporta_Block_Option_RawHyperText1" validation_method="verifyHTML">
+      <option_value>&lt;xen:require css="EWRblock_RawHyperText.css" /&gt;
+
+&lt;div class="section"&gt;
+	&lt;div class="secondaryContent" id="charIcons"&gt;
+		&lt;h3&gt;&lt;a href="categories/86/"&gt;Soulcalibur V Character Soul Arenas TEST&lt;/a&gt;&lt;/h3&gt;
+	&lt;ul&gt;
+		&lt;li&gt;&lt;a href="forums/121/"&gt;&lt;img class="Tooltip" src="images/alpha-patroklos.jpg" title="a Patroklos"&gt;&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href="forums/118/"&gt;&lt;img class="Tooltip" src="images/aeon.jpg" title="Aeon (Lizardman)"&gt;&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href="forums/120/"&gt;&lt;img class="Tooltip" src="images/algol.jpg" title="Algol"&gt;&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href="forums/111/"&gt;&lt;img class="Tooltip" src="images/astaroth.jpg" title="Astaroth"&gt;&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href="forums/117/"&gt;&lt;img class="Tooltip" src="images/cervantes.jpg" title="Cervantes"&gt;&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href="forums/114/"&gt;&lt;img class="Tooltip" src="images/dampierre.jpg" title="Dampierre"&gt;&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href="forums/123/"&gt;&lt;img class="Tooltip" src="images/devil-jin.jpg" title="Devil Jin"&gt;&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href="forums/113/"&gt;&lt;img class="Tooltip" src="images/ezio-auditore.jpg" title="Ezio Auditore"&gt;&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href="forums/101/"&gt;&lt;img class="Tooltip" src="images/hilde.jpg" title="Hilde"&gt;&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href="forums/97/"&gt;&lt;img class="Tooltip" src="images/ivy.jpg" title="Ivy"&gt;&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href="forums/100/"&gt;&lt;img class="Tooltip" src="images/leixia.jpg" title="Leixia"&gt;&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href="forums/102/"&gt;&lt;img class="Tooltip" src="images/maxi.jpg" title="Maxi"&gt;&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href="forums/96/"&gt;&lt;img class="Tooltip" src="images/mitsurugi.jpg" title="Mitsurugi"&gt;&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href="forums/99/"&gt;&lt;img class="Tooltip" src="images/natsu.jpg" title="Natsu"&gt;&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href="forums/95/"&gt;&lt;img class="Tooltip" src="images/nightmare.jpg" title="Nightmare"&gt;&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href="forums/91/"&gt;&lt;img class="Tooltip" src="images/patroklos.jpg" title="Patroklos"&gt;&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href="forums/93/"&gt;&lt;img class="Tooltip" src="images/pyrrha.jpg" title="Pyrrha"&gt;&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href="forums/122/"&gt;&lt;img class="Tooltip" src="images/pyrrha-omega.jpg" title="Pyrrha O"&gt;&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href="forums/112/"&gt;&lt;img class="Tooltip" src="images/raphael.jpg" title="Raphael"&gt;&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href="forums/94/"&gt;&lt;img class="Tooltip" src="images/siegfried.jpg" title="Siegfried"&gt;&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href="forums/103/"&gt;&lt;img class="Tooltip" src="images/tira.jpg" title="Tira"&gt;&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href="forums/110/"&gt;&lt;img class="Tooltip" src="images/viola.jpg" title="Viola"&gt;&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href="forums/104/"&gt;&lt;img class="Tooltip" src="images/voldo.jpg" title="Voldo"&gt;&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href="forums/119/"&gt;&lt;img class="Tooltip" src="images/xiba.jpg" title="Xiba"&gt;&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href="forums/115/"&gt;&lt;img class="Tooltip" src="images/yoshimitsu.jpg" title="Yoshimitsu"&gt;&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href="forums/98/"&gt;&lt;img class="Tooltip" src="images/zwei.jpg" title="Z.W.E.I."&gt;&lt;/a&gt;&lt;/li&gt;
+	&lt;/ul&gt;
+	&lt;/div&gt;
+&lt;/div&gt;</option_value>
+      <edit_format_params>rows=10</edit_format_params>
+      <sub_options></sub_options>
+      <title>HTML</title>
+      <explain><![CDATA[Template: EWRblock_RawHyperText1]]></explain>
+    </option>
+    <option option_id="rawhypertext1_css" edit_format="textbox" data_type="string" display_order="2" validation_class="EWRporta_Block_Option_RawHyperText1" validation_method="verifyCSS">
+      <option_value>#charIcons { text-align: center; margin-bottom: 10px; }
+#charIcons ul { text-align: center; }
+#charIcons ul li { display: inline-block; }
+#charIcons ul li img { position: relative; z-index: 1; width: 46px; height: 46px; }
+
+#charIcons ul li img:hover
+{
+	z-index: 2;
+	-moz-transform:		scale(2.0);
+	-webkit-transform:	scale(2.0);
+	-o-transform:		scale(2.0);
+	-moz-transition:		all 0.3s ease-in-out 0s;
+	-o-transition:		all 0.3s ease-in-out 0s;
+	-webkit-transition:	all 0.3s ease-in-out 0s;
+}</option_value>
+      <edit_format_params>rows=5</edit_format_params>
+      <sub_options></sub_options>
+      <title>CSS</title>
+      <explain><![CDATA[Template: EWRblock_RawHyperText1.css]]></explain>
+    </option>
+  </options>
+  <phrases/>
+  <route_prefixes/>
+  <templates/>
+</block>

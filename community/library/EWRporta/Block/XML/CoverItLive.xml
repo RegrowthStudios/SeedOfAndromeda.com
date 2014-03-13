@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<block block_id="CoverItLive" title="CoverItLive Press Events" version_string="1.0.0" version_id="1" url="http://8wayrun.com/" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="" cache="+1 days">
+  <admin_templates/>
+  <listeners/>
+  <options>
+    <option option_id="coveritlive_altcast" edit_format="textbox" data_type="string" display_order="1">
+      <option_value></option_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <title>Altcast Code</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+    <option option_id="coveritlive_width" edit_format="spinbox" data_type="unsigned_integer" display_order="2">
+      <option_value>700</option_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <title>Altcast Width</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+    <option option_id="coveritlive_height" edit_format="spinbox" data_type="unsigned_integer" display_order="3">
+      <option_value>300</option_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <title>Altcast Height</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+  </options>
+  <phrases/>
+  <route_prefixes/>
+  <templates>
+    <template title="EWRblock_CoverItLive"><![CDATA[<div class="section">
+	<iframe src="http://www.coveritlive.com/index2.php/option=com_altcaster/task=viewaltcast/altcast_code={$option.altcast}/height={$option.height}/width={$option.width}"
+		scrolling="no" height="{$option.height}px" width="{$option.width}px" frameborder="0">
+	</iframe>
+</div>]]></template>
+  </templates>
+</block>

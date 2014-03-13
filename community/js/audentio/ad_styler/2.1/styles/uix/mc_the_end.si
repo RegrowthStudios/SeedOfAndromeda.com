@@ -1,0 +1,199 @@
+<div class="styleit-wrapper-inner">
+    <div class="styleit-header">
+		<span class="styleit-logo left">
+			<i class="fa fa-tint"></i>
+			<span>AD</span>Styler
+		</span>
+				
+		<div id='si-preset-changer' class="styleit-select">
+			<span class="styleit-select-placeholder"></span>
+			<i class="fa fa-angle-down right"></i>
+			
+			<div class="styleit-select-options">
+				<span data-si-value="default">Default</span>
+				<span data-si-value="minecraft">Minecraft</span>
+				<span data-si-value="mc_cliff">Cliff</span>
+				<span data-si-value="mc_dungeon">Dungeon</span>
+				<span data-si-value="mc_forest">Forest</span>
+				<span data-si-value="mc_tundra">Tundra</span>
+				<span data-si-value="mc_nether">Nether</span>
+				<span data-si-value="mc_the_end">The End</span>
+			</div>
+		</div>
+				
+		<span class="styleit-action-icon si-reveal-toggle">
+			<i class="fa fa-times"></i>
+		</span>
+				
+		<span class="styleit-action-icon" id="si-move">
+			<i class="fa fa-arrows"></i>
+		</span>
+				
+	</div>
+		
+		<div class="styleit-section">
+				<div class="styleit-section-title">Colors</div>
+				<div class="styleit-section-input">
+						<span
+								data-si-tooltip="Primary Color"
+								data-si-type="color"
+								data-si-value="#615269"
+								data-si-change='{ 
+
+									"{%primaryColor_background-color%}":"background-color",
+									"{%primaryColor_color%}":"color", 
+									"{%primaryColor_border-top-color%}":"border-top-color", 
+									"{%primaryColor_border-color%}":"border-color"
+
+								}'
+							>
+						</span>
+
+						<span
+								data-si-tooltip="Secondary Color"
+								data-si-type="color"
+								data-si-value="#45364d"
+								data-si-change='{
+
+									"{%secondaryColor_background-color%}":"background-color"
+
+								}'
+							>
+						</span>
+						
+						<span
+								data-si-tooltip="Tertiary Color"
+								data-si-type="color"
+								data-si-value="#6d6e54"
+								data-si-change='{
+
+									"{%tertiaryColor_background-color%}":"background-color",
+									"{%tertiaryColor_border-color%}":"border-color",
+									"{%tertiaryColor_border-top-color%}":"border-top-color"
+
+								}'
+							>
+						</span>
+						
+				</div>
+		</div>
+		
+		<div class="styleit-section">
+				<div class="styleit-section-title">Panel font</div>
+				<div class="styleit-section-input">
+						<span
+									class="styleit-select"
+									data-si-type="select"
+									data-si-value="{%titleFont%}"
+									data-si-fonturl="{%gFontsPath%}/css?family={%titleFontSource%}"
+									data-si-change='{ "{%titleFont_elements%}":"font" }'
+								>
+								<span class="styleit-select-placeholder"></span>
+								<i class="fa fa-angle-down right"></i>
+								
+								<div class="styleit-select-options">
+								
+									<span 
+										data-si-value="{%titleFont%}"
+										data-si-fonturl="{%gFontsPath%}/css?family={%titleFontSource%}"
+										style="font: {%titleFont%}; font-size: 12px; line-height: 28px;"
+									>Default Font</span>
+
+									<span data-si-value="normal bold 20px 'Open Sans', sans-serif" 
+										data-si-fonturl="{%gFontsPath%}/css?family=Open+Sans:400,700"
+										style="font-family: 'Open Sans', sans-serif"
+									>Open Sans</span>
+
+									<span 
+										data-si-value="normal bold 20px arial, sans-serif"
+										style="font-family: arial, sans-serif"
+									>Arial</span>
+
+									<span 
+										data-si-value="normal 24px pacifico, cursive" 
+										data-si-fonturl="{%gFontsPath%}/css?family=Pacifico"
+										style="font-family: pacifico, cursive" 
+									>Pacifico</span>
+
+									<span 
+										data-si-value="normal 24px 'Source Sans Pro', sans-serif"
+										data-si-fonturl="{%gFontsPath%}/css?family=Source+Sans+Pro"
+										style="font-family: 'Source Sans Pro', sans-serif;"
+									>Source Sans Pro</span>
+
+									<span 
+										data-si-value="normal 24px Ubuntu, sans-serif"
+										data-si-fonturl="{%gFontsPath%}/css?family=Ubuntu"
+										style="font-family: Ubuntu, sans-serif;"
+									>Ubuntu</span>
+
+									<span 
+										data-si-value="normal 24px Play, sans-serif"
+										data-si-fonturl="{%gFontsPath%}/css?family=Play"
+										style="font-family: Play, sans-serif;"
+									>Play</span>
+
+									<span 
+										data-si-value="normal 24px Raleway, sans-serif"
+										data-si-fonturl="{%gFontsPath%}/css?family=Raleway"
+										style="font-family: Raleway, sans-serif;"
+									>Raleway</span>
+
+									<span 
+										data-si-value="normal 24px Arvo, serif"
+										data-si-fonturl="{%gFontsPath%}/css?family=Arvo"
+										style="font-family: Arvo, serif;"
+									>Arvo</span>
+
+									<span 
+										data-si-value="normal 24px Dosis, sans-serif"
+										data-si-fonturl="{%gFontsPath%}/css?family=Dosis"
+										style="font-family: Dosis, sans-serif;"
+									>Dosis</span>
+
+									<span 
+										data-si-value="normal 24px Aldrich, sans-serif"
+										data-si-fonturl="{%gFontsPath%}/css?family=Aldrich"
+										style="font-family: Aldrich, sans-serif;"
+									>Aldrich</span>
+								
+								</div>
+								
+						</span>
+				</div>
+		</div>
+		
+		<div class="styleit-section">
+				<div class="styleit-section-title">Body Background Pattern</div>
+				<div class="styleit-section-input">
+						<span
+								data-si-tooltip="Body background pattern"
+								data-si-type="background-image"
+								data-si-value="{%ImgPath%}/minecraft/theend.jpg"
+								data-si-meta='{"background-repeat":"no-repeat", "background-size":"cover"}'
+								data-si-change='{ "body":"background-image" }'
+								>
+								<div class="styleit-bgimage-options">
+										<span title="no pattern" data-si-value="{%ImgPath%}/patterns/blank.gif"></span>
+										<span data-si-value="{%ImgPath%}/minecraft/cliff.jpg"></span>
+										<span data-si-value="{%ImgPath%}/minecraft/cliff2.jpg"></span>
+										<span data-si-value="{%ImgPath%}/minecraft/forest.jpg"></span>
+										<span data-si-value="{%ImgPath%}/minecraft/dungeon.jpg"></span>
+										<span data-si-value="{%ImgPath%}/minecraft/nether.jpg"></span>
+										<span data-si-value="{%ImgPath%}/minecraft/theend.jpg"></span>
+										<span data-si-value="{%ImgPath%}/minecraft/tundra.jpg"></span>
+								</div>
+						</span>
+				</div>
+		</div>
+		
+
+		<div class="styleit-footer">
+				<div class="styleit-action-icon right" id="si-reset" data-si-action="reset">
+			<i class="fa fa-refresh"></i>
+				</div>
+				<div class="styleit-action-icon right" id="si-save" data-si-action="save">
+			<i class="fa fa-check-circle"></i>
+				</div>
+		</div>
+</div>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<block block_id="BoardTotals" title="Forum Statistics" version_string="1.0.0" version_id="1" url="http://8wayrun.com/" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="" cache="+1 hours">
+  <admin_templates/>
+  <listeners/>
+  <options/>
+  <phrases>
+    <phrase title="EWRblock_BoardTotals_user_record"><![CDATA[User Record]]></phrase>
+  </phrases>
+  <route_prefixes/>
+  <templates>
+    <template title="EWRblock_BoardTotals"><![CDATA[<div class="section">
+	<div class="secondaryContent statsList" id="boardStats">
+		<h3>{xen:phrase forum_statistics}</h3>
+		<div class="pairsJustified">
+			<dl class="discussionCount"><dt>{xen:phrase discussions}:</dt>
+				<dd>{xen:number $BoardTotals.discussions}</dd></dl>
+			<dl class="messageCount"><dt>{xen:phrase messages}:</dt>
+				<dd>{xen:number $BoardTotals.messages}</dd></dl>
+			<dl class="memberCount"><dt>{xen:phrase members_count}:</dt>
+				<dd>{xen:number $BoardTotals.users}</dd></dl>
+			<dl class="mostCount"><dt>{xen:phrase EWRblock_BoardTotals_user_record}:</dt>
+				<dd class="Tooltip" title="{xen:dateTime $BoardTotals.most_users.time}">{xen:number $BoardTotals.most_users.total}</dd></dl>
+			<dl><dt>{xen:phrase latest_member}:</dt>
+				<dd><xen:username user="$BoardTotals.latestUser" text="rich" /></dd></dl>
+			<!-- slot: forum_stats_extra -->
+		</div>
+	</div>
+</div>]]></template>
+  </templates>
+</block>

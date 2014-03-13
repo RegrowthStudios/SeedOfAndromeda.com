@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<block block_id="RecentThreads" title="Recently Active Threads" version_string="1.0.0" version_id="1" url="http://8wayrun.com/" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="" cache="now">
+  <admin_templates/>
+  <listeners/>
+  <options>
+    <option option_id="recentthreads_forum" edit_format="callback" data_type="array" display_order="1">
+      <option_value>a:1:{i:0;s:1:"0";}</option_value>
+      <edit_format_params>EWRporta_Option_ForumChooser::renderOption</edit_format_params>
+      <sub_options>*</sub_options>
+      <title>Thread Source Forums</title>
+      <explain><![CDATA[Only selected forums will be searched. (unspecify to select all)]]></explain>
+    </option>
+    <option option_id="recentthreads_limit" edit_format="spinbox" data_type="unsigned_integer" display_order="2">
+      <option_value>3</option_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <title>Thread Listing Limit</title>
+      <explain><![CDATA[The maximum number of threads to display on the block.]]></explain>
+    </option>
+    <option option_id="recentthreads_cutoff" edit_format="spinbox" data_type="unsigned_integer" display_order="3">
+      <option_value>1</option_value>
+      <edit_format_params>min=1
+max=28</edit_format_params>
+      <sub_options></sub_options>
+      <title>Age Cutoff (in days)</title>
+      <explain><![CDATA[Increasing this setting could slow down block search time.]]></explain>
+    </option>
+  </options>
+  <phrases>
+    <phrase title="EWRblock_RecentThreads_title"><![CDATA[Recent Threads]]></phrase>
+  </phrases>
+  <route_prefixes/>
+  <templates>
+    <template title="EWRblock_RecentThreads"><![CDATA[<xen:if is="{$RecentThreads}">
+	<xen:require css="discussion_list.css" />
+	<xen:require css="EWRblock_RecentThreads.css" />
+
+	<xen:if is="{$position} == 'top-left' OR {$position} == 'mid-left' OR {$position} == 'btm-left' OR {$position} == 'sidebar'">
+
+		<div class="section avatarList threadList">
+			<div class="secondaryContent" id="recentThreads">
+				<h3>{xen:phrase EWRblock_RecentThreads_title}</h3>
+
+				<ol class="discussionListItems">
+					<xen:foreach loop="$RecentThreads" value="$thread">
+						<li id="thread-{$thread.thread_id}" class="{$thread.discussion_state} {xen:if {$thread.sticky}, 'sticky'} {xen:if {$thread.isNew}, 'unread'}" data-author="{$thread.username}">
+							<xen:avatar user="$thread" size="s" img="true" />
+							<div class="title">
+								<a href="{xen:link "threads{xen:if '{$thread.isNew} AND {$thread.haveReadData}', '/unread'}", $thread}"
+									title="{xen:if '{$thread.isNew} AND {$thread.haveReadData}', {xen:phrase go_to_first_unread_message}}"
+									class="{xen:if $thread.hasPreview, PreviewTooltip}"
+									data-previewUrl="{xen:if $thread.hasPreview, {xen:link threads/preview, $thread}}">{xen:helper snippet, $thread.title, 50}</a>
+							</div>
+							<div class="muted">
+								<a href="{xen:link members, $thread.lastPostInfo}">{$thread.lastPostInfo.username}</a> @
+								<a{xen:if '{$visitor.user_id}', ' href="{xen:link posts, $thread.lastPostInfo}" title="{xen:phrase go_to_last_message}"'} class="dateTime"><xen:datetime time="$thread.lastPostInfo.post_date" /></a>
+							</div>
+						</li>
+					</xen:foreach>
+				</ol>
+			</div>
+		</div>
+
+	<xen:else />
+
+		<xen:require css="inline_mod.css" />
+		<xen:require js="js/xenforo/discussion_list.js" />
+
+		<form action="{xen:link inline-mod/thread/switch}" method="post"
+			class="DiscussionList InlineModForm"
+			data-cookieName="threads"
+			data-controls="#InlineModControls"
+			data-imodOptions="#ModerationSelect option">
+
+			<div class="discussionList section sectionMain" id="recentThreads">
+				<dl class="sectionHeaders">
+					<dt class="posterAvatar"></dt>
+					<dd class="main">
+						<a class="title"><span>{xen:phrase EWRblock_RecentThreads_title}</span></a>
+						<a class="postDate"><span>{xen:phrase start_date}</span></a>
+					</dd>
+					<dd class="stats">
+						<a class="major"><span>{xen:phrase replies}</span></a>
+						<a class="minor"><span>{xen:phrase views}</span></a>
+					</dd>
+					<dd class="lastPost"><a><span>{xen:phrase last_message}</span></a></dd>
+				</dl>
+
+				<ol class="discussionListItems">
+					<xen:foreach loop="$RecentThreads" value="$thread">
+						<xen:include template="thread_list_item">
+							<xen:map from="$thread.showForumLink" to="$showForumLink" />
+						</xen:include>
+					</xen:foreach>
+				</ol>
+			</div>
+
+			<input type="hidden" name="_xfToken" value="{$visitor.csrf_token_page}" />
+		</form>
+
+	</xen:if>
+
+	<xen:include template="preview_tooltip" />
+</xen:if>]]></template>
+    <template title="EWRblock_RecentThreads.css"><![CDATA[.threadList #recentThreads ol.discussionListItems { margin: 0px; }]]></template>
+  </templates>
+</block>

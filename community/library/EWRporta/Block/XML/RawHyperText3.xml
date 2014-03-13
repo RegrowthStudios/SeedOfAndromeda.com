@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<block block_id="RawHyperText3" title="Raw HTML Block 3" version_string="1.0.0" version_id="1" url="http://8wayrun.com/" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="" cache="+1 days">
+  <admin_templates/>
+  <listeners/>
+  <options>
+    <option option_id="rawhypertext3_html" edit_format="textbox" data_type="string" display_order="1" validation_class="EWRporta_Block_Option_RawHyperText3" validation_method="verifyHTML">
+      <option_value></option_value>
+      <edit_format_params>rows=10</edit_format_params>
+      <sub_options></sub_options>
+      <title>HTML</title>
+      <explain><![CDATA[Template: EWRblock_RawHyperText3]]></explain>
+    </option>
+    <option option_id="rawhypertext3_css" edit_format="textbox" data_type="string" display_order="2" validation_class="EWRporta_Block_Option_RawHyperText3" validation_method="verifyCSS">
+      <option_value></option_value>
+      <edit_format_params>rows=5</edit_format_params>
+      <sub_options></sub_options>
+      <title>CSS</title>
+      <explain><![CDATA[Template: EWRblock_RawHyperText3.css]]></explain>
+    </option>
+  </options>
+  <phrases/>
+  <route_prefixes/>
+  <templates>
+    <template title="EWRblock_RawHyperText3"><![CDATA[]]></template>
+    <template title="EWRblock_RawHyperText3.css"><![CDATA[]]></template>
+  </templates>
+</block>

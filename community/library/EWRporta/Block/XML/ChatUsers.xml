@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<block block_id="ChatUsers" title="Who's Chatting Now" version_string="1.0.0" version_id="1" url="http://8wayrun.com/" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="" cache="+10 minutes">
+  <admin_templates/>
+  <listeners/>
+  <options/>
+  <phrases/>
+  <route_prefixes/>
+  <templates>
+    <template title="EWRblock_ChatUsers"><![CDATA[<xen:require css="EWRhabla.css" />
+
+<xen:if hascontent="true">
+	<div class="section chatUsers">		
+		<div class="secondaryContent">
+			<h3><a href="{xen:link chat}">{xen:phrase members_in_chat_room}</a></h3>
+
+			<xen:contentcheck>
+			<xen:foreach loop="$ChatUsers.rooms" value="$channel" key="$key">
+				<xen:if is="{$channel.count}">
+					<div class="footnote">
+						<b>#{$key}</b> : {$channel.count} {xen:phrase members_in_room}
+					</div>
+
+					<ol class="listInline">
+						<xen:foreach loop="$channel.users" value="$user" i="$i">
+							<li><span class="{$user.status}">{$user.nick}</span></li>
+						</xen:foreach>
+					</ol>
+				</xen:if>
+			</xen:foreach>
+			</xen:contentcheck>
+		
+			<div class="footnote">
+				{xen:phrase most_users_ever_x, 'total={xen:number $ChatUsers.most_users.total}'} (<xen:datetime time="$ChatUsers.most_users.time" />)
+			</div>
+
+		</div>
+	</div>
+</xen:if>]]></template>
+  </templates>
+</block>

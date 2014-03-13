@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<block block_id="NewsCategories" title="News Category Navigation" version_string="1.0.0" version_id="1" url="http://8wayrun.com/" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="" cache="+1 hours">
+  <admin_templates/>
+  <listeners/>
+  <options>
+    <option option_id="newscategories_restrict" edit_format="onoff" data_type="boolean" display_order="1">
+      <option_value>1</option_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <title>Restrict to Major Categories Only?</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+  </options>
+  <phrases>
+    <phrase title="EWRblock_NewsCategories_news_categories"><![CDATA[News Categories]]></phrase>
+  </phrases>
+  <route_prefixes/>
+  <templates>
+    <template title="EWRblock_NewsCategories"><![CDATA[<xen:require css="EWRblock_NewsCategories.css" />
+
+<div class="section">
+	<div class="secondaryContent" id="NewsCategories">
+		<h3>{xen:phrase EWRblock_NewsCategories_news_categories}</h3>
+		<div class="pairsJustified">
+			<xen:foreach loop="$NewsCategories" value="$category">
+				<dl class="discussionCount">
+					<dt><a href="{xen:link articles, $category}">{$category.category_name}</a></dt>
+					<dd>{xen:number $category.count}</dd>
+				</dl>
+			</xen:foreach>
+		</div>
+	</div>
+</div>]]></template>
+    <template title="EWRblock_NewsCategories.css"><![CDATA[#NewsCategories dt { font-size: 1.5em; }]]></template>
+  </templates>
+</block>

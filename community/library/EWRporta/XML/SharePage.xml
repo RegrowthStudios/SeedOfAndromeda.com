@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<block block_id="SharePage" title="Share This Page" version_string="1.0.0" version_id="1" url="http://8wayrun.com/" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="" cache="+1 days">
+  <admin_templates/>
+  <listeners/>
+  <options/>
+  <phrases/>
+  <route_prefixes/>
+  <templates>
+    <template title="EWRblock_SharePage"><![CDATA[<xen:require css="EWRblock_SharePage.css" />
+
+<xen:if is="{$position} == 'top-left' OR {$position} == 'mid-left' OR {$position} == 'btm-left' OR {$position} == 'sidebar'">
+	<xen:include template="sidebar_share_page">
+		<xen:set var="$url"></xen:set>
+	</xen:include>
+<xen:else />
+	<div class="section"><div class="secondaryContent">
+		<xen:include template="share_page">
+			<xen:set var="$url"></xen:set>
+		</xen:include>
+	</div></div>
+</xen:if>]]></template>
+    <template title="EWRblock_SharePage.css"><![CDATA[.infoBlock.sharePage .shareControl { float: none; }]]></template>
+  </templates>
+</block>

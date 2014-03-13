@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<block block_id="RecentThreadx5" title="Recently Active Threads x5" version_string="1.0.0" version_id="1" url="http://8wayrun.com/" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="" cache="now">
+  <admin_templates/>
+  <listeners>
+    <listener description="EWRblock_RecentThreadx5" event_id="load_class_controller" execute_order="10" callback_class="EWRporta_Block_Listener_RecentThreadx5" callback_method="controller" active="1"/>
+  </listeners>
+  <options>
+    <option option_id="recentthreadx5_limit" edit_format="spinbox" data_type="unsigned_integer" display_order="1">
+      <option_value>3</option_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <title>Thread Listing Limit</title>
+      <explain><![CDATA[The maximum number of threads to display on the block.]]></explain>
+    </option>
+    <option option_id="recentthreadx5_cutoff" edit_format="spinbox" data_type="unsigned_integer" display_order="2">
+      <option_value>7</option_value>
+      <edit_format_params>min=1
+max=28</edit_format_params>
+      <sub_options></sub_options>
+      <title>Age Cutoff (in days)</title>
+      <explain><![CDATA[Increasing this setting could slow down block search time.]]></explain>
+    </option>
+    <option option_id="recentthreadx5_name1" edit_format="textbox" data_type="string" display_order="101">
+      <option_value>Recent Threads</option_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <title>Thread Search Name 1</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+    <option option_id="recentthreadx5_forum1" edit_format="callback" data_type="array" display_order="102">
+      <option_value>a:1:{i:0;s:1:"0";}</option_value>
+      <edit_format_params>EWRporta_Option_ForumChooser::renderOption</edit_format_params>
+      <sub_options>*</sub_options>
+      <title>Thread Source Forums 1</title>
+      <explain><![CDATA[Only selected forums will be searched. (unspecify to select all)]]></explain>
+    </option>
+    <option option_id="recentthreadx5_name2" edit_format="textbox" data_type="string" display_order="201">
+      <option_value>Announcements</option_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <title>Thread Search Name 2</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+    <option option_id="recentthreadx5_forum2" edit_format="callback" data_type="array" display_order="202">
+      <option_value>a:1:{i:0;s:2:"78";}</option_value>
+      <edit_format_params>EWRporta_Option_ForumChooser::renderOption</edit_format_params>
+      <sub_options>*</sub_options>
+      <title>Thread Source Forums 2</title>
+      <explain><![CDATA[Only selected forums will be searched. (unspecify to select all)]]></explain>
+    </option>
+    <option option_id="recentthreadx5_name3" edit_format="textbox" data_type="string" display_order="301">
+      <option_value>Tournaments</option_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <title>Thread Search Name 3</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+    <option option_id="recentthreadx5_forum3" edit_format="callback" data_type="array" display_order="302">
+      <option_value>a:2:{i:0;s:2:"47";i:1;s:2:"49";}</option_value>
+      <edit_format_params>EWRporta_Option_ForumChooser::renderOption</edit_format_params>
+      <sub_options>*</sub_options>
+      <title>Thread Source Forums 3</title>
+      <explain><![CDATA[Only selected forums will be searched. (unspecify to select all)]]></explain>
+    </option>
+    <option option_id="recentthreadx5_name4" edit_format="textbox" data_type="string" display_order="401">
+      <option_value>Soulcalibur V</option_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <title>Thread Search Name 4</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+    <option option_id="recentthreadx5_forum4" edit_format="callback" data_type="array" display_order="402">
+      <option_value>a:1:{i:0;s:2:"45";}</option_value>
+      <edit_format_params>EWRporta_Option_ForumChooser::renderOption</edit_format_params>
+      <sub_options>*</sub_options>
+      <title>Thread Source Forums 4</title>
+      <explain><![CDATA[Only selected forums will be searched. (unspecify to select all)]]></explain>
+    </option>
+    <option option_id="recentthreadx5_name5" edit_format="textbox" data_type="string" display_order="501">
+      <option_value>Soul Arenas</option_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <title>Thread Search Name 5</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+    <option option_id="recentthreadx5_forum5" edit_format="callback" data_type="array" display_order="502">
+      <option_value>a:27:{i:0;s:2:"86";i:1;s:3:"121";i:2;s:3:"118";i:3;s:3:"120";i:4;s:3:"111";i:5;s:3:"117";i:6;s:3:"114";i:7;s:3:"123";i:8;s:3:"113";i:9;s:3:"101";i:10;s:2:"97";i:11;s:3:"100";i:12;s:3:"102";i:13;s:2:"96";i:14;s:2:"99";i:15;s:2:"95";i:16;s:2:"91";i:17;s:2:"93";i:18;s:3:"122";i:19;s:3:"112";i:20;s:2:"94";i:21;s:3:"103";i:22;s:3:"110";i:23;s:3:"104";i:24;s:3:"119";i:25;s:3:"115";i:26;s:2:"98";}</option_value>
+      <edit_format_params>EWRporta_Option_ForumChooser::renderOption</edit_format_params>
+      <sub_options>*</sub_options>
+      <title>Thread Source Forums 5</title>
+      <explain><![CDATA[Only selected forums will be searched. (unspecify to select all)]]></explain>
+    </option>
+  </options>
+  <phrases>
+    <phrase title="EWRblock_RecentThreadx5_title"><![CDATA[Recent Threads]]></phrase>
+  </phrases>
+  <route_prefixes/>
+  <templates>
+    <template title="EWRblock_RecentThreadx5"><![CDATA[<xen:if is="{$RecentThreadx5}">
+	<xen:require css="discussion_list.css" />
+	<xen:require css="EWRblock_RecentThreadx5.css" />
+
+	<xen:if is="{$position} == 'top-left' OR {$position} == 'mid-left' OR {$position} == 'btm-left' OR {$position} == 'sidebar'">
+
+		<div class="section avatarList threadList">
+			<div class="secondaryContent" id="recentThreadx5">
+				<h3>{xen:phrase EWRblock_RecentThreadx5_title}</h3>
+
+				<ul class="tabs mainTabs Tabs" data-panes="#ThreadPanes > li" data-history="on">
+					<li><a href="{$requestPaths.requestUri}#threadPane1">{$option.name1}</a></li>
+					<xen:if is="{$option.name2}"><li><a href="{$requestPaths.requestUri}#threadPane2">{$option.name2}</a></li></xen:if>
+					<xen:if is="{$option.name3}"><li><a href="{$requestPaths.requestUri}#threadPane3">{$option.name3}</a></li></xen:if>
+					<xen:if is="{$option.name4}"><li><a href="{$requestPaths.requestUri}#threadPane4">{$option.name4}</a></li></xen:if>
+					<xen:if is="{$option.name5}"><li><a href="{$requestPaths.requestUri}#threadPane5">{$option.name5}</a></li></xen:if>
+				</ul>
+
+				<ul id="ThreadPanesx5">
+					<li id="threadPane1x5" class="threadPane">
+						<ol class="discussionListItems">
+							<xen:foreach loop="$RecentThreadx5" value="$thread">
+								<li id="thread-{$thread.thread_id}" class="{$thread.discussion_state} {xen:if {$thread.sticky}, 'sticky'} {xen:if {$thread.isNew}, 'unread'}" data-author="{$thread.username}">
+									<xen:avatar user="$thread" size="s" img="true" />
+									<div class="title">
+										<a href="{xen:link "threads{xen:if '{$thread.isNew} AND {$thread.haveReadData}', '/unread'}", $thread}"
+											title="{xen:if '{$thread.isNew} AND {$thread.haveReadData}', {xen:phrase go_to_first_unread_message}}"
+											class="{xen:if $thread.hasPreview, PreviewTooltip}"
+											data-previewUrl="{xen:if $thread.hasPreview, {xen:link threads/preview, $thread}}">{xen:helper snippet, $thread.title, 50}</a>
+									</div>
+									<div class="muted">
+										<a href="{xen:link members, $thread.lastPostInfo}">{$thread.lastPostInfo.username}</a> @
+										<a{xen:if '{$visitor.user_id}', ' href="{xen:link posts, $thread.lastPostInfo}" title="{xen:phrase go_to_last_message}"'} class="dateTime"><xen:datetime time="$thread.lastPostInfo.post_date" /></a>
+									</div>
+								</li>
+							</xen:foreach>
+						</ol>
+					</li>
+					
+					<xen:if is="{$option.name2}">
+						<li id="threadPane2x5" class="threadPane" data-loadUrl="{xen:link portal/recent-threads}?tab=2&pos=side">
+							<span class="jsOnly">{xen:phrase loading}...</span>
+							<noscript><a href="{xen:link portal/recent-threads}?tab=2">{xen:phrase view}</a></noscript>
+						</li>
+					</xen:if>
+					
+					<xen:if is="{$option.name3}">
+						<li id="threadPane3x5" class="threadPane" data-loadUrl="{xen:link portal/recent-threads}?tab=3&pos=side">
+							<span class="jsOnly">{xen:phrase loading}...</span>
+							<noscript><a href="{xen:link portal/recent-threads}?tab=3">{xen:phrase view}</a></noscript>
+						</li>
+					</xen:if>
+					
+					<xen:if is="{$option.name4}">
+						<li id="threadPane4x5" class="threadPane" data-loadUrl="{xen:link portal/recent-threads}?tab=4&pos=side">
+							<span class="jsOnly">{xen:phrase loading}...</span>
+							<noscript><a href="{xen:link portal/recent-threads}?tab=4">{xen:phrase view}</a></noscript>
+						</li>
+					</xen:if>
+					
+					<xen:if is="{$option.name5}">
+						<li id="threadPane5x5" class="threadPane" data-loadUrl="{xen:link portal/recent-threads}?tab=5&pos=side">
+							<span class="jsOnly">{xen:phrase loading}...</span>
+							<noscript><a href="{xen:link portal/recent-threads}?tab=5">{xen:phrase view}</a></noscript>
+						</li>
+					</xen:if>
+				</ul>
+			</div>
+		</div>
+
+	<xen:else />
+	
+		<xen:require css="inline_mod.css" />
+		<xen:require js="js/xenforo/discussion_list.js" />
+			
+		<form action="{xen:link inline-mod/thread/switch}" method="post"
+			class="DiscussionList InlineModForm"
+			data-cookieName="threads"
+			data-controls="#InlineModControls"
+			data-imodOptions="#ModerationSelect option">
+			
+			<div class="discussionList section sectionMain" id="recentThreadx5">
+
+				<ul class="tabs mainTabs Tabs" data-panes="#ThreadPanesx5 > li" data-history="on">
+					<li><a href="{$requestPaths.requestUri}#threadPane1x5">{$option.name1}</a></li>
+					<xen:if is="{$option.name2}"><li><a href="{$requestPaths.requestUri}#threadPane2x5">{$option.name2}</a></li></xen:if>
+					<xen:if is="{$option.name3}"><li><a href="{$requestPaths.requestUri}#threadPane3x5">{$option.name3}</a></li></xen:if>
+					<xen:if is="{$option.name4}"><li><a href="{$requestPaths.requestUri}#threadPane4x5">{$option.name4}</a></li></xen:if>
+					<xen:if is="{$option.name5}"><li><a href="{$requestPaths.requestUri}#threadPane5x5">{$option.name5}</a></li></xen:if>
+				</ul>
+				
+				<dl class="sectionHeaders">
+					<dt class="posterAvatar"></dt>
+					<dd class="main">
+						<a class="title"><span>{xen:phrase EWRblock_RecentThreadx5_title}</span></a>
+						<a class="postDate"><span>{xen:phrase start_date}</span></a>
+					</dd>
+					<dd class="stats">
+						<a class="major"><span>{xen:phrase replies}</span></a>
+						<a class="minor"><span>{xen:phrase views}</span></a>
+					</dd>
+					<dd class="lastPost"><a><span>{xen:phrase last_message}</span></a></dd>
+				</dl>
+
+				<ul id="ThreadPanesx5">
+					<li id="threadPane1x5" class="threadPane">
+						<ol class="discussionListItems">
+							<xen:foreach loop="$RecentThreadx5" value="$thread">
+								<xen:include template="thread_list_item">
+									<xen:map from="$thread.showForumLink" to="$showForumLink" />
+								</xen:include>
+							</xen:foreach>
+						</ol>
+					</li>
+					
+					<xen:if is="{$option.name2}">
+						<li id="threadPane2x5" class="threadPane" data-loadUrl="{xen:link portal/recent-threads}?tab=2">
+							<span class="jsOnly">{xen:phrase loading}...</span>
+							<noscript><a href="{xen:link portal/recent-threads}?tab=2">{xen:phrase view}</a></noscript>
+						</li>
+					</xen:if>
+					
+					<xen:if is="{$option.name3}">
+						<li id="threadPane3x5" class="threadPane" data-loadUrl="{xen:link portal/recent-threads}?tab=3">
+							<span class="jsOnly">{xen:phrase loading}...</span>
+							<noscript><a href="{xen:link portal/recent-threads}?tab=3">{xen:phrase view}</a></noscript>
+						</li>
+					</xen:if>
+					
+					<xen:if is="{$option.name4}">
+						<li id="threadPane4x5" class="threadPane" data-loadUrl="{xen:link portal/recent-threads}?tab=4">
+							<span class="jsOnly">{xen:phrase loading}...</span>
+							<noscript><a href="{xen:link portal/recent-threads}?tab=4">{xen:phrase view}</a></noscript>
+						</li>
+					</xen:if>
+					
+					<xen:if is="{$option.name5}">
+						<li id="threadPane5x5" class="threadPane" data-loadUrl="{xen:link portal/recent-threads}?tab=5">
+							<span class="jsOnly">{xen:phrase loading}...</span>
+							<noscript><a href="{xen:link portal/recent-threads}?tab=5">{xen:phrase view}</a></noscript>
+						</li>
+					</xen:if>
+				</ul>
+				
+			</div>
+
+			<input type="hidden" name="_xfToken" value="{$visitor.csrf_token_page}" />
+		</form>
+		
+	</xen:if>
+
+	<xen:include template="preview_tooltip" />
+</xen:if>]]></template>
+    <template title="EWRblock_RecentThreadx5.css"><![CDATA[#recentThreadx5 .tabs { background: transparent; }
+
+.DiscussionList #recentThreadx5 .tabs { padding: 0 {xen:property profilePageTabInset}; }
+.DiscussionList #recentThreadx5 .tabs li a { font-weight: bold; padding-left: {xen:property profilePageTabHeight}; padding-right: {xen:property profilePageTabHeight}; }
+.DiscussionList #recentThreadx5 .tabs.mainTabs { margin-bottom: -{xen:property subHeading.margin-top}; }
+.DiscussionList #recentThreadx5 .jsOnly { display: block; padding: 20px; }
+
+.threadList #recentThreadx5 ol.discussionListItems { margin: 0px; }
+.threadList #recentThreadx5 .tabs li { margin: 0px; }]]></template>
+    <template title="EWRblock_RecentThreadx5_Simple"><![CDATA[<xen:if is="{$position} == 'side'">
+	<ol class="discussionListItems">
+		<xen:foreach loop="$threads" value="$thread">
+			<li id="thread-{$thread.thread_id}" class="{$thread.discussion_state} {xen:if {$thread.sticky}, 'sticky'} {xen:if {$thread.isNew}, 'unread'}" data-author="{$thread.username}">
+				<xen:avatar user="$thread" size="s" img="true" />
+				<div class="title">
+					<a href="{xen:link "threads{xen:if '{$thread.isNew} AND {$thread.haveReadData}', '/unread'}", $thread}"
+						title="{xen:if '{$thread.isNew} AND {$thread.haveReadData}', {xen:phrase go_to_first_unread_message}}"
+						class="{xen:if $thread.hasPreview, PreviewTooltip}"
+						data-previewUrl="{xen:if $thread.hasPreview, {xen:link threads/preview, $thread}}">{xen:helper snippet, $thread.title, 50}</a>
+				</div>
+				<div class="muted">
+					<a href="{xen:link members, $thread.lastPostInfo}">{$thread.lastPostInfo.username}</a> @
+					<a{xen:if '{$visitor.user_id}', ' href="{xen:link posts, $thread.lastPostInfo}" title="{xen:phrase go_to_last_message}"'} class="dateTime"><xen:datetime time="$thread.lastPostInfo.post_date" /></a>
+				</div>
+			</li>
+		</xen:foreach>
+	</ol>
+<xen:else />
+	<ol class="discussionListItems">
+		<xen:foreach loop="$threads" value="$thread">
+			<xen:include template="thread_list_item">
+				<xen:map from="$thread.showForumLink" to="$showForumLink" />
+			</xen:include>
+		</xen:foreach>
+	</ol>
+</xen:if>]]></template>
+  </templates>
+</block>

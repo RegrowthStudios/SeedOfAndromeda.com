@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<block block_id="Amazon" title="Amazon Affiliate Links" version_string="1.0.0" version_id="1" url="http://8wayrun.com/" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="" cache="+1 days">
+  <admin_templates/>
+  <listeners/>
+  <options>
+    <option option_id="amazon_title" edit_format="textbox" data_type="string" display_order="1">
+      <option_value>BUY SOULCALIBUR V</option_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <title>Amazon Block Title</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+    <option option_id="amazon_tackid" edit_format="textbox" data_type="string" display_order="2">
+      <option_value>8wayrun-20</option_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <title>Amazon Tracking ID</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+    <option option_id="amazon_price" edit_format="radio" data_type="string" display_order="3">
+      <option_value>nou</option_value>
+      <edit_format_params>all=Show All Prices
+nou=Show New Prices
+npa=Hide All Prices</edit_format_params>
+      <sub_options></sub_options>
+      <title>Price Options</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+    <option option_id="amazon_products" edit_format="callback" data_type="array" display_order="4" validation_class="EWRporta_Option_MultiEntries" validation_method="verifyOption">
+      <option_value>a:2:{i:0;s:10:"B00604I8ZY";i:1;s:10:"B00604I94E";}</option_value>
+      <edit_format_params>EWRporta_Option_MultiEntries::renderOption</edit_format_params>
+      <sub_options>*</sub_options>
+      <title>Amazon Product IDs</title>
+      <explain><![CDATA[Each entry should contain a product ASIN ID.]]></explain>
+    </option>
+    <option option_id="amazon_bordcolor" edit_format="textbox" data_type="string" display_order="101">
+      <option_value>2A2A2A</option_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <title>Border Color</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+    <option option_id="amazon_backcolor" edit_format="textbox" data_type="string" display_order="102">
+      <option_value>2A2A2A</option_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <title>Background Color</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+    <option option_id="amazon_fontcolor" edit_format="textbox" data_type="string" display_order="103">
+      <option_value>FFFFFF</option_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <title>Text Font Color</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+    <option option_id="amazon_linkcolor" edit_format="textbox" data_type="string" display_order="104">
+      <option_value>217BD5</option_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <title>Text Link Color</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+    <option option_id="amazon_height" edit_format="spinbox" data_type="unsigned_integer" display_order="105">
+      <option_value>180</option_value>
+      <edit_format_params>min=160
+max=240
+step=10</edit_format_params>
+      <sub_options></sub_options>
+      <title>Product Frame Height</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+  </options>
+  <phrases/>
+  <route_prefixes/>
+  <templates>
+    <template title="EWRblock_Amazon"><![CDATA[<xen:require css="EWRblock_Amazon.css" />
+
+<div class="section">
+	<div class="secondaryContent amazon" id="amazon">
+		<h3>{$option.title}</h3>
+
+		<ul>
+			<xen:foreach loop="$option.products" value="$product">
+				<li><iframe src="http://rcm.amazon.com/e/cm?t={$option.tackid}&asins={$product}&bc1={$option.bordcolor}&bg1={$option.backcolor}&fc1={$option.fontcolor}&lc1={$option.linkcolor}&{$option.price}=1&o=1&p=8&l=as1&f=ifr" style="width:120px;height:{$option.height}px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe></li>
+			</xen:foreach>
+		</ul>
+	</div>
+</div>
+	]]></template>
+    <template title="EWRblock_Amazon.css"><![CDATA[.amazon ul { margin: -20px -10px -5px -10px; text-align: center; }
+.amazon li { position: relative; display: inline-block; margin-top: 10px; width: 49%; }]]></template>
+  </templates>
+</block>

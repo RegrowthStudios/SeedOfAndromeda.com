@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<block block_id="CountDown" title="Countdown Timer" version_string="1.0.0" version_id="1" url="http://8wayrun.com/" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="" cache="+1 days">
+  <admin_templates/>
+  <listeners/>
+  <options>
+    <option option_id="countdown_name" edit_format="textbox" data_type="string" display_order="1">
+      <option_value>U.S. Soulcalibur V Release!</option_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <title>Countdown Name</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+    <option option_id="countdown_month" edit_format="select" data_type="unsigned_integer" display_order="2">
+      <option_value>1</option_value>
+      <edit_format_params>1=January
+2=February
+3=March
+4=April
+5=May
+6=June
+7=July
+8=August
+9=September
+10=October
+11=November
+12=December</edit_format_params>
+      <sub_options></sub_options>
+      <title>Month</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+    <option option_id="countdown_day" edit_format="spinbox" data_type="unsigned_integer" display_order="3">
+      <option_value>31</option_value>
+      <edit_format_params>min=1
+max=31</edit_format_params>
+      <sub_options></sub_options>
+      <title>Day</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+    <option option_id="countdown_year" edit_format="spinbox" data_type="unsigned_integer" display_order="4">
+      <option_value>2012</option_value>
+      <edit_format_params>min=2011
+max=2015</edit_format_params>
+      <sub_options></sub_options>
+      <title>Year</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+    <option option_id="countdown_hour" edit_format="spinbox" data_type="unsigned_integer" display_order="5">
+      <option_value>10</option_value>
+      <edit_format_params>min=0
+max=23</edit_format_params>
+      <sub_options></sub_options>
+      <title>Hour</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+    <option option_id="countdown_minute" edit_format="spinbox" data_type="unsigned_integer" display_order="6">
+      <option_value>0</option_value>
+      <edit_format_params>min=0
+max=59
+step=15</edit_format_params>
+      <sub_options></sub_options>
+      <title>Minute</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+    <option option_id="countdown_second" edit_format="spinbox" data_type="unsigned_integer" display_order="7">
+      <option_value>0</option_value>
+      <edit_format_params>min=0
+max=59
+step=30</edit_format_params>
+      <sub_options></sub_options>
+      <title>Second</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+    <option option_id="countdown_utc" edit_format="onoff" data_type="boolean" display_order="8">
+      <option_value>0</option_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <title>Sync with UTC</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+  </options>
+  <phrases/>
+  <route_prefixes/>
+  <templates>
+    <template title="EWRblock_CountDown"><![CDATA[<xen:require css="EWRblock_CountDown.css" />
+
+<div class="section countDown">
+
+	<xen:require js="js/8wayrun/EWRporta_lwtcd.js" />
+
+	<script type="text/javascript">
+	jQuery(document).ready(function() {
+		$('#countdown').countDown({
+			targetDate: {
+				'day':		{$option.day},
+				'month':	{$option.month},
+				'year':		{$option.year},
+				'hour':		{$option.hour},
+				'min':		{$option.minute},
+				'sec':		{$option.second},
+				'utc':		{$option.utc}
+			}
+		});
+	});
+	</script>
+
+	<div class="secondaryContent">
+		<h3>{$option.name}</h3>
+		<div id="countdown">
+			<div class="dash first weeks_dash">
+				<span class="dash_title">Weeks</span>
+				<div class="digit">0</div>
+				<div class="digit">0</div>
+			</div>
+			<div class="dash days_dash">
+				<span class="dash_title">Days</span>
+				<div class="digit">0</div>
+				<div class="digit">0</div>
+			</div>
+			<div class="dash hours_dash">
+				<span class="dash_title">Hrs</span>
+				<div class="digit">0</div>
+				<div class="digit">0</div>
+			</div>
+			<div class="dash minutes_dash">
+				<span class="dash_title">Mins</span>
+				<div class="digit">0</div>
+				<div class="digit">0</div>
+			</div>
+			<div class="dash seconds_dash">
+				<span class="dash_title">Secs</span>
+				<div class="digit">0</div>
+				<div class="digit">0</div>
+			</div>
+		</div>
+	</div>
+</div>]]></template>
+    <template title="EWRblock_CountDown.css"><![CDATA[.countDown #countdown { background-color: {xen:property contentBackground}; height: 40px; }
+.countDown .dash
+{
+	border-left: 1px solid {xen:property primaryLighterStill};
+	float: left;
+	height:40px;
+	width: 30px;
+	margin-left: 8px;
+	padding-left: 8px;
+	position: relative;
+}
+.countDown .first { padding-left: 0; border-left: 0px; }
+
+.countDown .dash .digit
+{
+	color: {xen:property primaryLightish};
+	float: left;
+	font-family: Arial, sans-serif;
+	font-size: 26px;
+	font-weight: bold;
+}
+
+.countDown .dash_title
+{
+	color: {xen:property mutedTextColor};
+	display: block;
+	font-family: Arial, sans-serif;
+	font-size: 9px;
+	letter-spacing: 0px;
+	text-transform: uppercase;
+	bottom: 0px;
+	right: 2px;
+	position: absolute;
+}
+]]></template>
+  </templates>
+</block>

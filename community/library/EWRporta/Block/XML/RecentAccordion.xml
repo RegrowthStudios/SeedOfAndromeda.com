@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<block block_id="RecentAccordion" title="Recent Article Accordion" version_string="1.0.0" version_id="1" url="http://8wayrun.com/" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="" cache="+1 hours">
+  <admin_templates/>
+  <listeners/>
+  <options>
+    <option option_id="recentaccordion_filename" edit_format="textbox" data_type="string" display_order="1">
+      <option_value>slide.jpg</option_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <title>Slide Filename</title>
+      <explain><![CDATA[The accordion will search for this image attached to articles.]]></explain>
+    </option>
+    <option option_id="recentaccordion_limit" edit_format="spinbox" data_type="unsigned_integer" display_order="2">
+      <option_value>5</option_value>
+      <edit_format_params>min=1</edit_format_params>
+      <sub_options></sub_options>
+      <title>Slide Limit</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+    <option option_id="recentaccordion_height" edit_format="spinbox" data_type="unsigned_integer" display_order="3">
+      <option_value>250</option_value>
+      <edit_format_params>step=50</edit_format_params>
+      <sub_options></sub_options>
+      <title>Slide Height</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+    <option option_id="recentaccordion_width" edit_format="spinbox" data_type="unsigned_integer" display_order="4">
+      <option_value>500</option_value>
+      <edit_format_params>step=50</edit_format_params>
+      <sub_options></sub_options>
+      <title>Slide Width</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+    <option option_id="recentaccordion_anchor" edit_format="select" data_type="string" display_order="5">
+      <option_value>right</option_value>
+      <edit_format_params>left=Left
+center=Center
+right=Right</edit_format_params>
+      <sub_options></sub_options>
+      <title>Slide Anchor</title>
+      <explain><![CDATA[The position of the slide will be anchored from this point on the image.]]></explain>
+    </option>
+    <option option_id="recentaccordion_sumheight" edit_format="spinbox" data_type="unsigned_integer" display_order="6">
+      <option_value>85</option_value>
+      <edit_format_params>step=5</edit_format_params>
+      <sub_options></sub_options>
+      <title>Summary Height</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+    <option option_id="recentaccordion_trimtitle" edit_format="spinbox" data_type="unsigned_integer" display_order="7">
+      <option_value>50</option_value>
+      <edit_format_params>step=5</edit_format_params>
+      <sub_options></sub_options>
+      <title>Max Length of Titles</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+    <option option_id="recentaccordion_trimexcerpt" edit_format="spinbox" data_type="unsigned_integer" display_order="8">
+      <option_value>175</option_value>
+      <edit_format_params>step=10</edit_format_params>
+      <sub_options></sub_options>
+      <title>Max Length of Story</title>
+      <explain><![CDATA[]]></explain>
+    </option>
+    <option option_id="recentaccordion_sticky" edit_format="onoff" data_type="boolean" display_order="9">
+      <option_value>0</option_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <title>Stick Slides</title>
+      <explain><![CDATA[If selected, a slide will always be open and viewable in full.]]></explain>
+    </option>
+  </options>
+  <phrases/>
+  <route_prefixes/>
+  <templates>
+    <template title="EWRblock_RecentAccordion"><![CDATA[<xen:require css="EWRblock_RecentAccordion.css" />
+
+<div class="section sectionMain">
+	<div class="secondaryContent" id="recentAccordion">
+
+		<xen:require js="js/8wayrun/EWRporta_kwicks.js" />
+
+		<script type="text/javascript">
+		jQuery(document).ready(function() {  
+			$('.recentAccordion').kwicks({  
+				max: {$option.width},
+				sticky: {$option.sticky},
+				duration: 300,
+				caption: '.focus',
+				miniCaption: '.blur'
+			});  
+		});  
+		</script>
+
+		<ul class="recentAccordion">
+		<xen:foreach loop="$RecentAccordion" value="$news">
+			<li style="background-image: url('{xen:link attachments, $news.attach}'); background-position: {$option.anchor} top; width: {$option.itemwidth}%;">
+				<a href="{xen:link threads, $news}">
+					<div class="gradient right" style="height: {$option.height}px;"></div>
+					<div style="height: {$option.height}px;">
+						<div class="summary focus" style="height: {$option.sumheight}px; width: {$option.width}px; opacity: 0;">
+							<div class="title">{xen:helper wordtrim, $news.title, {$option.trimtitle}}</div>
+							<div class="excerpt">{xen:helper wordtrim, $news.messageText, {$option.trimexcerpt}}</div>
+						</div>
+						<div class="summary blur" style="height: {$option.sumheight}px;">
+							<div class="title">{xen:helper wordtrim, $news.title, {$option.trimtitle}}</div>
+						</div>
+					</div>
+				</a>
+			</li>
+		</xen:foreach>
+		</ul>
+	</div>
+</div>]]></template>
+    <template title="EWRblock_RecentAccordion.css"><![CDATA[#recentAccordion { padding: 0px; }
+
+.recentAccordion { list-style: none; margin: 0; padding: 0; position: relative; }
+.recentAccordion li
+{
+	background-color: #000000;
+	background-repeat: no-repeat;
+	border: 1px solid #333;
+	display: inline-block;
+	margin-right: -5px;
+	overflow: hidden;
+	padding: 0;
+	position: relative; 
+}
+.recentAccordion li a { text-decoration: none !important; color: #EEE; }
+
+.recentAccordion li .gradient { display: block; position: absolute; width: 50px; }
+.recentAccordion li .left { background: transparent url("styles/8wayrun/EWRporta_left.png") repeat-y right top; left: -10px; }
+.recentAccordion li .right { background: transparent url("styles/8wayrun/EWRporta_right.png") repeat-y right top; right: -10px; }
+.recentAccordion li:first-child .left { background-image: none; }
+.recentAccordion li:last-child .right { background-image: none; }
+
+.recentAccordion li .summary { background-color: rgba(0,0,0,0.8); border-top: 1px solid #333; position: absolute; bottom: 0px; left: 0px; }
+.recentAccordion li .summary.blur .title { font-size: 12px; font-weight: bold; padding: 20px; text-transform: uppercase; width: 100px; }
+.recentAccordion li .summary.focus .title { font-size: 22px; letter-spacing: -1px; padding: 15px 20px 0px; white-space: nowrap; }
+.recentAccordion li .summary.focus .excerpt { font-size: 11px; padding: 0px 20px; }
+]]></template>
+  </templates>
+</block>

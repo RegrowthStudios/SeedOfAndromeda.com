@@ -1,11 +1,11 @@
 <?php
-define ( 'IN_MYBB', 1 );
+require_once('community/XenForoSDK.php');
+$sdk = new XenForoSDK;
 
-require_once 'Forums/global.php';
+$loggedIn = $sdk->isLoggedIn();
+$userinfo = $sdk->getUser();
+$visitor = $sdk->getVisitor();
 
-require_once 'class.MyBBIntegrator.php';
-
-$MyBBI = new MyBBIntegrator ( $mybb, $db, $cache, $plugins, $lang, $config );
 
 $pagetitle = "SoA - ";
 $pagename = "";
@@ -83,6 +83,7 @@ if ($pageurl != "" && $_REQUEST ['page'] != $pageurl && $page_exists) {
 	exit ();
 }
 if (! $page_exists) {
+	header ( "HTTP/1.0 404 Not Found" );
 	$pagetitle .= "Not Found";
 }
 if (! isset ( $_REQUEST ['notemplate'] )) {
@@ -92,7 +93,6 @@ if (! isset ( $_REQUEST ['notemplate'] )) {
 if ($page_exists) {
 	include ("pages/" . $pagename);
 } else {
-	header ( "HTTP/1.0 404 Not Found" );
 	include ("pages/404.php");
 }
 

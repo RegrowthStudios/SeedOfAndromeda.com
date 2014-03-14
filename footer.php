@@ -3,7 +3,7 @@
 
 </div>
 
-<div id="footer">Copyright &copy; <?php echo date(Y); ?> SeedofAndromeda.com</div>
+<div id="footer">Copyright &copy; <?php echo date("Y"); ?> SeedofAndromeda.com</div>
 
 <!-- AddThis Smart Layers BEGIN -->
 
@@ -102,7 +102,7 @@ if (typeof jQuery != 'undefined') {
 
 
 
-<?php if(!($page_id != null && ($page_id == 4 || $page_id == 5 || $page_id == 6))) { ?>
+<?php if($cleanpageid != "videos" && $cleanpageid != "screenshots") { ?>
 
 
 
@@ -226,7 +226,7 @@ if (typeof jQuery != 'undefined') {
 
 </div>
 
-<script src="/soa.js?ver=3"></script>
+<script src="/soa.js?ver=4"></script>
 
 <?php
 

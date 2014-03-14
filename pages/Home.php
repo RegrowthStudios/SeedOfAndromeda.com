@@ -1,13 +1,13 @@
 
 <div class="double-col">
 
-	<img src="Assets/images/Screenshots/Mountains.jpg"
+	<img src="/Assets/images/Screenshots/Mountains.jpg"
 		class="clear right image" />
 
 	<h3>Try The Game</h3>
 
 	<br /> The pre-alpha version of the game can be downloaded <a
-		href="http://www.seedofandromeda.com/Downloads.php">here</a>!
+		href="/downloads">here</a>!
 
 </div>
 

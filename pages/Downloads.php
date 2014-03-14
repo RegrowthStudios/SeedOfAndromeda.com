@@ -6,7 +6,22 @@
 	<br />
 
 	<h3 class="tab-tiny-indent">The Game</h3>
+	<blockquote>
 
+		<em>V0.1.5</em> - <a
+			onclick="var that=this;_gaq.push(['_trackEvent','Download','ZIP',this.href]);setTimeout(function(){location.href=that.href;},400);return false;"
+			href="http://seedofandromeda.com/SeedofAndromeda/Game/Versions/0.1.5/SOA_0.1.5.zip">Link</a>
+
+		<div>
+			<blockquote>This build fixes a ton of crash bugs, improves particle
+				performance, adds animated explosions, adds a new texture pack
+				system, and adds some new blocks! Please report any bugs to the
+				forums.</blockquote>
+		</div>
+
+	</blockquote>
+
+	<br />
 	<blockquote>
 
 		<em>V0.1.4</em> - <a
@@ -14,12 +29,10 @@
 			href="http://seedofandromeda.com/SeedofAndromeda/Game/Versions/0.1.4/SOA_0.1.4.zip">Link</a>
 
 		<div>
-			<blockquote>
-				This build brings a huge pile of needed bug fixes and crash fixes!
-				Not all bugs have been fixed, but it is getting ever more stable!
-				This build also introduces some new textures thanks to _zombiehunter
-				and some new planets thanks to sir_moodz. Have fun!</em>
-			</blockquote>
+			<blockquote>This build brings a huge pile of needed bug fixes and
+				crash fixes! Not all bugs have been fixed, but it is getting ever
+				more stable! This build also introduces some new textures thanks to
+				_zombiehunter and some new planets thanks to sir_moodz. Have fun!</blockquote>
 		</div>
 
 	</blockquote>
@@ -33,15 +46,13 @@
 			href="http://seedofandromeda.com/SeedofAndromeda/Game/Versions/0.1.3/SOA_0.1.3.zip">Link</a>
 
 		<div>
-			<blockquote>
-				This build is mainly for stability, but also adds the awesome new
-				main menu and markers system! This build should crash MUCH less than
-				0.1.2 but it is not quite crash free yet. Remember this is
-				pre-alpha, so play at your own risk! Be sure to run the vcredist_x86
-				that is in the same directory as the game. This will install the
-				required microsoft redistributable. Future builds will not require
-				you to do this step.</em>
-			</blockquote>
+			<blockquote>This build is mainly for stability, but also adds the
+				awesome new main menu and markers system! This build should crash
+				MUCH less than 0.1.2 but it is not quite crash free yet. Remember
+				this is pre-alpha, so play at your own risk! Be sure to run the
+				vcredist_x86 that is in the same directory as the game. This will
+				install the required microsoft redistributable. Future builds will
+				not require you to do this step.</blockquote>
 		</div>
 
 	</blockquote>

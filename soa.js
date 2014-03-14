@@ -400,32 +400,6 @@ $(document).ready(function() {
 
 });
 
-// Content Discreet Repeat
-
-//BUG: This breaks jQuery changing page contents on the fly!
-
-//$(document).ready(function() {
-//
-//	var contBoxes = $('#content-outer');
-//
-//	var windHeight = $(window).height();
-//
-//	var thresh = Math.ceil((windHeight - 588) / 72);
-//
-//	for (var i = 0; i < contBoxes.length; i++) {
-//
-//		var contBox = $(contBoxes[i]);
-//
-//		var innerHeight = contBox.innerHeight();
-//
-//		contHeight = (Math.ceil((innerHeight) / 72)) * 72;
-//
-//		contBox.css('height', (contHeight.toString() + 'px'));
-//
-//	}
-//
-//});
-
 // Sticky Footer (Cheating - do the damned CSS)
 
 $(document).ready(function() {

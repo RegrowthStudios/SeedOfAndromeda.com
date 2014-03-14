@@ -140,7 +140,7 @@ if (file_exists ( $pagestyle )) {
 
 		</div>
 
-		<div id="header"></div>
+		<a href="/"><div id="header"></div></a>
 
 		<div id="nav-bar">
 

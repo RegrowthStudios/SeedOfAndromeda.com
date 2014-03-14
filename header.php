@@ -253,7 +253,9 @@ if (file_exists ( $pagestyle )) {
 								?>
                 <div id='accountBar'>
 
-				<img src='/Assets/images/DefaultUser_ProfImg.png' />
+				<img
+					src='<?php echo ($MyBBI->mybb->user['avatar'] == "" ? "/Assets/images/DefaultUser_ProfImg.png" : $MyBBI->mybb->user['avatar']); ?>'
+					height="35" width="35" />
 
 				<div class='accountsName'><?php echo $MyBBI->mybb->user['username']; ?></div>
 

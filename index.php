@@ -69,6 +69,10 @@ switch ($cleanpageid) {
 		$pagetitle = "Under Construction";
 		$pagename = "Under Construction.php";
 		break;
+	case "login" :
+		$pagetitle = "Log in";
+		$pagename = "Login.php";
+		break;
 }
 
 $page_exists = $pagename == "" ? false : file_exists ( "pages/" . $pagename );

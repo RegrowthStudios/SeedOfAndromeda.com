@@ -13,13 +13,13 @@
 
 <div class="tri-col-3 empty">
 
-	<img src="Assets/images/ProfileImages/BenA.png" class="large image" />
+	<img src="/Assets/images/ProfileImages/BenA.png" class="large image" />
 
 </div>
 
 <div class="tri-col-1 empty">
 
-	<img src="Assets/images/ProfileImages/AnthonyK.jpg" class="large image" />
+	<img src="/Assets/images/ProfileImages/AnthonyK.jpg" class="large image" />
 
 </div>
 
@@ -52,14 +52,14 @@
 
 <div class="tri-col-3 empty">
 
-	<img src="Assets/images/ProfileImages/SebastianC.png"
+	<img src="/Assets/images/ProfileImages/SebastianC.png"
 		class="large image" />
 
 </div>
 
 <div class="tri-col-1 empty">
 
-	<img src="Assets/images/ProfileImages/Scuttles.jpg" class="large image" />
+	<img src="/Assets/images/ProfileImages/Scuttles.jpg" class="large image" />
 
 </div>
 
@@ -87,13 +87,13 @@
 
 <div class="tri-col-3 empty">
 
-	<img src="Assets/images/placeholder_4.jpg" class="large image" />
+	<img src="/Assets/images/placeholder_4.jpg" class="large image" />
 
 </div>
 
 <div class="tri-col-1 empty">
 
-	<img src="Assets/images/ProfileImages/MatthewM.jpg" class="large image" />
+	<img src="/Assets/images/ProfileImages/MatthewM.jpg" class="large image" />
 
 </div>
 
@@ -126,13 +126,13 @@
 
 <div class="tri-col-3 empty">
 
-	<img src="Assets/images/ProfileImages/GeorgH.png" class="large image" />
+	<img src="/Assets/images/ProfileImages/GeorgH.png" class="large image" />
 
 </div>
 
 <div class="tri-col-1 empty">
 
-	<img src="Assets/images/ProfileImages/AndreasR.jpg" class="large image" />
+	<img src="/Assets/images/ProfileImages/AndreasR.jpg" class="large image" />
 
 </div>
 
@@ -163,5 +163,5 @@
 
 <div class="tri-col-3 empty">
 
-	<img src="Assets/images/placeholder_4.jpg" class="large image" />
+	<img src="/Assets/images/placeholder_4.jpg" class="large image" />
 </div>

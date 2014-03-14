@@ -24,7 +24,7 @@
 	other survivors! The game focusses on modability and customisation,
 	many tools will come packaged with the game, including world, tree,
 	biome and block editors! <br /> <br /> <a
-		href="http://www.seedofandromeda.com/The%20Game.php"
+		href="/thegame"
 		style="float: right;">Read more here!</a>
 
 </div>

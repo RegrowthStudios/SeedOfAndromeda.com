@@ -4,7 +4,7 @@
 	<h3 style="text-align: center; font-size: 1.6em;">Screenshots</h3>
 
 	<div class="img-prev">
-		<img src="Assets/images/arrowLeft.png" />
+		<img src="/Assets/images/arrowLeft.png" />
 	</div>
 
 	<div id="image-frame-inner">
@@ -14,7 +14,7 @@
 	</div>
 
 	<div class="img-next">
-		<img src="Assets/images/arrowRight.png" />
+		<img src="/Assets/images/arrowRight.png" />
 	</div>
 
 	<br />

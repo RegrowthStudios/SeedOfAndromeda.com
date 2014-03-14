@@ -10,7 +10,7 @@
 	<div id="blog-post-body">
 
 		<img id="blog-post-header-image" class="image"
-			src="../Assets/images/Blogs/Region-File-System--2013-12-04/Blog-Header.png" />
+			src="/Assets/images/Blogs/Region-File-System--2013-12-04/Blog-Header.png" />
 
 		<div>
 
@@ -651,7 +651,7 @@
 				endian machine, they will be DCBA. This image explains it well:</p>
 
 			<img class="blog-inline-image xx-large-wide image"
-				src="Assets/images/Blogs/Region-File-System--2013-12-04/Endianess.png" />
+				src="/Assets/images/Blogs/Region-File-System--2013-12-04/Endianess.png" />
 
 			<p>If we write our data to file as integers on a big-endian machine,
 				then if we read it on another machine that is little-endian, the

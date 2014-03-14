@@ -236,7 +236,7 @@ if ($cleanpageid == "screenshots")
 	
 	?>
 
-<script src="/EmbeddedImageSlider.js?ver=3"></script>
+<script src="/EmbeddedImageSlider.js?ver=4"></script>
 
 <?php
 } 

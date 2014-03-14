@@ -44,7 +44,7 @@
             elem = $(elems.get(elems.length - 1));
             index = elems.index(elem);
             var src = elem.attr('src');
-            $('.temp-image').attr('src', src).css('display', 'none').show("slide", { direction: "right", easing: "easeInOutCirc" }, "slow");
+            $('.temp-image').attr('src', src).css('display', 'none').show("slide", { direction: "left", easing: "easeInOutCirc" }, "slow");
             $('.enlarged-image').hide("slide", { direction: "right", easing: "easeInOutCirc" }, "slow", function () {
                 $('.enlarged-image').attr('src', src).fadeIn(0);
             });
@@ -52,7 +52,7 @@
             elem = $(elems.get(ind - 1));
             index = elems.index(elem);
             var src = elem.attr('src');
-            $('.temp-image').attr('src', src).css('display', 'none').show("slide", { direction: "right", easing: "easeInOutCirc" }, "slow");
+            $('.temp-image').attr('src', src).css('display', 'none').show("slide", { direction: "left", easing: "easeInOutCirc" }, "slow");
             $('.enlarged-image').hide("slide", { direction: "right", easing: "easeInOutCirc" }, "slow", function () {
                 $('.enlarged-image').attr('src', src).fadeIn(0);
             });

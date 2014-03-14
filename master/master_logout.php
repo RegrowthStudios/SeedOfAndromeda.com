@@ -1,5 +1,5 @@
-<?php
-@session_start();
-@session_destroy();
-header("location: /master/");
+<?php
+@session_start();
+@session_destroy();
+header("location: /master/");
 ?>

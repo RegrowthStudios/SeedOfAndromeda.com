@@ -147,5 +147,21 @@
 	the forum! As SoA develops further, Andreas will be designing the 3D
 	models and textures. He will also be helping design the voxel damage
 	and animation systems! Forum name: Gilzokha
+</div>
 
+<div class="tri-double-col team-info">
+
+	<h3 class="team-name">Jesse Leskinen</h3>
+
+	<span class="team-title">Web Developer</span> Jesse is an incredibly
+	talented web developer, and is working on the backend of the website,
+	as well as integration between the game and the mod respository used by
+	the forums. His work will help make the site become a much more smooth
+	experience and bring a unique way of tackling the challenges of such a
+	project as this.
+</div>
+
+<div class="tri-col-3 empty">
+
+	<img src="Assets/images/placeholder_4.jpg" class="large image" />
 </div>

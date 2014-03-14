@@ -6,7 +6,7 @@
 <link rel="shortcut icon" type="image/x-icon"
 	href="/Assets/images/favicon.ico" />
 
-<link rel="stylesheet" href="/styles/soa.css?ver=1" type="text/css" />
+<link rel="stylesheet" href="/styles/soa.css?ver=3" type="text/css" />
 
 <link rel="stylesheet" href="/styles/Normalise.css" type="text/css" />
 
@@ -83,59 +83,59 @@ if (file_exists ( $pagestyle )) {
 
 			<!-- Really Needs Optimising! -->
 
-			<!--<a href="https://twitter.com/ChillstepCoder" target="_blank" title="Ben Arnold's Twitter'">
-                    <div id="social-button" class="twitter">
-                        <img src="/Assets/images/SocialBackgroundTwitter.png" class="star" />
-                        <img src="/Assets/images/SocialTwitterRing_Top_Left.png" class="top-left" />
-                        <img src="/Assets/images/SocialTwitterRing_Top_Right.png" class="top-right" />
-                        <img src="/Assets/images/SocialTwitterRing_Bottom_Right.png" class="bottom-right" />
-                        <img src="/Assets/images/SocialTwitterRing_Bottom_Left.png" class="bottom-left" />
-                        <img src="/Assets/images/SocialTwitterRing_Top_Left_Hover.png" class="top-left-hover" />
-                        <img src="/Assets/images/SocialTwitterRing_Top_Right_Hover.png" class="top-right-hover" />
-                        <img src="/Assets/images/SocialTwitterRing_Bottom_Right_Hover.png" class="bottom-right-hover" />
-                        <img src="/Assets/images/SocialTwitterRing_Bottom_Left_Hover.png" class="bottom-left-hover" />
-                    </div>
-                </a>
-                <a href="http://www.youtube.com/user/DubstepCoder" target="_blank" title="Ben Arnold's YouTube Channel'">
-                    <div id="social-button" class="youtube">
-                        <img src="/Assets/images/SocialBackgroundYouTube.png" class="star" />
-                        <img src="/Assets/images/SocialYouTubeRing_Top_Left.png" class="top-left" />
-                        <img src="/Assets/images/SocialYouTubeRing_Top_Right.png" class="top-right" />
-                        <img src="/Assets/images/SocialYouTubeRing_Bottom_Right.png" class="bottom-right" />
-                        <img src="/Assets/images/SocialYouTubeRing_Bottom_Left.png" class="bottom-left" />
-                        <img src="/Assets/images/SocialYouTubeRing_Top_Left_Hover.png" class="top-left-hover" />
-                        <img src="/Assets/images/SocialYouTubeRing_Top_Right_Hover.png" class="top-right-hover" />
-                        <img src="/Assets/images/SocialYouTubeRing_Bottom_Right_Hover.png" class="bottom-right-hover" />
-                        <img src="/Assets/images/SocialYouTubeRing_Bottom_Left_Hover.png" class="bottom-left-hover" />
-                    </div>
-                </a>
-            </div>
-            <div id="social-bar" class="right">
-                <a href="https://www.facebook.com/SeedOfAndromedaUnofficial?ref=stream" target="_blank" title="Official SoA Facebook Page'">
-                    <div id="social-button" class="facebook">
-                        <img src="/Assets/images/SocialBackgroundFacebook.png" class="star" />
-                        <img src="/Assets/images/SocialFacebookRing_Top_Left.png" class="top-left" />
-                        <img src="/Assets/images/SocialFacebookRing_Top_Right.png" class="top-right" />
-                        <img src="/Assets/images/SocialFacebookRing_Bottom_Right.png" class="bottom-right" />
-                        <img src="/Assets/images/SocialFacebookRing_Bottom_Left.png" class="bottom-left" />
-                        <img src="/Assets/images/SocialFacebookRing_Top_Left_Hover.png" class="top-left-hover" />
-                        <img src="/Assets/images/SocialFacebookRing_Top_Right_Hover.png" class="top-right-hover" />
-                        <img src="/Assets/images/SocialFacebookRing_Bottom_Right_Hover.png" class="bottom-right-hover" />
-                        <img src="/Assets/images/SocialFacebookRing_Bottom_Left_Hover.png" class="bottom-left-hover" />
-                    </div>
-                </a>
-                <a href="http://www.indiedb.com/games/seed-of-andromeda" target="_blank" title="SoA IndieDB Page'">
-                    <div id="social-button" class="indiedb">
-                        <img src="/Assets/images/SocialBackgroundIndieDB.png" class="star" />
-                        <img src="/Assets/images/SocialIndieDBRing_Top_Left.png" class="top-left" />
-                        <img src="/Assets/images/SocialIndieDBRing_Top_Right.png" class="top-right" />
-                        <img src="/Assets/images/SocialIndieDBRing_Bottom_Right.png" class="bottom-right" />
-                        <img src="/Assets/images/SocialIndieDBRing_Bottom_Left.png" class="bottom-left" />
-                        <img src="/Assets/images/SocialIndieDBRing_Top_Left_Hover.png" class="top-left-hover" />
-                        <img src="/Assets/images/SocialIndieDBRing_Top_Right_Hover.png" class="top-right-hover" />
-                        <img src="/Assets/images/SocialIndieDBRing_Bottom_Right_Hover.png" class="bottom-right-hover" />
-                        <img src="/Assets/images/SocialIndieDBRing_Bottom_Left_Hover.png" class="bottom-left-hover" />
-                    </div>
+			<!--<a href="https://twitter.com/ChillstepCoder" target="_blank" title="Ben Arnold's Twitter'">
+                    <div id="social-button" class="twitter">
+                        <img src="/Assets/images/SocialBackgroundTwitter.png" class="star" />
+                        <img src="/Assets/images/SocialTwitterRing_Top_Left.png" class="top-left" />
+                        <img src="/Assets/images/SocialTwitterRing_Top_Right.png" class="top-right" />
+                        <img src="/Assets/images/SocialTwitterRing_Bottom_Right.png" class="bottom-right" />
+                        <img src="/Assets/images/SocialTwitterRing_Bottom_Left.png" class="bottom-left" />
+                        <img src="/Assets/images/SocialTwitterRing_Top_Left_Hover.png" class="top-left-hover" />
+                        <img src="/Assets/images/SocialTwitterRing_Top_Right_Hover.png" class="top-right-hover" />
+                        <img src="/Assets/images/SocialTwitterRing_Bottom_Right_Hover.png" class="bottom-right-hover" />
+                        <img src="/Assets/images/SocialTwitterRing_Bottom_Left_Hover.png" class="bottom-left-hover" />
+                    </div>
+                </a>
+                <a href="http://www.youtube.com/user/DubstepCoder" target="_blank" title="Ben Arnold's YouTube Channel'">
+                    <div id="social-button" class="youtube">
+                        <img src="/Assets/images/SocialBackgroundYouTube.png" class="star" />
+                        <img src="/Assets/images/SocialYouTubeRing_Top_Left.png" class="top-left" />
+                        <img src="/Assets/images/SocialYouTubeRing_Top_Right.png" class="top-right" />
+                        <img src="/Assets/images/SocialYouTubeRing_Bottom_Right.png" class="bottom-right" />
+                        <img src="/Assets/images/SocialYouTubeRing_Bottom_Left.png" class="bottom-left" />
+                        <img src="/Assets/images/SocialYouTubeRing_Top_Left_Hover.png" class="top-left-hover" />
+                        <img src="/Assets/images/SocialYouTubeRing_Top_Right_Hover.png" class="top-right-hover" />
+                        <img src="/Assets/images/SocialYouTubeRing_Bottom_Right_Hover.png" class="bottom-right-hover" />
+                        <img src="/Assets/images/SocialYouTubeRing_Bottom_Left_Hover.png" class="bottom-left-hover" />
+                    </div>
+                </a>
+            </div>
+            <div id="social-bar" class="right">
+                <a href="https://www.facebook.com/SeedOfAndromedaUnofficial?ref=stream" target="_blank" title="Official SoA Facebook Page'">
+                    <div id="social-button" class="facebook">
+                        <img src="/Assets/images/SocialBackgroundFacebook.png" class="star" />
+                        <img src="/Assets/images/SocialFacebookRing_Top_Left.png" class="top-left" />
+                        <img src="/Assets/images/SocialFacebookRing_Top_Right.png" class="top-right" />
+                        <img src="/Assets/images/SocialFacebookRing_Bottom_Right.png" class="bottom-right" />
+                        <img src="/Assets/images/SocialFacebookRing_Bottom_Left.png" class="bottom-left" />
+                        <img src="/Assets/images/SocialFacebookRing_Top_Left_Hover.png" class="top-left-hover" />
+                        <img src="/Assets/images/SocialFacebookRing_Top_Right_Hover.png" class="top-right-hover" />
+                        <img src="/Assets/images/SocialFacebookRing_Bottom_Right_Hover.png" class="bottom-right-hover" />
+                        <img src="/Assets/images/SocialFacebookRing_Bottom_Left_Hover.png" class="bottom-left-hover" />
+                    </div>
+                </a>
+                <a href="http://www.indiedb.com/games/seed-of-andromeda" target="_blank" title="SoA IndieDB Page'">
+                    <div id="social-button" class="indiedb">
+                        <img src="/Assets/images/SocialBackgroundIndieDB.png" class="star" />
+                        <img src="/Assets/images/SocialIndieDBRing_Top_Left.png" class="top-left" />
+                        <img src="/Assets/images/SocialIndieDBRing_Top_Right.png" class="top-right" />
+                        <img src="/Assets/images/SocialIndieDBRing_Bottom_Right.png" class="bottom-right" />
+                        <img src="/Assets/images/SocialIndieDBRing_Bottom_Left.png" class="bottom-left" />
+                        <img src="/Assets/images/SocialIndieDBRing_Top_Left_Hover.png" class="top-left-hover" />
+                        <img src="/Assets/images/SocialIndieDBRing_Top_Right_Hover.png" class="top-right-hover" />
+                        <img src="/Assets/images/SocialIndieDBRing_Bottom_Right_Hover.png" class="bottom-right-hover" />
+                        <img src="/Assets/images/SocialIndieDBRing_Bottom_Left_Hover.png" class="bottom-left-hover" />
+                    </div>
                 </a>-->
 
 		</div>
@@ -201,14 +201,14 @@ if (file_exists ( $pagestyle )) {
 				<li <?php if($cleanpageid == "blogs"){ ?> class='active'><a href="#"> <?php } else { ?> > <a
 						href="/blogs"> <?php } ?> Dev Blogs</a></li>
 
-			</ul>
+			</ul>
     			<?php
 							
 							if (! ($MyBBI->isLoggedIn ())) 
 
 							{
 								
-								?> 
+								?> 
 				<div id='accountBar' class='loggedOut'>
 
 				<img src='/Assets/images/DefaultUser_NoSignIn_ProfImg.png' />
@@ -242,7 +242,7 @@ if (file_exists ( $pagestyle )) {
 
 				</div>
 
-			</div>
+			</div>
 				<?php
 							} 
 
@@ -250,7 +250,7 @@ if (file_exists ( $pagestyle )) {
 
 							{
 								
-								?>
+								?>
                 <div id='accountBar'>
 
 				<img src='/Assets/images/DefaultUser_ProfImg.png' />
@@ -269,11 +269,11 @@ if (file_exists ( $pagestyle )) {
 
 				</ul>
 
-			</div>
+			</div>
                 <?php
 							}
 							
-							?>
+							?>
             </div>
 
 		<div class="topimg"></div>

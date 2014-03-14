@@ -1,0 +1,17 @@
+﻿#content-outer .team-info {
+    height: 192px;
+}
+
+span.team-title {
+    font-style: italic;
+    font-size: 1.15em;
+    display: block;
+    margin-bottom: 0.2em;
+}
+#content-outer h3.team-name {
+    margin-bottom: 0;
+}
+
+#content-outer .large.image {
+    margin-top: 7px;
+}

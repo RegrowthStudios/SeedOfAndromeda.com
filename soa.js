@@ -381,25 +381,6 @@ $(document).ready(
 					});
 
 		});
-
-// Empty Content Box Width Fix
-
-$(document).ready(function() {
-
-	var empties = $('div.empty');
-
-	for (var i = 0; i < empties.length; i++) {
-
-		empty = $(empties[i]);
-
-		var width = (empty.innerWidth() + 22).toString();
-
-		empty.css('width', (width + 'px'));
-
-	}
-
-});
-
 // Sticky Footer (Cheating - do the damned CSS)
 
 $(document).ready(function() {

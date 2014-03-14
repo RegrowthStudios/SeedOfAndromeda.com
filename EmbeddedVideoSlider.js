@@ -8,17 +8,6 @@ $(document).ready(function () {
 	    	var  html = '<div class="video-col tri-col-'+check+' empty"><img src="'+data.data.items[i].thumbnail.hqDefault+'" data-id="'+data.data.items[i].id+'" class="video" /><div class="video-play"></div></div>';
 	    	$('#content-outer').append(html);
 	    }
-	    	var empties = $('div.empty');
-
-	    	for (var i = 0; i < empties.length; i++) {
-
-	    		empty = $(empties[i]);
-
-	    		var width = (empty.innerWidth() + 22).toString();
-
-	    		empty.css('width', (width + 'px'));
-
-	    	}
 	    var elem;
 
 	    var elems = $('.video');

@@ -257,13 +257,13 @@ if (file_exists ( $pagestyle )) {
 
 				<div class='accountsName'><?php echo $MyBBI->mybb->user['username']; ?></div>
 
-				<div class='accountAlerts'>99+</div>
+				<div class='accountAlerts'><?php echo $MyBBI->mybb->user['unreadpms']; ?></div>
 
 				<ul class='accountOptions'>
 
-					<li><a href='#'>My Profile</a></li>
+					<li><a href='/Forums/member.php?action=profile'>My Profile</a></li>
 
-					<li><a href='#'>Inbox</a></li>
+					<li><a href='/Forums/private.php'>Inbox (<?php echo $MyBBI->mybb->user['unreadpms']; ?>)</a></li>
 
 					<li><a class="logout" href='/Logout.php'>Log Out</a></li>
 

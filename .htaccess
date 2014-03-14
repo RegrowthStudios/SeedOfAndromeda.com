@@ -6,6 +6,7 @@ RewriteBase /
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{DOCUMENT_ROOT}/index\.php -f
+RewriteCond %{REQUEST_URI} !^community/
 RewriteRule ^(.*)$  /index.php?page=$1 [QSA]
 
 

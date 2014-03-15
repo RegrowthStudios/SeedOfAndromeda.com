@@ -88,3 +88,7 @@ local.properties
 # TeXlipse plugin
 .texlipse
 
+#Thumbnails by thumb.php
+*_thumb_*x*.jpg
+*_thumb_*x*.png
+*_thumb_*x*.gif

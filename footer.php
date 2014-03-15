@@ -100,44 +100,6 @@ if (typeof jQuery != 'undefined') {
 
 <!-- Downloads Tracking END -->
 
-
-
-<?php if($cleanpageid != "screenshots" && $cleanpageid != "videos" && $cleanpageid != "irc") { ?>
-
-
-
-<div class="cover imgSlider" style="display: none;">
-
-	<div class="imageFrame">
-
-		<div class="close"></div>
-
-		<div class="imgPrev">
-			<img src="Assets/images/arrowLeft.png" />
-		</div>
-
-		<div class="imageFrameInner">
-
-			<img class="enlargedImage" src="#" /> <img class="tempImage" src="#" />
-
-		</div>
-
-		<div class="imgNext">
-			<img src="Assets/images/arrowRight.png" />
-		</div>
-
-		<div class="imgPos">X / X</div>
-
-	</div>
-
-</div>
-
-
-
-<?php } ?>
-
-
-
 <div class="cover registration-cover" style="display: none;">
 
 	<div class="registration-form">
@@ -226,32 +188,5 @@ if (typeof jQuery != 'undefined') {
 
 </div>
 
-<script src="/soa.js?ver=4"></script>
-
-<?php
-
-if ($cleanpageid == "screenshots") 
-
-{
-	
-	?>
-
-<script src="/EmbeddedImageSlider.js?ver=5"></script>
-
-<?php
-} 
-
-else if ($cleanpageid == "videos") 
-
-{
-	
-	?>
-
-<script src="/EmbeddedVideoSlider.js?ver=4"></script>
-
-<?php
-}
-
-?>
 </body>
 </html>

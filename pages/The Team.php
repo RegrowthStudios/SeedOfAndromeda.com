@@ -13,13 +13,19 @@
 
 <div class="tri-col-3 empty">
 
-	<img src="/Assets/images/ProfileImages/BenA_thumb_250x200.png" class="large image" />
+	<a href="/Assets/images/ProfileImages/BenA.png" data-lightbox="images"
+		title="Benjamin Arnold" class="large image"><img
+		src="/Assets/images/ProfileImages/BenA_thumb_250x200.png"
+		class="large image" /></a>
 
 </div>
 
 <div class="tri-col-1 empty">
 
-	<img src="/Assets/images/ProfileImages/AnthonyK_thumb_250x200.jpg" class="large image" />
+	<a href="/Assets/images/ProfileImages/AnthonyK.jpg"
+		data-lightbox="images" title="Anthony Keeton" class="large image"><img
+		src="/Assets/images/ProfileImages/AnthonyK_thumb_250x200.jpg"
+		class="large image" /></a>
 
 </div>
 
@@ -52,14 +58,19 @@
 
 <div class="tri-col-3 empty">
 
-	<img src="/Assets/images/ProfileImages/SebastianC_thumb_250x200.png"
-		class="large image" />
+	<a href="/Assets/images/ProfileImages/SebastianC.png"
+		data-lightbox="images" title="Sebastian Corfitzen" class="large image"><img
+		src="/Assets/images/ProfileImages/SebastianC_thumb_250x200.png"
+		class="large image" /></a>
 
 </div>
 
 <div class="tri-col-1 empty">
 
-	<img src="/Assets/images/ProfileImages/Scuttles_thumb_250x200.jpg" class="large image" />
+	<a href="/Assets/images/ProfileImages/Scuttles.jpg"
+		data-lightbox="images" title="Scuttles" class="large image"><img
+		src="/Assets/images/ProfileImages/Scuttles_thumb_250x200.jpg"
+		class="large image" /></a>
 
 </div>
 
@@ -87,13 +98,19 @@
 
 <div class="tri-col-3 empty">
 
-	<img src="/Assets/images/placeholder_4_thumb_250x200.jpg" class="large image" />
+	<a href="/Assets/images/placeholder_4.jpg" data-lightbox="images"
+		title="Placeholder cat for Joshua Arnold" class="large image"><img
+		src="/Assets/images/placeholder_4_thumb_250x200.jpg"
+		class="large image" /></a>
 
 </div>
 
 <div class="tri-col-1 empty">
 
-	<img src="/Assets/images/ProfileImages/MatthewM_thumb_250x200.jpg" class="large image" />
+	<a href="/Assets/images/ProfileImages/MatthewM.jpg"
+		data-lightbox="images" title="Matthew Marshall" class="large image"><img
+		src="/Assets/images/ProfileImages/MatthewM_thumb_250x200.jpg"
+		class="large image" /></a>
 
 </div>
 
@@ -126,13 +143,19 @@
 
 <div class="tri-col-3 empty">
 
-	<img src="/Assets/images/ProfileImages/GeorgH_thumb_250x200.png" class="large image" />
+	<a href="/Assets/images/ProfileImages/GeorgH.png"
+		data-lightbox="images" title="Georg Hammerschmid" class="large image"><img
+		src="/Assets/images/ProfileImages/GeorgH_thumb_250x200.png"
+		class="large image" /></a>
 
 </div>
 
 <div class="tri-col-1 empty">
 
-	<img src="/Assets/images/ProfileImages/AndreasR_thumb_250x200.jpg" class="large image" />
+	<a href="/Assets/images/ProfileImages/AndreasR.jpg"
+		data-lightbox="images" title="Andreas Ressl" class="large image"><img
+		src="/Assets/images/ProfileImages/AndreasR_thumb_250x200.jpg"
+		class="large image" /></a>
 
 </div>
 
@@ -163,5 +186,8 @@
 
 <div class="tri-col-3 empty">
 
-	<img src="/Assets/images/placeholder_4_thumb_250x200.jpg" class="large image" />
+	<a href="/Assets/images/placeholder_4.jpg" data-lightbox="images"
+		title="Placeholder cat for Jesse Leskinen" class="large image"><img
+		src="/Assets/images/placeholder_4_thumb_250x200.jpg"
+		class="large image" /></a>
 </div>

@@ -9,7 +9,7 @@
 
 	<div id="image-frame-inner">
 
-		<img src="#" class="temp-image" /> <img src="#" class="enlarged-image" />
+		<a href="#" id="screenshotlink" data-lightbox="screenshot" title="Screenshot"><img src="#" class="temp-image" /> <img src="#" class="enlarged-image" /></a>
 
 	</div>
 

@@ -42,10 +42,12 @@
 
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"
-	type="text/javascript"></script><?php
-$loginerr = ( string ) $_REQUEST ['loginerror'];
+	type="text/javascript"></script>
+<script src="/scripts/lightbox-2.6.js"></script>
+<link href="/styles/lightbox.css" rel="stylesheet" />
+<script src="/scripts/soa.js?ver=4"></script><?php
 
-if ($loginerr != null) {
+if (isset($_REQUEST ['loginerror'])) {
 	
 	echo "<script type='text/javascript'>
 
@@ -54,9 +56,7 @@ if ($loginerr != null) {
                      </script>";
 }
 
-$logouterr = ( string ) $_REQUEST ['logouterror'];
-
-if ($logouterr != null) {
+if (isset($_REQUEST ['logouterror'])) {
 	
 	echo "<script type='text/javascript'>
 
@@ -67,6 +67,10 @@ if ($logouterr != null) {
 $pagestyle = "styles/pages/" . str_replace ( ".php", ".css", $pagename );
 if (file_exists ( $pagestyle )) {
 	echo '<link rel="stylesheet" href="/' . $pagestyle . '" type="text/css" />';
+}
+$pagestyle = "scripts/pages/" . str_replace ( ".php", ".js", $pagename );
+if (file_exists ( $pagestyle )) {
+	echo '<script src="/' . $pagestyle . '"></script>';
 }
 ?>
 </head>

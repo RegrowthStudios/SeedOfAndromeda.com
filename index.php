@@ -65,10 +65,6 @@ switch ($cleanpageid) {
 		$pagetitle .= "Blog";
 		$pagename = "Blog.php";
 		break;
-    case "blog2" :
-		$pagetitle .= "Blog2";
-		$pagename = "Blog2.php";
-		break;
 	case "underconstruction" :
 		$pagetitle = "Under Construction";
 		$pagename = "Under Construction.php";
@@ -87,6 +83,7 @@ if ($pageurl != "" && $_REQUEST ['page'] != $pageurl && $page_exists) {
 	exit ();
 }
 if (! $page_exists) {
+	header ( "HTTP/1.0 404 Not Found" );
 	$pagetitle .= "Not Found";
 }
 if (! isset ( $_REQUEST ['notemplate'] )) {
@@ -96,7 +93,6 @@ if (! isset ( $_REQUEST ['notemplate'] )) {
 if ($page_exists) {
 	include ("pages/" . $pagename);
 } else {
-	header ( "HTTP/1.0 404 Not Found" );
 	include ("pages/404.php");
 }
 

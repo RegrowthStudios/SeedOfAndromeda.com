@@ -124,7 +124,7 @@ $(document).ready(function() {
 
 		img1 = new Image();
 
-		img1.src = "closeImage_hover.png";
+		img1.src = "/Assets/images/closeImage_Hover.png";
 
 	}
 

@@ -1,7 +1,7 @@
 
 <div class="double-col">
 
-	<img src="/Assets/images/Screenshots/Mountains.jpg"
+	<img src="/Assets/images/Screenshots/Mountains_thumb_125x100.jpg"
 		class="clear right image" />
 
 	<h3>Try The Game</h3>
@@ -62,7 +62,7 @@
 	a side of bugs. Straight after this release, Ben began work on solving
 	reported bugs and bringing performance up to an even more incredible
 	standard than the initial pre-alpha release. <br /> <br /> <img
-		src="/Assets/images/Screenshots/Blossoms.jpg" class="clear left image" />
+		src="/Assets/images/Screenshots/Blossoms_thumb_125x100.jpg" class="clear left image" />
 
 	Meanwhile, the Seed of Andromeda website got an overhaul thanks to the
 	new Website Designer, Matthew, with the assistance of Sebastian's

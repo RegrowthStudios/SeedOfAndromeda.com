@@ -6,7 +6,7 @@ if (! isset ( $_REQUEST ['i'] ) || ! isset ( $_REQUEST ['w'] ) || ! isset ( $_RE
 $source_path = $_REQUEST ['i'];
 $width = $_REQUEST ['w'];
 $height = $_REQUEST ['h'];
-if (! file_exists ( $source_path )) {
+if (substr_count ( $source_path, "_thumb_" ) > 0 || ! file_exists ( $source_path )) {
 	header ( "HTTP/1.0 404 Not Found" );
 	die ( "Image not found" );
 }

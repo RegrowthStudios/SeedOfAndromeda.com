@@ -34,6 +34,9 @@ $(document).ready(function () {
 	        var src = "https://www.youtube.com/embed/" + elem.attr('data-id') + "?wmode=transparent";
 
 	        $('.temp-iframe').attr('src', src);
+	        $('html, body').animate({
+	            scrollTop: $("#video-frame-inner").offset().top - 100
+	        }, 1000);
 
 	        $('.enlarged-iframe').fadeOut(0, function () {
 

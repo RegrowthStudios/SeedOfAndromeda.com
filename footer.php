@@ -102,7 +102,7 @@ if (typeof jQuery != 'undefined') {
 
 
 
-<?php if(!($cleanpageid != null && ($cleanpageid == "screenshots" || $cleanpageid == "videos" || $cleanpageid == "irc"))) { ?>
+<?php if($cleanpageid != "screenshots" && $cleanpageid != "videos" && $cleanpageid != "irc") { ?>
 
 
 
@@ -226,7 +226,7 @@ if (typeof jQuery != 'undefined') {
 
 </div>
 
-<script src="/soa.js?ver=3"></script>
+<script src="/soa.js?ver=4"></script>
 
 <?php
 
@@ -236,7 +236,7 @@ if ($cleanpageid == "screenshots")
 	
 	?>
 
-<script src="/EmbeddedImageSlider.js?ver=4"></script>
+<script src="/EmbeddedImageSlider.js?ver=5"></script>
 
 <?php
 } 
@@ -247,7 +247,7 @@ else if ($cleanpageid == "videos")
 	
 	?>
 
-<script src="/EmbeddedVideoSlider.js?ver=3"></script>
+<script src="/EmbeddedVideoSlider.js?ver=4"></script>
 
 <?php
 }

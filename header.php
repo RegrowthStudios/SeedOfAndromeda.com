@@ -6,7 +6,7 @@
 <link rel="shortcut icon" type="image/x-icon"
 	href="/Assets/images/favicon.ico" />
 
-<link rel="stylesheet" href="/styles/soa.css?ver=3" type="text/css" />
+<link rel="stylesheet" href="/styles/soa.css?ver=4" type="text/css" />
 
 <link rel="stylesheet" href="/styles/Normalise.css" type="text/css" />
 
@@ -23,9 +23,9 @@
 <meta name="description"
 	content="Seed Of Andromeda is a Voxel based Sandbox RPG in a futuristic setting. The player will crash land on a fully round voxel planet and will be forced to survive hostile creatures. As the player progresses through the game, they will be able to form settlements, develop technology, and eventually escape the rock they are stranded on!">
 
-<meta property="og:title" content="Seed of Andromeda">
+<meta name="og:title" content="Seed of Andromeda">
 
-<meta property="og:description"
+<meta name="og:description"
 	content="Seed Of Andromeda is a Voxel based Sandbox RPG in a futuristic setting. The player will crash land on a fully round voxel planet and will be forced to survive hostile creatures. As the player progresses through the game, they will be able to form settlements, develop technology, and eventually escape the rock they are stranded on!">
 
 <meta name="og:site_name" content="seedofandromeda">

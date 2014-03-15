@@ -191,154 +191,244 @@ $(document).ready(
 
 // Full Screen Media Slider
 
-$(document).ready(
-		function() {
+$(document)
+		.ready(
+				function() {
 
-			var img, index;
+					var img, index;
 
-			var imgs = $('.image');
+					var imgs = $('.image');
 
-			function popup_Img(img) {
+					function popup_Img(img) {
 
-				var src = img.attr('src').toString();
+						var src = img.attr('src').toString();
+						var fullimg = src.indexOf('_thumb_') != -1 ? (src
+								.substring(0, src.indexOf('_thumb_')) + src
+								.substring(src.length - 4)) : src;
 
-				$('.enlargedImage').attr('src', src);
+						$('.enlargedImage').attr('src', fullimg);
 
-				$('.cover.imgSlider').fadeIn();
+						$('.cover.imgSlider').fadeIn();
 
-			}
+					}
 
-			imgs.click(function() {
+					imgs.click(function() {
 
-				img = $(this);
-
-				$('.imgPos').text(
-						(imgs.index(img) + 1).toString() + " / "
-								+ (imgs.length).toString());
-
-				popup_Img(img);
-
-			});
-
-			$('.imgNext').click(
-					function() {
-
-						var ind = imgs.index(img);
-
-						if (ind == (imgs.length - 1)) {
-
-							img = $(imgs.get(0));
-
-							index = 0;
-
-							var src = img.attr('src');
-
-							$('.tempImage').attr('src', src).css('display',
-									'none').show("slide", {
-								direction : "right",
-								easing : "easeInOutCirc"
-							}, "slow");
-
-							$('.enlargedImage').hide("slide", {
-								direction : "left",
-								easing : "easeInOutCirc"
-							}, "slow", function() {
-
-								$('.enlargedImage').attr('src', src).fadeIn(0);
-
-							});
-
-						} else {
-
-							img = $(imgs.get(ind + 1));
-
-							index = imgs.index(img);
-
-							var src = img.attr('src');
-
-							$('.tempImage').attr('src', src).css('display',
-									'none').show("slide", {
-								direction : "right",
-								easing : "easeInOutCirc"
-							}, "slow");
-
-							$('.enlargedImage').hide("slide", {
-								direction : "left",
-								easing : "easeInOutCirc"
-							}, "slow", function() {
-
-								$('.enlargedImage').attr('src', src).fadeIn(0);
-
-							});
-
-						}
+						img = $(this);
 
 						$('.imgPos').text(
-								(index + 1).toString() + " / "
+								(imgs.index(img) + 1).toString() + " / "
 										+ (imgs.length).toString());
+
+						popup_Img(img);
 
 					});
 
-			$('.imgPrev').click(
-					function() {
+					$('.imgNext')
+							.click(
+									function() {
 
-						var ind = imgs.index(img);
+										var ind = imgs.index(img);
 
-						if (ind == 0) {
+										if (ind == (imgs.length - 1)) {
 
-							img = $(imgs.get(imgs.length - 1));
+											img = $(imgs.get(0));
 
-							index = imgs.index(img);
+											index = 0;
 
-							var src = img.attr('src');
+											var src = img.attr('src');
+											var fullimg = src
+													.indexOf('_thumb_') != -1 ? (src
+													.substring(0, src
+															.indexOf('_thumb_')) + src
+													.substring(src.length - 4))
+													: src;
+											$('.tempImage')
+													.attr('src', fullimg)
+													.css('display', 'none')
+													.show(
+															"slide",
+															{
+																direction : "right",
+																easing : "easeInOutCirc"
+															}, "slow");
 
-							$('.tempImage').attr('src', src).css('display',
-									'none').show("slide", {
-								direction : "left",
-								easing : "easeInOutCirc"
-							}, "slow");
+											$('.enlargedImage')
+													.hide(
+															"slide",
+															{
+																direction : "left",
+																easing : "easeInOutCirc"
+															},
+															"slow",
+															function() {
 
-							$('.enlargedImage').hide("slide", {
-								direction : "right",
-								easing : "easeInOutCirc"
-							}, "slow", function() {
+																$(
+																		'.enlargedImage')
+																		.attr(
+																				'src',
+																				fullimg)
+																		.fadeIn(
+																				0);
 
-								$('.enlargedImage').attr('src', src).fadeIn(0);
+															});
 
-							});
+										} else {
 
-						} else {
+											img = $(imgs.get(ind + 1));
 
-							img = $(imgs.get(ind - 1));
+											index = imgs.index(img);
 
-							index = imgs.index(img);
+											var src = img.attr('src');
+											var fullimg = src
+													.indexOf('_thumb_') != -1 ? (src
+													.substring(0, src
+															.indexOf('_thumb_')) + src
+													.substring(src.length - 4))
+													: src;
+											$('.tempImage')
+													.attr('src', fullimg)
+													.css('display', 'none')
+													.show(
+															"slide",
+															{
+																direction : "right",
+																easing : "easeInOutCirc"
+															}, "slow");
 
-							var src = img.attr('src');
+											$('.enlargedImage')
+													.hide(
+															"slide",
+															{
+																direction : "left",
+																easing : "easeInOutCirc"
+															},
+															"slow",
+															function() {
 
-							$('.tempImage').attr('src', src).css('display',
-									'none').show("slide", {
-								direction : "left",
-								easing : "easeInOutCirc"
-							}, "slow");
+																$(
+																		'.enlargedImage')
+																		.attr(
+																				'src',
+																				fullimg)
+																		.fadeIn(
+																				0);
 
-							$('.enlargedImage').hide("slide", {
-								direction : "right",
-								easing : "easeInOutCirc"
-							}, "slow", function() {
+															});
 
-								$('.enlargedImage').attr('src', src).fadeIn(0);
+										}
 
-							});
+										$('.imgPos').text(
+												(index + 1).toString()
+														+ " / "
+														+ (imgs.length)
+																.toString());
 
-						}
+									});
 
-						$('.imgPos').text(
-								(index + 1).toString() + " / "
-										+ (imgs.length).toString());
+					$('.imgPrev')
+							.click(
+									function() {
 
-					});
+										var ind = imgs.index(img);
 
-		});
+										if (ind == 0) {
+
+											img = $(imgs.get(imgs.length - 1));
+
+											index = imgs.index(img);
+
+											var src = img.attr('src');
+											var fullimg = src
+													.indexOf('_thumb_') != -1 ? (src
+													.substring(0, src
+															.indexOf('_thumb_')) + src
+													.substring(src.length - 4))
+													: src;
+											$('.tempImage')
+													.attr('src', fullimg)
+													.css('display', 'none')
+													.show(
+															"slide",
+															{
+																direction : "left",
+																easing : "easeInOutCirc"
+															}, "slow");
+
+											$('.enlargedImage')
+													.hide(
+															"slide",
+															{
+																direction : "right",
+																easing : "easeInOutCirc"
+															},
+															"slow",
+															function() {
+
+																$(
+																		'.enlargedImage')
+																		.attr(
+																				'src',
+																				fullimg)
+																		.fadeIn(
+																				0);
+
+															});
+
+										} else {
+
+											img = $(imgs.get(ind - 1));
+
+											index = imgs.index(img);
+
+											var src = img.attr('src');
+											var fullimg = src
+													.indexOf('_thumb_') != -1 ? (src
+													.substring(0, src
+															.indexOf('_thumb_')) + src
+													.substring(src.length - 4))
+													: src;
+											$('.tempImage')
+													.attr('src', fullimg)
+													.css('display', 'none')
+													.show(
+															"slide",
+															{
+																direction : "left",
+																easing : "easeInOutCirc"
+															}, "slow");
+
+											$('.enlargedImage')
+													.hide(
+															"slide",
+															{
+																direction : "right",
+																easing : "easeInOutCirc"
+															},
+															"slow",
+															function() {
+
+																$(
+																		'.enlargedImage')
+																		.attr(
+																				'src',
+																				fullimg)
+																		.fadeIn(
+																				0);
+
+															});
+
+										}
+
+										$('.imgPos').text(
+												(index + 1).toString()
+														+ " / "
+														+ (imgs.length)
+																.toString());
+
+									});
+
+				});
 // Sticky Footer (Cheating - do the damned CSS)
 
 $(document).ready(function() {

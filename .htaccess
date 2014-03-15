@@ -3,11 +3,18 @@ RewriteEngine On
 
 
 RewriteBase /
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{DOCUMENT_ROOT}/thumb\.php -f
+RewriteCond %{REQUEST_URI} !^community/
+RewriteRule ^(.*)_thumb_([0-9]+)x([0-9]+).(jpg|png|gif)$  /thumb.php?i=$1.$4&w=$2&h=$3 [QSA,L]
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{DOCUMENT_ROOT}/index\.php -f
 RewriteCond %{REQUEST_URI} !^community/
-RewriteRule ^(.*)$  /index.php?page=$1 [QSA]
+RewriteRule ^(.*)$  /index.php?page=$1 [QSA,L]
 
 
 #########################

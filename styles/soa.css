@@ -273,9 +273,7 @@ div {
 .close:hover {
 	text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
 	cursor: pointer;
-	background-image: url("/Assets/images/SOASprite.png");
 	background-position: -52px -602px;
-	background-size: 32px 32px;
 	background-repeat: no-repeat;
 }
 

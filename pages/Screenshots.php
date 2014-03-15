@@ -25,10 +25,12 @@
 $i = 0;
 
 foreach ( glob ( "Assets/images/Screenshots/*.jpg" ) as $image ) {
-	$i ++;
-	echo '<div class="image-col quad-col-'.$i.' empty"><img src="' . $image . '" class="image"/></div>';
-	if ($i == 4) {
-		$i = 0;
+	if (substr_count ( $image, "_thumb_" ) == 0) {
+		$i ++;
+		echo '<div class="image-col quad-col-' . $i . ' empty"><img src="' . substr ( $image, 0, strlen ( $image ) - 4 ) . '_thumb_202x162.jpg" class="image"/></div>';
+		if ($i == 4) {
+			$i = 0;
+		}
 	}
 }
 

@@ -65,6 +65,10 @@ switch ($cleanpageid) {
 		$pagetitle .= "Blog";
 		$pagename = "Blog.php";
 		break;
+    case "blog2" :
+		$pagetitle .= "Blog2";
+		$pagename = "Blog2.php";
+		break;
 	case "underconstruction" :
 		$pagetitle = "Under Construction";
 		$pagename = "Under Construction.php";

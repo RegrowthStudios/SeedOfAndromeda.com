@@ -102,7 +102,7 @@ if (typeof jQuery != 'undefined') {
 
 
 
-<?php if(!($page_id != null && ($page_id == 4 || $page_id == 5 || $page_id == 6))) { ?>
+<?php if(!($cleanpageid != null && ($cleanpageid == "screenshots" || $cleanpageid == "videos" || $cleanpageid == "irc"))) { ?>
 
 
 

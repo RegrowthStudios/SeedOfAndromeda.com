@@ -96,35 +96,34 @@
 					<code>
 						<p>class Herbivore {</p>
 
-						<p>var scan = new Scanner();</p>
-						<p>var herbivore = null;</p>
-						<p>var hunger = null;</p>
+						<p class="tab-indent">var scan = new Scanner();</p>
+						<p class="tab-indent">var herbivore = null;</p>
+						<p class="tab-indent">var hunger = null;</p>
 
-						<p>Herbivore( Animal animal ) {</p>
-						<p>herbivore = animal;</p>
-						<p>hunger = new Hunger();</p>
-						<p>hunger.hungerLevel = animal.initialHunger();</p>
-						<p>}</p>
+						<p class="tab-indent">Herbivore( Animal animal ) {</p>
+						<p class="tab-indent-2">herbivore = animal;</p>
+						<p class="tab-indent-2">hunger = new Hunger();</p>
+						<p class="tab-indent-2">hunger.hungerLevel = animal.initialHunger();</p>
+						<p class="tab-indent">}</p>
 
-						<p>updateTick() {</p>
-						<p>hunger.updateTick();</p>
-						<p>handleHunger();</p>
-						<p>}</p>
+						<p class="tab-indent">updateTick() {</p>
+						<p class="tab-indent-2">hunger.updateTick();</p>
+						<p class="tab-indent-2">handleHunger();</p>
+						<p class="tab-indent">}</p>
 
-						<p>handleHunger() {</p>
-						<p>if( hunger.getHungerLevel() <= 0 ) {</p>
-						<p>var food = new Food();</p>
-						var foodSource = scan.findFoodSource( herbivore.location() ); 
+						<p class="tab-indent">handleHunger() {</p>
+						<p class="tab-indent-2">if( hunger.getHungerLevel() <= 0 ) {</p>
+						<p class="tab-indent-3">var food = new Food();</p>
+						<p class="tab-indent-3">var foodSource = scan.findFoodSource( herbivore.location() );</p>
 				
-				</p>
-				<p>if( foodSource != false && food.isFood(foodSource) ) {</p>
-				<p>herbivore.moveTo( foodSource );</p>
-				<p>herbivore.consume( foodSource );</p>
-				<p>hunger += foodSource.fillAmount;</p>
-				<p>herbivore.region.depleteResource( foodSource );</p>
-				<p>}</p>
-				<p>}</p>
-				<p>}</p>
+				<p class="tab-indent-3">if( foodSource != false && food.isFood(foodSource) ) {</p>
+				<p class="tab-indent-4">herbivore.moveTo( foodSource );</p>
+				<p class="tab-indent-4">herbivore.consume( foodSource );</p>
+				<p class="tab-indent-4">hunger += foodSource.fillAmount;</p>
+				<p class="tab-indent-4">herbivore.region.depleteResource( foodSource );</p>
+				<p class="tab-indent-3">}</p>
+				<p class="tab-indent-2">}</p>
+				<p class="tab-indent">}</p>
 
 				<p>}</p>
 				</code>

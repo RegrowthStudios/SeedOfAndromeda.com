@@ -30,6 +30,7 @@ body:after {
   text-align: center;
   line-height: 0;
   font-weight: normal;
+  font-family: "orbitronlight", sans-serif, Arial;
 }
 /* line 28, ../sass/lightbox.sass */
 .lightbox .lb-image {
@@ -55,11 +56,13 @@ body:after {
   width: 250px;
   height: 250px;
   margin: 0 auto;
+  /* Sharp Corners are a thing on the site no point losing them now!
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   -ms-border-radius: 4px;
   -o-border-radius: 4px;
   border-radius: 4px;
+  */
 }
 /* line 38, ../../../../.rvm/gems/ruby-1.9.3-p392/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
 .lb-outerContainer:after {
@@ -115,11 +118,12 @@ body:after {
 
 /* line 77, ../sass/lightbox.sass */
 .lb-prev, .lb-next {
-  width: 49%;
+  width: 80px;
   height: 100%;
   cursor: pointer;
   /* Trick IE into showing hover */
   display: block;
+  transition: background-image .2s linear, background-color .2s linear;
 }
 
 /* line 84, ../sass/lightbox.sass */
@@ -140,6 +144,10 @@ body:after {
 /* line 93, ../sass/lightbox.sass */
 .lb-next:hover {
   background: url(/Assets/lightbox/next.png) right 48% no-repeat;
+}
+
+.lb-prev:hover, .lb-next:hover {
+	background-color: rgba(0,0,0,0.3);
 }
 
 /* line 96, ../sass/lightbox.sass */

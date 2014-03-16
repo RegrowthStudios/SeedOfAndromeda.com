@@ -186,8 +186,8 @@
 
 <div class="tri-col-3 empty">
 
-	<a href="/Assets/images/placeholder_4.jpg" data-lightbox="images"
-		title="Placeholder cat for Jesse Leskinen" class="large image"><img
-		src="/Assets/images/placeholder_4_thumb_250x200.jpg"
+	<a href="/Assets/images/ProfileImages/Jesses_dog.jpg" data-lightbox="images"
+		title="Jesse's dog as a placeholder" class="large image"><img
+		src="/Assets/images/ProfileImages/Jesses_dog_thumb_250x200.jpg"
 		class="large image" /></a>
 </div>

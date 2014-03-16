@@ -165,8 +165,7 @@ if (typeof jQuery != 'undefined') {
 
 						<td><input type="password" maxlength="40"
 							id="reg_confirm_password" name="reg_confirm_password"
-							placeholder="Password" />
-							</form></td>
+							placeholder="Password" /></td>
 
 					</tr>
 

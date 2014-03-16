@@ -108,7 +108,7 @@
     
     function preload(imgIndex) {
     	    	var image = $(elems.get(imgIndex));
-    	    	var src = image.attr('src').replace('_thumb_202x162', '');
+    	    	var src = image.attr('src').replace('_thumb_202x162', '_thumb_700x480');
     	    	(new Image()).src = src;
     }
 

@@ -5,7 +5,7 @@
 
 /* line 7, ../sass/lightbox.sass */
 body:after {
-  content: url(/Assets/lightbox/close.png) url(/Assets/lightbox/loading.gif) url(/Assets/lightbox/prev.png) url(/Assets/lightbox/next.png);
+  content: url(/Assets/lightbox/close.png) url(/Assets/lightbox/loading_blue.gif) url(/Assets/lightbox/prev.png) url(/Assets/lightbox/next.png);
   display: none;
 }
 
@@ -90,7 +90,7 @@ body:after {
   width: 32px;
   height: 32px;
   margin: 0 auto;
-  background: url(/Assets/lightbox/loading.gif) no-repeat;
+  background: url(/Assets/lightbox/loading_blue.gif) no-repeat;
 }
 
 /* line 63, ../sass/lightbox.sass */

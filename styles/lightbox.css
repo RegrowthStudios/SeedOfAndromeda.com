@@ -44,7 +44,8 @@ body:after {
 /* line 35, ../sass/lightbox.sass */
 .lb-outerContainer {
   position: relative;
-  background-color: white;
+  background: rgba(28,28,28,0.7);
+  border: 2px #39AECF solid;
   *zoom: 1;
   width: 250px;
   height: 250px;

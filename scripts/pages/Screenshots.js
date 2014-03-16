@@ -4,6 +4,8 @@
 
     elem = $(elems[0]);
     var thumbpath = $(elems[0]).attr('src');
+    $('.enlarged-image').attr('src', thumbpath);
+    $('.temp-image').attr('src', thumbpath);
     var fullimg = thumbpath.substring(0, thumbpath.indexOf('_thumb_')) +'_thumb_700x480' + thumbpath.substring(thumbpath.length-4);
     $('#screenshotlink').attr('href', (fullimg
 			.substring(0, fullimg.indexOf('_thumb_')) + fullimg
@@ -12,8 +14,9 @@
     $('.temp-image').attr('src', fullimg);
 
     elems.click(function () {
-        elem = $(this)
+        elem = $(this);
         var src = elem.attr('src');
+        $('.temp-image').attr('src', src);
         var fullimg = src.substring(0, src.indexOf('_thumb_')) +'_thumb_700x480' +  src.substring(src.length-4);
         $('.temp-image').attr('src', fullimg);
         $('#screenshotlink').attr('href', (fullimg
@@ -25,7 +28,7 @@
         $('.enlarged-image').fadeOut(0, function () {
             $('.enlarged-image').attr('src', fullimg).fadeIn(0);
         });
-    })
+    });
 
     $('.img-next').click(function () {
         var ind = elems.index(elem);
@@ -33,6 +36,7 @@
             elem = $(elems.get(0));
             index = 0;
             var src = elem.attr('src');
+            $('.temp-image').attr('src', src);
             var fullimg = src.substring(0, src.indexOf('_thumb_')) +'_thumb_700x480' +  src.substring(src.length-4);
             $('#screenshotlink').attr('href', (fullimg
     				.substring(0, fullimg.indexOf('_thumb_')) + fullimg
@@ -45,6 +49,7 @@
             elem = $(elems.get(ind + 1));
             index = elems.index(elem);
             var src = elem.attr('src');
+            $('.temp-image').attr('src', src);
             var fullimg = src.substring(0, src.indexOf('_thumb_')) +'_thumb_700x480' +  src.substring(src.length-4);
             $('#screenshotlink').attr('href', (fullimg
     				.substring(0, fullimg.indexOf('_thumb_')) + fullimg
@@ -64,6 +69,7 @@
             elem = $(elems.get(elems.length - 1));
             index = elems.index(elem);
             var src = elem.attr('src');
+            $('.temp-image').attr('src', src);
             var fullimg = src.substring(0, src.indexOf('_thumb_')) +'_thumb_700x480' +  src.substring(src.length-4);
             $('#screenshotlink').attr('href', (fullimg
     				.substring(0, fullimg.indexOf('_thumb_')) + fullimg
@@ -76,6 +82,7 @@
             elem = $(elems.get(ind - 1));
             index = elems.index(elem);
             var src = elem.attr('src');
+            $('.temp-image').attr('src', src);
             var fullimg = src.substring(0, src.indexOf('_thumb_')) +'_thumb_700x480' +  src.substring(src.length-4);
             $('#screenshotlink').attr('href', (fullimg
     				.substring(0, fullimg.indexOf('_thumb_')) + fullimg
@@ -85,6 +92,6 @@
                 $('.enlarged-image').attr('src', fullimg).fadeIn(0);
             });
         }
-    })
+    });
 
 });

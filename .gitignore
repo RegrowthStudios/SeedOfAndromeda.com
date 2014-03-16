@@ -92,3 +92,7 @@ local.properties
 *_thumb_*x*.jpg
 *_thumb_*x*.png
 *_thumb_*x*.gif
+
+#OS junk files
+[Tt]humbs.db
+*.DS_Store

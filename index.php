@@ -12,7 +12,7 @@ $pagename = "";
 if (! isset ( $_REQUEST ['page'] )) {
 	$_REQUEST ['page'] = "index";
 }
-$cleanpageid = preg_replace ( "/[^A-Za-z0-9_]/", '', str_replace ( ".php", "", strtolower ( $_REQUEST ['page'] ) ) );
+$cleanpageid = preg_replace ( "/[^\/A-Za-z0-9_\-]/", '', str_replace ( ".php", "", strtolower ( $_REQUEST ['page'] ) ) );
 $pageurl = $cleanpageid;
 switch ($cleanpageid) {
 	case "index" :
@@ -61,10 +61,6 @@ switch ($cleanpageid) {
 	// $pagetitle .= "Reddit";
 	// $pagename = "";
 	// break;
-	case "blog" :
-		$pagetitle .= "Blog";
-		$pagename = "Blog.php";
-		break;
 	case "underconstruction" :
 		$pagetitle = "Under Construction";
 		$pagename = "Under Construction.php";
@@ -72,6 +68,17 @@ switch ($cleanpageid) {
 	case "login" :
 		$pagetitle = "Log in";
 		$pagename = "Login.php";
+		break;
+		//Blogs:
+	case "blog" :
+	case "blogs/creating-a-region-file-system-for-a-voxel-game" :
+		$pagetitle = "Creating a Region File System for a Voxel Game";
+		$pagename = "blogs/BenA_1.php";
+		$pageurl = "blogs/creating-a-region-file-system-for-a-voxel-game";
+		break;
+	case "blogs/designing-the-world-character" :
+		$pagetitle = "Designing the World Character";
+		$pagename = "blogs/Anthony_1.php";
 		break;
 }
 

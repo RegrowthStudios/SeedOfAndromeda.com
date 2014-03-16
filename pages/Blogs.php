@@ -42,7 +42,8 @@
 	<div id="blog-post-footer">
 
 		<p>
-			<a href="/BenA_1">Read More...</a>
+			<a href="/blogs/creating-a-region-file-system-for-a-voxel-game">Read
+				More...</a>
 		</p>
 
 	</div>
@@ -60,28 +61,30 @@
 	<div id="blog-post-body">
 
 
-			<p>Designing a sandbox game is one of the most intensive, yet rewarding 
-			experiences I've had in my few short years in the games industry. I'd 
-			like to share some of my design concepts, principles and the general 
-			direction I plan to work with when designing SoA alongside Ben and 
-			Sebastian.
-			First is the concept of "Pillars of Design" or those areas of 
-			building a game that are built around the "core feeling" and major 
-			game-play concepts. Every game is first designed with a very simple 
-			question, with very simple answers…<br />
-			So of these base feelings we can design game-play features and functionality. 
-			If we want the player to have this sense of freedom to explore, and a desire 
-			to explore, we must first give them a world worth exploring. The same follows 
-			suit with the rest of the base feelings we want to instill, as well as holding 
-			to the three basic principles of the sandbox; which are Interactivity, Creativity, 
-			and Exploration. Simple, we design the "World Character", as having a Planet, or 
-			even a solar system devoid of meaningful life, that begets meaningful interaction, 
-			is useless to us in the greater sense of game design and development. At least in 
-			regards to a sandbox game like SoA. While designing the "World Character" we keep 
-			to the core principles of sandbox design and the core feelings of the game that, 
-			as I mentioned earlier, we're trying to instill in our players. So, let's get started 
-			with an overview of our main storyline planet: Aldrin...
-			</p>
+		<p>
+			Designing a sandbox game is one of the most intensive, yet rewarding
+			experiences I've had in my few short years in the games industry. I'd
+			like to share some of my design concepts, principles and the general
+			direction I plan to work with when designing SoA alongside Ben and
+			Sebastian. First is the concept of "Pillars of Design" or those areas
+			of building a game that are built around the "core feeling" and major
+			game-play concepts. Every game is first designed with a very simple
+			question, with very simple answersï¿½<br /> So of these base feelings
+			we can design game-play features and functionality. If we want the
+			player to have this sense of freedom to explore, and a desire to
+			explore, we must first give them a world worth exploring. The same
+			follows suit with the rest of the base feelings we want to instill,
+			as well as holding to the three basic principles of the sandbox;
+			which are Interactivity, Creativity, and Exploration. Simple, we
+			design the "World Character", as having a Planet, or even a solar
+			system devoid of meaningful life, that begets meaningful interaction,
+			is useless to us in the greater sense of game design and development.
+			At least in regards to a sandbox game like SoA. While designing the
+			"World Character" we keep to the core principles of sandbox design
+			and the core feelings of the game that, as I mentioned earlier, we're
+			trying to instill in our players. So, let's get started with an
+			overview of our main storyline planet: Aldrin...
+		</p>
 
 
 
@@ -90,7 +93,7 @@
 	<div id="blog-post-footer">
 
 		<p>
-			<a href="/Anthony_1">Read More...</a>
+			<a href="/blogs/designing-the-world-character">Read More...</a>
 		</p>
 
 	</div>

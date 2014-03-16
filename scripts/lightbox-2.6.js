@@ -183,7 +183,7 @@ Licensed under the Creative Commons Attribution 2.5 License - http://creativecom
       this.$outerContainer.addClass('animating');
       preloader = new Image();
       preloader.onload = function() {
-        var $preloader, imageHeight, imageWidth, maxImageHeight, maxImageWidth, windowHeight, windowWidth;
+        var $preloader, imageHeight, imageWidth, maxImageHeight, maxImageWidth, minImageHeight, minImageWidth, windowHeight, windowWidth;
         $image.attr('src', _this.album[imageNumber].link);
         $preloader = $(preloader);
         $image.width(preloader.width);
@@ -191,8 +191,10 @@ Licensed under the Creative Commons Attribution 2.5 License - http://creativecom
         if (_this.options.fitImagesInViewport) {
           windowWidth = $(window).width();
           windowHeight = $(window).height();
-          maxImageWidth = windowWidth - _this.containerLeftPadding - _this.containerRightPadding - 20;
-          maxImageHeight = windowHeight - _this.containerTopPadding - _this.containerBottomPadding - 110;
+          maxImageWidth = (windowWidth * 0.90) - _this.containerLeftPadding - _this.containerRightPadding - 20;
+          maxImageHeight = (windowHeight * 0.90) - _this.containerTopPadding - _this.containerBottomPadding - 110;
+          minImageWidth = (windowWidth * 0.4);
+          minImageHeight = (windowHeight * 0.4);
           if ((preloader.width > maxImageWidth) || (preloader.height > maxImageHeight)) {
             if ((preloader.width / maxImageWidth) > (preloader.height / maxImageHeight)) {
               imageWidth = maxImageWidth;
@@ -205,7 +207,19 @@ Licensed under the Creative Commons Attribution 2.5 License - http://creativecom
               $image.width(imageWidth);
               $image.height(imageHeight);
             }
-          }
+          } else if ((preloader.width < minImageWidth) || (preloader.height < minImageHeight)) {
+              if ((preloader.width / minImageWidth) > (preloader.height / minImageHeight)) {
+                  imageWidth = minImageWidth;
+                  imageHeight = parseInt(preloader.height / (preloader.width / imageWidth), 10);
+                  $image.width(imageWidth);
+                  $image.height(imageHeight);
+                } else {
+                  imageHeight = minImageHeight;
+                  imageWidth = parseInt(preloader.width / (preloader.height / imageHeight), 10);
+                  $image.width(imageWidth);
+                  $image.height(imageHeight);
+                }
+              }
         }
         return _this.sizeContainer($image.width(), $image.height());
       };

@@ -147,4 +147,11 @@
 				stay tuned!</p>
 		</div>
 	</div>
+	
+
+	<div id="blog-post-footer">
+
+		<p>Anthony "Damion Rayne" Keeton</p>
+
+	</div>
 </div>

@@ -21,6 +21,9 @@ try {
 			break;
 		case IMAGETYPE_PNG :
 			$source_gdim = imagecreatefrompng ( $source_path );
+			// Turn off alpha blending and set alpha flag
+			imagealphablending ( $source_gdim, false );
+			imagesavealpha ( $source_gdim, true );
 			break;
 		default :
 			header ( "HTTP/1.0 404 Not Found" );
@@ -53,6 +56,10 @@ if ($source_aspect_ratio > $desired_aspect_ratio) {
  */
 
 $temp_gdim = imagecreatetruecolor ( $temp_width, $temp_height );
+if ($source_type == IMAGETYPE_PNG) {
+	imagealphablending ( $temp_gdim, false );
+	imagesavealpha ( $temp_gdim, true );
+}
 imagecopyresampled ( $temp_gdim, $source_gdim, 0, 0, 0, 0, $temp_width, $temp_height, $source_width, $source_height );
 
 /*
@@ -62,6 +69,10 @@ imagecopyresampled ( $temp_gdim, $source_gdim, 0, 0, 0, 0, $temp_width, $temp_he
 $x0 = ($temp_width - $width) / 2;
 $y0 = ($temp_height - $height) / 2;
 $desired_gdim = imagecreatetruecolor ( $width, $height );
+if ($source_type == IMAGETYPE_PNG) {
+	imagealphablending ( $desired_gdim, false );
+	imagesavealpha ( $desired_gdim, true );
+}
 imagecopy ( $desired_gdim, $temp_gdim, 0, 0, $x0, $y0, $width, $height );
 
 /*
@@ -76,13 +87,15 @@ switch ($source_type) {
 	case IMAGETYPE_JPEG :
 		header ( 'Content-type: image/jpeg' );
 		imagejpeg ( $desired_gdim );
-		imagegif ( $desired_gdim, substr ( $source_path, 0, strlen ( $source_path ) - 4 ) . "_thumb_" . $width . "x" . $height . ".jpg" );
+		imagejpeg ( $desired_gdim, substr ( $source_path, 0, strlen ( $source_path ) - 4 ) . "_thumb_" . $width . "x" . $height . ".jpg" );
 		break;
 	case IMAGETYPE_PNG :
 		header ( 'Content-type: image/png' );
 		imagepng ( $desired_gdim );
-		imagegif ( $desired_gdim, substr ( $source_path, 0, strlen ( $source_path ) - 4 ) . "_thumb_" . $width . "x" . $height . ".png" );
+		imagepng ( $desired_gdim, substr ( $source_path, 0, strlen ( $source_path ) - 4 ) . "_thumb_" . $width . "x" . $height . ".png" );
 		break;
 }
 
+imagedestroy ( $source_gdim );
+imagedestroy ( $temp_gdim );
 imagedestroy ( $desired_gdim );

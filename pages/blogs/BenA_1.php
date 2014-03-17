@@ -9,8 +9,10 @@
 
 	<div id="blog-post-body">
 
-		<img id="blog-post-header-image" class="image"
-			src="/Assets/images/Blogs/Region-File-System--2013-12-04/Blog-Header.png" />
+		<a
+			href="/Assets/images/Blogs/Region-File-System--2013-12-04/Blog-Header.png"
+			data-lightbox="images"><img id="blog-post-header-image" class="image"
+			src="/Assets/images/Blogs/Region-File-System--2013-12-04/Blog-Header_thumb_500x300.png" /></a>
 
 		<div>
 
@@ -650,8 +652,11 @@
 				machine, they will be ordered ABCD in memory. However, on a little
 				endian machine, they will be DCBA. This image explains it well:</p>
 
-			<img class="blog-inline-image xx-large-wide image"
-				src="/Assets/images/Blogs/Region-File-System--2013-12-04/Endianess.png" />
+			<a
+				href="/Assets/images/Blogs/Region-File-System--2013-12-04/Endianess.png"
+				data-lightbox="images" title="Endianess"><img
+				class="blog-inline-image xx-large-wide image"
+				src="/Assets/images/Blogs/Region-File-System--2013-12-04/Endianess_thumb_500x300.png" /></a>
 
 			<p>If we write our data to file as integers on a big-endian machine,
 				then if we read it on another machine that is little-endian, the

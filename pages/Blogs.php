@@ -18,7 +18,7 @@
 			Sebastian. First is the concept of "Pillars of Design" or those areas
 			of building a game that are built around the "core feeling" and major
 			game-play concepts. Every game is first designed with a very simple
-			question, with very simple answers�<br /> So of these base feelings
+			question, with very simple answers...<br /> So of these base feelings
 			we can design game-play features and functionality. If we want the
 			player to have this sense of freedom to explore, and a desire to
 			explore, we must first give them a world worth exploring. The same

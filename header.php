@@ -6,7 +6,7 @@
 <link rel="shortcut icon" type="image/x-icon"
 	href="/Assets/images/favicon.ico" />
 
-<link rel="stylesheet" href="/styles/soa.css?ver=4" type="text/css" />
+<link rel="stylesheet" href="/styles/soa.css?ver=5" type="text/css" />
 
 <link rel="stylesheet" href="/styles/Normalise.css" type="text/css" />
 

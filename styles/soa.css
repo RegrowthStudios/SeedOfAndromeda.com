@@ -178,6 +178,8 @@ div {
 	background-repeat: no-repeat;
 	border-top: none;
 	float: none;
+	padding-bottom: 20px;
+	margin-bottom: -20px;
 }
 
 #content-outer {

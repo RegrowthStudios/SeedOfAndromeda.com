@@ -3,25 +3,33 @@
 		<p>Designing the World Character</p>
 	</div>
 	<div id="blog-post-body">
-		<img id="blog-post-header-image" class="image xx-large-wide"
-			src="/Assets/images/Blogs/Designing-World-Character-2014-03-17/SOA.png" style="border:none;" />
+		<a
+			href="/Assets/images/Blogs/Designing-World-Character-2014-03-17/SOA.png"
+			data-lightbox="images" title="SOA Logo"><img
+			id="blog-post-header-image" class="image xx-large-wide"
+			src="/Assets/images/Blogs/Designing-World-Character-2014-03-17/SOA_thumb_500x300.png"
+			style="border: none;" /></a>
 		<div>
 			<p>Designing a sandbox game is one of the most intensive, yet
 				rewarding experiences I've had in my few short years in the games
 				industry. I'd like to share some of my design concepts, principles
 				and the general direction I plan to work with when designing SoA
 				alongside Ben and Sebastian.</p>
-			<p>First is the concept of <em>"Pillars of Design"</em> or those areas of
-				building a game that are built around the <em>"core feeling"</em> and major
-				game-play concepts. Every game is first designed with a very simple
-				question, with very simple answers...</p>
+			<p>
+				First is the concept of <em>"Pillars of Design"</em> or those areas
+				of building a game that are built around the <em>"core feeling"</em>
+				and major game-play concepts. Every game is first designed with a
+				very simple question, with very simple answers...
+			</p>
 			<h2>"What do I want my players to feel?"</h2>
 			<p>In Seed of Andromeda those answers are the following,</p>
 			<p>&bull; Sense of Freedom to choose how to play the game.</p>
 			<p>&bull; Desire to Create in the World</p>
 			<p>&bull; Desire to Explore the World</p>
-			<p>&bull; Desire to Interact (with the world / NPCS / other players
-				). Or as it's commonly known: <em>"The Social Aspect"</em></p>
+			<p>
+				&bull; Desire to Interact (with the world / NPCS / other players ).
+				Or as it's commonly known: <em>"The Social Aspect"</em>
+			</p>
 			<p>So of these base feelings we can design game-play features and
 				functionality. If we want the player to have this sense of freedom
 				to explore, and a desire to explore, we must first give them a world
@@ -32,29 +40,36 @@
 
 
 			<h2>So, now that we know all this...what next?</h2>
-			<p>Simple, we design the <em>"World Character"</em>, as having a Planet, or
-				even a solar system devoid of meaningful life, that begets
-				meaningful interaction, is useless to us in the greater sense of
-				game design and development. At least in regards to a sandbox game
-				like SoA. While designing the <em>"World Character"</em> we keep to the core
-				principles of sandbox design and the core feelings of the game that,
-				as I mentioned earlier, we're trying to instill in our players. So,
-				let's get started with an overview of our main storyline planet:
-				Aldrin.</p>
+			<p>
+				Simple, we design the <em>"World Character"</em>, as having a
+				Planet, or even a solar system devoid of meaningful life, that
+				begets meaningful interaction, is useless to us in the greater sense
+				of game design and development. At least in regards to a sandbox
+				game like SoA. While designing the <em>"World Character"</em> we
+				keep to the core principles of sandbox design and the core feelings
+				of the game that, as I mentioned earlier, we're trying to instill in
+				our players. So, let's get started with an overview of our main
+				storyline planet: Aldrin.
+			</p>
 			<h2>The Planet Aldrin</h2>
 
-			<img class="blog-inline-image xx-large-wide image"
-				src="/Assets/images/Blogs/Designing-World-Character-2014-03-17/Aldrin.jpg" />
+			<a
+				href="/Assets/images/Blogs/Designing-World-Character-2014-03-17/Aldrin.jpg"
+				data-lightbox="images" title="Planet Aldrin"><img
+				class="blog-inline-image xx-large-wide image"
+				src="/Assets/images/Blogs/Designing-World-Character-2014-03-17/Aldrin_thumb_500x300.jpg" /></a>
 
 			<p>
 				Planet: Aldrin <br /> Name Origin: Edwin Eugene "Buzz" Aldrin, Jr. <br />
 				Planet Type: Terrestrial <br />
 			</p>
 
-			<p>This planet pictured above, is the one that is the prime focus of
+			<p>
+				This planet pictured above, is the one that is the prime focus of
 				our game and also the prime focus of this blog, at least in regards
-				to the design of the <em>"World Character"</em>. So, let's move on now that
-				you've got this little blue dot in front of you.</p>
+				to the design of the <em>"World Character"</em>. So, let's move on
+				now that you've got this little blue dot in front of you.
+			</p>
 			<h3>The Biosphere - Simulation</h3>
 			<p>Moving forward we start talking about creating a 'biosphere' for
 				our planet, and designing a dynamic simulation based system that
@@ -103,7 +118,8 @@
 						<p class="tab-indent">Herbivore( Animal animal ) {</p>
 						<p class="tab-indent-2">herbivore = animal;</p>
 						<p class="tab-indent-2">hunger = new Hunger();</p>
-						<p class="tab-indent-2">hunger.hungerLevel = animal.initialHunger();</p>
+						<p class="tab-indent-2">hunger.hungerLevel =
+							animal.initialHunger();</p>
 						<p class="tab-indent">}</p>
 
 						<p class="tab-indent">updateTick() {</p>
@@ -114,19 +130,22 @@
 						<p class="tab-indent">handleHunger() {</p>
 						<p class="tab-indent-2">if( hunger.getHungerLevel() <= 0 ) {</p>
 						<p class="tab-indent-3">var food = new Food();</p>
-						<p class="tab-indent-3">var foodSource = scan.findFoodSource( herbivore.location() );</p>
-				
-				<p class="tab-indent-3">if( foodSource != false && food.isFood(foodSource) ) {</p>
-				<p class="tab-indent-4">herbivore.moveTo( foodSource );</p>
-				<p class="tab-indent-4">herbivore.consume( foodSource );</p>
-				<p class="tab-indent-4">hunger += foodSource.fillAmount;</p>
-				<p class="tab-indent-4">herbivore.region.depleteResource( foodSource );</p>
-				<p class="tab-indent-3">}</p>
-				<p class="tab-indent-2">}</p>
-				<p class="tab-indent">}</p>
+						<p class="tab-indent-3">var foodSource = scan.findFoodSource(
+							herbivore.location() );</p>
 
-				<p>}</p>
-				</code>
+						<p class="tab-indent-3">if( foodSource != false &&
+							food.isFood(foodSource) ) {</p>
+						<p class="tab-indent-4">herbivore.moveTo( foodSource );</p>
+						<p class="tab-indent-4">herbivore.consume( foodSource );</p>
+						<p class="tab-indent-4">hunger += foodSource.fillAmount;</p>
+						<p class="tab-indent-4">herbivore.region.depleteResource(
+							foodSource );</p>
+						<p class="tab-indent-3">}</p>
+						<p class="tab-indent-2">}</p>
+						<p class="tab-indent">}</p>
+
+						<p>}</p>
+					</code>
 				</p>
 			</blockquote>
 
@@ -147,7 +166,7 @@
 				stay tuned!</p>
 		</div>
 	</div>
-	
+
 
 	<div id="blog-post-footer">
 

@@ -44,6 +44,9 @@
 
 	</div>
 	
+</div>
+<div class="double-col empty">
+	
 	<div id="blog-post-header">
 
 		<p>Designing the World Character</p>

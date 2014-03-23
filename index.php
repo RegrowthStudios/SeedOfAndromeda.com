@@ -80,6 +80,10 @@ switch ($cleanpageid) {
 		$pagetitle = "Designing the World Character";
 		$pagename = "blogs/Anthony_1.php";
 		break;
+	case "blogs/crafting-research-and-intergroup-cooperation-volume-one-part-one" :
+		$pagetitle = "Crafting, Research and Intergroup Cooperation - Volume I.I";
+		$pagename = "blogs/Matthew_1.php";
+		break;
 }
 
 $page_exists = $pagename == "" ? false : file_exists ( "pages/" . $pagename );

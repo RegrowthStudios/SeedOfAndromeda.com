@@ -1,6 +1,49 @@
 
 <div class="double-col empty">
+	<div id="blog-post-header">
 
+		<p>Crafting, Research and Intergroup Cooperation - Volume I.I</p>
+
+	</div>
+
+	<div id="blog-post-body">
+
+
+		<p>
+			To start this volume off, I would like to open up with a comment on what 
+			I consider to be good practice in creating an immersive experience for the 
+			player. Firstly, I do not believe in the use of GUIs where there is no reason 
+			or explanation for the use of them: they simply work to slow down the 
+			flow of the game, and they do not reflect real-life processes (if they are 
+			without explanation). The latter point is of great concern when the 
+			crafting process has to incorporate things as advanced as the technologies 
+			that will be attainable and creatable in SoA. Take the example of Minecraft, 
+			its crafting system is unintuitive, lacks any form of scalability and so for 
+			that reason, almost every mod either has to introduce a whole new crafting 
+			system for its own items, or it has to have an expansive wiki that players 
+			refer to for every creation. This issue runs nicely into the second good 
+			practice I believe in: keeping the player in-game and enthused to do so at 
+			all times. This means, rather than just not allowing wikis to be created, 
+			or making alt+tab kill the game to discourage the use of wikis, instead, 
+			make sure your system is so engaging - and so rewarding - that the player 
+			finds themselves wanting to beat the system rather than let others beat it 
+			for them. This won't stop all players, but it will do what you should only 
+			ever aspire to do as a developer of a sandbox game: encourage a play-style 
+			rather than force it.
+		</p>
+
+
+
+	</div>
+
+	<div id="blog-post-footer">
+
+		<p>
+			<a href="/blogs/crafting-research-and-intergroup-cooperation-volume-one-part-one">Read More...</a>
+		</p>
+
+	</div>
+	
 	<div id="blog-post-header">
 
 		<p>Designing the World Character</p>

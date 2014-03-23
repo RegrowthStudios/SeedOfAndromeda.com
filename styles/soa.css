@@ -961,6 +961,7 @@ ul.accountOptions li a {
 
 #single-blog #blog-post-body>div {
 	text-align: center;
+	width:100%;
 }
 
 #single-blog #blog-post-body>div p {
@@ -1006,6 +1007,7 @@ blockquote.table-wrapper table {
 	text-shadow: 0px 0px 3px rgba(255, 255, 255, 0.65);
 	font-style: italic;
 	text-align: left;
+	width: 90%;
 }
 
 #single-blog #blog-post-body>div p strong {

@@ -119,9 +119,9 @@
 		    		Links for this post:
 		    	</em>
 		    </p>
-		    <p>The Discussion - http://www.seedofandromeda.com/Forums/thread-177.html</p>
-		    <p>Tetryd's Discussion on GUIs  - http://www.seedofandromeda.com/Forums/thread-153.html</p>
-		    <p>Reddit Post for Volume I - http://www.reddit.com/r/seedofandromeda/comments/1uen1j/crafting_research_and_intergroup_cooperation/</p>
+		    <p style="text-align:left;">The Discussion - http://www.seedofandromeda.com/Forums/thread-177.html</p>
+		    <p style="text-align:left;">Tetryd's Discussion on GUIs  - http://www.seedofandromeda.com/Forums/thread-153.html</p>
+		    <p style="text-align:left;">Reddit Post for Volume I - http://www.reddit.com/r/seedofandromeda/comments/1uen1j/crafting_research_and_intergroup_cooperation/</p>
 	    </div>
     </div>
     <div id="blog-post-footer">

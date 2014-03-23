@@ -1,8 +1,12 @@
 <div id="single-blog" class="double-col empty">
-	<div id="blog-post-header">
+    <div id="blog-post-header">
 		<p>Matthew's Musings: Crafting, Research and Intergroup Cooperation - Volume I</p>
   	</div>
-  	<div id="blog-post-body">
+  	<div id="blog-post-body" style="padding-top:40px;">
+		<a
+			href="/Assets/images/Screenshots/Horizons5.jpg"
+			data-lightbox="images"><img id="blog-post-header-image" class="image"
+			src="/Assets/images/Screenshots/Horizons5_thumb_500x300.jpg" /></a>
   		<div>
 	    	<h2>Series Preface</h2>
 	    	<p>

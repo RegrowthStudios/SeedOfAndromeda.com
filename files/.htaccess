@@ -1,0 +1,8 @@
+RewriteEngine On
+RewriteBase /files
+
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteCond %{REQUEST_URI} !^download.php
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REMOTE_ADDR}:%{QUERY_STRING} !^(.+):\1$
+RewriteRule ^(.*)$  download.php?file=$1 [QSA,L]

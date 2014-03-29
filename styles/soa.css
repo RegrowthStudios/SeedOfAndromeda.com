@@ -856,8 +856,8 @@ ul.accountOptions li a {
 
 /**********/
 #footer {
-	background: rgba(25, 61, 86, 0.85);
-	box-shadow: 0 0 15px 7px rgba(25, 61, 86, 0.95);
+	background: rgba(20,49,69, 0.95);
+	box-shadow: 0 0 15px 7px rgba(20,49,69,1);
 	border: none;
 	margin: 0;
 	margin-top: 40px;

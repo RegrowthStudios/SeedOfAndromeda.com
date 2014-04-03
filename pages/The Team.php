@@ -65,6 +65,8 @@
 
 </div>
 
+<!-- Leave in for now, just commented out, he may return!
+
 <div class="tri-col-1 empty">
 
 	<a href="/Assets/images/ProfileImages/Scuttles.jpg"
@@ -85,7 +87,18 @@
 
 </div>
 
-<div class="tri-double-col team-info">
+-->
+
+<div class="tri-col-1 empty">
+
+	<a href="/Assets/images/placeholder_4.jpg" data-lightbox="images"
+		title="Placeholder cat for Joshua Arnold" class="large image"><img
+		src="/Assets/images/placeholder_4_thumb_250x200.jpg"
+		class="large image" /></a>
+
+</div>
+
+<div class="tri-double-col right team-info">
 
 	<h3 class="team-name">Joshua Arnold</h3>
 
@@ -96,25 +109,7 @@
 
 </div>
 
-<div class="tri-col-3 empty">
-
-	<a href="/Assets/images/placeholder_4.jpg" data-lightbox="images"
-		title="Placeholder cat for Joshua Arnold" class="large image"><img
-		src="/Assets/images/placeholder_4_thumb_250x200.jpg"
-		class="large image" /></a>
-
-</div>
-
-<div class="tri-col-1 empty">
-
-	<a href="/Assets/images/ProfileImages/MatthewM.jpg"
-		data-lightbox="images" title="Matthew Marshall" class="large image"><img
-		src="/Assets/images/ProfileImages/MatthewM_thumb_250x200.jpg"
-		class="large image" /></a>
-
-</div>
-
-<div class="tri-double-col right team-info">
+<div class="tri-double-col team-info">
 
 	<h3 class="team-name">Matthew Marshall</h3>
 
@@ -128,7 +123,25 @@
 
 </div>
 
-<div class="tri-double-col team-info">
+<div class="tri-col-3 empty">
+
+	<a href="/Assets/images/ProfileImages/MatthewM.jpg"
+		data-lightbox="images" title="Matthew Marshall" class="large image"><img
+		src="/Assets/images/ProfileImages/MatthewM_thumb_250x200.jpg"
+		class="large image" /></a>
+
+</div>
+
+<div class="tri-col-1 empty">
+
+	<a href="/Assets/images/ProfileImages/GeorgH.png"
+		data-lightbox="images" title="Georg Hammerschmid" class="large image"><img
+		src="/Assets/images/ProfileImages/GeorgH_thumb_250x200.png"
+		class="large image" /></a>
+
+</div>
+
+<div class="tri-double-col right team-info">
 
 	<h3 class="team-name">Georg Hammerschmid</h3>
 
@@ -141,25 +154,7 @@
 
 </div>
 
-<div class="tri-col-3 empty">
-
-	<a href="/Assets/images/ProfileImages/GeorgH.png"
-		data-lightbox="images" title="Georg Hammerschmid" class="large image"><img
-		src="/Assets/images/ProfileImages/GeorgH_thumb_250x200.png"
-		class="large image" /></a>
-
-</div>
-
-<div class="tri-col-1 empty">
-
-	<a href="/Assets/images/ProfileImages/AndreasR.jpg"
-		data-lightbox="images" title="Andreas Ressl" class="large image"><img
-		src="/Assets/images/ProfileImages/AndreasR_thumb_250x200.jpg"
-		class="large image" /></a>
-
-</div>
-
-<div class="tri-double-col right team-info">
+<div class="tri-double-col team-info">
 
 	<h3 class="team-name">Andreas Ressl</h3>
 
@@ -172,7 +167,24 @@
 	and animation systems! Forum name: Gilzokha
 </div>
 
-<div class="tri-double-col team-info">
+<div class="tri-col-3 empty">
+
+	<a href="/Assets/images/ProfileImages/AndreasR.jpg"
+		data-lightbox="images" title="Andreas Ressl" class="large image"><img
+		src="/Assets/images/ProfileImages/AndreasR_thumb_250x200.jpg"
+		class="large image" /></a>
+
+</div>
+
+<div class="tri-col-1 empty">
+
+	<a href="/Assets/images/ProfileImages/Jesses_dog.jpg" data-lightbox="images"
+		title="Jesse's dog as a placeholder" class="large image"><img
+		src="/Assets/images/ProfileImages/Jesses_dog_thumb_250x200.jpg"
+		class="large image" /></a>
+</div>
+
+<div class="tri-double-col right team-info">
 
 	<h3 class="team-name">Jesse Leskinen</h3>
 
@@ -182,12 +194,4 @@
 	the forums. His work will help make the site become a much more smooth
 	experience and bring a unique way of tackling the challenges of such a
 	project as this.
-</div>
-
-<div class="tri-col-3 empty">
-
-	<a href="/Assets/images/ProfileImages/Jesses_dog.jpg" data-lightbox="images"
-		title="Jesse's dog as a placeholder" class="large image"><img
-		src="/Assets/images/ProfileImages/Jesses_dog_thumb_250x200.jpg"
-		class="large image" /></a>
 </div>

@@ -91,9 +91,9 @@
 
 <div class="tri-col-1 empty">
 
-	<a href="/Assets/images/placeholder_4.jpg" data-lightbox="images"
-		title="Placeholder cat for Joshua Arnold" class="large image"><img
-		src="/Assets/images/placeholder_4_thumb_250x200.jpg"
+	<a href="/Assets/images/ProfileImages/JoshA.jpg" data-lightbox="images"
+		title="Joshua Arnold" class="large image"><img
+		src="/Assets/images/ProfileImages/JoshA_thumb_250x200.jpg"
 		class="large image" /></a>
 
 </div>

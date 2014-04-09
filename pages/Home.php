@@ -65,13 +65,13 @@
 		<img src="/Assets/images/Screenshots/SavannaSillohuette_thumb_125x100.jpg"
 		class="clear left image" />
 	</a>
-	<br /> 
 	Seed of Andromeda version 0.1.6 is incoming, with huge performance boosts
 	and some much needed bug fixes. One of the most immense changes Ben has made is in 
 	decoupling Physics and Player FPS, allowing for smooth control of the player even 
 	when explosives are going going off left, right and center! Our two talented artists,
 	Andreas and Georg have been working on two phenomenal texture packs, and have been adding 
 	more textures and blocks than can be listed here!
+	<br />
 	<a
 	href="/Assets/images/Screenshots/planet4.jpg" data-lightbox="images"
 	title="Aldrin" class="clear left image">

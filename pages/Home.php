@@ -57,25 +57,48 @@
 <div class="double-col">
 
 	<h3>Latest Dev News</h3>
-
-	<br /> The long awaited public release of Seed of Andromeda came near
-	the end of 2013. Serving to the players a main of realistic physics and
-	a side of bugs. Straight after this release, Ben began work on solving
-	reported bugs and bringing performance up to an even more incredible
-	standard than the initial pre-alpha release. <br /> <br /> <a
-		href="/Assets/images/Screenshots/Blossoms.jpg" data-lightbox="images"
-		title="Blossoms" class="clear left image"><img
-		src="/Assets/images/Screenshots/Blossoms_thumb_125x100.jpg"
-		class="clear left image" /></a> Meanwhile, the Seed of Andromeda
-	website got an overhaul thanks to the new Website Designer, Matthew,
-	with the assistance of Sebastian's PhotoShop skills. The initial result
-	was a huge increase in cat images and a reduction in useful
-	information. Though that has been quickly changing over the last few
-	days. <br /> <br /> Keep an eye on this space, as within the next few
-	weeks you will be seeing updates on the game. In the mean time, have a
-	good new year and if you haven't already, drop in to the IRC and say hi
-	to fellow SoA supporters and the dev team! Also don't forget the Steam
-	group where we occasionally organise games of Civilization V and
-	Planetside 2!
-
+	<br /> 
+	
+	<a
+	href="/Assets/images/Screenshots/SavannaSillohuette.jpg" data-lightbox="images"
+	title="Sillohuette of the Savanna" class="clear left image">
+		<img src="/Assets/images/Screenshots/SavannaSillohuette_thumb_125x100.jpg"
+		class="clear left image" />
+	</a>
+	<br /> 
+	Seed of Andromeda version 0.1.6 is incoming, with huge performance boosts
+	and some much needed bug fixes. One of the most immense changes Ben has made is in 
+	decoupling Physics and Player FPS, allowing for smooth control of the player even 
+	when explosives are going going off left, right and center! Our two talented artists,
+	Andreas and Georg have been working on two phenomenal texture packs, and have been adding 
+	more textures and blocks than can be listed here!
+	<a
+	href="/Assets/images/Screenshots/planet4.jpg" data-lightbox="images"
+	title="Aldrin" class="clear left image">
+		<img src="/Assets/images/Screenshots/planet4_thumb_125x100.jpg"
+		class="clear left image" />
+	</a>
+	<br /> 
+	On the website side of the coin, Matthew is currently working on setting up the new
+	forum system, while Jesse has been optimising the sites code to make everything a
+	much greater experience for users - no matter their internet connection (dial-up 
+	excluded!).
+	<br /> 
+	<a
+	href="/Assets/images/Screenshots/Kolasi.jpg" data-lightbox="images"
+	title="Kolasi" class="clear left image">
+		<img src="/Assets/images/Screenshots/Kolasi_thumb_125x100.jpg"
+		class="clear left image" />
+	</a>
+	<br />
+	Our designers have been pondering the depths of game mechanics, and some of this can be
+	seen in Anthony's blogs showing off the method by which our worlds will develop and behave! 
+	Sebastian has been working on some concepts for the PDA - a core component of the player-game 
+	interaction.
+	<br />
+	<br />
+	In the time between work, we have also been having a game of Civilisation which is 
+	drawing to a close, so be on the lookout in the IRC and in the Steam group for announcements of 
+	when we will be starting another game - we will be looking to play a large game after our exams 
+	no doubt!
 </div>

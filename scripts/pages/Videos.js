@@ -35,7 +35,7 @@ $(document).ready(function () {
 
 	        $('.temp-iframe').attr('src', src);
 	        $('html, body').animate({
-	            scrollTop: $("#video-frame-inner").offset().top - 100
+	            scrollTop: $("#video-frame-inner").offset().top - 150
 	        }, 1000);
 
 	        $('.enlarged-iframe').fadeOut(0, function () {

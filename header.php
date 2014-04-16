@@ -91,7 +91,7 @@ if (file_exists ( $pagestyle )) {
 
 
 <!-- Downloads Tracking -->
-
+<!-- Task completed by Cloud Flare script
 <script type="text/javascript">
 if (typeof jQuery != 'undefined') {
   jQuery(document).ready(function($) {
@@ -146,7 +146,7 @@ if (typeof jQuery != 'undefined') {
   });
 }
 </script>
-
+-->
 <!-- Downloads Tracking END -->
 </head>
 

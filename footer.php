@@ -1,5 +1,5 @@
-</div>
-<div class="bottomimg"></div>
+	</div></div></div></div></div></div></div>
+	</div>
 
 </div>
 
@@ -99,93 +99,6 @@ if (typeof jQuery != 'undefined') {
 </script>
 
 <!-- Downloads Tracking END -->
-
-<div class="cover registration-cover" style="display: none;">
-
-	<div class="registration-form">
-
-		<div class="close"></div>
-
-		<div class="registration-outer">
-
-			<h2>Create Account</h2>
-
-			<form name="create" action="/Register_Function.php" method="post">
-
-				<table>
-
-					<tr>
-
-						<td><h4>First Name*</h4></td>
-
-						<td><input type="text" maxlength="40" id="reg_first_name"
-							name="reg_first_name" placeholder="First Name" /></td>
-
-					</tr>
-
-					<tr>
-
-						<td><h4>Last Name*</h4></td>
-
-						<td><input type="text" maxlength="40" id="reg_last_name"
-							name="reg_last_name" placeholder="Last Name" /></td>
-
-					</tr>
-
-					<tr>
-
-						<td><h4>Email Address*</h4></td>
-
-						<td><input type="text" maxlength="100" id="reg_email"
-							name="reg_email" placeholder="Email" /></td>
-
-					</tr>
-
-					<tr>
-
-						<td><h4>User Name*</h4></td>
-
-						<td><input type="text" maxlength="40" id="reg_username"
-							name="reg_username" placeholder="User Name" /></td>
-
-					</tr>
-
-					<tr>
-
-						<td><h4>Password*</h4></td>
-
-						<td><input type="password" maxlength="40" id="reg_password"
-							name="reg_password" placeholder="Password" /></td>
-
-					</tr>
-
-					<tr>
-
-						<td><h4>Confirm Password*</h4></td>
-
-						<td><input type="password" maxlength="40"
-							id="reg_confirm_password" name="reg_confirm_password"
-							placeholder="Password" /></td>
-
-					</tr>
-
-					<tr>
-
-						<td></td>
-
-						<td><input style="float: right;" type="button"
-							onClick="validate_create();" value="Create Account" /></td>
-
-					</tr>
-
-				</table>
-			</form>
-
-		</div>
-
-	</div>
-
-</div>
 
 </body>
 </html>

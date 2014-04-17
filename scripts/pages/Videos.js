@@ -6,7 +6,7 @@ $(document).ready(function () {
 	           //console.log(data.data.items[i]);
 	       	var check = (i % 3)+1;
 	    	var  html = '<div class="video-col tri-col-'+check+' empty"><img src="'+data.data.items[i].thumbnail.hqDefault+'" data-id="'+data.data.items[i].id+'" title="'+data.data.items[i].title+'" class="video" /><div class="video-play" title="'+data.data.items[i].title+'"></div></div>';
-	    	$('#content-outer').append(html);
+	    	$('.final_content_border').append(html);
 	    }
 	    var elem;
 

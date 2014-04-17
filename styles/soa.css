@@ -64,7 +64,7 @@
 }
 
 #main #content-outer div.right {
-	margin-right: 80px;
+	margin-right: 51px;
 	margin-left: 0;
 }
 
@@ -111,10 +111,6 @@ body {
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-color: #000000;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
 	margin: 0;
 	height: 100%;
 	-webkit-background-size: cover
@@ -158,7 +154,7 @@ div {
 }
 
 #main {
-	width: 1105px;
+	width: 1054px;
 	height: 100%;
 	margin: 0 auto;
 	margin-top: 0;
@@ -172,7 +168,7 @@ div {
 	width: 650px;
 	height: 260px;
 	overflow: hidden;
-	margin-left: 190px;
+	margin-left: 150px;
 	background-image: url("/Assets/images/SOASprite.png");
 	background-position: -10px -654px;
 	background-repeat: no-repeat;
@@ -185,13 +181,59 @@ div {
 #content-outer {
 	width: 100%;
 	height: auto;
-	background: url("/Assets/images/CentreContentBox.png");
-	background-repeat: repeat-y;
+	border-radius: 8px;
+	background: url("/Assets/images/content_pattern.png");
+	background-repeat: repeat;
 	z-index: 1;
-	padding-bottom: 45px;
+	margin-top: 50px;
 }
+	
+	.content_border3 {
+		border: 1px solid rgb(221,221,221);
+		border-radius: 8px;
+		height: auto;
+		background: none;
+		box-shadow: 0;
+		margin-top: 0px;
+		padding: 0px;
+	}
+	
+	.content_border2 {
+		border: 1px solid rgb(181,181,181);
+		border-radius: 8px;
+		height: auto;
+		background: none;
+		box-shadow: 0;
+		margin-top: 0px;
+		padding: 0px;
+	}
+	
+	.content_border1 {
+		border: 1px solid rgb(141,141,141);
+		border-radius: 8px;
+		height: auto;
+		background: none;
+		box-shadow: 0;
+		margin-top: 0px;
+		padding: 0px;
+	}
+	
+	.content_border0 {
+		border: 1px solid rgb(102,102,102);
+		border-radius: 8px;
+		height: auto;
+		background: none;
+		box-shadow: 0;
+		margin-top: 0px;
+		padding: 0px;
+	}
+	
+	.final_content_border {
+		padding-top: 40px;
+		padding-bottom: 45px;
+	}
 
-.topimg {
+/*.topimg {
 	background-image: url("/Assets/images/SOASprite.png");
 	background-repeat: no-repeat;
 	background-position: -10px -56px;
@@ -202,9 +244,9 @@ div {
 	border: none;
 	top: 0;
 	box-shadow: none;
-}
+}*/
 
-.bottomimg {
+/*.bottomimg {
 	background-image: url("/Assets/images/SOASprite.png");
 	background-repeat: no-repeat;
 	background-position: -10px -183px;
@@ -215,9 +257,9 @@ div {
 	margin: 0;
 	box-shadow: none;
 	z-index: -1;
-}
+}*/
 
-#content-outer>div {
+.final_content_border > div {
 	background: rgba(0, 0, 0, 0.55);
 	border: 1px solid #39AECF;
 	box-shadow: 0px 0px 10px 5px rgba(57, 174, 207, 0.5);
@@ -229,14 +271,14 @@ div {
 	padding: 10px 10px;
 }
 
-#content-outer>div.empty {
+.final_content_border>div.empty {
 	border: none;
 	background: none;
-	padding: 0px, 25px, 0px, 0px;
+	padding: 0;
 	box-shadow: none;
 }
 
-#content-outer>div>h3 {
+.final_content_border>div>h3 {
 	margin-top: 0;
 	margin-bottom: 0.5em;
 }
@@ -245,7 +287,7 @@ div {
 	color: white;
 }
 
-#content-outer>div>img,#content-outer>div>a>img {
+.final_content_border>div>img,.final_content_border>div>a>img {
 	border: 2px solid #39AECF;
 	width: 125px;
 	height: 100px;
@@ -313,7 +355,7 @@ div {
 
 /**************/
 #nav-bar {
-	width: 1102px;
+	width: 100%;
 	height: 44px;
 	background-image: url("/Assets/images/SOASprite.png");
 	background-position: 0px 0px;
@@ -323,7 +365,7 @@ div {
 
 #nav-bar.navigation-fixed {
 	position: fixed;
-	width: 1102px;
+	width: 1054px;
 	margin-top: 0px;
 	top: 0px;
 }
@@ -419,6 +461,11 @@ div {
 #navigation li.active a {
 	background-image: url("/Assets/images/SOASprite.png");
 	background-position: 0px -552px;
+}
+
+#navigation li.active:last-child a {
+    background-image: url("/Assets/images/SOASprite.png");
+    background-position: 0px -512px;
 }
 
 #navigation>li.active a {
@@ -763,56 +810,56 @@ ul.accountOptions li a {
 .dual-col-1 {
 	display: inline-block;
 	position: static;
-	width: 416px;
-	margin-left: 92px;
+	width: 433px;
+	margin-left: 51px;
 	clear: none;
 }
 
 .dual-col-2 {
 	display: inline-block;
 	position: static;
-	width: 416px;
+	width: 433px;
 	float: right;
-	margin-right: 92px;
+	margin-right: 51px;
 	clear: none;
 }
 
 .double-col {
-	width: 899px;
-	margin-left: 92px;
+	width: 919px;
+	margin-left: 51px;
 }
 
 /* RECOMENDATION: Do not use this without first introducing a break between this and a dual column format - else format chaos will ensue! */
 .tri-col-1 {
 	display: inline-block;
 	position: static;
-	width: 269px;
-	margin-left: 92px;
+	width: 271px;
+	margin-left: 51px;
 	clear: none;
 }
 
 .tri-col-2 {
 	display: inline-block;
 	position: static;
-	width: 269px;
-	margin-left: 56px;
+	width: 271px;
+	margin-left: 30px;
 	clear: none;
 }
 
 .tri-col-3 {
 	display: inline-block;
 	position: static;
-	width: 269px;
+	width: 271px;
 	float: right;
-	margin-right: 92px;
+	margin-right: 51px;
 	clear: none;
 }
 
 .tri-double-col {
 	display: inline-block;
 	position: static;
-	width: 582px;
-	margin-left: 92px;
+	width: 614px;
+	margin-left: 51px;
 	clear: none;
 }
 
@@ -822,31 +869,31 @@ ul.accountOptions li a {
 
 /* RECOMENDATION: Do not use this without first introducing a break between this and a dual or tri column format - else format chaos will ensue! */
 .quad-col-1 {
-	width: 180px;
+	width: 190px;
 	height: auto;
-	margin-left: 92px;
+	margin-left: 51px;
 	text-align: center;
 }
 
 .quad-col-2 {
-	width: 180px;
+	width: 190px;
 	height: auto;
-	margin-left: 36px;
+	margin-left: 30px;
 	text-align: center;
 }
 
 .quad-col-3 {
-	width: 180px;
+	width: 190px;
 	height: auto;
-	margin-left: 37px;
+	margin-left: 30px;
 	text-align: center;
 }
 
 .quad-col-4 {
-	width: 180px;
+	width: 190px;
 	height: auto;
 	float: right;
-	margin-right: 95px;
+	margin-right: 51px;
 	text-align: center;
 }
 

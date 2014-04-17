@@ -1,5 +1,5 @@
 #content-outer .video-col > img {
-    width: 291px;
+    width: 271px;
     height: 169px;
     box-sizing: border-box;
     border: 1px #39AECF solid;
@@ -8,12 +8,16 @@
     transition: box-shadow .2s linear;
 }
 
+#content-outer .video-col.tri-col-2 {
+    margin-left: 62px !important;
+}
+
 #video-frame-inner {
     width: 700px;
     height: 393px;
     background: rgba(255,255,255,0.2);
     overflow: hidden;
-    margin-left: 98px;
+    margin-left: 107px;
     float: none;
     border: 2px #39AECF solid;
 }

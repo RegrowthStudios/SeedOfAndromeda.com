@@ -3,9 +3,18 @@
     height: 480px;
     background: rgba(255,255,255,0.2);
     overflow: hidden;
-    margin-left: 98px;
+    margin-left: 107px;
     float: none;
     border: 2px #39AECF solid;
+}
+
+#content-outer .image-col {
+    width: 202px !important;
+    margin-left: 43px;
+}
+
+#content-outer .quad-col-1 {
+    margin-left: 51px !important;
 }
 
 #content-outer .image-col > img {

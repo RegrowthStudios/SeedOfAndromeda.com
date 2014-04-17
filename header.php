@@ -282,7 +282,12 @@ if (file_exists ( $pagestyle )) {
 							?>
             </div>
 
-		<div class="topimg"></div>
-
 
 		<div id="content-outer">
+			<div class="content_border0" style="width:1053px;">
+			<div class="content_border1" style="width:1051px;">
+			<div class="content_border2" style="width:1049px;">
+			<div class="content_border3" style="width:1047px;">
+			<div class="content_border2" style="width:1045px;">
+			<div class="content_border1" style="width:1043px;">
+			<div class="final_content_border content_border0" style="width:1041px;">

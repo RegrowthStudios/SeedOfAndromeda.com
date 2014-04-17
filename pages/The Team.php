@@ -195,3 +195,23 @@
 	experience and bring a unique way of tackling the challenges of such a
 	project as this.
 </div>
+
+<div class="tri-double-col team-info">
+
+	<h3 class="team-name">Patrick Cavanagh</h3>
+
+	<span class="team-title">Community Manager</span> Patrick is our first 
+	community manager, he runs most - no doubt, soon, all - of our social media groups 
+	and is also the youngest of the team! He is known for his ability for eloquence and 
+	for understanding the wants and needs of the community with ease. He rules with a 
+	feathery fist of iron, so be warned - don't antagonise him, or a soft tickle may turn deadly.
+</div>
+
+<div class="tri-col-3 empty">
+
+	<a href="/Assets/images/ProfileImages/PatrickC.jpg"
+		data-lightbox="images" title="Patrick Cavanagh" class="large image"><img
+		src="/Assets/images/ProfileImages/PatrickC_thumb_250x200.jpg"
+		class="large image" /></a>
+
+</div>

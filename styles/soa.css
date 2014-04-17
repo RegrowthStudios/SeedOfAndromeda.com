@@ -799,7 +799,7 @@ ul.accountOptions li a {
 
 #accountBar .register:hover,#accountBar .register:active {
 	cursor: pointer;
-	color: palevioletred;
+	color: paleviolet;
 }
 
 /**********/
@@ -827,6 +827,10 @@ ul.accountOptions li a {
 .double-col {
 	width: 919px;
 	margin-left: 51px;
+}
+
+.double-col.empty {
+    width: 941px;
 }
 
 /* RECOMENDATION: Do not use this without first introducing a break between this and a dual column format - else format chaos will ensue! */

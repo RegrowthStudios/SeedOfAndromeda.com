@@ -51,12 +51,11 @@ if (isset($_REQUEST ['loginerror'])) {
 	
 	echo "<script type='text/javascript'>
 
-                         window.onload = function() { alert('Invalid User Name or Password!'); }
+                         window.onload = function() { alert('" . addslashes ( $_REQUEST ['loginerror'] ) . "'); }
 
                      </script>";
 }
-
-if (isset($_REQUEST ['logouterror'])) {
+if (isset ( $_REQUEST ['logouterror'] )) {
 	
 	echo "<script type='text/javascript'>
 
@@ -260,7 +259,7 @@ if (typeof jQuery != 'undefined') {
 					<ul class="dropdown">
 
 						<li <?php if($cleanpageid == "forums"){ ?> class='active'><a
-							href="#"> <?php } else { ?> > <a href="/Forums/"> <?php } ?> Forums</a></li>
+							href="#"> <?php } else { ?> > <a href="/community/"> <?php } ?> Forums</a></li>
 
 						<li <?php if($cleanpageid == "mods"){ ?> class='active'><a
 							href="#"> <?php } else { ?> > <a href="/underconstruction"> <?php } ?> Mods</a></li>
@@ -283,7 +282,7 @@ if (typeof jQuery != 'undefined') {
 			</ul>
     			<?php
 							
-							if (! ($MyBBI->isLoggedIn ())) 
+							if (! $loggedIn) 
 
 							{
 								
@@ -298,10 +297,10 @@ if (typeof jQuery != 'undefined') {
 
 					<div id='break' class='five'></div>
 
-					<form method='post' action='/Login_Function.php'>
+					<form method='post' action='/community/login/login'>
 
 						<span>Username:</span> <input type='text'
-							style="padding-right: 0;" id="username" name='username'
+							style="padding-right: 0;" id="username" name='login'
 							placeholder="Username" /> <br />
 						<div id='break' class='five'></div>
 
@@ -309,14 +308,16 @@ if (typeof jQuery != 'undefined') {
 							style="padding-right: 0;" id='password' name='password'
 							placeholder="Password" /> <br /> <span>Remember Me:</span> <input
 							type='checkbox' style="padding-right: 0;" name='remember' /> <br />
-
-						<input type='submit' name='submit' value='submit'
-							onClick='prepare_login();' class="left" />
+						<input type="hidden" name="cookie_check" value="1"> <input
+							type="hidden" name="redirect" value="/<?php echo $pageurl;?>">
+						<input type="hidden" name="_xfToken" value=""> <input
+							type='submit' value='submit' onClick='prepare_login();'
+							class="left" />
 
 					</form>
 
 					<div class='register'>
-						<a href="/Forums/member.php?action=register">or Register Now!</a>
+						<a href="/community/register/">or Register Now!</a>
 					</div>
 
 				</div>
@@ -333,20 +334,27 @@ if (typeof jQuery != 'undefined') {
                 <div id='accountBar'>
 
 				<img
-					src='<?php echo ($MyBBI->mybb->user['avatar'] == "" ? "/Assets/images/DefaultUser_ProfImg.png" : (($MyBBI->mybb->user['avatartype'] == "remote" ? "" : "/Forums/") .$MyBBI->mybb->user['avatar'])); ?>'
+					src='/community/avatar.php?userid=<?php echo $userinfo['user_id']; ?>&size=s'
 					height="35" width="35" />
 
-				<div class='accountsName'><?php echo $MyBBI->mybb->user['username']; ?></div>
+				<div class='accountsName'><?php echo $userinfo['username']; ?></div>
 
-				<div class='accountAlerts'><?php echo $MyBBI->mybb->user['unreadpms']; ?></div>
+				<div class='accountAlerts'><?php echo $userinfo['alerts_unread']+$userinfo['conversations_unread']; ?></div>
 
 				<ul class='accountOptions'>
 
-					<li><a href='/Forums/member.php?action=profile'>My Profile</a></li>
+					<li><a
+						href='<?php echo XenForo_Link::buildPublicLink("canonical:account/alerts");?>'>Alerts (<?php echo $userinfo['alerts_unread']; ?>)</a></li>
+					<li><a
+						href='<?php echo XenForo_Link::buildPublicLink("canonical:conversations");?>'>Inbox (<?php echo $userinfo['conversations_unread']; ?>)</a></li>
 
-					<li><a href='/Forums/private.php'>Inbox (<?php echo $MyBBI->mybb->user['unreadpms']; ?>)</a></li>
+					<li><a
+						href='<?php echo XenForo_Link::buildPublicLink("canonical:account");?>'>My
+							Account</a></li>
 
-					<li><a class="logout" href='/Logout.php'>Log Out</a></li>
+					<li><a class="logout"
+						href='<?php echo XenForo_Link::buildPublicLink("canonical:logout", $userinfo, array('_xfToken' => $visitor['csrf_token_page'], 'redirect' => '/'.$pageurl));?>'>Log
+							Out</a></li>
 
 				</ul>
 

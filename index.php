@@ -1,11 +1,11 @@
 <?php
-define ( 'IN_MYBB', 1 );
+require_once('community/XenForoSDK.php');
+$sdk = new XenForoSDK;
 
-require_once 'Forums/global.php';
+$loggedIn = $sdk->isLoggedIn();
+$userinfo = $sdk->getUser();
+$visitor = $sdk->getVisitor();
 
-require_once 'class.MyBBIntegrator.php';
-
-$MyBBI = new MyBBIntegrator ( $mybb, $db, $cache, $plugins, $lang, $config );
 
 $pagetitle = "SoA - ";
 $pagename = "";

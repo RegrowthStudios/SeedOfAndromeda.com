@@ -3,7 +3,7 @@
 
 </div>
 
-<div id="footer">Copyright &copy; <?php echo date(Y); ?> SeedofAndromeda.com</div>
+<div id="footer">Copyright &copy; <?php echo date("Y"); ?> SeedofAndromeda.com</div>
 
 <!-- AddThis Smart Layers BEGIN -->
 
@@ -38,7 +38,6 @@
 </script>
 
 <!-- Google Analytics END-->
-
 
 </body>
 </html>

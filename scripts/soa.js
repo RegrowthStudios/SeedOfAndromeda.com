@@ -118,32 +118,6 @@ function validate_create()
 
 }
 
-function prepare_login()
-
-{
-
-	var currURL = document.URL;
-
-	if (currURL.length < 31) {
-
-		return true;
-
-	}
-
-	var shortenedURL = currURL.substring(31);
-
-	if (shortenedURL == "?loginerror=invalid"
-			|| shortenedURL == "inerror=invalid") {
-		return true;
-	}
-
-	$(".accountLog form").get(0).setAttribute('action',
-			("/Login_Function.php?prev=" + shortenedURL));
-
-	return true;
-
-}
-
 $(document).ready(function() {
 
 	if (document.images) {
@@ -153,22 +127,6 @@ $(document).ready(function() {
 		img1.src = "/Assets/images/closeImage_Hover.png";
 
 	}
-
-});
-
-$(document).ready(function() {
-
-	var currURL = document.URL;
-
-	if (currURL.length < 31) {
-
-		return;
-
-	}
-
-	var shortenedURL = currURL.substring(31);
-
-	$(".logout").attr("href", "/Logout.php?prev=" + shortenedURL);
 
 });
 

@@ -45,7 +45,7 @@
 	type="text/javascript"></script>
 <script src="/scripts/lightbox-2.6.js"></script>
 <link href="/styles/lightbox.css" rel="stylesheet" />
-<script src="/scripts/soa.js?ver=4"></script><?php
+<script src="/scripts/soa.js?ver=5"></script><?php
 
 if (isset($_REQUEST ['loginerror'])) {
 	

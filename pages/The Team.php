@@ -1,7 +1,7 @@
 
 <div class="tri-double-col team-info">
 
-	<h3 class="team-name">Benjamin Arnold</h3>
+    <h3 class="team-name">Benjamin Arnold</h3>
 
 	<span class="team-title">Lead Developer</span> Ben is the brain power
 	of the team, he has developed all the code that powers the game and is
@@ -194,7 +194,7 @@
 
 <div class="tri-double-col team-info">
 
-	<h3 class="team-name">Patrick Cavanagh</h3>
+    <h3 class="team-name">Patrick Cavanagh</h3>
 
 	<span class="team-title">Community Manager</span> Patrick is our first 
 	community manager, he runs most - no doubt, soon, all - of our social media groups 

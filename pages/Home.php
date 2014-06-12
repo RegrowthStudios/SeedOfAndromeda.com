@@ -1,7 +1,7 @@
 
 <div class="double-col">
 
-	<a href="/Assets/images/Screenshots/Mountains.jpg"
+    <a href="/Assets/images/Screenshots/Mountains.jpg"
 		data-lightbox="images" title="Mountains" class="clear right image"><img
 		src="/Assets/images/Screenshots/Mountains_thumb_125x100.jpg"
 		class="clear right image" /></a>

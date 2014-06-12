@@ -16,6 +16,7 @@ RewriteCond %{REQUEST_URI} !^Forums/
 RewriteRule ^(.*)$  /index.php?page=$1 [QSA,L]
 
 
+
 #########################
 
 # redirect no-www to www
@@ -25,3 +26,6 @@ RewriteRule ^(.*)$  /index.php?page=$1 [QSA,L]
 RewriteCond %{HTTP_HOST} !^www\.seedofandromeda\.com$ [NC]
 RewriteCond %{HTTP_HOST} !^www\.soatest\.local$ [NC]
 RewriteRule ^(.*)$ http://www.seedofandromeda.com/$1 [R=301,L]
+
+#Redirect old download location to new one with counter:
+Redirect /SeedofAndromeda/Game/Versions/ /files/game/

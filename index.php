@@ -61,9 +61,13 @@ switch ($cleanpageid) {
 	// $pagetitle .= "Reddit";
 	// $pagename = "";
 	// break;
-	case "underconstruction" :
+    case "underconstruction" :
 		$pagetitle = "Under Construction";
 		$pagename = "Under Construction.php";
+		break;
+	case "maintenance" :
+		$pagetitle = "Maintenance";
+		$pagename = "Maintenance.php";
 		break;
 	case "login" :
 		$pagetitle = "Log in";

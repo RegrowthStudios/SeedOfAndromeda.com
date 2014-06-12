@@ -1,6 +1,6 @@
 <div id="single-blog" class="double-col empty">
     <div id="blog-post-header">
-		<p>Matthew's Musings: Crafting, Research and Intergroup Cooperation - Volume I</p>
+    	<p>Matthew's Musings: Crafting, Research and Intergroup Cooperation - Volume I</p>
   	</div>
   	<div id="blog-post-body" style="padding-top:40px;">
 		<a

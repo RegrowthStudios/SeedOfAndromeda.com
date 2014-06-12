@@ -6,7 +6,7 @@
 <link rel="shortcut icon" type="image/x-icon"
 	href="/Assets/images/favicon.ico" />
 
-<link rel="stylesheet" href="/styles/soa.css?ver=5" type="text/css" />
+<link rel="stylesheet" href="/styles/soa.css?ver=6" type="text/css" />
 
 <link rel="stylesheet" href="/styles/Normalise.css" type="text/css" />
 
@@ -45,7 +45,7 @@
 	type="text/javascript"></script>
 <script src="/scripts/lightbox-2.6.js"></script>
 <link href="/styles/lightbox.css" rel="stylesheet" />
-<script src="/scripts/soa.js?ver=5"></script><?php
+<script src="/scripts/soa.js?ver=5"></script><?php
 
 if (isset($_REQUEST ['loginerror'])) {
 	
@@ -262,7 +262,7 @@ if (typeof jQuery != 'undefined') {
 							href="#"> <?php } else { ?> > <a href="/community/"> <?php } ?> Forums</a></li>
 
 						<li <?php if($cleanpageid == "mods"){ ?> class='active'><a
-							href="#"> <?php } else { ?> > <a href="/underconstruction"> <?php } ?> Mods</a></li>
+							href="#"> <?php } else { ?> > <a href="/community/modifications/"> <?php } ?> Mods</a></li>
 
 						<li <?php if($cleanpageid == "irc"){ ?> class='active'><a href="#"> <?php } else { ?> > <a
 								href="/irc"> <?php } ?> IRC</a></li>

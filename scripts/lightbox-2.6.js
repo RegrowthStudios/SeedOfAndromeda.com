@@ -193,8 +193,8 @@ Licensed under the Creative Commons Attribution 2.5 License - http://creativecom
           windowHeight = $(window).height();
           maxImageWidth = (windowWidth * 0.90) - _this.containerLeftPadding - _this.containerRightPadding - 20;
           maxImageHeight = (windowHeight * 0.90) - _this.containerTopPadding - _this.containerBottomPadding - 110;
-          minImageWidth = (768);
-          minImageHeight = (432);
+          minImageWidth = (windowWidth * 0.4);
+          minImageHeight = (windowHeight * 0.4);
           if ((preloader.width > maxImageWidth) || (preloader.height > maxImageHeight)) {
             if ((preloader.width / maxImageWidth) > (preloader.height / maxImageHeight)) {
               imageWidth = maxImageWidth;

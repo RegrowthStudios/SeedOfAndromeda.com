@@ -6,6 +6,23 @@
 	<br />
 
 	<h3 class="tab-tiny-indent">The Game</h3>
+    <blockquote>
+
+		<em>V0.1.6</em> - <a
+			onclick="var that=this;_gaq.push(['_trackEvent','Download','ZIP',this.href]);setTimeout(function(){location.href=that.href;},400);return false;"
+			href="http://seedofandromeda.com/SeedofAndromeda/Game/Versions/0.1.6/SOA_0.1.6.zip">Link</a>
+
+		<div>
+			<blockquote>This build introduces a huge performance boost! Instead
+                of 1 thread doing both physics and rendering, we split it into two threads! 
+                Stutter should be almost non-existent as long as your graphics card can 
+                handle it! We also have some new blocks and bugfixes!</blockquote>
+		</div>
+
+	</blockquote>
+
+	<br />
+    
 	<blockquote>
 
 		<em>V0.1.5</em> - <a

@@ -1,6 +1,6 @@
 
 <div class="double-col empty">
-	<div id="blog-post-header">
+    <div id="blog-post-header">
 
 		<p>Crafting, Research and Intergroup Cooperation - Volume I.I</p>
 
@@ -43,7 +43,7 @@
 		</p>
 
 	</div>
-	
+    
 </div>
 <div class="double-col empty">
 	

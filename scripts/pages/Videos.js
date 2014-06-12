@@ -1,5 +1,5 @@
 $(document).ready(function () {
-	$.getJSON('https://gdata.youtube.com/feeds/api/videos?author=UCMlW2qG20hcFYo06rcit4CQ&max-results=48&v=2&alt=jsonc&orderby=published', function(data) {
+    $.getJSON('https://gdata.youtube.com/feeds/api/videos?author=UCMlW2qG20hcFYo06rcit4CQ&max-results=48&v=2&alt=jsonc&orderby=published', function(data) {
 	    for(var i=0; i<data.data.items.length; i++) {
 	       //console.log(data.data.items[i].title); // title
 	       //console.log(data.data.items[i].description); // description

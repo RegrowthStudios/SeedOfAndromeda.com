@@ -13,8 +13,12 @@ $pagename = "";
 if (! isset ( $_REQUEST ['page'] )) {
 	$_REQUEST ['page'] = "index";
 }
-$cleanpageid = preg_replace ( "/[^\/A-Za-z0-9_\-]/", '', str_replace ( ".php", "", strtolower ( $_REQUEST ['page'] ) ) );
+$cleanpageid = clean_pageid ( $_REQUEST ['page'] );
 $pageurl = $cleanpageid;
+if (startsWith ( $cleanpageid, "blogs/" )) {
+	$pageurl = "blogs/" . substr ( $cleanpageid, 6 );
+	$cleanpageid = "blogs/";
+}
 switch ($cleanpageid) {
 	case "index" :
 		$pagetitle = "Seed of Andromeda";
@@ -49,8 +53,48 @@ switch ($cleanpageid) {
 	// $pagetitle = "Store";
 	// $pagename = "";
 	// break;
-	case "blogs" :
+	case "blogs/" :
+		require_once ("db_connect.php");
+		$pagename = "Blogs.php";
+		$cleanpageid = $pageurl;
+		if (isset ( $connection )) {
+			$currentblogpostlink = substr ( $pageurl, 6 );
+			$arr = explode ( "-",$currentblogpostlink , 1 );
+			if (count ( $arr ) == 0) {
+				$pagename = "";
+			} else {
+				$postid = preg_replace ( "/[^0-9]/", '', $arr [0] );
+				if ($postid == "") {
+					$pagename = "";
+				} else {
+					$query = $connection->prepare ( "SELECT * FROM blog_posts WHERE id = ?" );
+					$query->execute ( array (
+							$postid 
+					) );
+					$blogpost = $query->fetch ();
+					if (! $blogpost) {
+						$pagename = "";
+					} else {
+						$newpostlink = gen_postlink ( $blogpost );
+						if ($currentblogpostlink != $newpostlink) {
+							$pageurl = "blogs/" . $newpostlink;
+						}
+						$pagetitle .= $blogpost ["title"];
+						unset ( $query );
+					}
+				}
+			}
+		}else{
+			$pagetitle .= "Maintenance";
+			$pagename = "Maintenance.php";
+		}
+
+		//var_dump(get_defined_vars());
+		//die();
+		break;
 	case "devlog" :
+	case "blogs" :
+		require_once ("db_connect.php");
 		$pagetitle .= "Blogs";
 		$pagename = "Blogs.php";
 		break;
@@ -63,30 +107,30 @@ switch ($cleanpageid) {
 	// $pagename = "";
 	// break;
 	case "underconstruction" :
-		$pagetitle = "Under Construction";
+		$pagetitle .= "Under Construction";
 		$pagename = "Under Construction.php";
 		break;
 	case "maintenance" :
-		$pagetitle = "Maintenance";
+		$pagetitle .= "Maintenance";
 		$pagename = "Maintenance.php";
 		break;
 	case "login" :
-		$pagetitle = "Log in";
+		$pagetitle .= "Log in";
 		$pagename = "Login.php";
 		break;
 	// Blogs:
 	case "blog" :
 	case "blogs/creating-a-region-file-system-for-a-voxel-game" :
-		$pagetitle = "Creating a Region File System for a Voxel Game";
+		$pagetitle .= "Creating a Region File System for a Voxel Game";
 		$pagename = "blogs/BenA_1.php";
 		$pageurl = "blogs/creating-a-region-file-system-for-a-voxel-game";
 		break;
 	case "blogs/designing-the-world-character" :
-		$pagetitle = "Designing the World Character";
+		$pagetitle .= "Designing the World Character";
 		$pagename = "blogs/Anthony_1.php";
 		break;
 	case "blogs/crafting-research-and-intergroup-cooperation-volume-one-part-one" :
-		$pagetitle = "Crafting, Research and Intergroup Cooperation - Volume I.I";
+		$pagetitle .= "Crafting, Research and Intergroup Cooperation - Volume I.I";
 		$pagename = "blogs/Matthew_1.php";
 		break;
 }
@@ -115,6 +159,12 @@ if ($page_exists) {
 if (! isset ( $_REQUEST ['notemplate'] )) {
 	include ("footer.php");
 }
+function clean_pageid($pageid) {
+	return preg_replace ( "/[^\/A-Za-z0-9_\-]/", '', str_replace ( ".php", "", strtolower ( $pageid ) ) );
+}
+function gen_postlink($row) {
+	return $row ["id"] . '-' . clean_pageid ( $row ["title"] );
+}
 function dsq_hmacsha1($data, $key) {
 	$blocksize = 64;
 	$hashfunc = 'sha1';
@@ -126,14 +176,24 @@ function dsq_hmacsha1($data, $key) {
 	$hmac = pack ( 'H*', $hashfunc ( ($key ^ $opad) . pack ( 'H*', $hashfunc ( ($key ^ $ipad) . $data ) ) ) );
 	return bin2hex ( $hmac );
 }
-function echo_disqus() {
+function echo_disqus($title = "", $url = "", $id = "") {
 	global $loggedIn, $userinfo, $visitor, $pagetitle, $cleanpageid, $pageurl;
+
+	if($title == ""){
+		$title = $pagetitle;
+	}
+	if($url == ""){
+		$url = $pageurl;
+	}
+	if($id == ""){
+		$id = $cleanpageid;
+	}
 	
 	echo '<div id="disqus_thread" class="double-col empty"></div><script type="text/javascript">
     var disqus_shortname = "seedofandromeda";
-    var disqus_identifier = "' . $cleanpageid . '";
-    var disqus_title = "' . $pagetitle . '";
-    var disqus_url = "http://www.seedofandromeda.com/' . $pageurl . '";';
+    var disqus_identifier = "' . $id . '";
+    var disqus_title = "' . $title . '";
+    var disqus_url = "http://www.seedofandromeda.com/' . $url . '";';
 	if ($loggedIn && false) { // Disable SSO until Disqus creates a new SSO domain for SoA site
 		$data = array (
 				"id" => $userinfo ['user_id'],
@@ -160,7 +220,11 @@ function echo_disqus() {
 	Please enable JavaScript to view the <a
 		href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
 </noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span
-	class="logo-disqus">Disqus</span></a>
 <?php
+}
+function startsWith($haystack, $needle) {
+	return $needle === "" || strpos ( $haystack, $needle ) === 0;
+}
+function endsWith($haystack, $needle) {
+	return $needle === "" || substr ( $haystack, - strlen ( $needle ) ) === $needle;
 }

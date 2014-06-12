@@ -96,3 +96,12 @@ local.properties
 #OS junk files
 [Tt]humbs.db
 *.DS_Store
+
+#Block test
+blocks/**/*.png
+blocks/BlockData.ini
+blocks/BlockData_old.ini
+
+#Downloads
+files/game/
+files/updater/

@@ -1,7 +1,7 @@
 <?php
 if (isset ( $connection )) {
 	if (isset ( $blogpost )) {
-		
+		$author = $sdk->getUser ($blogpost["author"]);
 		?>
 
 <div id="single-blog" class="double-col empty">
@@ -12,7 +12,7 @@ if (isset ( $connection )) {
 		<?php echo $blogpost["post_body"];?>
 	</div>
 	<div id="blog-post-footer">
-		<p><?php echo $blogpost["author"];?></p>
+		<p><?php echo $author["username"]." - ".$author["custom_title"];?></p>
 	</div>
 </div>
 <?php

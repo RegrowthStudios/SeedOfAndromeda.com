@@ -39,7 +39,7 @@
 	<div id="blog-post-footer">
 
 		<p>
-			<a href="/blogs/crafting-research-and-intergroup-cooperation-volume-one-part-one">Read More...</a>
+			<a href="/blogs/crafting-research-and-intergroup-cooperation-volume-one-part-one">Read More...</a> <small> - (<a href="http://www.seedofandromeda.com/blogs/crafting-research-and-intergroup-cooperation-volume-one-part-one#disqus_thread">Comments</a>)</small>
 		</p>
 
 	</div>
@@ -88,7 +88,7 @@
 	<div id="blog-post-footer">
 
 		<p>
-			<a href="/blogs/designing-the-world-character">Read More...</a>
+			<a href="/blogs/designing-the-world-character">Read More...</a> <small> - (<a href="http://www.seedofandromeda.com/blogs/designing-the-world-character#disqus_thread">Comments</a>)</small>
 		</p>
 
 	</div>
@@ -138,9 +138,9 @@
 
 		<p>
 			<a href="/blogs/creating-a-region-file-system-for-a-voxel-game">Read
-				More...</a>
+				More...</a>  <small> - (<a href="http://www.seedofandromeda.com/blogs/creating-a-region-file-system-for-a-voxel-game#disqus_thread">Comments</a>)</small>
 		</p>
 
 	</div>
 
-</div>
+</div><script type="text/javascript"> /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */ var disqus_shortname = 'seedofandromeda'; // required: replace example with your forum shortname /* * * DON'T EDIT BELOW THIS LINE * * */ (function () { var s = document.createElement('script'); s.async = true; s.type = 'text/javascript'; s.src = 'http://' + disqus_shortname + '.disqus.com/count.js'; (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s); }()); </script> 

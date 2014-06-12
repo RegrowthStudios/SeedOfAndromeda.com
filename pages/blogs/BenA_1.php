@@ -789,3 +789,4 @@
 
 </div>
 
+<?php echo_disqus(); ?>

@@ -127,4 +127,4 @@
     <div id="blog-post-footer">
     	<p>Matthew Marshall</p>
     </div>
-</div>
+</div><?php echo_disqus(); ?>

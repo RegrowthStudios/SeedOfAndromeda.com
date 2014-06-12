@@ -174,3 +174,4 @@
 
 	</div>
 </div>
+<?php echo_disqus(); ?>

@@ -5,25 +5,19 @@ if (isset ( $connection )) {
 		?>
 
 <div id="single-blog" class="double-col empty">
-
 	<div id="blog-post-header">
-
 		<p><?php echo $blogpost["title"];?></p>
-
 	</div>
-
 	<div id="blog-post-body" style="padding-top: 40px;">
-<?php echo $blogpost["post_body"];?>
-		<div id="blog-post-footer">
-
-			<p><?php echo $blogpost["author"];?></p>
-
-		</div>
-
+		<?php echo $blogpost["post_body"];?>
 	</div>
+	<div id="blog-post-footer">
+		<p><?php echo $blogpost["author"];?></p>
+	</div>
+</div>
 <?php
 		
-		echo_disqus ($blogpost["title"], $cleanpageurl, $blogpost["id"]);
+		echo_disqus ( $blogpost ["title"], $cleanpageurl, $blogpost ["id"] );
 	} else {
 		$query = $connection->prepare ( "SELECT * FROM blog_posts" );
 		$query->execute ();

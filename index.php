@@ -203,7 +203,7 @@ function echo_disqus($title = "", $url = "", $id = "") {
     		
     this.sso = {
           name:   "SoA Forum Login",
-          button:  "http://www.seedofandromeda.com/Assets/images/disquslogin.png",
+          button:  "http://www.seedofandromeda.com/Assets/images/disquslogin_new.png",
           url:        "' . XenForo_Link::buildPublicLink ( "canonical:login", $userinfo, array (
 			'redirect' => '/closewindow.php' 
 	) ) . '",

@@ -946,6 +946,11 @@ ul.accountOptions li a {
 	left: 25px;
 }
 
+#blog-post-header p a, #blog-post-header p a:hover
+{
+	color: white;
+}
+
 #blog-post-body {
 	width: 100%;
 	height: 300px;

@@ -1,7 +1,7 @@
 <?php
 if (isset ( $connection )) {
 	if (isset ( $blogpost )) {
-		$author = $sdk->getUser ($blogpost["author"]);
+		$author = $sdk->getUser ( $blogpost ["author"] );
 		?>
 
 <div id="single-blog" class="double-col empty">
@@ -12,14 +12,17 @@ if (isset ( $connection )) {
 		<?php echo $blogpost["post_body"];?>
 	</div>
 	<div id="blog-post-footer">
-		<p><a href="<?php echo XenForo_Link::buildPublicLink('canonical:members', $author); ?>"><?php echo $author["username"]." - ".$author["custom_title"];?></a></p>
+		<p>
+			<a
+				href="<?php echo XenForo_Link::buildPublicLink('canonical:members', $author); ?>"><?php echo $author["username"]." - ".$author["custom_title"];?></a>
+		</p>
 	</div>
 </div>
 <?php
 		
-		echo_disqus ( $blogpost ["title"], $pageurl, $blogpost ["id"] );
+		echo_disqus ( $blogpost ["title"], $pageurl, "blogs-" . $blogpost ["id"] );
 	} else {
-		$query = $connection->prepare ( "SELECT * FROM blog_posts" );
+		$query = $connection->prepare ( "SELECT * FROM blog_posts ORDER BY id DESC" );
 		$query->execute ();
 		
 		while ( $row = $query->fetch () ) {
@@ -27,17 +30,17 @@ if (isset ( $connection )) {
 			echo '
 <div class="double-col empty">
 	<div id="blog-post-header">
-		<p>' . $row ["title"] . '</p>
+		<p><a href="/blogs/' . $postlink . '">' . $row ["title"] . '</a></p>
 	</div>
 	<div id="blog-post-body">
-		<p>asd asd</p>
+		<p>' . substr ( strip_tags ( $row ["post_body"], "<b><strong><a><i><s>" ), 0, 1500 ) . ' ...</p>
 	</div>
 	<div id="blog-post-footer">
 		<p>
 			<a
 				href="/blogs/' . $postlink . '">Read
 				More...</a> <small> - (<a
-				href="http://www.seedofandromeda.com/blogs/' . $postlink . '#disqus_thread" data-disqus-identifier="' . $row ["id"] . '">Comments</a>)
+				href="http://www.seedofandromeda.com/blogs/' . $postlink . '#disqus_thread" data-disqus-identifier="blogs-' . $row ["id"] . '">Comments</a>)
 			</small>
 		</p>
 	</div>

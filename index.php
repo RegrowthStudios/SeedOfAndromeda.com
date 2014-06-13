@@ -18,6 +18,8 @@ $pageurl = $cleanpageid;
 if (startsWith ( $cleanpageid, "blogs/" )) {
 	$pageurl = "blogs/" . substr ( $cleanpageid, 6 );
 	$cleanpageid = "blogs/";
+} else if (endsWith ( $cleanpageid, "/" )) {
+	$cleanpageid = substr ( $cleanpageid, 0, strlen ( $cleanpageid ) - 1 );
 }
 switch ($cleanpageid) {
 	case "index" :
@@ -59,7 +61,7 @@ switch ($cleanpageid) {
 		$cleanpageid = $pageurl;
 		if (isset ( $connection )) {
 			$currentblogpostlink = substr ( $pageurl, 6 );
-			$arr = explode ( "-",$currentblogpostlink , 1 );
+			$arr = explode ( "-", $currentblogpostlink, 1 );
 			if (count ( $arr ) == 0) {
 				$pagename = "";
 			} else {
@@ -84,13 +86,13 @@ switch ($cleanpageid) {
 					}
 				}
 			}
-		}else{
+		} else {
 			$pagetitle .= "Maintenance";
 			$pagename = "Maintenance.php";
 		}
-
-		//var_dump(get_defined_vars());
-		//die();
+		
+		// var_dump(get_defined_vars());
+		// die();
 		break;
 	case "devlog" :
 	case "blogs" :
@@ -122,16 +124,18 @@ switch ($cleanpageid) {
 	case "blog" :
 	case "blogs/creating-a-region-file-system-for-a-voxel-game" :
 		$pagetitle .= "Creating a Region File System for a Voxel Game";
-		$pagename = "blogs/BenA_1.php";
-		$pageurl = "blogs/creating-a-region-file-system-for-a-voxel-game";
+		$pagename = "Blogs.php";
+		$pageurl = "blogs/1-creating-a-region-file-system-for-a-voxel-game";
 		break;
 	case "blogs/designing-the-world-character" :
 		$pagetitle .= "Designing the World Character";
-		$pagename = "blogs/Anthony_1.php";
+		$pagename = "Blogs.php";
+		$pageurl = "blogs/2-designing-the-world-character";
 		break;
 	case "blogs/crafting-research-and-intergroup-cooperation-volume-one-part-one" :
 		$pagetitle .= "Crafting, Research and Intergroup Cooperation - Volume I.I";
-		$pagename = "blogs/Matthew_1.php";
+		$pagename = "Blogs.php";
+		$pageurl = "blogs/3-crafting-research-and-intergroup-cooperation---volume-i";
 		break;
 }
 
@@ -163,7 +167,7 @@ function clean_pageid($pageid) {
 	return preg_replace ( "/[^\/A-Za-z0-9_\-]/", '', str_replace ( ".php", "", strtolower ( $pageid ) ) );
 }
 function gen_postlink($row) {
-	return $row ["id"] . '-' . clean_pageid ( $row ["title"] );
+	return $row ["id"] . '-' . clean_pageid ( str_replace ( " ", "-", $row ["title"] ) );
 }
 function dsq_hmacsha1($data, $key) {
 	$blocksize = 64;
@@ -178,14 +182,14 @@ function dsq_hmacsha1($data, $key) {
 }
 function echo_disqus($title = "", $url = "", $id = "") {
 	global $loggedIn, $userinfo, $visitor, $pagetitle, $cleanpageid, $pageurl;
-
-	if($title == ""){
+	
+	if ($title == "") {
 		$title = $pagetitle;
 	}
-	if($url == ""){
+	if ($url == "") {
 		$url = $pageurl;
 	}
-	if($id == ""){
+	if ($id == "") {
 		$id = $cleanpageid;
 	}
 	
@@ -193,23 +197,44 @@ function echo_disqus($title = "", $url = "", $id = "") {
     var disqus_shortname = "seedofandromeda";
     var disqus_identifier = "' . $id . '";
     var disqus_title = "' . $title . '";
-    var disqus_url = "http://www.seedofandromeda.com/' . $url . '";';
-	if ($loggedIn && false) { // Disable SSO until Disqus creates a new SSO domain for SoA site
-		$data = array (
-				"id" => $userinfo ['user_id'],
-				"username" => $userinfo ['username'],
-				"email" => $userinfo ['email'] 
-		);
-		$message = base64_encode ( json_encode ( $data ) );
-		$timestamp = time ();
-		$hmac = dsq_hmacsha1 ( $message . ' ' . $timestamp, DISQUS_SECRET_KEY );
-		echo '
+    var disqus_url = "http://www.seedofandromeda.com/' . $url . '";
+    		
 		var disqus_config = function() {
-		    this.page.remote_auth_s3 = "' . $message . ' ' . $hmac . ' ' . $timestamp . '";
-		    this.page.api_key = "' . DISQUS_PUBLIC_KEY . '";
-		}';
+    		
+    this.sso = {
+          name:   "SoA Forum Login",
+          button:  "http://www.seedofandromeda.com/Assets/images/disquslogin.png",
+          url:        "' . XenForo_Link::buildPublicLink ( "canonical:login", $userinfo, array (
+			'redirect' => '/closewindow.php' 
+	) ) . '",
+          logout:  "' . XenForo_Link::buildPublicLink ( "canonical:logout", $userinfo, array (
+			'_xfToken' => $visitor ['csrf_token_page'],
+			'redirect' => '/' . $pageurl . '#disqus_thread' 
+	) ) . '",
+          width:   "800",
+          height:  "600"
+    };
+    		';
+	$data = array ();
+	if ($loggedIn) {
+		$data = array (
+				"id" => "soa-" . $userinfo ['user_id'],
+				"username" => $userinfo ['username'],
+				"email" => $userinfo ['email'],
+				"avatar" => "http://www.seedofandromeda.com/community/avatar.php?userid=" . $userinfo ['user_id'] . "&size=l",
+				"url" => XenForo_Link::buildPublicLink ( 'canonical:members', $userinfo ) 
+		);
 	}
+	$message = base64_encode ( json_encode ( $data ) );
+	$timestamp = time ();
+	$hmac = dsq_hmacsha1 ( $message . ' ' . $timestamp, DISQUS_SECRET_KEY );
+	
+	echo "
+		    this.page.remote_auth_s3 = '" . $message . " " . $hmac . " " . $timestamp . "';
+		    this.page.api_key = '" . DISQUS_PUBLIC_KEY . "';
+		";
 	?>
+	};
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';

@@ -120,23 +120,6 @@ switch ($cleanpageid) {
 		$pagetitle .= "Log in";
 		$pagename = "Login.php";
 		break;
-	// Blogs:
-	case "blog" :
-	case "blogs/creating-a-region-file-system-for-a-voxel-game" :
-		$pagetitle .= "Creating a Region File System for a Voxel Game";
-		$pagename = "Blogs.php";
-		$pageurl = "blogs/1-creating-a-region-file-system-for-a-voxel-game";
-		break;
-	case "blogs/designing-the-world-character" :
-		$pagetitle .= "Designing the World Character";
-		$pagename = "Blogs.php";
-		$pageurl = "blogs/2-designing-the-world-character";
-		break;
-	case "blogs/crafting-research-and-intergroup-cooperation-volume-one-part-one" :
-		$pagetitle .= "Crafting, Research and Intergroup Cooperation - Volume I.I";
-		$pagename = "Blogs.php";
-		$pageurl = "blogs/3-crafting-research-and-intergroup-cooperation---volume-i";
-		break;
 }
 
 $page_exists = $pagename == "" ? false : file_exists ( "pages/" . $pagename );

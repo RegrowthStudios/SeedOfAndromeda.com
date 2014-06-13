@@ -1,6 +1,10 @@
 RewriteEngine On
 RewriteBase /
 
+RewriteRule ^blogs/creating-a-region-file-system-for-a-voxel-game$ /blogs/1-creating-a-region-file-system-for-a-voxel-game [L,R=301]
+RewriteRule ^blogs/designing-the-world-character$ /blogs/2-designing-the-world-character [L,R=301]
+RewriteRule ^blogs/crafting-research-and-intergroup-cooperation-volume-one-part-one$ /blogs/3-crafting-research-and-intergroup-cooperation---volume-i [L,R=301]
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{DOCUMENT_ROOT}/thumb\.php -f

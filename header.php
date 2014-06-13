@@ -297,7 +297,7 @@ if (typeof jQuery != 'undefined') {
 
 					<div id='break' class='five'></div>
 
-					<form method='post' action='/community/login/login'>
+					<form method='post' action='<?php echo XenForo_Link::buildPublicLink('canonical:login'); ?>'>
 
 						<span>Username:</span> <input type='text'
 							style="padding-right: 0;" id="username" name='login'
@@ -310,14 +310,14 @@ if (typeof jQuery != 'undefined') {
 							type='checkbox' style="padding-right: 0;" name='remember' /> <br />
 						<input type="hidden" name="cookie_check" value="1"> <input
 							type="hidden" name="redirect" value="/<?php echo $pageurl;?>">
-						<input type="hidden" name="_xfToken" value=""> <input
+						<input type="hidden" name="_xfToken" value="<?php isset($visitor['csrf_token_page']) ? $visitor['csrf_token_page'] : "";?>"> <input
 							type='submit' value='submit' onClick='prepare_login();'
 							class="left" />
 
 					</form>
 
 					<div class='register'>
-						<a href="/community/register/">or Register Now!</a>
+						<a href="<?php echo XenForo_Link::buildPublicLink('canonical:register'); ?>">or Register Now!</a>
 					</div>
 
 				</div>

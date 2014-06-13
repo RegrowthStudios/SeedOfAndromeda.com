@@ -12,12 +12,12 @@ if (isset ( $connection )) {
 		<?php echo $blogpost["post_body"];?>
 	</div>
 	<div id="blog-post-footer">
-		<p><?php echo $author["username"]." - ".$author["custom_title"];?></p>
+		<p><a href="<?php echo XenForo_Link::buildPublicLink('canonical:members', $author); ?>"><?php echo $author["username"]." - ".$author["custom_title"];?></a></p>
 	</div>
 </div>
 <?php
 		
-		echo_disqus ( $blogpost ["title"], $cleanpageurl, $blogpost ["id"] );
+		echo_disqus ( $blogpost ["title"], $pageurl, $blogpost ["id"] );
 	} else {
 		$query = $connection->prepare ( "SELECT * FROM blog_posts" );
 		$query->execute ();

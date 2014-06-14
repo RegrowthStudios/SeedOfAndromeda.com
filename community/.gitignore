@@ -1,0 +1,48 @@
+#############
+## XenForo
+#############
+
+# Folders
+data/**/*
+install/**/*
+internal_data/**/*
+
+# JS Folders
+js/flot/**/*
+js/jquery/**/*
+js/redactor/**/*
+js/swfupload/**/*
+js/sortable/**/*
+js/xenforo/**/*
+js/index.html
+
+# Styles
+styles/default/xenforo/**/*
+styles/default/xenresource/**/*
+styles/default/index.html
+styles/index.html
+
+# Library
+library/Lgpl/**/*
+library/Minify/**/*
+library/Sabre/**/*
+library/XenForo/**/*
+library/XFCliImporter/**/*
+library/Zend/**/*
+library/.htaccess
+library/config.php.default
+library/config.php
+library/index.html
+
+# Root Files
+admin.php
+admindav.php
+css.php
+deferred.php
+fb_channel.php
+htaccess.txt
+.htaccess
+index.php
+payment_callback.php
+rgba.php
+proxy.php

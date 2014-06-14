@@ -202,12 +202,15 @@ if (! $loggedIn) {
 					echo "</ul>";
 				}
 				if ($caneditall) {
-					$query = $connection->prepare ( "SELECT * FROM blog_posts ORDER BY id DESC" );
-					$query->execute ();
+					$query = $connection->prepare ( "SELECT * FROM blog_posts WHERE author != ? ORDER BY id DESC" );
+					$query->execute ( array (
+							$userinfo ['user_id'] 
+					) );
 					
-					echo "All blog posts:<br><ul>";
+					echo "Blog posts by others:<br><ul>";
 					while ( $row = $query->fetch () ) {
-						echo '<li>' . $row ["title"] . ' - <a href="/' . $pageurl . '?postid=' . $row ["id"] . '">Edit</a></li>';
+						$author = $sdk->getUser ( $row ["author"] );
+						echo '<li>' . $row ["title"] . ' by ' . $author ["username"] . ' - <a href="/' . $pageurl . '?postid=' . $row ["id"] . '">Edit</a></li>';
 					}
 					echo "</ul>";
 				}

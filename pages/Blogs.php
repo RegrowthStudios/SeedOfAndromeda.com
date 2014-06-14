@@ -4,7 +4,7 @@ if (isset ( $connection )) {
 		$author = $sdk->getUser ( $blogpost ["author"] );
 		?>
 
-<div id="single-blog" class="double-col empty">
+<div id="single-blog" class="double-col">
 	<div id="blog-post-header">
 		<p><?php echo $blogpost["title"];?></p>
 	</div>
@@ -36,7 +36,7 @@ if (isset ( $connection )) {
 		<p><a href="/blogs/' . $postlink . '">' . $row ["title"] . '</a></p>
 	</div>
 	<div id="blog-post-body">
-		<p style="position: absolute;">' . substr ( strip_tags ( $row ["post_body"] ), 0, 1500 ) . ' ...</p>
+		<p style="position: absolute;">' . substr ( strip_tags ( $row ["post_body"] ), 0, 1400 ) . ' ...</p>
 	</div>
 	<div id="blog-post-footer">
 		<p>

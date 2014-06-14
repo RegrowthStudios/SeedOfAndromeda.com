@@ -935,6 +935,9 @@ ul.accountOptions li a {
 	font-size: 1.5em;
 	text-shadow: 0px 0px 12px rgba(255, 255, 255, 1);
 	font-family: 'orbitronregular', sans-serif;
+}
+
+div.double-col.empty #blog-post-header {
 	background: rgba(0, 0, 0, 0.6);
 	box-sizing: border-box;
 	border: 1px #39AECF solid;
@@ -960,6 +963,9 @@ ul.accountOptions li a {
 	overflow: hidden;
 	font-size: 1em;
 	font-family: 'electrolize', sans-serif;
+}
+
+div.double-col.empty #blog-post-body {
 	background: rgba(0, 0, 0, 0.6);
 	box-sizing: border-box;
 	border: 1px #39AECF solid;
@@ -984,6 +990,9 @@ ul.accountOptions li a {
 	font-family: 'orbitronlight', sans-serif;
 	text-shadow: 0px 0px 7px rgba(255, 255, 255, 0.65);
 	font-weight: 600;
+}
+
+div.double-col.empty #blog-post-footer {
 	background: rgba(0, 0, 0, 0.6);
 	box-sizing: border-box;
 	border: 1px #39AECF solid;
@@ -1115,11 +1124,10 @@ div.form-outer td:first-child h4 {
 	max-width: 450px;
 }
 
-#main textarea,#main input[type="text"] {
+#main textarea, #main input {
 	max-width: 200px;
 	margin-bottom: 5px;
 	border: 1px solid #33CCFF;
-	width: 280px;
 	background-color: black;
 	color: #33CCFF;
 }

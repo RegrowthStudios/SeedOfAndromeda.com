@@ -1,6 +1,6 @@
 <?php
 if (! isset ( $_REQUEST ['notemplate'] )) {
-	echo '<div id="single-blog" class="double-col empty">';
+	echo '<div id="single-blog" class="double-col">';
 }
 if (! $loggedIn) {
 	echo '<h3 style="color: red; text-shadow: 0px 0px 10px rgba(255, 0, 0, 1);">Login requred to access this page!</h3>';

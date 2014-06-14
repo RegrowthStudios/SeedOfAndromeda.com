@@ -69,7 +69,7 @@ switch ($cleanpageid) {
 				if ($postid == "") {
 					$pagename = "";
 				} else {
-					$query = $connection->prepare ( "SELECT * FROM blog_posts WHERE id = ?" );
+					$query = $connection->prepare ( "SELECT * FROM blog_posts WHERE id = ? AND published = 1" );
 					$query->execute ( array (
 							$postid 
 					) );
@@ -120,6 +120,11 @@ switch ($cleanpageid) {
 		$pagetitle .= "Log in";
 		$pagename = "Login.php";
 		break;
+	case "blogadmin":
+		$pagetitle .= "Blog Admin";
+		$pagename = "BlogAdmin.php";
+		require_once ("db_connect.php");
+		break;
 }
 
 $page_exists = $pagename == "" ? false : file_exists ( "pages/" . $pagename );
@@ -165,6 +170,10 @@ function dsq_hmacsha1($data, $key) {
 }
 function echo_disqus($title = "", $url = "", $id = "") {
 	global $loggedIn, $userinfo, $visitor, $pagetitle, $cleanpageid, $pageurl;
+	
+	if($_SERVER['HTTP_HOST'] == "www.soatest.local"){
+		return;
+	}
 	
 	if ($title == "") {
 		$title = $pagetitle;

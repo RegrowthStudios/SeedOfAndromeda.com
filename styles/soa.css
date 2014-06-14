@@ -968,7 +968,7 @@ ul.accountOptions li a {
 }
 
 #blog-post-body p {
-	position: absolute;
+	/*position: absolute;*/
 	left: 45px;
 	margin-right: 25px;
 	text-align: justify;
@@ -1115,7 +1115,7 @@ div.form-outer td:first-child h4 {
 	max-width: 450px;
 }
 
-#main textarea,#main input {
+#main textarea,#main input[type="text"] {
 	max-width: 200px;
 	margin-bottom: 5px;
 	border: 1px solid #33CCFF;

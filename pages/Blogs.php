@@ -9,7 +9,7 @@ if (isset ( $connection )) {
 		<p><?php echo $blogpost["title"];?></p>
 	</div>
 	<div id="blog-post-body" style="padding-top: 40px;">
-		<?php echo $blogpost["post_body"];?>
+		<div><?php echo $blogpost["post_body"];?></div>
 	</div>
 	<div id="blog-post-footer">
 		<p>
@@ -19,11 +19,14 @@ if (isset ( $connection )) {
 	</div>
 </div>
 <?php
-		
-		echo_disqus ( $blogpost ["title"], $pageurl, "blogs-" . $blogpost ["id"] );
+		if (! $blogpost ["disablecomments"]) {
+			echo_disqus ( $blogpost ["title"], $pageurl, "blogs-" . $blogpost ["id"] );
+		}
 	} else {
-		$query = $connection->prepare ( "SELECT * FROM blog_posts ORDER BY id DESC" );
-		$query->execute ();
+		$query = $connection->prepare ( "SELECT * FROM blog_posts WHERE published = ? ORDER BY id DESC" );
+		$query->execute ( array (
+				1 
+		) );
 		
 		while ( $row = $query->fetch () ) {
 			$postlink = gen_postlink ( $row );
@@ -33,15 +36,20 @@ if (isset ( $connection )) {
 		<p><a href="/blogs/' . $postlink . '">' . $row ["title"] . '</a></p>
 	</div>
 	<div id="blog-post-body">
-		<p>' . substr ( strip_tags ( $row ["post_body"], "<b><strong><a><i><s>" ), 0, 1500 ) . ' ...</p>
+		<p style="position: absolute;">' . substr ( strip_tags ( $row ["post_body"] ), 0, 1500 ) . ' ...</p>
 	</div>
 	<div id="blog-post-footer">
 		<p>
 			<a
 				href="/blogs/' . $postlink . '">Read
-				More...</a> <small> - (<a
+				More...</a> ';
+			if (! $row ["disablecomments"]) {
+				echo '<small> - (<a
 				href="http://www.seedofandromeda.com/blogs/' . $postlink . '#disqus_thread" data-disqus-identifier="blogs-' . $row ["id"] . '">Comments</a>)
-			</small>
+			</small>';
+			}
+			
+			echo '
 		</p>
 	</div>
 </div>

@@ -33,3 +33,6 @@ RewriteRule ^(.*)$ http://www.seedofandromeda.com/$1 [R=301,L]
 
 #Redirect old download location to new one with counter:
 Redirect /SeedofAndromeda/Game/Versions/ /files/game/
+
+#Hide .git directories and files if they get uploaded to the web server
+RedirectMatch 404 /\.git

@@ -99,8 +99,8 @@ if (! $loggedIn) {
     external_plugins: {
         "jbimages": "/jbimages/plugin.min.js"
     },
-    toolbar1: "styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent",
-    toolbar2: "save insertfile undo redo cut copy paste | forecolor backcolor emoticons | link media image jbimages",
+    toolbar1: "bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | blockquote code",
+    //toolbar2: "blockquote code | emoticons link media image jbimages",
     contextmenu: "link image jbimages inserttable | cut copy paste | cell row column deletetable",
     image_advtab: true,
     add_unload_trigger: false,

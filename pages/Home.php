@@ -42,7 +42,7 @@
                 var item = items[0];
                 var videoid = "https://www.youtube.com/embed/"+item.id+"?wmode=transparent";
                 console.log("Latest ID: '"+videoid+"'");
-                var video = "<iframe width='580' height='326' src='"+videoid+"' frameborder='0' allowfullscreen></iframe>"; 
+                var video = "<iframe width='610' height='314' src='"+videoid+"' frameborder='0' allowfullscreen></iframe>"; 
                 $('#featured_video').html(video);
             }
         }

@@ -23,6 +23,7 @@ if (startsWith ( $cleanpageid, "blogs/" )) {
 }
 switch ($cleanpageid) {
 	case "index" :
+		require_once ("db_connect.php");
 		$pagetitle = "Seed of Andromeda";
 		$pagename = "Home.php";
 		$pageurl = "";

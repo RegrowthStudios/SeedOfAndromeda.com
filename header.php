@@ -6,7 +6,7 @@
 <link rel="shortcut icon" type="image/x-icon"
 	href="/Assets/images/favicon.ico" />
 
-<link rel="stylesheet" href="/styles/soa.css?ver=13" type="text/css" />
+<link rel="stylesheet" href="/styles/soa.css?ver=14" type="text/css" />
 
 <link rel="stylesheet" href="/styles/Normalise.css" type="text/css" />
 
@@ -45,7 +45,14 @@
 	type="text/javascript"></script>
 <script src="/scripts/lightbox-2.6.js"></script>
 <link href="/styles/lightbox.css" rel="stylesheet" />
-<script src="/scripts/soa.js?ver=5"></script><?php
+<script src="/scripts/soa.js?ver=5"></script>
+<script src="/scripts/jquery.sticky.js"></script>
+<script>
+$(document).ready(function(){
+    $("#nav-bar").sticky({topSpacing:0});
+  });
+</script>
+<?php
 
 if (isset($_REQUEST ['loginerror'])) {
 	
@@ -155,13 +162,11 @@ if (typeof jQuery != 'undefined') {
 
 	<div id="main">
 
+		<!--<div id="social-bar">
 
+			 Really Needs Optimising!
 
-		<div id="social-bar">
-
-			<!-- Really Needs Optimising! -->
-
-			<!--<a href="https://twitter.com/ChillstepCoder" target="_blank" title="Ben Arnold's Twitter'">
+				<a href="https://twitter.com/ChillstepCoder" target="_blank" title="Ben Arnold's Twitter'">
                     <div id="social-button" class="twitter">
                         <img src="/Assets/images/SocialBackgroundTwitter.png" class="star" />
                         <img src="/Assets/images/SocialTwitterRing_Top_Left.png" class="top-left" />
@@ -214,9 +219,9 @@ if (typeof jQuery != 'undefined') {
                         <img src="/Assets/images/SocialIndieDBRing_Bottom_Right_Hover.png" class="bottom-right-hover" />
                         <img src="/Assets/images/SocialIndieDBRing_Bottom_Left_Hover.png" class="bottom-left-hover" />
                     </div>
-                </a>-->
+                </a>
 
-		</div>
+		</div>-->
 
 		<a href="/"><div id="header"></div></a>
 

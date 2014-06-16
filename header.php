@@ -45,7 +45,7 @@
 	type="text/javascript"></script>
 <script src="/scripts/lightbox-2.6.js"></script>
 <link href="/styles/lightbox.css" rel="stylesheet" />
-<script src="/scripts/soa.js?ver=6"></script>
+<script src="/scripts/soa.js?ver=7"></script>
 <script src="/scripts/jquery.sticky.js"></script>
 <script>
 $(document).ready(function(){

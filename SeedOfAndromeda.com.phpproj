@@ -25,6 +25,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="closewindow.php" />
+    <Compile Include="community\XenForoSDK.php" />
     <Compile Include="db_connect.php" />
     <Compile Include="footer.php" />
     <Compile Include="header.php" />
@@ -47,6 +48,7 @@
     <Compile Include="xftest.php" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="community\" />
     <Folder Include="pages\" />
     <Folder Include="scripts\" />
     <Folder Include="scripts\pages\" />
@@ -58,7 +60,6 @@
     <Content Include="scripts\lightbox-2.6.js" />
     <Content Include="scripts\pages\Screenshots.js" />
     <Content Include="scripts\pages\Videos.js" />
-    <Content Include="scripts\soa-b1.js" />
     <Content Include="scripts\soa.js" />
     <Content Include="styles\BButtonCode\.DS_Store" />
     <Content Include="styles\BButtonCode\highlight.png" />

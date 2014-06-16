@@ -168,7 +168,8 @@ div {
 	width: 650px;
 	height: 260px;
 	overflow: hidden;
-	margin-left: 150px;
+	margin-left: auto;
+	margin-right: auto;
 	background-image: url("/Assets/images/SOASprite.png");
 	background-position: -10px -654px;
 	background-repeat: no-repeat;

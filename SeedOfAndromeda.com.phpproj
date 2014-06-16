@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Name>SeedOfAndromeda.com</Name>
+    <ProjectGuid>20e07f3f-3dc8-4a21-a63d-157c63afc338</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>SeedOfAndromeda.com</RootNamespace>
+    <ProjectTypeGuids>{A0786B88-2ADB-4C21-ABE8-AA2D79766269}</ProjectTypeGuids>
+    <AssemblyName>SeedOfAndromeda.com</AssemblyName>
+    <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+    <Server>Custom</Server>
+    <CustomServerUrl>http://www.soatest.local/</CustomServerUrl>
+    <PublishEvent>None</PublishEvent>
+    <PHPDevAutoPort>True</PHPDevAutoPort>
+    <PHPDevPort>46562</PHPDevPort>
+    <PHPDevHostName>localhost</PHPDevHostName>
+    <IISProjectUrl>http://localhost:46562/</IISProjectUrl>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <IncludeDebugInformation>true</IncludeDebugInformation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <IncludeDebugInformation>false</IncludeDebugInformation>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="closewindow.php" />
+    <Compile Include="db_connect.php" />
+    <Compile Include="footer.php" />
+    <Compile Include="header.php" />
+    <Compile Include="index.php" />
+    <Compile Include="pages\404.php" />
+    <Compile Include="pages\BlogAdmin.php" />
+    <Compile Include="pages\Blogs.php" />
+    <Compile Include="pages\Downloads.php" />
+    <Compile Include="pages\Home.php" />
+    <Compile Include="pages\IRC.php" />
+    <Compile Include="pages\Login.php" />
+    <Compile Include="pages\Maintenance.php" />
+    <Compile Include="pages\Screenshots.php" />
+    <Compile Include="pages\The Game.php" />
+    <Compile Include="pages\The Team.php" />
+    <Compile Include="pages\Under Construction.php" />
+    <Compile Include="pages\Videos.php" />
+    <Compile Include="thumb.php" />
+    <Compile Include="update.php" />
+    <Compile Include="xftest.php" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="pages\" />
+    <Folder Include="scripts\" />
+    <Folder Include="scripts\pages\" />
+    <Folder Include="styles\" />
+    <Folder Include="styles\BButtonCode\" />
+    <Folder Include="styles\pages\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="scripts\lightbox-2.6.js" />
+    <Content Include="scripts\pages\Screenshots.js" />
+    <Content Include="scripts\pages\Videos.js" />
+    <Content Include="scripts\soa-b1.js" />
+    <Content Include="scripts\soa.js" />
+    <Content Include="styles\BButtonCode\.DS_Store" />
+    <Content Include="styles\BButtonCode\highlight.png" />
+    <Content Include="styles\lightbox.css" />
+    <Content Include="styles\Normalise.css" />
+    <Content Include="styles\pages\IRC.css" />
+    <Content Include="styles\pages\Screenshots.css" />
+    <Content Include="styles\pages\The Team.css" />
+    <Content Include="styles\pages\Videos.css" />
+    <Content Include="styles\soa.css" />
+  </ItemGroup>
+</Project>

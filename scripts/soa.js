@@ -34,6 +34,14 @@ function restore_textbox(textbox_id, textbox_value) {
 
 }
 
+function confirmAction(message) {
+    var ask = confirm(message);
+    if (ask == true) {
+        return true;
+    }
+    return false;
+}
+
 $(document).ready(function () {
 
     if (document.images) {

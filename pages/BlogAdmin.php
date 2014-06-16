@@ -16,13 +16,13 @@ if (! $loggedIn) {
 		$caneditown = false;
 		$caneditall = false;
 		
-		// Groups that can edit own posts:
+		// Groups that can edit/delete own posts:
 		$editowngroups = array (
 				7,
 				13 
 		); // 7 = Dev member, 13 = Dev leader
 		   
-		// Groups that can edit all posts:
+		// Groups that can edit/delete all posts:
 		$editallgroups = array (
 				3 
 		); // 3 = Admins
@@ -46,7 +46,33 @@ if (! $loggedIn) {
 		if (! $caneditown && ! $caneditall) {
 			echo '<h3 style="color: red; text-shadow: 0px 0px 10px rgba(255, 0, 0, 1);">You don\'t have permissions to view this page!</h3>';
 		} else {
-			if (isset ( $_REQUEST ['postid'] )) {
+            if (isset ( $_REQUEST ['delete'] )) {
+                $blogpost = false;
+                if ($caneditall) {
+					$query = $connection->prepare ( "SELECT * FROM blog_posts WHERE id = ?" );
+					$query->execute ( array (
+							$_REQUEST ['postid'] 
+					) );
+					$blogpost = $query->fetch ();
+				} elseif ($caneditown) {
+					
+					$query = $connection->prepare ( "SELECT * FROM blog_posts WHERE id = ? AND author = ?" );
+					$query->execute ( array (
+							$_REQUEST ['postid'],
+							$userinfo ['user_id'] 
+					) );
+					$blogpost = $query->fetch ();
+				}
+				if (! $blogpost) {
+					echo '<h3 style="color: red; text-shadow: 0px 0px 10px rgba(255, 0, 0, 1);">Blog post not found or you don\'t have permissions to delete it!</h3><br /><a style="color: white !important;" href="/' . $pageurl . '">Return</a>';
+                } else {
+                    $query = $connection->prepare ( "DELETE FROM blog_posts WHERE id = ?" );
+                    $query->execute ( array (
+                            $_REQUEST ['postid']
+                    ) );
+                    echo '<div style="text-align:center;width:100%;"><h3><a style="color: white !important;" href="/' . $pageurl . '">Return</a></h3></div>';
+                }
+            } else if (isset ( $_REQUEST ['postid'] )) {
 				$blogpost = false;
 				if ($caneditall) {
 					$query = $connection->prepare ( "SELECT * FROM blog_posts WHERE id = ?" );
@@ -170,8 +196,10 @@ if (! $loggedIn) {
 		Publish blog post<br /> <input type="checkbox" class="devnews" name="devnews"
 			value="1" <?php if($blogpost["devnews"] == "1") echo "checked";?> />
 		Publish blog to Dev News<br /> <input type="submit" value="Save" />
+        <br />
 	</div>
 </form>
+                   <?php echo '<div style="float: right;margin-top:100px;"><h3 style="margin-bottom: 0;"><a style="color: white !important;" href="/' . $pageurl . '">Return</a></h3></div>'; ?>
     <script>
 		var devnews = $("input.devnews");
 		var publish = $("input.publish");
@@ -216,7 +244,7 @@ if (! $loggedIn) {
 					) );
 					echo "Your blog posts:<br><ul>";
 					while ( $row = $query->fetch () ) {
-						echo '<li>' . $row ["title"] . ' - <a href="/' . $pageurl . '?postid=' . $row ["id"] . '">Edit</a></li>';
+						echo '<li>' . $row ["title"] . ' - <a href="/' . $pageurl . '?postid=' . $row ["id"] . '">Edit</a> - <a onclick="return confirmAction(\'Are you sure you wish to delete this blog?\');" href="/' . $pageurl . '?postid=' . $row ["id"] . '&delete=1">Delete</a></li>';
 					}
 					
 					echo "</ul>";
@@ -230,7 +258,7 @@ if (! $loggedIn) {
 					echo "Blog posts by others:<br><ul>";
 					while ( $row = $query->fetch () ) {
 						$author = $sdk->getUser ( $row ["author"] );
-						echo '<li>' . $row ["title"] . ' by ' . $author ["username"] . ' - <a href="/' . $pageurl . '?postid=' . $row ["id"] . '">Edit</a></li>';
+						echo '<li>' . $row ["title"] . ' by ' . $author ["username"] . ' - <a href="/' . $pageurl . '?postid=' . $row ["id"] . '">Edit</a> - <a onclick="return confirmAction(\'Are you sure you wish to delete this blog?\');" href="/' . $pageurl . '?postid=' . $row ["id"] . '&delete=1">Delete</a></li></li>';
 					}
 					echo "</ul>";
 				}

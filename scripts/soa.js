@@ -1,132 +1,116 @@
-function show_menu()
+function show_menu() {
 
-{
-
-	$("#game_menu").removeClass("game_menu_h").addClass("game_menu_s");
+    $("#game_menu").removeClass("game_menu_h").addClass("game_menu_s");
 
 }
 
-function hide_menu()
+function hide_menu() {
 
-{
-
-	$("#game_menu").removeClass("game_menu_s").addClass("game_menu_h");
+    $("#game_menu").removeClass("game_menu_s").addClass("game_menu_h");
 
 }
 
-function clear_textbox(textbox_id, textbox_value)
+function clear_textbox(textbox_id, textbox_value) {
 
-{
+    var text = $("#" + textbox_id);
 
-	var text = $("#" + textbox_id);
+    if (text.val() == textbox_value) {
 
-	if (text.val() == textbox_value)
+        text.val("");
 
-	{
-
-		text.val("");
-
-	}
+    }
 
 }
 
-function restore_textbox(textbox_id, textbox_value)
+function restore_textbox(textbox_id, textbox_value) {
 
-{
+    var text = $("#" + textbox_id);
 
-	var text = $("#" + textbox_id);
+    if (text.val() === "") {
 
-	if (text.val() === "")
+        text.val(textbox_value);
 
-	{
-
-		text.val(textbox_value);
-
-	}
+    }
 
 }
 
-function validate_newsletter_email()
+function validate_newsletter_email() {
 
-{
+    var error_message = "";
 
-	var error_message = "";
+    if ($('#first_name').val() === "" || $('#first_name').val() == "First Name") {
+        error_message += "Please enter your first name\n";
+    }
 
-	if ($('#first_name').val() === "" || $('#first_name').val() == "First Name") {
-		error_message += "Please enter your first name\n";
-	}
+    if ($('#last_name').val() === "" || $('#last_name').val() == "Last Name") {
+        error_message += "Please enter your last name\n";
+    }
 
-	if ($('#last_name').val() === "" || $('#last_name').val() == "Last Name") {
-		error_message += "Please enter your last name\n";
-	}
-
-	if (/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$/
+    if (/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$/
 			.test($('#email').val()) === false) {
-		error_message += "Please enter a valid email address\n";
-	}
+        error_message += "Please enter a valid email address\n";
+    }
 
-	if (error_message === "") {
-		document.forms.newsletter.submit();
-	} else {
-		alert(error_message);
-		return false;
-	}
+    if (error_message === "") {
+        document.forms.newsletter.submit();
+    } else {
+        alert(error_message);
+        return false;
+    }
 
 }
 
-function validate_create()
+function validate_create() {
 
-{
+    var error_message = "";
 
-	var error_message = "";
+    if ($('#reg_first_name').val() === "") {
+        error_message += "Please enter your first name\n";
+    }
 
-	if ($('#reg_first_name').val() === "") {
-		error_message += "Please enter your first name\n";
-	}
+    if ($('#reg_last_name').val() === "") {
+        error_message += "Please enter your last name\n";
+    }
 
-	if ($('#reg_last_name').val() === "") {
-		error_message += "Please enter your last name\n";
-	}
-
-	if (/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$/.test($('#reg_email')
+    if (/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$/.test($('#reg_email')
 			.val()) === false) {
-		error_message += "Please enter a valid email address\n";
-	}
+        error_message += "Please enter a valid email address\n";
+    }
 
-	if ($('#reg_username').val() === "") {
-		error_message += "Please enter a username\n";
-	}
+    if ($('#reg_username').val() === "") {
+        error_message += "Please enter a username\n";
+    }
 
-	if ($('#reg_password').val() === "") {
-		error_message += "Please enter a password\n";
-	}
+    if ($('#reg_password').val() === "") {
+        error_message += "Please enter a password\n";
+    }
 
-	if ($('#reg_password').val().length < 8) {
-		error_message += "Your password must be at least 8 characters long!\n";
-	} else
+    if ($('#reg_password').val().length < 8) {
+        error_message += "Your password must be at least 8 characters long!\n";
+    } else
 
-	if ($('#reg_password').val() != $('#reg_confirm_password').val()) {
-		error_message += "Passwords do not match\n";
-	}
+        if ($('#reg_password').val() != $('#reg_confirm_password').val()) {
+            error_message += "Passwords do not match\n";
+        }
 
-	if (error_message === "") {
-		document.forms.create.submit();
-	} else {
-		alert(error_message);
-		return false;
-	}
+    if (error_message === "") {
+        document.forms.create.submit();
+    } else {
+        alert(error_message);
+        return false;
+    }
 
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
 
-	if (document.images) {
+    if (document.images) {
 
-		img1 = new Image();
+        img1 = new Image();
 
-		img1.src = "/Assets/images/closeImage_Hover.png";
+        img1.src = "/Assets/images/closeImage_Hover.png";
 
-	}
+    }
 
 });
 
@@ -135,131 +119,131 @@ var contHeight = null;
 // User Name Shortener
 
 $(document).ready(
-		function() {
+		function () {
 
-			if ($('#accountBar > div.accountsName').text().length > 16) {
+		    if ($('#accountBar > div.accountsName').text().length > 16) {
 
-				var name = $('#accountBar > div.accountsName').text()
+		        var name = $('#accountBar > div.accountsName').text()
 						.substring(0, 12)
 						+ "...";
 
-				$('#accountBar > div.accountsName').text(name);
+		        $('#accountBar > div.accountsName').text(name);
 
-			}
+		    }
 
 		});
 
 // Nav Bar Fixer
 
 $(document).ready(
-		function() {
+		function () {
 
-			var nav = $('#nav-bar');
+		    var nav = $('#nav-bar');
 
-			var top = nav.offset().top
+		    var top = nav.offset().top
 					- parseFloat(nav.css('marginTop').replace(/auto/, 0));
 
-			var topimg = $('.topimg');
+		    var topimg = $('.topimg');
 
-			$(window).scroll(function(event) {
+		    $(window).scroll(function (event) {
 
-				// what the y position of the scroll is
+		        // what the y position of the scroll is
 
-				var y = $(this).scrollTop();
+		        var y = $(this).scrollTop();
 
-				// whether that's below the form
+		        // whether that's below the form
 
-				if (y >= top) {
+		        if (y >= top) {
 
-					nav.addClass('navigation-fixed');
+		            nav.addClass('navigation-fixed');
 
-					topimg.css("margin-top", "106px");
+		            topimg.css("margin-top", "106px");
 
-				} else {
+		        } else {
 
-					// otherwise remove it
+		            // otherwise remove it
 
-					nav.removeClass('navigation-fixed');
+		            nav.removeClass('navigation-fixed');
 
-					topimg.css("margin-top", "60px");
+		            topimg.css("margin-top", "60px");
 
-				}
+		        }
 
-			});
+		    });
 
 		});
 
 // Sticky Footer (Cheating - do the damned CSS)
 
-$(document).ready(function() {
+$(document).ready(function () {
 
-	var footer = $('#footer');
+    var footer = $('#footer');
 
-	var stickyFooter = function() {
+    var stickyFooter = function () {
 
-		if (contHeight === null) {
+        if (contHeight === null) {
 
-			setTimeout(stickyFooter, 1000);
+            setTimeout(stickyFooter, 1000);
 
-		} else {
+        } else {
 
-			var margin = $(window).height() - 568 - contHeight; // 568 is the
-			// pixel height
-			// of elements
-			// exluding
-			// content-outer.
+            var margin = $(window).height() - 568 - contHeight; // 568 is the
+            // pixel height
+            // of elements
+            // exluding
+            // content-outer.
 
-			if (margin > 40) {
+            if (margin > 40) {
 
-				footer.css('margin-top', margin);
+                footer.css('margin-top', margin);
 
-			} else {
+            } else {
 
-				footer.css('margin-top', 40);
+                footer.css('margin-top', 40);
 
-			}
+            }
 
-		}
+        }
 
-	}
+    }
 
-	$(window).resize(function() {
+    $(window).resize(function () {
 
-		stickyFooter();
+        stickyFooter();
 
-	})
+    })
 
-	stickyFooter();
+    stickyFooter();
 
 });
 
 // Close FullScreen Objects (Using Cover)
 
-$(document).ready(function() {
+$(document).ready(function () {
 
-	$('.close').click(function() {
+    $('.close').click(function () {
 
-		popdown();
+        popdown();
 
-	})
+    })
 
-	$('.cover').click(function(e) {
+    $('.cover').click(function (e) {
 
-		if (($(e.target).parents('.cover').length) * (-1)) {
+        if (($(e.target).parents('.cover').length) * (-1)) {
 
-			return;
+            return;
 
-		}
+        }
 
-		popdown();
+        popdown();
 
-	})
+    })
 
-	function popdown() {
+    function popdown() {
 
-		$('.cover').fadeOut();
+        $('.cover').fadeOut();
 
-	}
+    }
 
 });
 
@@ -320,7 +304,7 @@ $(document).ready(function() {
  */
 /* This or similar could be used in the future to load pages on the fly */
 function LoadPage(pageName) {
-	$.get('/' + pageName + '?notemplate=true', function(data) {
-		$('#content-outer').html(data);
-	});
+    $.get('/' + pageName + '?notemplate=true', function (data) {
+        $('#content-outer').html(data);
+    });
 }

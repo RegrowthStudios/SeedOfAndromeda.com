@@ -54,22 +54,6 @@ $(document).ready(function(){
 </script>
 <?php
 
-if (isset($_REQUEST ['loginerror'])) {
-	
-	echo "<script type='text/javascript'>
-
-                         window.onload = function() { alert('" . addslashes ( $_REQUEST ['loginerror'] ) . "'); }
-
-                     </script>";
-}
-if (isset ( $_REQUEST ['logouterror'] )) {
-	
-	echo "<script type='text/javascript'>
-
-                         window.onload = function() { alert('Log Out Failed!'); }
-
-                     </script>";
-}
 $pagestyle = "styles/pages/" . str_replace ( ".php", ".css", $pagename );
 if (file_exists ( $pagestyle )) {
 	echo '<link rel="stylesheet" href="/' . $pagestyle . '" type="text/css" />';
@@ -95,65 +79,6 @@ if (file_exists ( $pagestyle )) {
 <!-- Google Analytics END-->
 
 
-
-<!-- Downloads Tracking -->
-<!-- Task completed by Cloud Flare script
-<script type="text/javascript">
-if (typeof jQuery != 'undefined') {
-  jQuery(document).ready(function($) {
-    var filetypes = /\.(zip|exe|dmg|pdf|doc.*|xls.*|ppt.*|mp3|txt|rar|wma|mov|avi|wmv|flv|wav)$/i;
-    var baseHref = '';
-    if (jQuery('base').attr('href') != undefined) baseHref = jQuery('base').attr('href');
- 
-    jQuery('a').on('click', function(event) {
-      var el = jQuery(this);
-      var track = true;
-      var href = (typeof(el.attr('href')) != 'undefined' ) ? el.attr('href') :"";
-      var isThisDomain = href.match(document.domain.split('.').reverse()[1] + '.' + document.domain.split('.').reverse()[0]);
-      if (!href.match(/^javascript:/i)) {
-        var elEv = []; elEv.value=0, elEv.non_i=false;
-        if (href.match(/^mailto\:/i)) {
-          elEv.category = "Email";
-          elEv.action = "click";
-          elEv.label = href.replace(/^mailto\:/i, '');
-          elEv.loc = href;
-        }
-        else if (href.match(filetypes)) {
-          var extension = (/[.]/.exec(href)) ? /[^.]+$/.exec(href) : undefined;
-          elEv.category = "Download";
-          elEv.action = "click-" + extension[0];
-          elEv.label = href.replace(/ /g,"-");
-          elEv.loc = baseHref + href;
-        }
-        else if (href.match(/^https?\:/i) && !isThisDomain) {
-          elEv.category = "External";
-          elEv.action = "click";
-          elEv.label = href.replace(/^https?\:\/\//i, '');
-          elEv.non_i = true;
-          elEv.loc = href;
-        }
-        else if (href.match(/^tel\:/i)) {
-          elEv.category = "Telephone";
-          elEv.action = "click";
-          elEv.label = href.replace(/^tel\:/i, '');
-          elEv.loc = href;
-        }
-        else track = false;
- 
-        if (track) {
-          _gaq.push(['_trackEvent', elEv.category.toLowerCase(), elEv.action.toLowerCase(), elEv.label.toLowerCase(), elEv.value, elEv.non_i]);
-          if ( el.attr('target') == undefined || el.attr('target').toLowerCase() != '_blank') {
-            setTimeout(function() { location.href = elEv.loc; }, 400);
-            return false;
-      }
-    }
-      }
-    });
-  });
-}
-</script>
--->
-<!-- Downloads Tracking END -->
 </head>
 
 
@@ -162,66 +87,6 @@ if (typeof jQuery != 'undefined') {
 
 	<div id="main">
 
-		<!--<div id="social-bar">
-
-			 Really Needs Optimising!
-
-				<a href="https://twitter.com/ChillstepCoder" target="_blank" title="Ben Arnold's Twitter'">
-                    <div id="social-button" class="twitter">
-                        <img src="/Assets/images/SocialBackgroundTwitter.png" class="star" />
-                        <img src="/Assets/images/SocialTwitterRing_Top_Left.png" class="top-left" />
-                        <img src="/Assets/images/SocialTwitterRing_Top_Right.png" class="top-right" />
-                        <img src="/Assets/images/SocialTwitterRing_Bottom_Right.png" class="bottom-right" />
-                        <img src="/Assets/images/SocialTwitterRing_Bottom_Left.png" class="bottom-left" />
-                        <img src="/Assets/images/SocialTwitterRing_Top_Left_Hover.png" class="top-left-hover" />
-                        <img src="/Assets/images/SocialTwitterRing_Top_Right_Hover.png" class="top-right-hover" />
-                        <img src="/Assets/images/SocialTwitterRing_Bottom_Right_Hover.png" class="bottom-right-hover" />
-                        <img src="/Assets/images/SocialTwitterRing_Bottom_Left_Hover.png" class="bottom-left-hover" />
-                    </div>
-                </a>
-                <a href="http://www.youtube.com/user/DubstepCoder" target="_blank" title="Ben Arnold's YouTube Channel'">
-                    <div id="social-button" class="youtube">
-                        <img src="/Assets/images/SocialBackgroundYouTube.png" class="star" />
-                        <img src="/Assets/images/SocialYouTubeRing_Top_Left.png" class="top-left" />
-                        <img src="/Assets/images/SocialYouTubeRing_Top_Right.png" class="top-right" />
-                        <img src="/Assets/images/SocialYouTubeRing_Bottom_Right.png" class="bottom-right" />
-                        <img src="/Assets/images/SocialYouTubeRing_Bottom_Left.png" class="bottom-left" />
-                        <img src="/Assets/images/SocialYouTubeRing_Top_Left_Hover.png" class="top-left-hover" />
-                        <img src="/Assets/images/SocialYouTubeRing_Top_Right_Hover.png" class="top-right-hover" />
-                        <img src="/Assets/images/SocialYouTubeRing_Bottom_Right_Hover.png" class="bottom-right-hover" />
-                        <img src="/Assets/images/SocialYouTubeRing_Bottom_Left_Hover.png" class="bottom-left-hover" />
-                    </div>
-                </a>
-            </div>
-            <div id="social-bar" class="right">
-                <a href="https://www.facebook.com/SeedOfAndromedaUnofficial?ref=stream" target="_blank" title="Official SoA Facebook Page'">
-                    <div id="social-button" class="facebook">
-                        <img src="/Assets/images/SocialBackgroundFacebook.png" class="star" />
-                        <img src="/Assets/images/SocialFacebookRing_Top_Left.png" class="top-left" />
-                        <img src="/Assets/images/SocialFacebookRing_Top_Right.png" class="top-right" />
-                        <img src="/Assets/images/SocialFacebookRing_Bottom_Right.png" class="bottom-right" />
-                        <img src="/Assets/images/SocialFacebookRing_Bottom_Left.png" class="bottom-left" />
-                        <img src="/Assets/images/SocialFacebookRing_Top_Left_Hover.png" class="top-left-hover" />
-                        <img src="/Assets/images/SocialFacebookRing_Top_Right_Hover.png" class="top-right-hover" />
-                        <img src="/Assets/images/SocialFacebookRing_Bottom_Right_Hover.png" class="bottom-right-hover" />
-                        <img src="/Assets/images/SocialFacebookRing_Bottom_Left_Hover.png" class="bottom-left-hover" />
-                    </div>
-                </a>
-                <a href="http://www.indiedb.com/games/seed-of-andromeda" target="_blank" title="SoA IndieDB Page'">
-                    <div id="social-button" class="indiedb">
-                        <img src="/Assets/images/SocialBackgroundIndieDB.png" class="star" />
-                        <img src="/Assets/images/SocialIndieDBRing_Top_Left.png" class="top-left" />
-                        <img src="/Assets/images/SocialIndieDBRing_Top_Right.png" class="top-right" />
-                        <img src="/Assets/images/SocialIndieDBRing_Bottom_Right.png" class="bottom-right" />
-                        <img src="/Assets/images/SocialIndieDBRing_Bottom_Left.png" class="bottom-left" />
-                        <img src="/Assets/images/SocialIndieDBRing_Top_Left_Hover.png" class="top-left-hover" />
-                        <img src="/Assets/images/SocialIndieDBRing_Top_Right_Hover.png" class="top-right-hover" />
-                        <img src="/Assets/images/SocialIndieDBRing_Bottom_Right_Hover.png" class="bottom-right-hover" />
-                        <img src="/Assets/images/SocialIndieDBRing_Bottom_Left_Hover.png" class="bottom-left-hover" />
-                    </div>
-                </a>
-
-		</div>-->
 
 		<a href="/"><div id="header"></div></a>
 

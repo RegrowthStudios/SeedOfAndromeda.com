@@ -112,11 +112,12 @@ if (! $loggedIn) {
 					} else {
 						$author = $sdk->getUser ( $blogpost ["author"] );
 						?>
-<script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+<script src="./tinymce/tinymce.min.js"></script>
 <script>
     tinymce.init({
     selector: "div.editpost",
-    theme: "modern",
+    //theme: "modern",
+    skin: "darktheme",
     plugins: [
               "advlist autolink lists link image charmap hr anchor pagebreak",
               "searchreplace wordcount visualblocks visualchars code fullscreen",
@@ -138,15 +139,15 @@ if (! $loggedIn) {
     remove_script_host: true,
     document_base_url: "/blogs/",
     image_class_list: [
-                       {title: 'None', value: ''},
-                       {title: 'Large', value: 'large'},
-                       {title: 'X-large', value: 'x-large'},
-                       {title: 'XX-large', value: 'xx-large'},
-                       {title: 'XXX-large', value: 'xxx-large'},
-                       {title: 'Large wide', value: 'large-wide'},
-                       {title: 'X-large wide', value: 'x-large-wide'},
-                       {title: 'XX-large wide', value: 'xx-large-wide'},
-                       {title: 'XXX-large wide', value: 'xxx-large-wide'}
+                       {title: 'None', value: 'blog-inline-image'},
+                       { title: 'Large', value: 'large blog-inline-image' },
+                       { title: 'X-large', value: 'x-large blog-inline-image' },
+                       { title: 'XX-large', value: 'xx-large blog-inline-image' },
+                       { title: 'XXX-large', value: 'xxx-large blog-inline-image' },
+                       { title: 'Large wide', value: 'large-wide blog-inline-image' },
+                       { title: 'X-large wide', value: 'x-large-wide blog-inline-image' },
+                       { title: 'XX-large wide', value: 'xx-large-wide blog-inline-image' },
+                       { title: 'XXX-large wide', value: 'xxx-large-wide blog-inline-image' }
                    ],
     image_list: [
                  <?php

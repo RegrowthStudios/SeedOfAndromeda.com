@@ -9,5 +9,6 @@
 div#blog-post-body {
     height: auto !important;
     max-height: 750px;
+    padding-left: 5%;
+    padding-right: 5%;
 }
-

@@ -56,7 +56,7 @@ $(document).ready(function(){
 
 $pagestyle = "styles/pages/" . str_replace ( ".php", ".css", $pagename );
 if (file_exists ( $pagestyle )) {
-	echo '<link rel="stylesheet" href="/' . $pagestyle . '" type="text/css" />';
+	echo '<link rel="stylesheet" href="/' . $pagestyle . '?ver=8" type="text/css" />';
 }
 $pagestyle = "scripts/pages/" . str_replace ( ".php", ".js", $pagename );
 if (file_exists ( $pagestyle )) {

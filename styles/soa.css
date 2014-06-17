@@ -992,7 +992,7 @@ div.double-col.empty #blog-post-footer {
 	height: auto;
 }
 
-#single-blog #blog-post-header-image {
+#blog-post-header-image {
 	width: 500px;
 	height: 350px;
 	border: 2px #39AECF solid;
@@ -1001,19 +1001,19 @@ div.double-col.empty #blog-post-footer {
 	margin-bottom: 10px;
 }
 
-#single-blog #blog-post-body>div {
+#blog-post-body>div {
 	text-align: center;
 	width:100%;
 }
 
-#single-blog #blog-post-body>div p {
+#blog-post-body p {
 	display: block;
 	margin-bottom: 0.7em;
 	position: static;
 	margin-left: 50px;
 }
 
-#single-blog #blog-post-body>div blockquote {
+#blog-post-body blockquote {
 	margin-left: auto;
 	margin-right: auto;
 	border: 1px #39AECF solid;
@@ -1022,26 +1022,26 @@ div.double-col.empty #blog-post-footer {
 	padding: 5px 10px;
 }
 
-#single-blog #blog-post-body>div blockquote.table-wrapper {
+#blog-post-body blockquote.table-wrapper {
 	display: inline-block;
 	width: auto;
 }
 
-blockquote.table-wrapper table {
+#blog-post-body blockquote.table-wrapper table {
 	margin-left: auto;
 	margin-right: auto;
 }
 
-#single-blog #blog-post-body>div blockquote p {
+#blog-post-body blockquote p {
 	margin: 0;
 	font-size: 0.8em;
 }
 
-#single-blog #blog-post-body>div blockquote code p {
+#blog-post-body blockquote code p {
 	margin-bottom: 0.5em;
 }
 
-#single-blog #blog-post-body>div h2 {
+#blog-post-body h2 {
 	font-size: 1.4em;
 	margin-top: 0.2em;
 	margin-left: 60px;
@@ -1052,11 +1052,11 @@ blockquote.table-wrapper table {
 	width: 90%;
 }
 
-#single-blog #blog-post-body>div p strong {
+#blog-post-body p strong {
 	font-weight: 600;
 }
 
-#single-blog #blog-post-body>div h3 {
+#blog-post-body h3 {
 	font-size: 1.1em;
 	margin-left: 50px;
 	text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.65);

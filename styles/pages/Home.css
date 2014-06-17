@@ -6,6 +6,10 @@
     float: none;
 }
 
+div#latest-dev-news #blog-post-header {
+    padding-bottom: 20px;
+}
+
 div#blog-post-body {
     height: auto !important;
     max-height: 750px;

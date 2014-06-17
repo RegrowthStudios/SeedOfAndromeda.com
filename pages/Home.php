@@ -54,11 +54,11 @@
 
 </div>
 
-<div class="double-col">
-
+<div id="latest-dev-news" class="double-col">
+    
 	<h3>Latest Dev News</h3>
-	<br /> 
-	<?php
+    <div>
+    <?php
 	if (isset ( $connection )) {
 		$query = $connection->prepare ( "SELECT * FROM blog_posts WHERE published = ? AND devnews = ? ORDER BY id DESC LIMIT 1" );
 		$query->execute ( array (
@@ -73,7 +73,7 @@
 		<p><a href="/blogs/' . $postlink . '">' . $row ["title"] . '</a></p>
 	</div>
 	<div id="blog-post-body">
-		<p style="position: absolute;">' . substr ( strip_tags ( $row ["post_body"] ), 0, 1400 ) . ' ...</p>
+		<p style="position: absolute;">' . substr ( preg_replace('/<iframe.*?\/iframe>/i','<p>Click read more to view this video!</p>', $row ["post_body"] ), 0, 2000 ) . ' ...</p>
 	</div>
 	<div id="blog-post-footer">
 		<p>
@@ -93,4 +93,5 @@
 	';
 			}	
 		?>
+    </div>	
 </div>

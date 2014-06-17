@@ -260,6 +260,7 @@ div {
 .final_content_border>div>h3 {
 	margin-top: 0;
 	margin-bottom: 0.5em;
+    font-size: 1.4em;
 }
 
 #content-outer div {
@@ -905,9 +906,12 @@ ul.accountOptions li a {
 	position: relative;
 	z-index: 3;
 	/*background: url("PrepSite/Images/BlogHeader.png");*/
-	font-size: 1.5em;
 	text-shadow: 0px 0px 12px rgba(255, 255, 255, 1);
 	font-family: 'orbitronregular', sans-serif;
+}
+
+#blog-post-header p {
+	font-size: 1.5em;
 }
 
 div.double-col.empty #blog-post-header {
@@ -959,7 +963,7 @@ div.double-col.empty #blog-post-body {
 	position: relative;
 	/*background: url("/Assets/Images/BlogFooter.png");*/
 	overflow: hidden;
-	font-size: 1em;
+	font-size: 1em !important;
 	font-family: 'orbitronlight', sans-serif;
 	text-shadow: 0px 0px 7px rgba(255, 255, 255, 0.65);
 	font-weight: 600;
@@ -1060,7 +1064,7 @@ blockquote.table-wrapper table {
 	text-align: left;
 }
 
-#single-blog img.blog-inline-image {
+img.blog-inline-image {
 	width: 125px;
 	height: 100px;
 	border: 2px solid #39AECF;

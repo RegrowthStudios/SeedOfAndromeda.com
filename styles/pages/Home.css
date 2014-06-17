@@ -1,0 +1,13 @@
+﻿div#latest-dev-news > div {
+    font-size: 0.93em;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    float: none;
+}
+
+div#blog-post-body {
+    height: auto !important;
+    max-height: 750px;
+}
+

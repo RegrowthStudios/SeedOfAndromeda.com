@@ -67,6 +67,7 @@
     <Content Include="styles\Normalise.css" />
     <Content Include="styles\pages\IRC.css" />
     <Content Include="styles\pages\Screenshots.css" />
+    <Content Include="styles\pages\Home.css" />
     <Content Include="styles\pages\The Team.css" />
     <Content Include="styles\pages\Videos.css" />
     <Content Include="styles\soa.css" />

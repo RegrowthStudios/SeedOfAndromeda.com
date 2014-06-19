@@ -225,7 +225,7 @@ if (! $loggedIn) {
 						time (),
 						"<h2>Click here to edit!</h2><p>Click the title to edit it.</p>" ,
                         "<p>Click here to edit!</p>",
-                        '<p><img class="xx-large-wide blog-inline-image" src="http://www.seedofandromeda.com/Assets/images/Blogs/Default/SOA.png" alt="Default Dev News Background" /></p>'
+                        '<p><img class="xx-large-wide blog-inline-image" src="http://www.seedofandromeda.com/Assets/images/Blogs/Default/Plains.png" alt="Default Dev News Background" /></p>'
 				) );
 				
 				$id = $connection->lastInsertId ();

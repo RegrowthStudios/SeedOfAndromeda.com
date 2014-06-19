@@ -56,11 +56,11 @@ $(document).ready(function(){
 
 $pagestyle = "styles/pages/" . str_replace ( ".php", ".css", $pagename );
 if (file_exists ( $pagestyle )) {
-	echo '<link rel="stylesheet" href="/' . $pagestyle . '?ver=11" type="text/css" />';
+	echo '<link rel="stylesheet" href="/' . $pagestyle . '?ver=12" type="text/css" />';
 }
 $pagestyle = "scripts/pages/" . str_replace ( ".php", ".js", $pagename );
 if (file_exists ( $pagestyle )) {
-	echo '<script src="/' . $pagestyle . '?ver=2"></script>';
+	echo '<script src="/' . $pagestyle . '?ver=3"></script>';
 }
 ?>
 <!-- Google Analytics BEGIN-->

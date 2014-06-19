@@ -9,6 +9,7 @@ $(document).ready(function () {
     var ctrlsLocked = false;
     var slideShowPaused = false;
     var slideShowDelay = 6000;
+    var slideShowPauseDelay = 7000;
     index = 0;
 
     //Initially show latest Dev News
@@ -26,7 +27,7 @@ $(document).ready(function () {
         });
 
         $('.dev-news-control-left').click(function () {
-            pauseSlideshowDelay(7000);
+            pauseSlideshowDelay();
             if (ctrlsLocked == false) {
                 previousItem();
             }
@@ -34,7 +35,7 @@ $(document).ready(function () {
         });
 
         $('.dev-news-control-right').click(function () {
-            pauseSlideshowDelay(7000);
+            pauseSlideshowDelay();
             if (ctrlsLocked == false) {
                 nextItem();
             }
@@ -87,6 +88,7 @@ $(document).ready(function () {
         }
 
         function playSlideshow() {
+            clearTimeout(automateID);
             slideShowPaused = false;
             setTimeout(function () {
                 automateSlideshow();
@@ -95,15 +97,13 @@ $(document).ready(function () {
 
         function pauseSlideshow() {
             slideShowPaused = true;
-            clearTimeout(automateID);
         }
 
-        function pauseSlideshowDelay(timeout) {
+        function pauseSlideshowDelay() {
             slideShowPaused = true;
-            clearTimeout(automateID);
             setTimeout(function () {
                 playSlideshow();
-            }, timeout);
+            }, slideShowPauseDelay);
         }
 
         function lockCtrls() {

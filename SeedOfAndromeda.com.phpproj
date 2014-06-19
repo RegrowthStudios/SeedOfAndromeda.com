@@ -58,6 +58,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\lightbox-2.6.js" />
+    <Content Include="scripts\pages\BlogAdmin.js" />
+    <Content Include="scripts\pages\Home.js" />
     <Content Include="scripts\pages\Screenshots.js" />
     <Content Include="scripts\pages\Videos.js" />
     <Content Include="scripts\soa.js" />
@@ -65,6 +67,7 @@
     <Content Include="styles\BButtonCode\highlight.png" />
     <Content Include="styles\lightbox.css" />
     <Content Include="styles\Normalise.css" />
+    <Content Include="styles\pages\BlogAdmin.css" />
     <Content Include="styles\pages\IRC.css" />
     <Content Include="styles\pages\Screenshots.css" />
     <Content Include="styles\pages\Home.css" />

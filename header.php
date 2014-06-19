@@ -15,27 +15,27 @@
 	type="text/css" />
 
 <link href='http://fonts.googleapis.com/css?family=Electrolize'
-	rel='stylesheet' type='text/css'>
+	rel='stylesheet' type='text/css' />
 
 <meta name="keywords"
-	content="seed of andromeda, SoA, Windows, PC, Mac, Linux, Voxel, Voxel-Based, Voxel Game, Voxel-Based Game, indie game, independent game, independently developed, video game, pc game, creation, survival, chunks, blocks, sci fi">
+	content="seed of andromeda, SoA, Windows, PC, Mac, Linux, Voxel, Voxel-Based, Voxel Game, Voxel-Based Game, indie game, independent game, independently developed, video game, pc game, creation, survival, chunks, blocks, sci fi" />
 
 <meta name="description"
-	content="Seed Of Andromeda is a Voxel based Sandbox RPG in a futuristic setting. The player will crash land on a fully round voxel planet and will be forced to survive hostile creatures. As the player progresses through the game, they will be able to form settlements, develop technology, and eventually escape the rock they are stranded on!">
+	content="Seed Of Andromeda is a Voxel based Sandbox RPG in a futuristic setting. The player will crash land on a fully round voxel planet and will be forced to survive hostile creatures. As the player progresses through the game, they will be able to form settlements, develop technology, and eventually escape the rock they are stranded on!" />
 
-<meta name="og:title" content="Seed of Andromeda">
+<meta name="og:title" content="Seed of Andromeda" />
 
 <meta name="og:description"
-	content="Seed Of Andromeda is a Voxel based Sandbox RPG in a futuristic setting. The player will crash land on a fully round voxel planet and will be forced to survive hostile creatures. As the player progresses through the game, they will be able to form settlements, develop technology, and eventually escape the rock they are stranded on!">
+	content="Seed Of Andromeda is a Voxel based Sandbox RPG in a futuristic setting. The player will crash land on a fully round voxel planet and will be forced to survive hostile creatures. As the player progresses through the game, they will be able to form settlements, develop technology, and eventually escape the rock they are stranded on!" />
 
-<meta name="og:site_name" content="seedofandromeda">
+<meta name="og:site_name" content="seedofandromeda" />
 
-<meta name="og:type" content="game">
+<meta name="og:type" content="game" />
 
-<meta name="og:url" content="http://www.seedofandromeda.com/">
+<meta name="og:url" content="http://www.seedofandromeda.com/" />
 
 <meta name="og:image"
-	content="http://www.seedofandromeda.com/Assets/images/HeaderOld.png">
+	content="http://www.seedofandromeda.com/Assets/images/HeaderOld.png" />
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"
 	type="text/javascript"></script>
@@ -56,11 +56,11 @@ $(document).ready(function(){
 
 $pagestyle = "styles/pages/" . str_replace ( ".php", ".css", $pagename );
 if (file_exists ( $pagestyle )) {
-	echo '<link rel="stylesheet" href="/' . $pagestyle . '?ver=9" type="text/css" />';
+	echo '<link rel="stylesheet" href="/' . $pagestyle . '?ver=11" type="text/css" />';
 }
 $pagestyle = "scripts/pages/" . str_replace ( ".php", ".js", $pagename );
 if (file_exists ( $pagestyle )) {
-	echo '<script src="/' . $pagestyle . '"></script>';
+	echo '<script src="/' . $pagestyle . '?ver=2"></script>';
 }
 ?>
 <!-- Google Analytics BEGIN-->

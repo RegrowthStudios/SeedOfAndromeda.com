@@ -97,7 +97,7 @@ if (! $loggedIn) {
 						if (! isset ( $_REQUEST ['blog-post-title'] ) || ! isset ( $_REQUEST ['blog-post-content'] )) {
 							echo '<h3 style="color: red; text-shadow: 0px 0px 10px rgba(255, 0, 0, 1);">Blog post title and body are required!</h3>';
 						} else {
-							$query = $connection->prepare ( "UPDATE blog_posts SET title = ?, post_body = ?, updatetime = ?, disablecomments = ?, published = ?, devnews = ? WHERE id = ?" );
+							$query = $connection->prepare ( "UPDATE blog_posts SET title = ?, post_body = ?, updatetime = ?, disablecomments = ?, published = ?, devnews = ?, dev_news_body = ?, dev_news_background = ? WHERE id = ?" );
 							$query->execute ( array (
 									$_REQUEST ['blog-post-title'],
 									$_REQUEST ['blog-post-content'],
@@ -105,6 +105,8 @@ if (! $loggedIn) {
 									isset ( $_REQUEST ['commentsoff'] ) && $_REQUEST ['commentsoff'] == 1,
 									isset ( $_REQUEST ['publish'] ) && $_REQUEST ['publish'] == 1,
 									isset ( $_REQUEST ['devnews'] ) && $_REQUEST ['devnews'] == 1,
+                                    $_REQUEST ['dev-news-summary-content'],
+                                    $_REQUEST ['dev-news-summary-background'],
 									$_REQUEST ['postid'] 
 							) );
 							header ( "Location: /" . $pageurl . "?postid=" . $_REQUEST ['postid'] );
@@ -188,7 +190,17 @@ if (! $loggedIn) {
 			<?php echo $author["username"]." - ".$author["custom_title"];?>
 		</p>
 	</div>
-	<div>
+    <div <?php if($blogpost["devnews"] != "1") echo "style='display: none;'";?>  id="dev-news-summary-content-cover">
+        <div style="width: 100%;">
+            <h2>Dev News Summary:</h2>
+            <div class="editpost" id="dev-news-summary-content"><?php echo $blogpost["dev_news_body"];?></div>
+        </div>
+        <div style="width: 100%;">
+            <h3>Dev News Background Image:</h3>
+            <div class="editpost" id="dev-news-summary-background"><?php echo $blogpost["dev_news_background"];?></div>
+        </div>
+    </div>
+    <div>
 		<h3>Post settings</h3>
 		<input type="checkbox" name="commentsoff" value="1"
 			<?php if($blogpost["disablecomments"] == "1") echo "checked";?> />
@@ -201,34 +213,19 @@ if (! $loggedIn) {
 	</div>
 </form>
                    <?php echo '<div style="float: right;margin-top:100px;"><h3 style="margin-bottom: 0;"><a style="color: white !important;" href="/' . $pageurl . '">Return</a></h3></div>'; ?>
-    <script>
-		var devnews = $("input.devnews");
-		var publish = $("input.publish");
-		publish.click(function() {
-					if($(this).is(':checked')) {
-						devnews.removeAttr("disabled");
-					} else {
-						devnews.prop("disabled", true);
-					}
-				});
-		$(document).ready(function()
-				{
-					if(!(publish.is(':checked'))) {
-						devnews.prop("disabled", true);
-					}
-				});
-    </script>
 <?php
 					}
 				}
 			} elseif (isset ( $_REQUEST ['newpost'] )) {
 				
-				$query = $connection->prepare ( "INSERT INTO blog_posts (author, title, timestamp, post_body) VALUES (?, ?, ?, ?)" );
+				$query = $connection->prepare ( "INSERT INTO blog_posts (author, title, timestamp, post_body, dev_news_body, dev_news_background) VALUES (?, ?, ?, ?, ?, ?)" );
 				$query->execute ( array (
 						$userinfo ['user_id'],
 						"New blog post",
 						time (),
-						"<h2>Click here to edit</h2><p>Click the title to edit it.</p>" 
+						"<h2>Click here to edit!</h2><p>Click the title to edit it.</p>" ,
+                        "<p>Click here to edit!</p>",
+                        '<p><img class="xx-large-wide blog-inline-image" src="http://www.seedofandromeda.com/Assets/images/Blogs/Default/SOA.png" alt="Default Dev News Background" /></p>'
 				) );
 				
 				$id = $connection->lastInsertId ();

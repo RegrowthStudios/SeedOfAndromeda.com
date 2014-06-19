@@ -60,43 +60,73 @@
     <div>
     <?php
 	if (isset ( $connection )) {
-		$query = $connection->prepare ( "SELECT * FROM blog_posts WHERE published = ? AND devnews = ? ORDER BY id DESC LIMIT 1" );
+		$query = $connection->prepare ( "SELECT * FROM blog_posts WHERE published = ? AND devnews = ? ORDER BY id DESC LIMIT 5" ); //LIMIT 1
 		$query->execute ( array (
 				1,
 				1
 		) );
-		
-		$row = $query->fetch ();
+        ?>
+        <div id="dev-news-frame">
+            <div class="dev-news-control dev-news-control-left">
+		        <img src="/Assets/images/arrowLeft.png" />
+            </div>
+            <div class="dev-news-control dev-news-control-right">
+                <img src="/Assets/images/arrowRight.png" />
+            </div>
+            <div id="dev-news-js-warning">
+                <h3 style="color: red; text-shadow: 0px 0px 10px rgba(255, 0, 0, 1);">
+                    Please enable JavaScript to see Dev News content!
+                </h3>
+             </div>
+        <?php
+		while ( $row = $query->fetch () ) {
 			$postlink = gen_postlink ( $row );
+            $background = $row ["dev_news_background"];
+            $src_start = strpos('\'' . $background . '\'', 'src="') + 5;
+            $src_end = strpos('\'' . $background . '\'', '"', $src_start);
+            $backgroundurl = substr('\'' . $background . '\'', $src_start, $src_end - $src_start);
+            $disp = "";
 			echo '
-	<div id="blog-post-header">
-		<p><a href="/blogs/' . $postlink . '">' . $row ["title"] . '</a></p>
-	</div>
-	<div id="blog-post-body">
-		<p style="position: absolute;">' . substr ( preg_replace('/<iframe.*?\/iframe>/i','<p>Click read more to view this video!</p>', $row ["post_body"] ), 0, 2000 ) . ' ...</p>
-	</div>
-	<div id="blog-post-footer">
-		<p>
-			<a
-				href="/blogs/' . $postlink . '">Read
-				More...</a> ';
-			if (! $row ["disablecomments"]) {
-				echo '<small> - (<a
-				href="http://www.seedofandromeda.com/blogs/' . $postlink . '#disqus_thread" data-disqus-identifier="blogs-' . $row ["id"] . '">Comments</a>)
-			</small>';
-			}
-			
-			echo '
-		</p>
-	</div>
-
-	';
+                <div class="dev-news-wrapper" style="display:none;">
+                    <a href="http://www.seedofandromeda.com/blogs/' . $postlink . '">
+                        <div id="dev-news-text">
+                            <div id="dev-news-header"> <h2>' . $row ["title"] . '</h2> </div>
+                            <div id="dev-news-summary"> <strong>' . $row ["dev_news_body"] . '</strong> </div>
+                        </div>
+                        <div id="dev-news-background" style="background-image:url(\'' . $backgroundurl . '\');"></div>
+                    </a>
+                </div>
+	        ';
+        }
+        ?>
+        </div>
+        <?php
+        //<div id="blog-post-header">
+        //    <p><a href="/blogs/' . $postlink . '">' . $row ["title"] . '</a></p>
+        //</div>
+        //<div id="blog-post-body">
+        //    <p style="position: absolute;">' . substr ( preg_replace('/<iframe.*?\/iframe>/i','<p>Click read more to view this video!</p>', $row ["post_body"] ), 0, 2000 ) . ' ...</p>
+        //</div>
+        //<div id="blog-post-footer">
+        //    <p>
+        //        <a
+        //            href="/blogs/' . $postlink . '">Read
+        //            More...</a> ';
+        //        if (! $row ["disablecomments"]) {
+        //            echo '<small> - (<a
+        //            href="http://www.seedofandromeda.com/blogs/' . $postlink . '#disqus_thread" data-disqus-identifier="blogs-' . $row ["id"] . '">Comments</a>)
+        //        </small>';
+        //        }
+        
+        //        echo '
+        //    </p>
+        //</div>
 			}	
 		?>
 
-        <script type="text/javascript">            var disqus_shortname = 'seedofandromeda';
+<!--        <script type="text/javascript">            var disqus_shortname = 'seedofandromeda';
             (function () {
                 var s = document.createElement('script'); s.async = true;                s.type = 'text/javascript';                s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-            }()); </script>
+            }());        </script>-->
     </div>	
 </div>

@@ -4,7 +4,7 @@
     background: rgba(255,255,255,0.2);
     overflow: hidden;
     margin-left: 107px;
-    float: none;
+    float: none !important;
     border: 2px #39AECF solid;
 }
 
@@ -52,7 +52,7 @@
 .img-next {
     margin-top: -480px;
     margin-right: 38px;
-    float: right;
+    float: right !important;
 }
 
 .img-prev {

@@ -31,6 +31,8 @@
     height: 308px;
     /* Aspect Ratio: 35:13 */
     background-color: rgb(0,0,0);
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 #dev-news-text {

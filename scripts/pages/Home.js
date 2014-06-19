@@ -8,7 +8,7 @@ $(document).ready(function () {
     var elems = $('.dev-news-wrapper');
     var ctrlsLocked = false;
     var slideShowPaused = false;
-    var slideShowDelay = 4000;
+    var slideShowDelay = 6000;
     index = 0;
 
     //Initially show latest Dev News
@@ -26,7 +26,7 @@ $(document).ready(function () {
         });
 
         $('.dev-news-control-left').click(function () {
-            pauseSlideshowDelay(5000);
+            pauseSlideshowDelay(7000);
             if (ctrlsLocked == false) {
                 previousItem();
             }
@@ -34,7 +34,7 @@ $(document).ready(function () {
         });
 
         $('.dev-news-control-right').click(function () {
-            pauseSlideshowDelay(5000);
+            pauseSlideshowDelay(7000);
             if (ctrlsLocked == false) {
                 nextItem();
             }

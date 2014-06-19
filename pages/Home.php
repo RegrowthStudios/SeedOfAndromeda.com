@@ -101,32 +101,7 @@
         ?>
         </div>
         <?php
-        //<div id="blog-post-header">
-        //    <p><a href="/blogs/' . $postlink . '">' . $row ["title"] . '</a></p>
-        //</div>
-        //<div id="blog-post-body">
-        //    <p style="position: absolute;">' . substr ( preg_replace('/<iframe.*?\/iframe>/i','<p>Click read more to view this video!</p>', $row ["post_body"] ), 0, 2000 ) . ' ...</p>
-        //</div>
-        //<div id="blog-post-footer">
-        //    <p>
-        //        <a
-        //            href="/blogs/' . $postlink . '">Read
-        //            More...</a> ';
-        //        if (! $row ["disablecomments"]) {
-        //            echo '<small> - (<a
-        //            href="http://www.seedofandromeda.com/blogs/' . $postlink . '#disqus_thread" data-disqus-identifier="blogs-' . $row ["id"] . '">Comments</a>)
-        //        </small>';
-        //        }
-        
-        //        echo '
-        //    </p>
-        //</div>
 			}	
 		?>
-
-<!--        <script type="text/javascript">            var disqus_shortname = 'seedofandromeda';
-            (function () {
-                var s = document.createElement('script'); s.async = true;                s.type = 'text/javascript';                s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-            }());        </script>-->
     </div>	
 </div>

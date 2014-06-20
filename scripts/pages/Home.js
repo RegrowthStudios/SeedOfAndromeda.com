@@ -4,13 +4,14 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-    var elem, index, automateID;
+    var elem;
     var elems = $('.dev-news-wrapper');
     var ctrlsLocked = false;
     var slideShowPaused = false;
     var slideShowDelay = 6000;
     var slideShowPauseDelay = 7000;
-    index = 0;
+    var index = 0;
+    var automateID = [];
 
     //Initially show latest Dev News
     elem = $(elems[index]);
@@ -81,16 +82,17 @@ $(document).ready(function () {
         function automateSlideshow() {
             if (slideShowPaused == false) {
                 nextItem();
-                automateID = setTimeout(function () {
+                clearTimeouts();
+                automateID[automateID.length] = setTimeout(function () {
                     automateSlideshow();
                 }, slideShowDelay);
             }
         }
 
         function playSlideshow() {
-            clearTimeout(automateID);
+            clearTimeouts();
             slideShowPaused = false;
-            setTimeout(function () {
+            automateID[automateID.length] = setTimeout(function () {
                 automateSlideshow();
             }, slideShowDelay);
         }
@@ -113,12 +115,21 @@ $(document).ready(function () {
             }, 500);
         }
 
+        function clearTimeouts() {
+            for (var i = 0; i < automateID.length; ++i) {
+                clearTimeout(automateID[i]);
+                automateID.splice(i, 1);
+                --i;
+            }
+        }
+
         //Initiate slideshow
         (function () {
             setTimeout(function () {
                 automateSlideshow();
             }, slideShowDelay);
         })();
+
     } else {
         $('.dev-news-control').hide();
     }

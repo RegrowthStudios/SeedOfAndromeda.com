@@ -57,6 +57,7 @@
     <Folder Include="styles\pages\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="scripts\jquery.sticky.js" />
     <Content Include="scripts\lightbox-2.6.js" />
     <Content Include="scripts\pages\BlogAdmin.js" />
     <Content Include="scripts\pages\Home.js" />

@@ -13,8 +13,17 @@ if (isset ( $connection )) {
 	</div>
 	<div id="blog-post-footer">
 		<p>
-			<a
-				href="<?php echo XenForo_Link::buildPublicLink('canonical:members', $author); ?>"><?php echo $author["username"]." - ".$author["custom_title"];?></a>
+            <?php
+                if(! $blogpost["removesignoff"]) {
+                    if($blogpost["anonymous"]) {
+                        echo "Seed of Andromeda Team";
+                    } else {
+            ?>
+			    <a href="<?php echo XenForo_Link::buildPublicLink('canonical:members', $author); ?>"><?php echo $author["username"]." - ".$author["custom_title"];?></a>
+            <?php 
+                    }
+                }
+            ?>
 		</p>
 	</div>
 </div>

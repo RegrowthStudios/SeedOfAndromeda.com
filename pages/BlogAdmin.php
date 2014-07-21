@@ -97,7 +97,7 @@ if (! $loggedIn) {
 						if (! isset ( $_REQUEST ['blog-post-title'] ) || ! isset ( $_REQUEST ['blog-post-content'] )) {
 							echo '<h3 style="color: red; text-shadow: 0px 0px 10px rgba(255, 0, 0, 1);">Blog post title and body are required!</h3>';
 						} else {
-							$query = $connection->prepare ( "UPDATE blog_posts SET title = ?, post_body = ?, updatetime = ?, disablecomments = ?, published = ?, devnews = ?, dev_news_body = ?, dev_news_background = ? WHERE id = ?" );
+							$query = $connection->prepare ( "UPDATE blog_posts SET title = ?, post_body = ?, updatetime = ?, disablecomments = ?, published = ?, devnews = ?, anonymous = ?, removesignoff = ?, dev_news_body = ?, dev_news_background = ? WHERE id = ?" );
 							$query->execute ( array (
 									$_REQUEST ['blog-post-title'],
 									$_REQUEST ['blog-post-content'],
@@ -105,9 +105,11 @@ if (! $loggedIn) {
 									isset ( $_REQUEST ['commentsoff'] ) && $_REQUEST ['commentsoff'] == 1,
 									isset ( $_REQUEST ['publish'] ) && $_REQUEST ['publish'] == 1,
 									isset ( $_REQUEST ['devnews'] ) && $_REQUEST ['devnews'] == 1,
+									isset ( $_REQUEST ['anonymous'] ) && $_REQUEST ['anonymous'] == 1,
+									isset ( $_REQUEST ['no-sign-off'] ) && $_REQUEST ['no-sign-off'] == 1,
                                     $_REQUEST ['dev-news-summary-content'],
                                     $_REQUEST ['dev-news-summary-background'],
-									$_REQUEST ['postid'] 
+									$_REQUEST ['postid'],
 							) );
 							header ( "Location: /" . $pageurl . "?postid=" . $_REQUEST ['postid'] );
 						}
@@ -208,7 +210,11 @@ if (! $loggedIn) {
 			value="1" <?php if($blogpost["published"] == "1") echo "checked";?> />
 		Publish blog post<br /> <input type="checkbox" class="devnews" name="devnews"
 			value="1" <?php if($blogpost["devnews"] == "1") echo "checked";?> />
-		Publish blog to Dev News<br /> <input type="submit" value="Save" />
+		Publish blog to Dev News<br /> <input type="checkbox" class="anonymous" name="anonymous"
+			value="1" <?php if($blogpost["anonymous"] == "1") echo "checked";?> />
+        Publish anonymously<br /> <input type="checkbox" class="no-sign-off" name="no-sign-off"
+			value="1" <?php if($blogpost["removesignoff"] == "1") echo "checked";?> />
+        Publish with no sign off<br /> <input type="submit" value="Save" />
         <br />
 	</div>
 </form>

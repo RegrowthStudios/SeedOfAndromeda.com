@@ -83,9 +83,9 @@
         $tids = array();
         
         //Add developer user IDs here:
-        $devIDs = array(1);
+        $devIDs = array(  3, 7, 13  );
         //List of ignored forum IDs:
-        $ignoreForums = array();
+        $ignoreForums = array( 15, 16, 17, 20, 21, 23, 30 );
         
         
         foreach($devIDs as $devID){

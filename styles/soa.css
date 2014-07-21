@@ -988,6 +988,9 @@ div.double-col.empty #blog-post-footer {
 	text-decoration: none;
 }
 
+#single-blog {
+    position: relative;
+}
 #single-blog #blog-post-body {
 	height: auto;
 }

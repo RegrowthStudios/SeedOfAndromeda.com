@@ -214,11 +214,11 @@ if (! $loggedIn) {
 			value="1" <?php if($blogpost["anonymous"] == "1") echo "checked";?> />
         Publish anonymously<br /> <input type="checkbox" class="no-sign-off" name="no-sign-off"
 			value="1" <?php if($blogpost["removesignoff"] == "1") echo "checked";?> />
-        Publish with no sign off<br /> <input type="submit" value="Save" />
+        Publish with no sign off<br /><br /> <input type="submit" value="Save" />
         <br />
 	</div>
 </form>
-                   <?php echo '<div style="float: right;margin-top:100px;"><h3 style="margin-bottom: 0;"><a style="color: white !important;" href="/' . $pageurl . '">Return</a></h3></div>'; ?>
+                   <?php echo '<div style="float: right;position:absolute;right:20px;bottom:20px;"><h3 style="margin-bottom: 0;"><a style="color: white !important;" href="/' . $pageurl . '">Return</a></h3></div>'; ?>
 <?php
 					}
 				}

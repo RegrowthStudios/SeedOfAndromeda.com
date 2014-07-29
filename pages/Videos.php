@@ -1,29 +1,20 @@
-
-
-<div class="double-col">
-
-	<h3 style="text-align: center; font-size: 1.6em;">Videos</h3>
-
-	<div class="vid-prev">
-		<img src="/Assets/images/arrowLeft.png" />
-	</div>
-
-	<div id="video-frame-inner">
-
-		<iframe height="393" width="700" src="#" class="temp-iframe"
-			frameborder="0" allowfullscreen></iframe>
-
-		<iframe height="393" width="700" src="#" class="enlarged-iframe"
-			frameborder="0" allowfullscreen></iframe>
-
-	</div>
-
-	<div class="vid-next">
-		<img src="/Assets/images/arrowRight.png" />
-	</div>
-
-	<br />
-
+<div id="video-viewer" class="row clearfix">
+    <div class="header"><h1>Videos</h1></div>
+    <div class="col double-col-2">
+        <div class="media-slider-frame card-slider-frame">
+            <div class="media-slider-control media-slider-control-left card-slider-control">
+                <img class="media-slider-control-img" src="/assets/images/arrowLeft.png" />
+            </div>
+            <div class="media-slider-control media-slider-control-right card-slider-control">
+                <img class="media-slider-control-img" src="/assets/images/arrowRight.png" />
+            </div>
+            <div class="media-slider-js-warning card-slider-js-warning">
+                <h3 class="warning">Please enable JavaScript to see Dev News content!</h3>
+            </div>
+        </div>
+    </div>
 </div>
 
-<br />
+<div id="videos" class="row clearfix">
+    <div class="divider"></div>           
+</div>

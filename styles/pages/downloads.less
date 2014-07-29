@@ -1,0 +1,20 @@
+﻿@import "../data.less";
+
+.version {
+    display: inline-block;
+}
+
+@download-button-width: 192px;
+@download-button-height: ( @download-button-width * @btn-dim-ratio );
+.download {
+    float: right;
+    display: block;
+    font-size: 1.4em;
+    color: @color-anchor !important;
+    .ButtonDim(@download-button-width);
+}
+
+.ver-description {
+    min-height: @download-button-height;
+    margin-bottom: 20px;
+}

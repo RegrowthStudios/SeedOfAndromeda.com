@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "downloads.css",
+  "sources": [
+    "downloads.less",
+    "../data.less"
+  ],
+  "names": [],
+  "mappings": ";;;;;;;;;AAEA;EACI,qBAAA;;AAKJ;EACI,YAAA;EACA,cAAA;EACA,gBAAA;EACA,cAAA;EC8IA,iBAAA;EACA,YAAA;EACA,sBAAA;;AD5IJ;EACI,qBAAA;EACA,mBAAA"
+}

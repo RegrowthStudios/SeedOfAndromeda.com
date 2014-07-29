@@ -1,134 +1,67 @@
+// Prepare and Display Video Thumbnails
 $(document).ready(function () {
     $.getJSON('https://gdata.youtube.com/feeds/api/videos?author=UCMlW2qG20hcFYo06rcit4CQ&max-results=48&v=2&alt=jsonc&orderby=published', function (data) {
         for (var i = 0; i < data.data.items.length; i++) {
-            //console.log(data.data.items[i].title); // title
-            //console.log(data.data.items[i].description); // description
-            //console.log(data.data.items[i]);
-            var check = (i % 3) + 1;
-            var html = '<div class="video-col tri-col-' + check + ' empty"><img src="' + data.data.items[i].thumbnail.hqDefault + '" data-id="' + data.data.items[i].id + '" title="' + data.data.items[i].title + '" class="video" /><div class="video-play" title="' + data.data.items[i].title + '"></div></div>';
-            $('.final_content_border').append(html);
+            var htmlWrapper = '<div class="media-wrapper card-wrapper" style="display: none;"><div class="video-title"><h2 class="indent-large">' + data.data.items[i].title + '</h2></div><div class="card-background" style="background-image: url(\'https://i.ytimg.com/vi/' + data.data.items[i].id + '/maxresdefault.jpg\')" data-id="' + data.data.items[i].id + '"></div><div class="video-play"></div></div>';
+            var htmlColumn = '<div class="col tri-col-1"><img src="' + data.data.items[i].thumbnail.hqDefault + '" data-id="' + data.data.items[i].id + '" title="' + data.data.items[i].title + '" class="img medium-wide video" /></div>';
+            $('#video-viewer .media-slider-frame').append(htmlWrapper);
+            $('#videos').append(htmlColumn);
         }
-        var elem;
 
-        var elems = $('.video');
+        // Initiate Videos Slider
+        var slider;
+        {
+            var elems = $("#video-viewer .media-wrapper");
+            var sliderFrame = $("#video-viewer .media-slider-frame");
+            slider = new MediaSlider(elems, sliderFrame, 3000);
+        }
 
-
-
-        elem = $(elems[0]);
-
-        initSrc = "https://www.youtube.com/embed/" + elem.attr('data-id') + "?wmode=transparent";
-
-        $('.enlarged-iframe').attr('src', initSrc);
-
-        $('.temp-iframe').attr('src', initSrc);
-
-        $('.video-play').click(function () {
-            $(this).parent().find('.video').click();
-        });
-
-
-        elems.click(function () {
-
-            elem = $(this);
-
-            var src = "https://www.youtube.com/embed/" + elem.attr('data-id') + "?wmode=transparent";
-
-            $('.temp-iframe').attr('src', src);
-            $('html, body').animate({
-                scrollTop: $("#video-frame-inner").offset().top - 150
-            }, 1000);
-
-            $('.enlarged-iframe').fadeOut(0, function () {
-
-                $('.enlarged-iframe').attr('src', src).fadeIn(0);
-
+        //Correct Video Play Positioning
+        var videoPlays = $("#video-viewer .video-play");
+        {
+            var frameWidth = $("#video-viewer .media-slider-frame").width();
+            var videoPlayWidth = videoPlays.last().width();
+            var leftVal = ((frameWidth - videoPlayWidth) / 2);
+            $.each(videoPlays, function (i, v) {
+                $(v).css("left", leftVal + "px");
             });
-
-        });
-
-
-
-        $('.vid-next').click(function () {
-
-            var ind = elems.index(elem);
-
-            if (ind == (elems.length - 1)) {
-
-                elem = $(elems.get(0));
-
-                var src = "https://www.youtube.com/embed/" + elem.attr('data-id') + "?wmode=transparent";
-
-                $('.temp-iframe').attr('src', src);
-
-                $('.enlarged-iframe').fadeOut(0, function () {
-
-                    $('.enlarged-iframe').attr('src', src).fadeIn(0);
-
+        }
+        console.log(videoPlays);
+        // Handle Video Play Interaction
+        {
+            var cover = $("#video-cover");
+            $.each(videoPlays, function (i, v) {
+                $(v).click(function () {
+                    var vidID = $(v).siblings().last().data("id");
+                    var vidURL = "https://www.youtube.com/embed/" + vidID + "?wmode=transparent";
+                    var video = "<iframe width='" + ($(window).width() * 0.6) + "' height='" + ($(window).width() * 0.6 * 0.5) + "' style='margin-top:" + ( ( $(window).height() - ($(window).width() * 0.6 * 0.5) ) / 2 ) + "px;' src='" + vidURL + "' frameborder='0' allowfullscreen></iframe>";
+                    cover.children().remove();
+                    cover.append(video).fadeIn();
+                    setTimeout(function () {
+                        slider.pauseSlideshow();
+                    }, 10);
                 });
+            });
+            cover.click(function (e) {
+                if (($(e.target).parents('#video-cover').length) * (-1)) {
+                    return;
+                }
+                cover.children().remove();
+                slider.playSlideshow();
+            });
+        }
 
-            } else {
-
-                elem = $(elems.get(ind + 1));
-
-                var src = "https://www.youtube.com/embed/" + elem.attr('data-id') + "?wmode=transparent";
-
-                $('.temp-iframe').attr('src', src);
-
-                $('.enlarged-iframe').fadeOut(0, function () {
-
-                    $('.enlarged-iframe').attr('src', src).fadeIn(0);
-
+        // Handle Specific Video Selection
+        {
+            var videos = $(".video");
+            $.each(videos, function (i, v) {
+                $(v).click(function () {
+                    if (slider.ctrlsLocked == false) {
+                        slider.lockCtrls();
+                        slider.setItem(i);
+                    }
                 });
-
-            }
-
-        });
-
-
-
-
-
-        $('.vid-prev').click(function () {
-
-            var ind = elems.index(elem);
-
-
-
-            if (ind == 0) {
-
-                elem = $(elems.get(elems.length - 1));
-
-                index = elems.index(elem);
-
-                var src = "https://www.youtube.com/embed/" + elem.attr('data-id') + "?wmode=transparent";
-
-                $('.temp-iframe').attr('src', src);
-
-                $('.enlarged-iframe').fadeOut(0, function () {
-
-                    $('.enlarged-iframe').attr('src', src).fadeIn(0);
-
-                });
-
-            } else {
-
-                elem = $(elems.get(ind - 1));
-
-                index = elems.index(elem);
-
-                var src = "https://www.youtube.com/embed/" + elem.attr('data-id') + "?wmode=transparent";
-
-                $('.temp-iframe').attr('src', src);
-
-                $('.enlarged-iframe').fadeOut(0, function () {
-
-                    $('.enlarged-iframe').attr('src', src).fadeIn(0);
-
-                });
-
-            }
-
-        });
+            });
+        }
     });
-
 });

@@ -1,0 +1,9 @@
+{
+  "version": 3,
+  "file": "irc.css",
+  "sources": [
+    "irc.less"
+  ],
+  "names": [],
+  "mappings": ";;;;;;;;;AAEA;EACI,WAAA;EACA,iBAAA;EACA,gBAAA;EACA,SAAA;EACA,gBAAA;EACA,yBAAA;EACA,cAAA"
+}

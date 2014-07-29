@@ -1,0 +1,158 @@
+﻿/*************/
+/* Variables */
+/*************/
+
+@content-width: 1054px;
+@content-corner-radius: 8px;
+@header-height: 44px;
+
+@navigation-item-width: 120px;
+@navigation-dropdown-item-height: 40px;
+@account-bar-width: 198px;
+@account-bar-image-dim: 32px;
+@account-bar-alerts-dim: 30px;
+@account-bar-options-height: 38px;
+@account-bar-options-width: 180px;
+
+@row-header-height: 64px;
+@row-header-bottom-margin: 20px;
+@row-divider-height: 32px;
+@row-divider-bottom-margin: 20px;
+
+@column-double-unit-margin-width: 3%;
+@column-tri-unit-margin-width: 3%;
+@column-quad-unit-margin-width: 3%;
+
+@btn-drop-shadow-color: rgba(0,0,0,1);
+@btn-dim: 128px;
+@btn-dim-ratio: 0.757;
+
+@media-slider-default-height: 400px;
+@media-slider-default-width: 100%;
+@media-slider-control-width: 40px;
+@media-slider-control-color: rgb(255,255,255);
+
+@card-slider-height: 350px;
+@card-slider-width: 100%;
+
+@input-min-dim: 16px;
+@checkbox-outer-dim: 32px;
+@checkbox-inner-dim: 22px;
+
+@image-height-xxx-small: 32px;
+@image-height-xx-small: 48px;
+@image-height-x-small: 64px;
+@image-height-small: 128px;
+@image-height-medium: 192px;
+@image-height-large: 256px;
+@image-height-x-large: 320px;
+@image-height-xx-large: 384px;
+@image-height-xxx-large: 512px;
+
+@tab-intent-xxx-small: 0.5em;
+@tab-intent-xx-small: 0.625em;
+@tab-intent-x-small: 0.75em;
+@tab-intent-small: 1em;
+@tab-intent-medium: 1.25em;
+@tab-intent-large: 1.5em;
+@tab-intent-x-large: 2em;
+@tab-intent-xx-large: 3em;
+@tab-intent-xxx-large: 5em;
+
+@header-font: "orbitronregular", sans-serif;
+@light-font: "orbitronlight", sans-serif;
+@content-font: "electrolize", sans-serif;
+
+@color-header: #FFFFFF;
+@color-anchor: #61B7CF;
+@color-anchor-visited: #A168D5;
+@color-anchor-hover: #057D9F;
+@color-bright-blue: #10BEEF;
+@color-dull-blue: #38AECF;
+@color-footer: #143145;
+
+/*******************************/
+/* Proprietary Property Mixins */
+/*******************************/
+
+@default-radius: 0;
+.BorderRadius(@radius: @default-radius) {
+    -webkit-border-radius: @radius;
+       -moz-border-radius: @radius;
+            border-radius: @radius;
+}
+
+@default-targets: all;
+@default-duration: 0.2s;
+@default-timing: linear;
+.Transition(@target: @default-targets, @duration: @default-duration, @timing: @default-timing) {
+    -webkit-transition: @target @duration @timing;
+	   -moz-transition: @target @duration @timing;
+	     -o-transition: @target @duration @timing;
+	        transition: @target @duration @timing;
+}
+
+@default-inset: false;
+@default-val: 0;
+@default-color: rgba(0,0,0,1);
+.BoxShadow(@inset: @default-inset, @a: @default-val, @b: @default-val, @c: @default-val, @d: @default-val, @color: @default-color) when (@inset = true) {
+    -webkit-box-shadow: inset @a @b @c @d  @color;
+       -moz-box-shadow: inset @a @b @c @d  @color;
+	        box-shadow: inset @a @b @c @d  @color;
+}
+.BoxShadow(@inset: @default-inset, @a: @default-val, @b: @default-val, @c: @default-val, @d: @default-val, @color: @default-color) when not (@inset = true) { 
+    -webkit-box-shadow: @a @b @c @d  @color;
+       -moz-box-shadow: @a @b @c @d  @color;
+	        box-shadow: @a @b @c @d  @color;
+}
+
+.DropShadow(@a: @default-val, @b: @default-val, @c: @default-val, @color: @default-color) when (@color = 0) {
+    -webkit-filter: none;
+        -ms-filter: none;
+            filter: none;
+}
+.DropShadow(@a: @default-val, @b: @default-val, @c: @default-val, @color: @default-color) when not (@color = 0) {
+    -webkit-filter: drop-shadow(@a @b @c @color);
+        -ms-filter: drop-shadow(@a @b @c @color);
+            filter: drop-shadow(@a @b @c @color);
+}
+
+@default-box-sizing: border-box;
+.BoxSizing(@box-sizing: @default-box-sizing) {
+    -webkit-box-sizing: @default-box-sizing;
+       -moz-box-sizing: @default-box-sizing;
+            box-sizing: @default-box-sizing;
+}
+
+@default-perspective: 9999px;
+.Perspective(@perspective: @default-perspective) {
+    -webkit-perspective: @perspective;
+       -moz-perspective: @perspective;
+        -ms-perspective: @perspective;
+            perspective: @perspective;
+}
+
+@default-transform-style: preserve-3d;
+.TransformStyle(@transform-style: @default-transform-style) {
+    -webkit-transform-style: @transform-style;
+            transform-style: @transform-style;
+}
+
+@default-transform: none;
+.Transform(@transform: @default-transform) {
+    -webkit-transform: @transform;
+       -moz-transform: @transform;
+        -ms-transform: @transform;
+         -o-transform: @transform;
+            transform: @transform;
+}
+
+/******************/
+/* Content Mixins */
+/******************/
+
+.ButtonDim(@button-width: @btn-dim) {
+    height: ( @button-width * @btn-dim-ratio );
+    width: @button-width;
+    line-height: ( @button-width * @btn-dim-ratio );
+}

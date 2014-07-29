@@ -22,27 +22,27 @@ if (startsWith ( $cleanpageid, "blogs/" )) {
 	$cleanpageid = substr ( $cleanpageid, 0, strlen ( $cleanpageid ) - 1 );
 }
 switch ($cleanpageid) {
-	case "index" :
+    case "index" :
 		require_once ("db_connect.php");
 		$pagetitle = "Seed of Andromeda";
-		$pagename = "Home.php";
+		$pagename = "home.php";
 		$pageurl = "";
 		break;
-	case "thegame" :
+	case "the-game" :
 		$pagetitle .= "The Game";
-		$pagename = "The Game.php";
+		$pagename = "the-game.php";
 		break;
-	case "theteam" :
+	case "the-team" :
 		$pagetitle .= "The Team";
-		$pagename = "The Team.php";
+		$pagename = "the-team.php";
 		break;
 	case "screenshots" :
 		$pagetitle .= "Image Media";
-		$pagename = "Screenshots.php";
+		$pagename = "screenshots.php";
 		break;
 	case "videos" :
 		$pagetitle .= "Video Media";
-		$pagename = "Videos.php";
+		$pagename = "videos.php";
 		break;
 	// case "mods" :
 	// $pagetitle = "Mods";
@@ -50,7 +50,7 @@ switch ($cleanpageid) {
 	// break;
 	case "irc" :
 		$pagetitle .= "IRC";
-		$pagename = "IRC.php";
+		$pagename = "irc.php";
 		break;
 	// case "store" :
 	// $pagetitle = "Store";
@@ -58,7 +58,7 @@ switch ($cleanpageid) {
 	// break;
 	case "blogs/" :
 		require_once ("db_connect.php");
-		$pagename = "Blogs.php";
+		$pagename = "blogs.php";
 		$cleanpageid = $pageurl;
 		if (isset ( $connection )) {
 			$currentblogpostlink = substr ( $pageurl, 6 );
@@ -89,7 +89,7 @@ switch ($cleanpageid) {
 			}
 		} else {
 			$pagetitle .= "Maintenance";
-			$pagename = "Maintenance.php";
+			$pagename = "maintenance.php";
 		}
 		
 		// var_dump(get_defined_vars());
@@ -99,31 +99,31 @@ switch ($cleanpageid) {
 	case "blogs" :
 		require_once ("db_connect.php");
 		$pagetitle .= "Blogs";
-		$pagename = "Blogs.php";
+		$pagename = "blogs.php";
 		break;
 	case "downloads" :
 		$pagetitle .= "Downloads";
-		$pagename = "Downloads.php";
+		$pagename = "downloads.php";
 		break;
 	// case "reddit" :
 	// $pagetitle .= "Reddit";
 	// $pagename = "";
 	// break;
-	case "underconstruction" :
+	case "under-construction" :
 		$pagetitle .= "Under Construction";
-		$pagename = "Under Construction.php";
+		$pagename = "under-construction.php";
 		break;
 	case "maintenance" :
 		$pagetitle .= "Maintenance";
-		$pagename = "Maintenance.php";
+		$pagename = "maintenance.php";
 		break;
 	case "login" :
 		$pagetitle .= "Log in";
-		$pagename = "Login.php";
+		$pagename = "login.php";
 		break;
-	case "blogadmin":
+	case "blog-admin":
 		$pagetitle .= "Blog Admin";
-		$pagename = "BlogAdmin.php";
+		$pagename = "blog-admin.php";
 		require_once ("db_connect.php");
 		break;
 }

@@ -3,30 +3,30 @@ if (isset ( $connection )) {
 	if (isset ( $blogpost )) {
 		$author = $sdk->getUser ( $blogpost ["author"] );
 		?>
-
-<div id="single-blog" class="double-col">
-	<div id="blog-post-header">
-		<p><?php echo $blogpost["title"];?></p>
-	</div>
-	<div id="blog-post-body" style="padding-top: 40px;">
-		<div><?php echo $blogpost["post_body"];?></div>
-	</div>
-	<div id="blog-post-footer">
-		<p>
-            <?php
-                if(! $blogpost["removesignoff"]) {
-                    if($blogpost["anonymous"]) {
-                        echo "Seed of Andromeda Team";
-                    } else {
-            ?>
-			    <a href="<?php echo XenForo_Link::buildPublicLink('canonical:members', $author); ?>"><?php echo $author["username"]." - ".$author["custom_title"];?></a>
-            <?php 
-                    }
-                }
-            ?>
-		</p>
-	</div>
+<div id="single-blog" class="row clearfix">
+    <div class="header"><h1><?php echo $blogpost["title"]; ?></h1></div>
+    <div class="double-col-2">
+        <div class="text">
+	        <div id="blog-post" class="clearfix">
+		        <div><?php echo $blogpost["post_body"];?></div>
+	            <span id="blog-post-footer">
+                    <?php
+                        if(! $blogpost["removesignoff"]) {
+                            if($blogpost["anonymous"]) {
+                                echo "Seed of Andromeda Team";
+                            } else {
+                    ?>
+			            <a href="<?php echo XenForo_Link::buildPublicLink('canonical:members', $author); ?>"><?php echo $author["username"]." - ".$author["custom_title"];?></a>
+                    <?php 
+                            }
+                        }
+                    ?>
+	            </span>
+	        </div>
+        </div>
+    </div>
 </div>
+                                                
 <?php
 		if (! $blogpost ["disablecomments"]) {
 			echo_disqus ( $blogpost ["title"], $pageurl, "blogs-" . $blogpost ["id"] );
@@ -40,44 +40,41 @@ if (isset ( $connection )) {
 		while ( $row = $query->fetch () ) {
 			$postlink = gen_postlink ( $row );
 			echo '
-<div class="double-col empty">
-	<div id="blog-post-header">
-		<p><a href="/blogs/' . $postlink . '">' . $row ["title"] . '</a></p>
-	</div>
-	<div id="blog-post-body">
-		<p style="position: absolute;">' . substr ( strip_tags ( $row ["post_body"] ), 0, 1400 ) . ' ...</p>
-	</div>
-	<div id="blog-post-footer">
-		<p>
-			<a
-				href="/blogs/' . $postlink . '">Read
-				More...</a> ';
-			if (! $row ["disablecomments"]) {
-				echo '<small> - (<a
-				href="http://www.seedofandromeda.com/blogs/' . $postlink . '#disqus_thread" data-disqus-identifier="blogs-' . $row ["id"] . '">Comments</a>)
-			</small>';
-			}
-			
-			echo '
-		</p>
-	</div>
-</div>
-
-	';
-		}
-		
+            <div class="row clearfix">
+                <div class="header"><h1><a href="/blogs/' . $postlink . '">' . $row ["title"] . '</a></h1></div>
+                <div class="double-col-2">
+                    <div class="text">
+	                    <div id="blog-post" class="clearfix">
+		                    <div>' . substr ( strip_tags ( $row ["post_body"] ), 0, 1400 ) . ' ...</div>
+	                        <span id="blog-post-footer">
+                                <a
+				                    href="/blogs/' . $postlink . '">Read
+				                    More...</a> ';
+			                    if (! $row ["disablecomments"]) {
+				                    echo '<small> - (<a
+				                    href="http://www.seedofandromeda.com/blogs/' . $postlink . '#disqus_thread" data-disqus-identifier="blogs-' . $row ["id"] . '">Comments</a>)
+			                    </small>';
+			                    }
+                                echo '
+	                        </span>
+	                    </div>
+                    </div>
+                </div>
+            </div>
+            ';
+            }
 		?>
 
 <script type="text/javascript">
- var disqus_shortname = 'seedofandromeda';
+    var disqus_shortname = 'seedofandromeda';
  
- (function () {
- var s = document.createElement('script'); s.async = true;
- s.type = 'text/javascript';
- s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
- (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
- }());
- </script>
+    (function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>
 
 <?php
 	}
@@ -86,4 +83,3 @@ if (isset ( $connection )) {
 }
 
 ?>
-

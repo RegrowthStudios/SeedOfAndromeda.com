@@ -1,7 +1,8 @@
-
-<div class="double-col">
-
-    <h3 style="color: red; text-shadow: 0px 0px 10px rgba(255, 0, 0, 1);">This
-		area is currently down for maintenance!</h3>
-
+<div class="row clearfix">
+    <div class="header"><h1 class="error">Maintenance</h1></div>
+    <div class="col double-col-2" style="text-align:center;">
+        <div class="text error">
+            This section of the site is currently down for maintenance! We apologise for the inconvenience.
+        </div>
+    </div>
 </div>

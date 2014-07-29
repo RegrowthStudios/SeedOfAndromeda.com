@@ -1,0 +1,74 @@
+﻿@import "../data.less";
+
+#try-the-game {
+    background: url("../../assets/images/screenshots/Horizons5.jpg") center center no-repeat;
+}
+#try-the-game > .col {
+    font-size: 0.9rem;
+    text-align: center;
+}
+#try-the-game h4 {
+    text-shadow: none !important;
+    margin-top: 100px;
+}
+
+#about-the-game .text {
+    text-align: center;
+}
+#about-the-game .read-more {
+    margin-top: 1em;
+}
+#about-the-game #featured-video {
+    margin-top: 2em;
+}
+
+@dev-activity-card-padding: 2%;
+.dev-activity-card {
+    width: ( 100% - ( 2 * @dev-activity-card-padding ) );
+    //height: 100px;
+    padding: @dev-activity-card-padding;
+    background: rgba(0,0,0,0.65);
+    font-size: 0.75rem;
+}
+.dev-activity-avatar {
+    float: left;
+    margin-right: @tab-intent-small;
+}
+.dev-activity-dev-info {
+    position: relative;
+    background: rgba(0,0,0,0.3);
+    height: @image-height-xx-small;
+}
+.dev-activity-card * {
+    color: #FFF;
+}
+.dev-activity-card a {
+    color: #EEE !important;
+	text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+    .Transition();
+}
+.dev-activity-card a:hover {
+	text-shadow: 0 0 10px rgba(255, 255, 255, 1);
+}
+.dev-activity-dev-name, .dev-activity-dev-title {
+    height: ( @image-height-xx-small / 2 );
+    line-height: ( @image-height-xx-small / 2 );
+}
+.dev-activity-dev {
+    font-size: 1.45em;
+}
+.dev-activity-message {
+    font-size: 1.15em;
+    width: 100%;
+    background: rgba(0,0,0,0.2);
+    .BoxSizing();
+    padding: 5px;
+    margin-bottom: 0.7em;
+}
+.dev-activity-action {
+    margin: 0.7em 0;
+}
+.dev-activity-time {
+    margin-right: 1em;
+    float: right;
+}

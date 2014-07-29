@@ -1,0 +1,9 @@
+{
+  "version": 3,
+  "file": "blogs.css",
+  "sources": [
+    "blogs.less"
+  ],
+  "names": [],
+  "mappings": ";;;;;;;;;AAEA,IAAI,cAAe,QAAQ;EACvB,gBAAA;;AAGJ;EACI,iBAAA;EACA,YAAA;EACA,aAAa,2BAAb;EACA,0BAAA;;AAEJ,iBAAkB;EACd,uBAAA"
+}

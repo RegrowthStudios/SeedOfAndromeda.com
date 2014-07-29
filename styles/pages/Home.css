@@ -1,99 +1,84 @@
-﻿#latest-dev-news > div {
-    font-size: 0.93em;
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-    float: none;
+﻿/*************/
+/* Variables */
+/*************/
+/*******************************/
+/* Proprietary Property Mixins */
+/*******************************/
+/******************/
+/* Content Mixins */
+/******************/
+#try-the-game {
+  background: url("../../assets/images/screenshots/Horizons5.jpg") center center no-repeat;
 }
-
-#latest-dev-news #blog-post-header {
-    padding-bottom: 20px;
+#try-the-game > .col {
+  font-size: 0.9rem;
+  text-align: center;
 }
-
-#blog-post-body {
-    height: auto !important;
-    max-height: 750px;
-    padding-left: 5%;
-    padding-right: 5%;
+#try-the-game h4 {
+  text-shadow: none !important;
+  margin-top: 100px;
 }
-
-#dev-news-frame, .dev-news-wrapper, #dev-news-background, .dev-news-control, #dev-news-js-warning {
-    width: 100%;
-    height: 100%;
+#about-the-game .text {
+  text-align: center;
 }
-#dev-news-text, #dev-news-summary, #dev-news-header {
-    width: 80%;
+#about-the-game .read-more {
+  margin-top: 1em;
 }
-
-#dev-news-frame {
-    position: relative;
-    width: 828px;
-    height: 308px;
-    /* Aspect Ratio: 35:13 */
-    background-color: rgb(0,0,0);
-    margin-top: 20px;
-    margin-bottom: 20px;
+#about-the-game #featured-video {
+  margin-top: 2em;
 }
-
-#dev-news-text {
-    position: absolute;
-    z-index: 3;
+.dev-activity-card {
+  width: 96%;
+  padding: 2%;
+  background: rgba(0, 0, 0, 0.65);
+  font-size: 0.75rem;
 }
-
-#dev-news-background {
-    background-repeat: no-repeat;
-    /* Revert to this upon testing!
-        background-size: contain;
-    */
-    background-size: cover;
-    background-position: center center;
-    position: relative;
-    z-index: 1;
-    opacity: 0.7;
-    transition: all .2s linear;
+.dev-activity-avatar {
+  float: left;
+  margin-right: 1em;
 }
-
-.dev-news-wrapper:hover #dev-news-background {
-    opacity: 1;
+.dev-activity-dev-info {
+  position: relative;
+  background: rgba(0, 0, 0, 0.3);
+  height: 48px;
 }
-
-#dev-news-header {
-    padding-left: 3em;
+.dev-activity-card * {
+  color: #FFF;
 }
-#dev-news-summary {
-    padding-left: 5em;
+.dev-activity-card a {
+  color: #EEE !important;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+  -webkit-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear;
 }
-
-.dev-news-control {
-    width: 40px;
-    background: rgba(255,255,255,0.15);
-    transition: background .2s linear;
-    text-align: center;
-    position: absolute;
-    line-height: 308px;
-    z-index: 10;
+.dev-activity-card a:hover {
+  text-shadow: 0 0 10px #ffffff;
 }
-
-.dev-news-control:hover {
-    background: rgba(255,255,255,0.3);
-    cursor: pointer;
+.dev-activity-dev-name,
+.dev-activity-dev-title {
+  height: 24px;
+  line-height: 24px;
 }
-
-.dev-news-control-left {
-    left: 0;
+.dev-activity-dev {
+  font-size: 1.45em;
 }
-
-.dev-news-control-right {
-    right: 0;
+.dev-activity-message {
+  font-size: 1.15em;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 5px;
+  margin-bottom: 0.7em;
 }
-
-#dev-news-js-warning {
-    text-align: center;
-    line-height: 308px;
+.dev-activity-action {
+  margin: 0.7em 0;
 }
-
-.dev-news-wrapper, #dev-news-js-warning {
-    position: absolute;
-    left: 0;
-    right: 0;
+.dev-activity-time {
+  margin-right: 1em;
+  float: right;
 }
+/*# sourceMappingURL=home.css.map */

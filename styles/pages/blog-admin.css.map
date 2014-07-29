@@ -1,0 +1,9 @@
+{
+  "version": 3,
+  "file": "blog-admin.css",
+  "sources": [
+    "blog-admin.less"
+  ],
+  "names": [],
+  "mappings": ";;;;;;;;;AAEA;EACI,YAAA;;AAGJ,cAAe;EACX,YAAA;EACA,qBAAA;;AAEJ,cAAe,KAAI;EACf,mBAAA;;AAGJ;EACI,YAAA"
+}

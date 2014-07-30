@@ -637,7 +637,8 @@ img.overflowfix {
   box-shadow: 0 0 10px 5px rgba(56, 174, 207, 0.5);
   font-family: "electrolize", sans-serif;
   font-size: 1.05em;
-  padding: 10px 10px;
+  padding: 10px;
+  overflow: hidden;
 }
 .col .text:not(:first-child) {
   margin-top: 20px;

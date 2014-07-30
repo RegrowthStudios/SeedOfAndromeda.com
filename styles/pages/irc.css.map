@@ -2,8 +2,9 @@
   "version": 3,
   "file": "irc.css",
   "sources": [
-    "irc.less"
+    "irc.less",
+    "../data.less"
   ],
   "names": [],
-  "mappings": ";;;;;;;;;AAEA;EACI,WAAA;EACA,iBAAA;EACA,gBAAA;EACA,SAAA;EACA,gBAAA;EACA,yBAAA;EACA,cAAA"
+  "mappings": ";;;;;;;;;AAEA;EACI,UAAA;;AAEJ;EACI,WAAA;EACA,iBAAA;EACA,gBAAA;EACA,SAAA;EACA,gBAAA;EACA,yBAAA;EACA,YAAA;ECkHA,8BAAA;EACG,2BAAA;EACK,sBAAA"
 }

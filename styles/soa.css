@@ -42,9 +42,6 @@ a {
   /* Anchor Underline Fix */
   text-decoration: none;
 }
-a:visited {
-  color: #a168d5;
-}
 a:active,
 a:hover,
 a:visited:hover {
@@ -411,7 +408,8 @@ img.overflowfix {
   text-align: center;
   line-height: 30px;
 }
-#account-bar .account-options-wrapper {
+#account-bar .account-options-wrapper,
+#account-bar .account-log-in-wrapper {
   overflow: hidden;
   position: relative;
   height: 0;
@@ -424,11 +422,21 @@ img.overflowfix {
   height: 156px;
   /* + 4 for border width*/
 }
-#account-bar .account-options {
+#account-bar:hover .account-log-in-wrapper {
+  height: 144px;
+}
+#account-bar .account-options,
+#account-bar .account-log-in {
   width: 180px;
   margin-left: 20px;
   position: absolute;
   bottom: 0;
+}
+#account-bar .account-log-in {
+  background: url("/assets/images/SOASprite.png");
+  background-position: 0 -368px;
+  height: 144px;
+  font-size: 0.8rem;
 }
 #account-bar .account-options > li {
   height: 38px;
@@ -436,20 +444,47 @@ img.overflowfix {
   line-height: 38px;
   text-align: center;
   border-top: 1px solid #191919;
-  background: url("/Assets/images/SOASprite.png");
+  background: url("/assets/images/SOASprite.png");
   background-position: -255px -255px;
 }
 #account-bar .account-options > li:hover {
-  background: url("/Assets/images/SOASprite.png");
+  background: url("/assets/images/SOASprite.png");
   background-position: -435px -255px;
 }
 #account-bar .account-options > li:last-child {
-  background: url("/Assets/images/SOASprite.png");
+  background: url("/assets/images/SOASprite.png");
   background-position: -255px -295px;
 }
 #account-bar .account-options > li:last-child:hover {
-  background: url("/Assets/images/SOASprite.png");
+  background: url("/assets/images/SOASprite.png");
   background-position: -435px -295px;
+}
+#account-bar .account-log-in form {
+  margin-left: 20px;
+}
+#account-bar .account-log-in input {
+  max-width: 120px;
+}
+#account-bar .account-log-in .checkbox {
+  height: 22px;
+  width: 22px;
+}
+#account-bar .account-log-in .checkbox label {
+  height: 14px;
+  width: 14px;
+  top: 4px;
+  left: 4px;
+}
+#account-bar .account-log-in-submit {
+  float: right;
+  margin-right: 20px;
+}
+#account-bar .account-log-in-register,
+#account-bar .account-log-in-register a {
+  font-size: 0.9em;
+}
+#account-bar .account-log-in-register a {
+  text-transform: none;
 }
 /***************/
 /* Content Box */
@@ -791,7 +826,8 @@ input.btn {
 /******************/
 /* Content - Form */
 /******************/
-textarea {
+textarea,
+input:not(.btn) {
   min-height: 16px;
   min-width: 16px;
   border: 1px solid #10beef;
@@ -800,6 +836,21 @@ textarea {
   font-family: "electrolize", sans-serif;
   -webkit-appearance: none;
   -moz-appearance: none;
+}
+input[type="submit"]:not(.btn) {
+  -webkit-transition: background-color 0.2s linear;
+  -moz-transition: background-color 0.2s linear;
+  -o-transition: background-color 0.2s linear;
+  transition: background-color 0.2s linear;
+}
+input[type="submit"]:not(.btn):hover {
+  background-color: #122;
+}
+.input {
+  margin-bottom: 3px;
+}
+.input:first-child {
+  margin-top: 3px;
 }
 .checkbox {
   width: 32px;
@@ -811,7 +862,7 @@ textarea {
   display: inline-block;
 }
 .checkbox input[type="checkbox"] {
-  visibility: hidden;
+  visibility: hidden !important;
 }
 .checkbox label {
   display: block;
@@ -823,8 +874,6 @@ textarea {
   border-radius: 100%;
   cursor: pointer;
   position: absolute;
-  top: 5px;
-  left: 5px;
   background: #000;
   -webkit-box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.5);
   -moz-box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.5);
@@ -833,6 +882,8 @@ textarea {
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
+  top: 5px;
+  left: 5px;
 }
 .checkbox input[type="checkbox"]:checked + label {
   background: #10beef;

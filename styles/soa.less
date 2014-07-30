@@ -33,9 +33,6 @@ a {
     /* Anchor Underline Fix */
     text-decoration: none;
 }
-a:visited {
-	color: @color-anchor-visited;
-}
 a:active,a:hover,a:visited:hover {
 	color: @color-anchor-hover;
 }
@@ -407,7 +404,7 @@ ul {
 	line-height: @account-bar-alerts-dim;
 }
 
-#account-bar .account-options-wrapper {
+#account-bar .account-options-wrapper, #account-bar .account-log-in-wrapper {
     overflow: hidden;
     position: relative;
     height: 0;
@@ -416,12 +413,21 @@ ul {
 #account-bar:hover .account-options-wrapper {
     height: ( ( @account-bar-options-height * 4 ) + 4 ); /* + 4 for border width*/
 }
+#account-bar:hover .account-log-in-wrapper {
+    height: @account-bar-log-in-form-height;
+}
 
-#account-bar .account-options {
+#account-bar .account-options, #account-bar .account-log-in {
     width: @account-bar-options-width;
     margin-left: 20px;
     position: absolute;
     bottom: 0;
+}
+#account-bar .account-log-in {
+    background: url("/assets/images/SOASprite.png");
+	background-position: 0 -368px;
+    height: @account-bar-log-in-form-height;
+    font-size: 0.8rem;
 }
 #account-bar .account-options > li {
     height: @account-bar-options-height;
@@ -429,20 +435,46 @@ ul {
     line-height: @account-bar-options-height;
 	text-align: center;
 	border-top: 1px solid rgba(25, 25, 25, 1);
-	background: url("/Assets/images/SOASprite.png");
+	background: url("/assets/images/SOASprite.png");
 	background-position: -255px -255px;
 }
 #account-bar .account-options > li:hover {
-	background: url("/Assets/images/SOASprite.png");
+	background: url("/assets/images/SOASprite.png");
 	background-position: -435px -255px;
 }
 #account-bar .account-options > li:last-child {
-	background: url("/Assets/images/SOASprite.png");
+	background: url("/assets/images/SOASprite.png");
 	background-position: -255px -295px;
 }
 #account-bar .account-options > li:last-child:hover {
-	background: url("/Assets/images/SOASprite.png");
+	background: url("/assets/images/SOASprite.png");
 	background-position: -435px -295px;
+}
+
+#account-bar .account-log-in form {
+    margin-left: @account-bar-log-in-form-margin;
+}
+#account-bar .account-log-in input {
+    max-width: 120px;
+}
+#account-bar .account-log-in .checkbox {
+    height: @account-bar-remember-outer-dim;
+    width: @account-bar-remember-outer-dim;
+}
+#account-bar .account-log-in .checkbox label {
+    height: @account-bar-remember-inner-dim;
+    width: @account-bar-remember-inner-dim;
+    .CheckboxLabelPos(@account-bar-remember-outer-dim, @account-bar-remember-inner-dim);
+}
+#account-bar .account-log-in-submit {
+    float: right;
+    margin-right: @account-bar-log-in-form-margin;
+}
+#account-bar .account-log-in-register, #account-bar .account-log-in-register a {
+    font-size: 0.9em;
+}
+#account-bar .account-log-in-register a {
+    text-transform: none;
 }
 
 /***************/
@@ -781,7 +813,7 @@ input.btn {
 /* Content - Form */
 /******************/
 
-textarea {
+textarea, input:not(.btn) {
     min-height: @input-min-dim;
     min-width: @input-min-dim;
 	border: 1px solid @color-bright-blue;
@@ -790,6 +822,18 @@ textarea {
     font-family: @content-font;
     -webkit-appearance: none;
     -moz-appearance: none;
+}
+input[type="submit"]:not(.btn) {
+    .Transition(background-color);
+}
+input[type="submit"]:not(.btn):hover {
+    background-color: #122;
+}
+.input {
+    margin-bottom: 3px;
+}
+.input:first-child {
+    margin-top: 3px;
 }
 .checkbox {
 	width: @checkbox-outer-dim;
@@ -801,7 +845,7 @@ textarea {
 	display: inline-block;
 }
 .checkbox input[type="checkbox"] {
-    visibility: hidden;
+    visibility: hidden !important;
 }
 .checkbox label {
 	display: block;
@@ -811,12 +855,10 @@ textarea {
     .BorderRadius(100%);
 	cursor: pointer;
 	position: absolute;
-    @checkbox-inner-pos: ( ( @checkbox-outer-dim - @checkbox-inner-dim ) / 2 );
-	top: @checkbox-inner-pos;
-	left: @checkbox-inner-pos;
 	background: #000;
     .BoxShadow(true, 0, 1px, 3px, 0, rgba(0,0,0,0.5));
     .Transition(all, 0.5s, ease);
+    .CheckboxLabelPos();
 }
 .checkbox input[type="checkbox"]:checked + label {
 	background: @color-bright-blue;

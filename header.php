@@ -2,11 +2,27 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title><?php echo $pagetitle ?></title>
-    <link rel="shortcut icon" type="image/x-icon" href="/Assets/images/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.ico" />
     <link rel="stylesheet" href="/styles/normalise.css" type="text/css" />
     <link rel="stylesheet" href="/styles/soa.min.css" type="text/css" />
     <link rel="stylesheet" href="/Assets/Fonts/the_league_of_orbitron/Orbitron.css" type="text/css" />
     <link href='http://fonts.googleapis.com/css?family=Electrolize' rel='stylesheet' type='text/css' />
+    <meta name="keywords"
+	    content="seed of andromeda, SoA, Windows, PC, Mac, Linux, Voxel, Voxel-Based, Voxel Game, Voxel-Based Game, indie game, independent game, independently developed, video game, pc game, creation, survival, chunks, blocks, sci fi" />
+    <meta name="description"
+	    content="Seed Of Andromeda is a Voxel based Sandbox RPG in a futuristic setting. The player will crash land on a fully round voxel planet and will be forced to survive hostile creatures. As the player progresses through the game, they will be able to form settlements, develop technology, and eventually escape the rock they are stranded on!" />
+    <meta name="og:title" 
+        content="Seed of Andromeda" />
+    <meta name="og:description"
+	    content="Seed Of Andromeda is a Voxel based Sandbox RPG in a futuristic setting. The player will crash land on a fully round voxel planet and will be forced to survive hostile creatures. As the player progresses through the game, they will be able to form settlements, develop technology, and eventually escape the rock they are stranded on!" />
+    <meta name="og:site_name" 
+        content="seedofandromeda" />
+    <meta name="og:type" 
+        content="game" />
+    <meta name="og:url" 
+        content="http://www.seedofandromeda.com/" />
+    <meta name="og:image"
+	    content="http://www.seedofandromeda.com/assets/images/soa_icon.png" />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js" type="text/javascript"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js" type="text/javascript"></script>
     <script src="/scripts/lightbox-2.6.js"></script>
@@ -81,21 +97,64 @@
                     <li class="store"><a href="/under-construction">Store</a></li>
                     <li class="blogs"><a href="/blogs">Dev Blogs</a></li>
                 </ul>
-
+                
                 <div id="account-bar">
-                    <img class="account-image" src="/community/avatar.php?userid=1&size=s" />
+                <?php
+                    if(!$loggedIn)
+                    {
+                ?>
+                    <img class="account-image" src="assets/images/DefaultUser_NoSignIn_ProfImg.png" />
                     <div class="account-overview">
-                        <span class="account-name">PsychoticLeprechaun</span>
-                        <span class="account-alerts">0</span>
+                        <span class="account-name">Not Logged In</span>
+                    </div>
+                    <div class="account-log-in-wrapper">
+                        <ul class="account-log-in">
+                            <form method='post' action='<?php echo XenForo_Link::buildPublicLink('canonical:login'); ?>'>
+                                <div class="input"> 
+						            <span>Username:</span> <input type='text'
+							            style="padding-right: 0;" id="username" name='login'
+							            placeholder="Username" />
+                                </div>
+                                <div class="input"> 
+						            <span>Password:</span> <input type='password'
+							            style="padding-right: 0;" id='password' name='password'
+							            placeholder="Password" />
+                                </div>
+                                <div class="input">
+                                    <span>Remember Me:</span> <div class="checkbox"> <input id="remember" 
+								        type='checkbox' style="padding-right: 0;" name='remember' />
+							            <label for="remember"></label>
+                                    </div>
+                                </div>
+						        <input type="hidden" name="cookie_check" value="1"> <input
+							        type="hidden" name="redirect" value="/<?php echo $pageurl;?>">
+						        <div class="account-log-in-submit"><input type="hidden" name="_xfToken" value="<?php isset($visitor['csrf_token_page']) ? $visitor['csrf_token_page'] : "";?>"> <input
+							        type='submit' value='submit' onClick='prepare_login();'
+							        class="left" /><span class="account-log-in-register">&nbsp;or <a href="<?php echo XenForo_Link::buildPublicLink("canonical:register");?>">register</a>.</span></div>
+					        </form>
+                        </ul>
+                    </div>
+                <?php
+                    }
+                    else
+                    {
+                ?>
+                    <img class="account-image" src="/community/avatar.php?userid=<?php echo $userinfo['user_id']; ?>&size=s" />
+                    <div class="account-overview">
+                        <span class="account-name"><?php echo $userinfo['username']; ?></span>
+                        <span class="account-alerts"><?php echo $userinfo['alerts_unread']+$userinfo['conversations_unread']; ?></span>
                     </div>
                     <div class="account-options-wrapper">
                         <ul class="account-options">
-                            <li><a href="http://www.seedofandromeda.com/community/account/alerts">Alerts (0)</a></li>
-                            <li><a href="http://www.seedofandromeda.com/community/conversations/">Inbox (0)</a></li>
-                            <li><a href="http://www.seedofandromeda.com/community/account/">My Account</a></li>
-                            <li><a class="logout" href="http://www.seedofandromeda.com/community/logout/?_xfToken=1%2C1403566850%2C111dbf3c78501b758fde404460ba519719eee3a4&redirect=%2F">Log Out</a></li>
+                            <li><a href="<?php echo XenForo_Link::buildPublicLink("canonical:account/alerts");?>">Alerts (<?php echo $userinfo['alerts_unread']; ?>)</a></li>
+                            <li><a href="<?php echo XenForo_Link::buildPublicLink("canonical:conversations");?>">Inbox (<?php echo $userinfo['conversations_unread']; ?>)</a></li>
+                            <li><a href="<?php echo XenForo_Link::buildPublicLink("canonical:account");?>">My Account</a></li>
+                            <li><a class="logout" href="<?php echo XenForo_Link::buildPublicLink("canonical:logout", $userinfo, array('_xfToken' => $visitor['csrf_token_page'], 'redirect' => '/'.$pageurl));?>">Log Out</a></li>
                         </ul>
                     </div>
+                <?php
+                    }
+                ?>
                 </div>
             </div>
 

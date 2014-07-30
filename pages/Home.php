@@ -163,8 +163,8 @@
     $i = 0;
         
     foreach($posts as $post){
-        if($i >= 5){
-            break; //Limit to 5 posts
+        if($i >= 9){
+            break; //Limit to 9 posts
         }
         $thread = getThreadFromList($post["thread_id"],$threads);
         if(in_array($thread['node_id'], $ignoreForums)){
@@ -172,8 +172,9 @@
         }
         $user = $sdk->getUser($post["user_id"]);
         //var_dump($user);
-        $message = XenForo_Helper_String::wholeWordTrim($post['message'], 150); //Strip the message to 150 chars
+        $message = XenForo_Helper_String::wholeWordTrim($post['message'], 100); //Strip the message to 100 chars
         $message = XenForo_Helper_String::bbCodeStrip($message); //Strip bbcode
+        $threadTitle = XenForo_Helper_String::wholeWordTrim($thread["title"], 35);
         echo '
             <div class="col tri-col-1">
                 <div class="dev-activity-card text">
@@ -181,14 +182,22 @@
                         <img class="dev-activity-avatar img xx-small" src="/community/avatar.php?userid=' . $user["user_id"] . '&size=s" />
                         <div class="dev-activity-dev-info">
                             <div class="dev-activity-dev-name"><a href="'.XenForo_Link::buildPublicLink('canonical:members', $user).'">'. $user["username"] . '</a></div>
-                            <div class="dev-activity-dev-title">'.$user["custom_title"].'Test</div>
+                            <div class="dev-activity-dev-title"><em>'.$user["custom_title"].'</em></div>
                             <div class="content-corner-top-right content-corner"></div>
                             <div class="content-corner-bottom-right content-corner"></div>
                         </div>
                     </div>
                     <div class="dev-activity-content clearfix">
-                        <div class="dev-activity-action"><em>' . ($thread["first_post_id"] == $post["post_id"] ? "Started" : "Replied to") . ' <a href="' . XenForo_Link::buildPublicLink('canonical:threads', $thread) . '">' . $thread["title"] . '</a></em></div>
-                        <div class="dev-activity-message"><span class="indent-small">' . $message . '</span></div>
+                        <div class="dev-activity-action"><em>' . ($thread["first_post_id"] == $post["post_id"] ? "Started" : "Replied to") . ' <a href="' . XenForo_Link::buildPublicLink('canonical:threads', $thread) . ($thread["first_post_id"] != $post["post_id"] ? "#post-" . $post["post_id"] : "") . '">' . $threadTitle . '</a></em></div>
+                        <div class="dev-activity-message-wrapper">
+                            <div class="dev-activity-message">
+                                <span class="indent-small">' . $message . '</span>
+                                <div class="content-corner-top-right content-corner"></div>
+                                <div class="content-corner-bottom-right content-corner"></div>
+                                <div class="content-corner-top-left content-corner"></div>
+                                <div class="content-corner-bottom-left content-corner"></div>
+                            </div>
+                        </div>
                         <em class="dev-activity-time">' . XenForo_Locale::dateTime($post["post_date"]) . '</em>
                     </div>
                 </div>

@@ -29,6 +29,7 @@
     padding: @dev-activity-card-padding;
     background: rgba(0,0,0,0.65);
     font-size: 0.75rem;
+    margin-bottom: 5px;
 }
 .dev-activity-avatar {
     float: left;
@@ -39,31 +40,32 @@
     background: rgba(0,0,0,0.3);
     height: @image-height-xx-small;
 }
-.dev-activity-card * {
-    color: #FFF;
-}
-.dev-activity-card a {
-    color: #EEE !important;
-	text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
-    .Transition();
-}
-.dev-activity-card a:hover {
-	text-shadow: 0 0 10px rgba(255, 255, 255, 1);
+.dev-activity-card .dev-activity-dev-name a {
+    color: @color-dev;
+	text-shadow: 0 0 3px @color-dev;
 }
 .dev-activity-dev-name, .dev-activity-dev-title {
     height: ( @image-height-xx-small / 2 );
     line-height: ( @image-height-xx-small / 2 );
 }
+.dev-activity-dev-title {
+    font-size: 0.8em;
+}
 .dev-activity-dev {
     font-size: 1.45em;
 }
+@dev-activity-message-padding: 5px;
+.dev-activity-message-wrapper {
+    height: 51px + ( 2 * @dev-activity-message-padding );
+    margin-bottom: 0.7em;
+}
 .dev-activity-message {
+    position: relative;
     font-size: 1.15em;
     width: 100%;
     background: rgba(0,0,0,0.2);
     .BoxSizing();
-    padding: 5px;
-    margin-bottom: 0.7em;
+    padding: @dev-activity-message-padding;
 }
 .dev-activity-action {
     margin: 0.7em 0;

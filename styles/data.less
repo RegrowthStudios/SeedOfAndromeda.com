@@ -13,6 +13,10 @@
 @account-bar-alerts-dim: 30px;
 @account-bar-options-height: 38px;
 @account-bar-options-width: 180px;
+@account-bar-log-in-form-height: 144px;
+@account-bar-log-in-form-margin: 20px;
+@account-bar-remember-outer-dim: 22px;
+@account-bar-remember-inner-dim: 14px;
 
 @row-header-height: 64px;
 @row-header-bottom-margin: 20px;
@@ -70,6 +74,7 @@
 @color-bright-blue: #10BEEF;
 @color-dull-blue: #38AECF;
 @color-footer: #143145;
+@color-dev: #B21111;
 
 /*******************************/
 /* Proprietary Property Mixins */
@@ -155,4 +160,10 @@
     height: ( @button-width * @btn-dim-ratio );
     width: @button-width;
     line-height: ( @button-width * @btn-dim-ratio );
+}
+
+.CheckboxLabelPos(@outer-dim: @checkbox-outer-dim, @inner-dim: @checkbox-inner-dim) {
+    @checkbox-inner-pos: ( ( @outer-dim - @inner-dim ) / 2 );
+	top: @checkbox-inner-pos;
+	left: @checkbox-inner-pos;
 }

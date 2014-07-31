@@ -143,7 +143,7 @@ if (! $loggedIn) {
                                         </div>
                                     </div>';    
 						} else {
-							$query = $connection->prepare ( "UPDATE blog_posts SET title = ?, post_body = ?, post_brief = ?, updatetime = ?, disablecomments = ?, published = ?, devnews = ?, anonymous = ?, removesignoff = ?, dev_news_body = ?, dev_news_background = ? WHERE id = ?" );
+							$query = $connection->prepare ( "UPDATE blog_posts SET title = ?, post_body = ?, post_brief = ?, updatetime = ?, disablecomments = ?, published = ?, devnews = ?, anonymous = ?, removesignoff = ?, dev_news_body = ?, dev_news_background = ?, prioritisescreenshots = ?, hidescreenshots = ? WHERE id = ?" );
 							$query->execute ( array (
 									$_REQUEST ['blog-post-title'],
 									$_REQUEST ['blog-post-content'],
@@ -156,7 +156,9 @@ if (! $loggedIn) {
 									isset ( $_REQUEST ['no-sign-off'] ) && $_REQUEST ['no-sign-off'] == 1,
                                     $_REQUEST ['dev-news-summary-content'],
                                     $_REQUEST ['dev-news-summary-background'],
-									$_REQUEST ['postid'],
+                                    $_REQUEST ['prioritisescreenshots'],
+                                    $_REQUEST ['hidescreenshots'],
+									$_REQUEST ['postid']
 							) );
 							header ( "Location: /" . $pageurl . "?postid=" . $_REQUEST ['postid'] );
 						}
@@ -276,10 +278,10 @@ if (! $loggedIn) {
                 </div>
             </div>
         </div>
-        <div class="row clearfix">
+        <div id="dev-news-summary-content-cover" class="row clearfix" <?php if($blogpost["devnews"] != "1") echo "style='display: none;'";?>>
             <div class="divider"></div>
             <div class="col double-col-2">
-                <div <?php if($blogpost["devnews"] != "1") echo "style='display: none;'";?>  class="text">
+                <div class="text">
                     <div style="width: 100%;">
                         <h2>Dev News Summary:</h2>
                         <div id="dev-news-summary-content" class="editpost"><?php echo $blogpost["dev_news_body"];?></div>
@@ -311,6 +313,16 @@ if (! $loggedIn) {
                         <span>Publish Blog to Dev News:</span> <div class="checkbox"> <input id="devnews" value="1"
 						    type="checkbox" name="devnews" <?php if($blogpost["devnews"] == "1") echo "checked";?> />
 						    <label for="devnews"></label>
+                        </div>
+                        <br/>
+                        <span>Prioritise Screenshots:</span> <div class="checkbox"> <input id="prioritisescreenshots" value="1"
+						    type="checkbox" name="prioritisescreenshots" <?php if($blogpost["prioritisescreenshots"] == "1") echo "checked";?> />
+						    <label for="prioritisescreenshots"></label>
+                        </div>
+                        <br/>
+                        <span>Hide Screenshot Slider:</span> <div class="checkbox"> <input id="hidescreenshots" value="1"
+						    type="checkbox" name="hidescreenshots" <?php if($blogpost["hidescreenshots"] == "1") echo "checked";?> />
+						    <label for="hidescreenshots"></label>
                         </div>
                         <br/>
                         <span>Publish Anonymously:</span> <div class="checkbox"> <input id="anonymous" value="1"

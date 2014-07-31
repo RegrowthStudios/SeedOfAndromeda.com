@@ -7,7 +7,7 @@
 /******************/
 /* Content Mixins */
 /******************/
-:not(#single-blog) .header > * {
+.row:not(#single-blog) .header > * {
   font-size: 1.6em;
 }
 #blog-post-footer {
@@ -18,5 +18,9 @@
 }
 #blog-post-footer * {
   color: white !important;
+}
+#blog-image-slider .media-slider-frame {
+  width: 80%;
+  margin-left: 10%;
 }
 /*# sourceMappingURL=blogs.css.map */

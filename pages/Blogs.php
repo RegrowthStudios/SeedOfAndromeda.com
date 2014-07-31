@@ -45,7 +45,7 @@ if (isset ( $connection )) {
                 <div class="double-col-2">
                     <div class="text">
 	                    <div id="blog-post" class="clearfix">
-		                    <div>' . substr ( strip_tags ( $row ["post_body"] ), 0, 1400 ) . ' ...</div>
+		                    <div>' . substr ( strip_tags ( $row ["post_brief"] ), 0, 1400 ) . ' ...</div>
 	                        <span id="blog-post-footer">
                                 <a
 				                    href="/blogs/' . $postlink . '">Read

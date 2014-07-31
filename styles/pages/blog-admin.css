@@ -20,4 +20,13 @@
 #blog-post-footer {
   float: right;
 }
+#blog-settings {
+  width: 400px;
+}
+#blog-settings > span {
+  line-height: 32px;
+}
+#blog-settings .checkbox {
+  float: right;
+}
 /*# sourceMappingURL=blog-admin.css.map */

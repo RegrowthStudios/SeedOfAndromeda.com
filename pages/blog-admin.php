@@ -143,10 +143,11 @@ if (! $loggedIn) {
                                         </div>
                                     </div>';    
 						} else {
-							$query = $connection->prepare ( "UPDATE blog_posts SET title = ?, post_body = ?, updatetime = ?, disablecomments = ?, published = ?, devnews = ?, anonymous = ?, removesignoff = ?, dev_news_body = ?, dev_news_background = ? WHERE id = ?" );
+							$query = $connection->prepare ( "UPDATE blog_posts SET title = ?, post_body = ?, post_brief = ?, updatetime = ?, disablecomments = ?, published = ?, devnews = ?, anonymous = ?, removesignoff = ?, dev_news_body = ?, dev_news_background = ? WHERE id = ?" );
 							$query->execute ( array (
 									$_REQUEST ['blog-post-title'],
 									$_REQUEST ['blog-post-content'],
+									$_REQUEST ['blog-brief'],
 									time (),
 									isset ( $_REQUEST ['commentsoff'] ) && $_REQUEST ['commentsoff'] == 1,
 									isset ( $_REQUEST ['publish'] ) && $_REQUEST ['publish'] == 1,
@@ -267,6 +268,17 @@ if (! $loggedIn) {
         <div class="row clearfix">
             <div class="divider"></div>
             <div class="col double-col-2">
+                <div class="text">
+                    <div style="width: 100%;">
+                        <h2>Blog Brief:</h2>
+                        <div id="blog-brief" class="editpost"><?php echo $blogpost["post_brief"];?></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="divider"></div>
+            <div class="col double-col-2">
                 <div <?php if($blogpost["devnews"] != "1") echo "style='display: none;'";?>  class="text">
                     <div style="width: 100%;">
                         <h2>Dev News Summary:</h2>
@@ -285,17 +297,33 @@ if (! $loggedIn) {
                 <div id="post-settings" class="text clearfix">
 		            <h3>Post settings</h3>
                     <br/>
-		            <input type="checkbox" name="commentsoff" value="1"
-			            <?php if($blogpost["disablecomments"] == "1") echo "checked";?> />
-		            Disable commenting<br /> <input type="checkbox" class="publish" name="publish"
-			            value="1" <?php if($blogpost["published"] == "1") echo "checked";?> />
-		            Publish blog post<br /> <input type="checkbox" class="devnews" name="devnews"
-			            value="1" <?php if($blogpost["devnews"] == "1") echo "checked";?> />
-		            Publish blog to Dev News<br /> <input type="checkbox" class="anonymous" name="anonymous"
-			            value="1" <?php if($blogpost["anonymous"] == "1") echo "checked";?> />
-                    Publish anonymously<br /> <input type="checkbox" class="no-sign-off" name="no-sign-off"
-			            value="1" <?php if($blogpost["removesignoff"] == "1") echo "checked";?> />
-                    Publish with no sign off<br /><br /> 
+                    <div id="blog-settings">
+                        <span>Disable Commenting:</span> <div class="checkbox"> <input id="commentsoff" value="1"
+						    type="checkbox" name="commentsoff" <?php if($blogpost["disablecomments"] == "1") echo "checked";?> />
+						    <label for="commentsoff"></label>
+                        </div>
+                        <br/>
+                        <span>Publish Blog Post:</span> <div class="checkbox"> <input id="publish" value="1"
+						    type="checkbox" name="publish" <?php if($blogpost["published"] == "1") echo "checked";?> />
+						    <label for="publish"></label>
+                        </div>
+                        <br/>
+                        <span>Publish Blog to Dev News:</span> <div class="checkbox"> <input id="devnews" value="1"
+						    type="checkbox" name="devnews" <?php if($blogpost["devnews"] == "1") echo "checked";?> />
+						    <label for="devnews"></label>
+                        </div>
+                        <br/>
+                        <span>Publish Anonymously:</span> <div class="checkbox"> <input id="anonymous" value="1"
+						    type="checkbox" name="anonymous" <?php if($blogpost["anonymous"] == "1") echo "checked";?> />
+						    <label for="anonymous"></label>
+                        </div>
+                        <br/>
+                        <span>Publish with No Sign Off:</span> <div class="checkbox"> <input id="no-sign-off" value="1"
+						    type="checkbox" name="no-sign-off" <?php if($blogpost["removesignoff"] == "1") echo "checked";?> />
+						    <label for="anonymous"></label>
+                        </div> 
+                    </div>
+                    <br /> 
                     <?php echo '<a class="btn" href="/' . $pageurl . '">Return</a>'; ?>
                     <input class="btn" type="submit" value="Save" />
 	            </div>
@@ -307,12 +335,13 @@ if (! $loggedIn) {
 				}
 			} elseif (isset ( $_REQUEST ['newpost'] )) {
 				
-				$query = $connection->prepare ( "INSERT INTO blog_posts (author, title, timestamp, post_body, dev_news_body, dev_news_background) VALUES (?, ?, ?, ?, ?, ?)" );
+				$query = $connection->prepare ( "INSERT INTO blog_posts (author, title, timestamp, post_body, post_brief, dev_news_body, dev_news_background) VALUES (?, ?, ?, ?, ?, ?)" );
 				$query->execute ( array (
 						$userinfo ['user_id'],
 						"New blog post",
 						time (),
-						"<h2>Click here to edit!</h2><p>Click the title to edit it.</p>" ,
+						"<h2>Click here to edit!</h2><p>Click the title to edit it.</p>",
+                        "<p>Click here to write up a brief.</p>",
                         "<p>Click here to edit!</p>",
                         '<p><img class="img large-wide" src="http://www.seedofandromeda.com/Assets/images/Blogs/Default/Plains.jpg" alt="Default Dev News Background" /></p>'
 				) );

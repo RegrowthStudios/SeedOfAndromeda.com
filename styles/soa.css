@@ -36,6 +36,7 @@ body {
   padding: 0;
   height: 100%;
   background-size: cover;
+  -webkit-text-size-adjust: none;
 }
 a {
   color: #61b7cf;
@@ -852,7 +853,8 @@ input[type="submit"]:not(.btn):hover {
   position: relative;
   display: inline-block;
 }
-.checkbox input[type="checkbox"] {
+.checkbox input[type="checkbox"],
+.checkbox input[type="radio"] {
   visibility: hidden !important;
 }
 .checkbox label {
@@ -876,7 +878,11 @@ input[type="submit"]:not(.btn):hover {
   top: 4px;
   left: 4px;
 }
-.checkbox input[type="checkbox"]:checked + label {
+.checkbox input:disabled + label {
+  background: #ddd !important;
+}
+.checkbox input[type="checkbox"]:checked + label,
+.checkbox input[type="radio"]:checked + label {
   background: #10beef;
 }
 /*********/

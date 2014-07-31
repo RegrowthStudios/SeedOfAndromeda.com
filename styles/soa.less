@@ -26,6 +26,7 @@ body {
     padding: 0;
 	height: 100%;
     background-size: cover;
+    -webkit-text-size-adjust: none;
 }
 
 a {
@@ -836,7 +837,7 @@ input[type="submit"]:not(.btn):hover {
 	position: relative;
 	display: inline-block;
 }
-.checkbox input[type="checkbox"] {
+.checkbox input[type="checkbox"], .checkbox input[type="radio"] {
     visibility: hidden !important;
 }
 .checkbox label {
@@ -852,7 +853,11 @@ input[type="submit"]:not(.btn):hover {
     .Transition(all, 0.5s, ease);
     .CheckboxLabelPos();
 }
-.checkbox input[type="checkbox"]:checked + label {
+.checkbox input:disabled + label {
+	background: #ddd !important;
+}
+.checkbox input[type="checkbox"]:checked + label, 
+.checkbox input[type="radio"]:checked + label {
 	background: @color-bright-blue;
 }
 

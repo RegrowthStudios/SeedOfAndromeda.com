@@ -465,16 +465,6 @@ img.overflowfix {
 #account-bar .account-log-in input {
   max-width: 120px;
 }
-#account-bar .account-log-in .checkbox {
-  height: 22px;
-  width: 22px;
-}
-#account-bar .account-log-in .checkbox label {
-  height: 14px;
-  width: 14px;
-  top: 4px;
-  left: 4px;
-}
 #account-bar .account-log-in-submit {
   float: right;
   margin-right: 20px;
@@ -854,8 +844,8 @@ input[type="submit"]:not(.btn):hover {
   margin-top: 3px;
 }
 .checkbox {
-  width: 32px;
-  height: 32px;
+  width: 22px;
+  height: 22px;
   background: #ddd;
   margin: 5px;
   border-radius: 100%;
@@ -867,9 +857,9 @@ input[type="submit"]:not(.btn):hover {
 }
 .checkbox label {
   display: block;
-  width: 22px;
-  height: 22px;
-  line-height: 22px;
+  width: 14px;
+  height: 14px;
+  line-height: 14px;
   -webkit-border-radius: 100%;
   -moz-border-radius: 100%;
   border-radius: 100%;
@@ -883,8 +873,8 @@ input[type="submit"]:not(.btn):hover {
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
-  top: 5px;
-  left: 5px;
+  top: 4px;
+  left: 4px;
 }
 .checkbox input[type="checkbox"]:checked + label {
   background: #10beef;

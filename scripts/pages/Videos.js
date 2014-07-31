@@ -34,7 +34,7 @@ $(document).ready(function () {
                 $(v).click(function () {
                     var vidID = $(v).siblings().last().data("id");
                     var vidURL = "https://www.youtube.com/embed/" + vidID + "?wmode=transparent";
-                    var video = "<iframe width='" + ($(window).width() * 0.6) + "' height='" + ($(window).width() * 0.6 * 0.5) + "' style='margin-top:" + ( ( $(window).height() - ($(window).width() * 0.6 * 0.5) ) / 2 ) + "px;' src='" + vidURL + "' frameborder='0' allowfullscreen></iframe>";
+                    var video = "<div class='text' style='width:" + ($(window).width() * 0.6) + "px;margin-top:" + (($(window).height() - ($(window).width() * 0.6 * 0.5)) / 2) + "px;display:inline-block;padding:0;'><iframe width='" + ($(window).width() * 0.6) + "' height='" + ($(window).width() * 0.6 * 0.5) + "' style='margin-bottom:-5px;' src='" + vidURL + "' frameborder='0' allowfullscreen></iframe></div>";
                     cover.children().remove();
                     cover.append(video).fadeIn();
                     setTimeout(function () {

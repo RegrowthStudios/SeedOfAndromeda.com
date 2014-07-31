@@ -16,7 +16,11 @@
     <IncludeDebugInformation>false</IncludeDebugInformation>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="blocks\index.php" />
+    <Compile Include="db_connect.php" />
+    <Compile Include="files\download.php" />
     <Compile Include="footer.php" />
+    <Compile Include="pages\404.php" />
     <Compile Include="pages\blog-admin.php" />
     <Compile Include="pages\blogs.php" />
     <Compile Include="community\avatar.php" />
@@ -341,8 +345,12 @@
     <Compile Include="thumb.php" />
     <Compile Include="pages\home.php" />
     <Compile Include="pages\videos.php" />
+    <Compile Include="update.php" />
+    <Compile Include="xftest.php" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include=".errordocs\" />
+    <Folder Include=".settings\" />
     <Folder Include="assets\" />
     <Folder Include="assets\fonts\" />
     <Folder Include="assets\fonts\the_league_of_orbitron\" />
@@ -354,6 +362,7 @@
     <Folder Include="assets\images\profile_images\" />
     <Folder Include="assets\images\screenshots\" />
     <Folder Include="assets\lightbox\" />
+    <Folder Include="blocks\" />
     <Folder Include="community\" />
     <Folder Include="community\js\" />
     <Folder Include="community\js\8wayrun\" />
@@ -526,6 +535,8 @@
     <Folder Include="community\styles\uix\xenforo\smilies\" />
     <Folder Include="community\styles\uix\xenforo\widgets\" />
     <Folder Include="community\styles\uix\xenresource\" />
+    <Folder Include="files\" />
+    <Folder Include="Forums\" />
     <Folder Include="jbimages\" />
     <Folder Include="jbimages\ci\" />
     <Folder Include="jbimages\ci\application\" />
@@ -551,6 +562,7 @@
     <Folder Include="pages\" />
     <Folder Include="scripts\" />
     <Folder Include="scripts\pages\" />
+    <Folder Include="stats\" />
     <Folder Include="styles\" />
     <Folder Include="styles\pages\" />
     <Folder Include="tinymce\" />
@@ -609,6 +621,10 @@
     <Folder Include="tinymce\themes\modern\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".errordocs\.htaccess" />
+    <Content Include=".errordocs\403.html" />
+    <Content Include=".errordocs\404.html" />
+    <Content Include=".errordocs\missing.html" />
     <Content Include="assets\fonts\the_league_of_orbitron\generator_config.txt" />
     <Content Include="assets\fonts\the_league_of_orbitron\Orbitron.css" />
     <Content Include="assets\fonts\the_league_of_orbitron\orbitron_black-demo.html" />
@@ -1226,6 +1242,8 @@
     <Content Include="community\styles\uix\xenforo\XenForo.png" />
     <Content Include="community\styles\uix\xenresource\desktop.ini" />
     <Content Include="community\styles\uix\xenresource\resource_icon.png" />
+    <Content Include="files\.htaccess" />
+    <Content Include="Forums\.htaccess" />
     <Content Include="jbimages\ci\application\.htaccess" />
     <Content Include="jbimages\ci\application\config\index.html" />
     <Content Include="jbimages\ci\application\controllers\index.html" />
@@ -1265,11 +1283,14 @@
     <Content Include="scripts\jquery.sticky.js" />
     <Content Include="scripts\less-1.7.3.min.js" />
     <Content Include="scripts\lightbox-2.6.js" />
-    <Content Include="scripts\pages\blogadmin.js" />
+    <Content Include="scripts\pages\blog-admin.js" />
     <Content Include="scripts\pages\home.js" />
     <Content Include="scripts\pages\screenshots.js" />
     <Content Include="scripts\pages\videos.js" />
     <Content Include="scripts\soa.js" />
+    <Content Include="stats\.htaccess" />
+    <Content Include="stats\.statspwd" />
+    <Content Include="stats\index.html" />
     <Content Include="styles\data.css" />
     <Content Include="styles\data.css.map" />
     <Content Include="styles\data.min.css" />

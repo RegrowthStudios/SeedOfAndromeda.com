@@ -1284,6 +1284,7 @@
     <Content Include="scripts\less-1.7.3.min.js" />
     <Content Include="scripts\lightbox-2.6.js" />
     <Content Include="scripts\pages\blog-admin.js" />
+    <Content Include="scripts\pages\blogs.js" />
     <Content Include="scripts\pages\home.js" />
     <Content Include="scripts\pages\screenshots.js" />
     <Content Include="scripts\pages\videos.js" />

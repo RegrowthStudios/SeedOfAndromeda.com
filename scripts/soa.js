@@ -247,6 +247,19 @@ MediaSlider.prototype.clearTimeouts = function () {
     }
 };
 
+MediaSlider.prototype.updateElems = function (selector) {
+    var _this = this
+    _this.elems = $(selector);
+
+    $.each(_this.elems, function (i, v) {
+        $(v).hover(function () {
+            _this.pauseSlideshow();
+        }, function () {
+            _this.playSlideshow();
+        });
+    });
+}
+
 //Fix nav controls to hover state when on mobile devices for greater visibility
 $(document).ready(function () {
     if (jQuery.browser.mobile) {

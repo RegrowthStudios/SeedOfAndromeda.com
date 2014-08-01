@@ -42,3 +42,15 @@ function loadMoreScreenshots(pid, async) {
         async: async
     });
 }
+
+var nextPID = 2;
+$(window).on('scroll', function () {
+    var docHeightWindowHeightDiff = $(document).height() - $(window).height();
+    var yScrollPos = window.pageYOffset;
+    var yScrollPosReq = 50; // Pixels from bottom of document
+
+    if ((docHeightWindowHeightDiff - yScrollPos) <= yScrollPosReq) {
+        loadMoreScreenshots(nextPID, true);
+        nextPID++;
+    }
+});

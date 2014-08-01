@@ -1,0 +1,9 @@
+{
+  "version": 3,
+  "file": "downloads-admin.css",
+  "sources": [
+    "downloads-admin.less"
+  ],
+  "names": [],
+  "mappings": ";;;;;;;;;AAEA,kBAAmB;EACf,YAAA;EACA,qBAAA;;AAEJ,kBAAmB,KAAI;EACnB,mBAAA"
+}

@@ -280,6 +280,7 @@
     <Compile Include="community\library\XenResource\WarningHandler\Rating.php" />
     <Compile Include="community\library\XenResource\WarningHandler\Update.php" />
     <Compile Include="community\XenForoSDK.php" />
+    <Compile Include="pages\downloads-admin.php" />
     <Compile Include="pages\downloads.php" />
     <Compile Include="header.php" />
     <Compile Include="index.php" />
@@ -1305,6 +1306,10 @@
     <Content Include="styles\pages\blogs.css.map" />
     <Content Include="styles\pages\blogs.less" />
     <Content Include="styles\pages\blogs.min.css" />
+    <Content Include="styles\pages\downloads-admin.css" />
+    <Content Include="styles\pages\downloads-admin.css.map" />
+    <Content Include="styles\pages\downloads-admin.less" />
+    <Content Include="styles\pages\downloads-admin.min.css" />
     <Content Include="styles\pages\downloads.css" />
     <Content Include="styles\pages\downloads.css.map" />
     <Content Include="styles\pages\downloads.less" />

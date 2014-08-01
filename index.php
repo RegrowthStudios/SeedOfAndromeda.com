@@ -102,6 +102,7 @@ switch ($cleanpageid) {
 		$pagename = "blogs.php";
 		break;
 	case "downloads" :
+		require_once ("db_connect.php");
 		$pagetitle .= "Downloads";
 		$pagename = "downloads.php";
 		break;
@@ -124,6 +125,11 @@ switch ($cleanpageid) {
 	case "blog-admin":
 		$pagetitle .= "Blog Admin";
 		$pagename = "blog-admin.php";
+		require_once ("db_connect.php");
+		break;
+	case "downloads-admin":
+		$pagetitle .= "Download Admin";
+		$pagename = "downloads-admin.php";
 		require_once ("db_connect.php");
 		break;
 }

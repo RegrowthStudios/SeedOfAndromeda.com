@@ -1,0 +1,17 @@
+﻿/*************/
+/* Variables */
+/*************/
+/*******************************/
+/* Proprietary Property Mixins */
+/*******************************/
+/******************/
+/* Content Mixins */
+/******************/
+#download-settings .btn {
+  float: right;
+  margin-top: -96.896px;
+}
+#download-settings .btn:last-child {
+  margin-right: 128px;
+}
+/*# sourceMappingURL=downloads-admin.css.map */

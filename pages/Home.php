@@ -122,8 +122,8 @@
         
     foreach($devIDs as $devID){
         $results = XenForo_Search_SourceHandler_Abstract::getDefaultSourceHandler()->executeSearchByUserId(
-            $devID, 0, 10
-        );
+            $devID, 0, 18
+        ); //18 to ensure 9 usable results.
         //$results = $this->getModelFromCache('XenForo_Model_Search')->getSearchResultsForDisplay($results);
         if ($results)
         {

@@ -133,13 +133,13 @@ if (! $loggedIn) {
 				} else {
 					if (isset ( $_REQUEST ['submit'] )) {
 						// var_dump ( $_REQUEST );
-						if (! isset ( $_REQUEST ['blog-post-title'] ) || ! isset ( $_REQUEST ['blog-post-content'] )) {
+						if (! isset ( $_REQUEST ['blog-post-title'] ) || ! isset ( $_REQUEST ['blog-post-content'] ) || ! isset ( $_REQUEST ['blog-brief'] )) {
 							echo '
                                 <div class="row clearfix">
                                     <div class="header"><h1 class="error">Blog Editor - Error</h1></div>
                                     <div class="col double-col-2">
                                         <div class="text">
-                                            <h3 class="error">Blog post title and body are required!</h3>
+                                            <h3 class="error">Blog post title, body and brief are required!</h3>
                                         </div>
                                     </div>';    
 						} else {
@@ -154,10 +154,10 @@ if (! $loggedIn) {
 									isset ( $_REQUEST ['devnews'] ) && $_REQUEST ['devnews'] == 1,
 									isset ( $_REQUEST ['anonymous'] ) && $_REQUEST ['anonymous'] == 1,
 									isset ( $_REQUEST ['no-sign-off'] ) && $_REQUEST ['no-sign-off'] == 1,
-                                    $_REQUEST ['dev-news-summary-content'],
-                                    $_REQUEST ['dev-news-summary-background'],
-                                    $_REQUEST ['prioritisescreenshots'],
-                                    $_REQUEST ['hidescreenshots'],
+                                    isset ( $_REQUEST ['dev-news-summary-content'] ) && $_REQUEST ['dev-news-summary-content'] == 1,
+                                    isset ( $_REQUEST ['dev-news-summary-background'] ) && $_REQUEST ['dev-news-summary-background'] == 1,
+                                    isset ( $_REQUEST ['prioritisescreenshots'] ) && $_REQUEST ['prioritisescreenshots'] == 1,
+                                    isset ( $_REQUEST ['hidescreenshots'] ) && $_REQUEST ['hidescreenshots'] == 1,
 									$_REQUEST ['postid']
 							) );
 							header ( "Location: /" . $pageurl . "?postid=" . $_REQUEST ['postid'] );
@@ -250,7 +250,7 @@ if (! $loggedIn) {
                 <div class="text">
 	                <div id="blog-post" class="clearfix">
 		                <div id="blog-post-content" class="editpost"><?php echo $blogpost["post_body"];?></div>
-                        <span id="blog-post-footer">
+                        <span id="blog-post-footer" class="right">
                             <?php
                                 if(! $blogpost["removesignoff"]) {
                                     if($blogpost["anonymous"]) {
@@ -368,7 +368,7 @@ if (! $loggedIn) {
                         <div class="text">';
 				if ($caneditown) {
 					
-					echo '<a id="new-post" class="btn" href="/' . $pageurl . '?newpost&notemplate">New post</a>';
+					echo '<a class="btn right" href="/' . $pageurl . '?newpost&notemplate">New post</a>';
 					
 					$query = $connection->prepare ( "SELECT * FROM blog_posts WHERE author = ? ORDER BY id DESC" );
 					$query->execute ( array (

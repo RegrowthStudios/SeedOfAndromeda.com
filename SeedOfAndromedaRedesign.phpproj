@@ -343,6 +343,7 @@
     <Compile Include="pages\the-team.php" />
     <Compile Include="pages\the-game.php" />
     <Compile Include="pages\under-construction.php" />
+    <Compile Include="screenshot-loader.php" />
     <Compile Include="thumb.php" />
     <Compile Include="pages\home.php" />
     <Compile Include="pages\videos.php" />

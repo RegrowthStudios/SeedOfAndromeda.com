@@ -24,7 +24,7 @@ if (isset ( $connection )) {
         }
 ?>
 <div id="single-blog" class="row clearfix">
-    <div class="header"><h1><?php echo $blogpost["title"]; ?></h1></div>
+    <div class="header"><h1><?php echo XenForo_Helper_String::wholeWordTrim( strip_tags ( $blogpost["title"] ), 60) ?></h1></div>
     <div class="double-col-2">
         <div class="text">
 	        <div id="blog-post" class="clearfix">
@@ -87,11 +87,11 @@ if (isset ( $connection )) {
 			$postlink = gen_postlink ( $row );
 			echo '
             <div class="row clearfix">
-                <div class="header"><h1><a href="/blogs/' . $postlink . '">' . $row ["title"] . '</a></h1></div>
+                <div class="header"><h1><a href="/blogs/' . $postlink . '">' . XenForo_Helper_String::wholeWordTrim( strip_tags ( $row ["title"] ), 60) . '</a></h1></div>
                 <div class="double-col-2">
                     <div class="text">
 	                    <div id="blog-post" class="clearfix">
-		                    <div>' . substr ( strip_tags ( $row ["post_brief"] ), 0, 1400 ) . ' ...</div>
+		                    <div>' . XenForo_Helper_String::wholeWordTrim( strip_tags ( $row ["post_brief"] ), 1400) . '</div>
 	                        <span id="blog-post-footer">
                                 <a
 				                    href="/blogs/' . $postlink . '">Read

@@ -81,7 +81,7 @@ ul {
 }
 
 .borderless {
-    border: none;
+    border: none !important;
 }
 
 .error {
@@ -545,11 +545,11 @@ ul {
         background: linear-gradient(to bottom, rgba(16,190,239,0) 59%, rgba(16,190,239,0.6) 100%);
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#10beef', endColorstr='#10beef', GradientType=0 );
 }
-.row:first-child {
+.row:first-of-type, .row:first-of-type .header {
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
 }
-.row:last-child, .row:last-child::after {
+.row:last-of-type, .row:last-of-type::after {
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
 }

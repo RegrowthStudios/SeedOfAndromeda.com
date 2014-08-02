@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/styles/soa.min.css" type="text/css" />
     <link rel="stylesheet" href="/Assets/Fonts/the_league_of_orbitron/Orbitron.css" type="text/css" />
     <link href='http://fonts.googleapis.com/css?family=Electrolize' rel='stylesheet' type='text/css' />
-    <meta name="viewport" content="width=device-width; initial-scale=1.0;" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="keywords"
 	    content="seed of andromeda, SoA, Windows, PC, Mac, Linux, Voxel, Voxel-Based, Voxel Game, Voxel-Based Game, indie game, independent game, independently developed, video game, pc game, creation, survival, chunks, blocks, sci fi" />
     <meta name="description"

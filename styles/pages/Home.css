@@ -37,6 +37,8 @@
 .dev-activity-avatar {
   float: left;
   margin-right: 1em;
+  position: relative;
+  z-index: 2;
 }
 .dev-activity-dev-info {
   position: relative;

@@ -66,3 +66,37 @@ $(document).ready(function () {
         }
     });
 });
+
+//AJAJ Draft System
+var captureNextChange = false;
+var CAPTURE_DELAY = 500;
+function delayCapture() {
+    captureNextChange = false;
+    setTimeout(function () {
+        captureNextChange = true;
+    }, CAPTURE_DELAY);
+};
+function saveDraft(html) {
+    $.ajax({
+        url: "../draft-saver.php",
+        type: "POST",
+        data: { draft: html, id: getParameterByName("postid") },
+        success: function (msg) {
+            if (msg == 1) {
+                console.log("Draft Saved!");
+            } else {
+                console.log("Draft failed to save!");
+            }
+        }
+    })
+}
+$(document).ready(function () {
+    var blogContent = $("#blog-post-content");
+    delayCapture();
+    blogContent.bind("DOMSubtreeModified", function () {
+        if (captureNextChange) {
+            saveDraft(blogContent.html());
+            delayCapture();
+        }
+    });
+});

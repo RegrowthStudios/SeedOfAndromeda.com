@@ -5,7 +5,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.ico" />
     <link rel="stylesheet" href="/styles/normalise.css" type="text/css" />
     <link rel="stylesheet" href="/styles/soa.min.css" type="text/css" />
-    <link rel="stylesheet" href="/Assets/Fonts/the_league_of_orbitron/Orbitron.css" type="text/css" />
+    <link rel="stylesheet" href="/assets/fonts/the_league_of_orbitron/Orbitron.css" type="text/css" />
     <link href='http://fonts.googleapis.com/css?family=Electrolize' rel='stylesheet' type='text/css' />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="keywords"

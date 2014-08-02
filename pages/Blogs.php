@@ -70,11 +70,13 @@ if (isset ( $connection )) {
 ?>
 <div id="blog-comments" class="row clearfix">     
     <div class="divider"></div>   
+    <div class="text">
 <?php
 		if (! $blogpost ["disablecomments"]) {
 			echo_disqus ( $blogpost ["title"], $pageurl, "blogs-" . $blogpost ["id"] );
 		}
 ?>
+    </div>
 </div>                                        
 <?php
 	} else {

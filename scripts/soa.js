@@ -30,6 +30,14 @@ function confirmAction(message) {
     return false;
 }
 
+//Get URL parameters
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
 // User Name Shortener
 $(document).ready(function () {
     if ($('#account-bar .account-name').text().length > 16) {

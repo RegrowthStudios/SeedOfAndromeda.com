@@ -90,6 +90,7 @@ function MediaSlider(elements, sliderFrame, slideShowPauseDelay, slideShowDelay,
     _this.elems = elements;
     _this.ctrlsLocked = false;
     _this.slideShowPaused = false;
+    _this.ignoreMouseOut = false;
     _this.index = 0;
     _this.automateID = new Array();
     _this.elem = _this.elems[_this.index];
@@ -107,15 +108,15 @@ function MediaSlider(elements, sliderFrame, slideShowPauseDelay, slideShowDelay,
         });        
 
         _this.leftControl.click(function () {
-            _this.pauseSlideshowDelay();
             if (_this.ctrlsLocked == false) {
+                _this.pauseSlideshowDelay();
                 _this.previousItem();
             }
         });
 
         _this.rightControl.click(function () {
-            _this.pauseSlideshowDelay();
             if (_this.ctrlsLocked == false) {
+                _this.pauseSlideshowDelay();
                 _this.nextItem();
             }
         });
@@ -210,11 +211,13 @@ MediaSlider.prototype.automateSlideshow = function () {
 
 MediaSlider.prototype.playSlideshow = function () {
     var _this = this;
-    _this.clearTimeouts();
-    _this.slideShowPaused = false;
-    _this.automateID[_this.automateID.length] = setTimeout(function () {
-        _this.automateSlideshow();
-    }, _this.slideShowDelay);
+    if (!_this.ignoreMouseOut) {
+        _this.clearTimeouts();
+        _this.slideShowPaused = false;
+        _this.automateID[_this.automateID.length] = setTimeout(function () {
+            _this.automateSlideshow();
+        }, _this.slideShowDelay);
+    }
 };
 
 MediaSlider.prototype.pauseSlideshow = function () {
@@ -225,7 +228,9 @@ MediaSlider.prototype.pauseSlideshow = function () {
 MediaSlider.prototype.pauseSlideshowDelay = function () {
     var _this = this;
     _this.slideShowPaused = true;
+    _this.ignoreMouseOut = true;
     setTimeout(function () {
+        _this.ignoreMouseOut = false;
         _this.playSlideshow();
     }, _this.slideShowPauseDelay);
 };

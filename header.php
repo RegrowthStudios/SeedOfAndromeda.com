@@ -43,7 +43,7 @@
     }
     $pagestyle = "scripts/pages/" . str_replace ( ".php", ".js", $pagename );
     if (file_exists ( $pagestyle )) {
-	    echo '<script src="/' . $pagestyle . '?ver=3"></script>';
+	    echo '<script src="/' . $pagestyle . '?ver=4"></script>';
     }
     ?>
     <script>

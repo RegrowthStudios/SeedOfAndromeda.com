@@ -9,11 +9,8 @@
         if ( isset ( $_REQUEST['pid'] )) {
             $i = 0;
             $images = array();
-            $di = new RecursiveDirectoryIterator("assets/images/screenshots/",RecursiveDirectoryIterator::SKIP_DOTS);
-            $it = new RecursiveIteratorIterator($di);
-            foreach($it as $image)
-            {
-                if( pathinfo($image,PATHINFO_EXTENSION) == "jpg" || pathinfo($image,PATHINFO_EXTENSION) == "png" || pathinfo($image,PATHINFO_EXTENSION) == "gif" ) {
+            foreach ( glob ( "assets/images/screenshots/*.jpg" ) as $image ) {
+	            if (substr_count ( $image, "_thumb_" ) == 0) {
                     $time = filemtime($image);
                     if (array_key_exists ($time, $images)) {
                         while (array_key_exists ($time, $images)) {
@@ -21,7 +18,8 @@
                         }
                     }
                     $images[$time] = $image;
-                }
+		            $i++;
+	            }
             }
             ksort ( $images );
             $sortedImages = array_values ( $images );

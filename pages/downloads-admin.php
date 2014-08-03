@@ -136,14 +136,14 @@ if(! $loggedIn) {
                                             </div>';
                                 } else {
                                 
-                                    if ( ! file_exists( $_SERVER{'DOCUMENT_ROOT'} . "/SeedofAndromeda/" . $_REQUEST ['download-version'] ) ) {
-                                        mkdir ( $_SERVER{'DOCUMENT_ROOT'} . "/SeedofAndromeda/" . $_REQUEST ['download-version'], 0755, true );
-                                    } else if ( file_exists( $_SERVER{'DOCUMENT_ROOT'} . "/SeedofAndromeda/" . $_REQUEST ['download-version'] . "/SoA." . $extension ) ) {
-                                        unlink ( $_SERVER{'DOCUMENT_ROOT'} . "/SeedofAndromeda/" . $_REQUEST ['download-version'] . "/SoA." . $extension );
+                                    if ( ! file_exists( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "file_seedofandromeda_com/game/" . $_REQUEST ['download-version'] ) ) {
+                                        mkdir ( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "file_seedofandromeda_com/game/" . $_REQUEST ['download-version'], 0755, true );
+                                    } else if ( file_exists( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "file_seedofandromeda_com/game/" . $_REQUEST ['download-version'] . "/SoA." . $extension ) ) {
+                                        unlink (dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "file_seedofandromeda_com/game/" . $_REQUEST ['download-version'] . "/SoA." . $extension );
                                     }
                                 
                                     move_uploaded_file($_FILES['download']['tmp_name'],
-                                       $_SERVER{'DOCUMENT_ROOT'} . "/SeedofAndromeda/" . $_REQUEST ['download-version'] . "/SoA." . $extension); 
+                                       dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "file_seedofandromeda_com/game/" . $_REQUEST ['download-version'] . "/SoA." . $extension); 
                             
                                 }
                             }
@@ -151,7 +151,7 @@ if(! $loggedIn) {
 						    $query->execute ( array (
 								    $_REQUEST ['download-version'],
 								    $_REQUEST ['download-description'],
-								    "/SeedofAndromeda/" . $_REQUEST ['download-version'] . "/SoA." . $extension,
+								    "file/" . $_REQUEST ['download-version'] . "/SoA." . $extension,
 								    time (),
                                     isset ( $_REQUEST ['published'] ) && $_REQUEST ['published'] == 1,
 								    $_REQUEST ['downloadid']
@@ -209,18 +209,22 @@ if(! $loggedIn) {
                     ],
     image_list: [
                     <?php
-						foreach ( glob ( "assets/images/blogs/*.*" ) as $filename ) {
-							$file = pathinfo ( $filename );
-							if ($file ["extension"] == "jpg" || $file ["extension"] == "png" || $file ["extension"] == "gif") {
-								echo "{title: '" . $file ["basename"] . "', value: '/assets/images/blogs/" . $file ["basename"] . "'},";
-							}
-						}
-						foreach ( glob ( "assets/images/screenshots/*.*" ) as $filename ) {
-							$file = pathinfo ( $filename );
-							if ($file ["extension"] == "jpg" || $file ["extension"] == "png" || $file ["extension"] == "gif") {
-								echo "{title: '" . $file ["basename"] . "', value: '/assets/images/screenshots/" . $file ["basename"] . "'},";
-							}
-						}
+                        $di = new RecursiveDirectoryIterator("assets/images/blogs/",RecursiveDirectoryIterator::SKIP_DOTS);
+                        $it = new RecursiveIteratorIterator($di);
+                        foreach($it as $file)
+                        {
+                            if( pathinfo($file,PATHINFO_EXTENSION) == "jpg" || pathinfo($file,PATHINFO_EXTENSION) == "png" || pathinfo($file,PATHINFO_EXTENSION) == "gif" ) {
+                                echo "{title: '" . pathinfo($file,PATHINFO_BASENAME) . "', value: '/assets/images/blogs/" . pathinfo($file,PATHINFO_BASENAME) . "'},";
+                            }
+                        }
+                        $di = new RecursiveDirectoryIterator("assets/images/screenshots/",RecursiveDirectoryIterator::SKIP_DOTS);
+                        $it = new RecursiveIteratorIterator($di);
+                        foreach($it as $file)
+                        {
+                            if( pathinfo($file,PATHINFO_EXTENSION) == "jpg" || pathinfo($file,PATHINFO_EXTENSION) == "png" || pathinfo($file,PATHINFO_EXTENSION) == "gif" ) {
+                                echo "{title: '" . pathinfo($file,PATHINFO_BASENAME) . "', value: '/assets/images/blogs/" . pathinfo($file,PATHINFO_BASENAME) . "'},";
+                            }
+                        }
 					?>
     ],
 });
@@ -278,7 +282,7 @@ if(! $loggedIn) {
 						"0.0.0",
 						"<p>Click here to write up a description of the download.</p>",
 						time (),
-						"/SeedofAndromeda/Game/Versions/0.0.0/SoA.zip"
+						"game/0.0.0/SoA.zip"
 				) );
                 
 				$id = $connection->lastInsertId ();

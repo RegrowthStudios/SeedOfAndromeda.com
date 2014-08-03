@@ -28,6 +28,7 @@
     <Compile Include="draft-saver.php" />
     <Compile Include="files\download.php" />
     <Compile Include="footer.php" />
+    <Compile Include="maintenance.php" />
     <Compile Include="pages\404.php" />
     <Compile Include="pages\blog-admin.php" />
     <Compile Include="pages\blogs.php" />

@@ -213,18 +213,22 @@ if (! $loggedIn) {
                     ],
     image_list: [
                     <?php
-						foreach ( glob ( "assets/images/blogs/*.*" ) as $filename ) {
-							$file = pathinfo ( $filename );
-							if ($file ["extension"] == "jpg" || $file ["extension"] == "png" || $file ["extension"] == "gif") {
-								echo "{title: '" . $file ["basename"] . "', value: '/assets/images/blogs/" . $file ["basename"] . "'},";
-							}
-						}
-						foreach ( glob ( "assets/images/screenshots/*.*" ) as $filename ) {
-							$file = pathinfo ( $filename );
-							if ($file ["extension"] == "jpg" || $file ["extension"] == "png" || $file ["extension"] == "gif") {
-								echo "{title: '" . $file ["basename"] . "', value: '/assets/images/screenshots/" . $file ["basename"] . "'},";
-							}
-						}
+                        $di = new RecursiveDirectoryIterator("assets/images/blogs/",RecursiveDirectoryIterator::SKIP_DOTS);
+                        $it = new RecursiveIteratorIterator($di);
+                        foreach($it as $file)
+                        {
+                            if( pathinfo($file,PATHINFO_EXTENSION) == "jpg" || pathinfo($file,PATHINFO_EXTENSION) == "png" || pathinfo($file,PATHINFO_EXTENSION) == "gif" ) {
+                                echo "{title: '" . pathinfo($file,PATHINFO_BASENAME) . "', value: '/assets/images/blogs/" . pathinfo($file,PATHINFO_BASENAME) . "'},";
+                            }
+                        }
+                        $di = new RecursiveDirectoryIterator("assets/images/screenshots/",RecursiveDirectoryIterator::SKIP_DOTS);
+                        $it = new RecursiveIteratorIterator($di);
+                        foreach($it as $file)
+                        {
+                            if( pathinfo($file,PATHINFO_EXTENSION) == "jpg" || pathinfo($file,PATHINFO_EXTENSION) == "png" || pathinfo($file,PATHINFO_EXTENSION) == "gif" ) {
+                                echo "{title: '" . pathinfo($file,PATHINFO_BASENAME) . "', value: '/assets/images/blogs/" . pathinfo($file,PATHINFO_BASENAME) . "'},";
+                            }
+                        }
 					?>
     ],
 });

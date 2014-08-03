@@ -81,7 +81,7 @@
                         <div class="card-background" style="background-image: url(\'' . $backgroundurl . '\');"></div>
                     </a>
                 </div>
-	        ';
+            ';
             }
             ?>
         </div>
@@ -118,14 +118,13 @@
     $devIDs = array( 1, 5, 9, 11, 16, 20, 21, 43, 57, 136, 475, 488 );
     //List of ignored forum IDs:
     $ignoreForums = array( 15, 16, 17, 20, 21, 23, 30 );
-    
+        
     foreach($devIDs as $devID){
         $results = XenForo_Search_SourceHandler_Abstract::getDefaultSourceHandler()->executeSearchByUserId(
             $devID, 0, 18
         ); //18 to ensure 9 usable results.
         if ($results)
         {
-            //var_dump($results);
             foreach($results as $result){
                 switch($result[0]){
                     case "thread":
@@ -156,11 +155,6 @@
         
     $i = 0;
     
-    function stripQuotes($text_to_search) { 
-        $pattern = '(\[QUOTE.*?\[/QUOTE\])';
-        $replace = '';
-        return preg_replace($pattern, $replace, $text_to_search);
-    }
     foreach($posts as $post){
         if($i >= 9){
             break; //Limit to 9 posts
@@ -170,7 +164,7 @@
             continue;
         }
         $user = $sdk->getUser($post["user_id"]);
-        $message = XenForo_Helper_String::bbCodeStrip( stripQuotes(  $post['message'] )); //Strip bbcode
+        $message = XenForo_Helper_String::bbCodeStrip( $post['message'], true ); //Strip bbcode
         $message = XenForo_Helper_String::wholeWordTrim($message, 100); //Strip the message to 100 chars
         $threadTitle = XenForo_Helper_String::wholeWordTrim($thread["title"], 35);
         echo '
@@ -201,7 +195,6 @@
                 </div>
             </div>
         ';
-        //var_dump($post);
         $i++;
     }
     ?>

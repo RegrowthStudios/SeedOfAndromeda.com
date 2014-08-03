@@ -132,7 +132,6 @@ if (! $loggedIn) {
                             </div>';
 				} else {
 					if (isset ( $_REQUEST ['submit'] )) {
-						// var_dump ( $_REQUEST );
 						if (! isset ( $_REQUEST ['blog-post-title'] ) || ! isset ( $_REQUEST ['blog-post-content'] ) || ! isset ( $_REQUEST ['blog-brief'] )) {
 							echo '
                                 <div class="row clearfix">

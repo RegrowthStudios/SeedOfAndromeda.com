@@ -115,16 +115,14 @@
     $tids = array();
         
     //Add developer user IDs here:
-    $devIDs = array(  1  ); //TODO: Update to actual User IDs
+    $devIDs = array( 1, 5, 9, 11, 16, 20, 21, 43, 57, 136, 475, 488 );
     //List of ignored forum IDs:
     $ignoreForums = array( 15, 16, 17, 20, 21, 23, 30 );
-        
-        
+    
     foreach($devIDs as $devID){
         $results = XenForo_Search_SourceHandler_Abstract::getDefaultSourceHandler()->executeSearchByUserId(
             $devID, 0, 18
         ); //18 to ensure 9 usable results.
-        //$results = $this->getModelFromCache('XenForo_Model_Search')->getSearchResultsForDisplay($results);
         if ($results)
         {
             //var_dump($results);
@@ -145,11 +143,8 @@
         }
     }
         
-        
-        
     $posts = XenForo_Model::create('XenForo_Model_Post')->getPostsByIds($pids);
     usort($posts, "comparePostTimes");
-    //var_dump($posts);
         
     foreach($posts as $post){
         if(!in_array($post["thread_id"],$tids)){
@@ -158,10 +153,14 @@
     }
         
     $threads = $sdk->getThreadsByIds($tids);
-    //var_dump($threads);
         
     $i = 0;
-        
+    
+    function stripQuotes($text_to_search) { 
+        $pattern = '(\[QUOTE.*?\[/QUOTE\])';
+        $replace = '';
+        return preg_replace($pattern, $replace, $text_to_search);
+    }
     foreach($posts as $post){
         if($i >= 9){
             break; //Limit to 9 posts
@@ -171,9 +170,8 @@
             continue;
         }
         $user = $sdk->getUser($post["user_id"]);
-        //var_dump($user);
-        $message = XenForo_Helper_String::wholeWordTrim($post['message'], 100); //Strip the message to 100 chars
-        $message = XenForo_Helper_String::bbCodeStrip($message); //Strip bbcode
+        $message = XenForo_Helper_String::bbCodeStrip( stripQuotes(  $post['message'] )); //Strip bbcode
+        $message = XenForo_Helper_String::wholeWordTrim($message, 100); //Strip the message to 100 chars
         $threadTitle = XenForo_Helper_String::wholeWordTrim($thread["title"], 35);
         echo '
             <div class="col tri-col-1">

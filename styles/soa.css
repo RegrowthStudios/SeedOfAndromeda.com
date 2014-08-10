@@ -246,7 +246,7 @@ img.overflowfix {
   position: relative;
   z-index: 1000;
   float: none;
-  background-image: url("/Assets/images/SOASprite.png");
+  background-image: url("/assets/images/SOASprite.png");
   background-position: 0 0;
 }
 #nav-bar a {
@@ -271,7 +271,7 @@ img.overflowfix {
   width: 120px;
   display: inline-block;
   position: absolute;
-  background-image: url("/Assets/images/SOASprite.png");
+  background-image: url("/assets/images/SOASprite.png");
   background-position: 164px -225px;
   background-repeat: no-repeat;
   line-height: 44px;
@@ -297,12 +297,12 @@ img.overflowfix {
   width: 120px;
 }
 #navigation > li:hover {
-  background-image: url("/Assets/images/SOASprite.png");
+  background-image: url("/assets/images/SOASprite.png");
   background-position: 0 -244px;
   cursor: pointer;
 }
 #navigation > li:first-child:hover {
-  background-image: url("/Assets/images/SOASprite.png");
+  background-image: url("/assets/images/SOASprite.png");
   background-position: 0 -203px;
 }
 /* Consider generalising across acc bar and nav bar. */
@@ -334,19 +334,19 @@ img.overflowfix {
   width: 120px;
   font-size: 0.7em;
   text-align: center;
-  background-image: url("/Assets/images/SOASprite.png");
+  background-image: url("/assets/images/SOASprite.png");
   background-position: 0 -328px;
 }
 #navigation .dropdown > li:hover {
-  background-image: url("/Assets/images/SOASprite.png");
+  background-image: url("/assets/images/SOASprite.png");
   background-position: 0 -552px;
 }
 #navigation .dropdown > li:last-child {
-  background-image: url("/Assets/images/SOASprite.png");
+  background-image: url("/assets/images/SOASprite.png");
   background-position: 0 -288px;
 }
 #navigation .dropdown > li:last-child:hover {
-  background-image: url("/Assets/images/SOASprite.png");
+  background-image: url("/assets/images/SOASprite.png");
   background-position: 0 -512px;
 }
 #navigation .dropdown > li > a {

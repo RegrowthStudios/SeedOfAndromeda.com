@@ -63,3 +63,53 @@ Redirect permanent /update.php http://updater.seedofandromeda.com/update.php
 
 #Hide .git directories and files if they get uploaded to the web server
 RedirectMatch 404 /\.git
+
+
+# PHP error handling for production servers
+
+# disable display of startup errors
+php_flag display_startup_errors off
+
+# disable display of all other errors
+php_flag display_errors off
+
+# disable html markup of errors
+php_flag html_errors off
+
+# enable logging of errors
+php_flag log_errors on
+
+# disable ignoring of repeat errors
+php_flag ignore_repeated_errors off
+
+# disable ignoring of unique source errors
+php_flag ignore_repeated_source off
+
+# enable logging of php memory leaks
+php_flag report_memleaks on
+
+# preserve most recent error via php_errormsg
+php_flag track_errors on
+
+# disable formatting of error reference links
+php_value docref_root 0
+
+# disable formatting of error reference links
+php_value docref_ext 0
+
+# specify path to php error log
+php_value error_log /var/zpanel/hostdata/seedofandromeda/public_html/seedofandromeda_com//PHP_errors.log
+
+# specify recording of all php errors
+php_value error_reporting 999999999
+php_value error_reporting -1
+
+# disable max error string length
+php_value log_errors_max_len 0
+
+# protect error log by preventing public access
+<Files PHP_errors.log>
+ Order allow,deny
+ Deny from all
+ Satisfy All
+</Files>

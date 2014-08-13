@@ -22,9 +22,9 @@
     <meta name="og:type" 
         content="game" />
     <meta name="og:url" 
-        content="http://www.seedofandromeda.com/" />
+        content="https://www.seedofandromeda.com/" />
     <meta name="og:image"
-	    content="http://www.seedofandromeda.com/assets/images/soa_icon.png" />
+	    content="https://www.seedofandromeda.com/assets/images/soa_icon.png" />
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js" type="text/javascript"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js" type="text/javascript"></script>
     <script src="/scripts/lightbox-2.6.js"></script>
@@ -105,7 +105,7 @@
                     if(!$loggedIn)
                     {
                 ?>
-                    <img class="account-image" src="assets/images/DefaultUser_NoSignIn_ProfImg.png" />
+                    <img class="account-image" src="/assets/images/DefaultUser_NoSignIn_ProfImg.png" />
                     <div class="account-overview">
                         <span class="account-name">Not Logged In</span>
                     </div>

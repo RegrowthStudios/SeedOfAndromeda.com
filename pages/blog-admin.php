@@ -359,7 +359,7 @@ if (! $loggedIn) {
 				}
 			} elseif (isset ( $_REQUEST ['newpost'] )) {
 				
-				$query = $connection->prepare ( "INSERT INTO blog_posts (author, title, timestamp, post_body, post_brief, dev_news_body, dev_news_background) VALUES (?, ?, ?, ?, ?, ?)" );
+				$query = $connection->prepare ( "INSERT INTO blog_posts (author, title, timestamp, post_body, post_brief, dev_news_body, dev_news_background) VALUES (?, ?, ?, ?, ?, ?, ?)" );
 				$query->execute ( array (
 						$userinfo ['user_id'],
 						"New blog post",

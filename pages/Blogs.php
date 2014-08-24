@@ -102,7 +102,7 @@ if (isset ( $connection )) {
 				                    More...</a> ';
 			                    if (! $row ["disablecomments"]) {
 				                    echo '<small> - (<a
-				                    href="http://www.seedofandromeda.com/blogs/' . $postlink . '#disqus_thread" data-disqus-identifier="blogs-' . $row ["id"] . '">Comments</a>)
+				                    href="/blogs/' . $postlink . '#disqus_thread" data-disqus-identifier="blogs-' . $row ["id"] . '">Comments</a>)
 			                    </small>';
 			                    }
                                 echo '
@@ -121,7 +121,7 @@ if (isset ( $connection )) {
     (function () {
     var s = document.createElement('script'); s.async = true;
     s.type = 'text/javascript';
-    s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+    s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
     (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
     </script>

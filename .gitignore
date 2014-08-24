@@ -47,6 +47,7 @@ local.properties
 #OS junk files
 [Tt]humbs.db
 *.DS_Store
+desktop.ini
 
 #Block test
 blocks/**/*.png

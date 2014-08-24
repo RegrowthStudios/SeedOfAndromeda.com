@@ -19,7 +19,7 @@
                     }
                     $images[$time] = $image;
 		            $i++;
-	            }
+                }
             }
             ksort ( $images );
             $sortedImages = array_values ( $images );

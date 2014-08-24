@@ -7,7 +7,7 @@
 	            style="border: 0; padding: 0; width: 100%; height: 550px;"></iframe>
 
             <div id="irc-alt-msg">
-	            Kiwi IRC not working? <a href="http://webchat.freenode.net/?channels=seedofandromeda">Try this one!</a>
+	            Kiwi IRC not working? <a href="https://webchat.freenode.net/?channels=seedofandromeda">Try this one!</a>
             </div>
         </div>
     </div>

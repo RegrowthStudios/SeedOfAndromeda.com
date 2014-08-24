@@ -69,7 +69,7 @@
                 $disp = "";
                 echo '
                 <div class="media-wrapper card-wrapper" style="display: none;">
-                    <a href="http://www.seedofandromeda.com/blogs/' . $postlink . '">
+                    <a href="/blogs/' . $postlink . '">
                         <div class="card-text">
                             <div class="card-header indent-xx-large">
                                 <h2>' . $row ["title"] . '</h2>
@@ -125,6 +125,7 @@
         ); //18 to ensure 9 usable results.
         if ($results)
         {
+            //var_dump($results);
             foreach($results as $result){
                 switch($result[0]){
                     case "thread":
@@ -144,6 +145,7 @@
         
     $posts = XenForo_Model::create('XenForo_Model_Post')->getPostsByIds($pids);
     usort($posts, "comparePostTimes");
+    //var_dump($posts);
         
     foreach($posts as $post){
         if(!in_array($post["thread_id"],$tids)){
@@ -152,6 +154,7 @@
     }
         
     $threads = $sdk->getThreadsByIds($tids);
+    //var_dump($threads);
         
     $i = 0;
     
@@ -164,6 +167,7 @@
             continue;
         }
         $user = $sdk->getUser($post["user_id"]);
+        //var_dump($user);
         $message = XenForo_Helper_String::bbCodeStrip( $post['message'], true ); //Strip bbcode
         $message = XenForo_Helper_String::wholeWordTrim($message, 100); //Strip the message to 100 chars
         $threadTitle = XenForo_Helper_String::wholeWordTrim($thread["title"], 35);
@@ -195,6 +199,7 @@
                 </div>
             </div>
         ';
+        //var_dump($post);
         $i++;
     }
     ?>

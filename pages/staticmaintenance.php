@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/styles/normalise.css" type="text/css" />
     <link rel="stylesheet" href="/styles/soa.min.css" type="text/css" />
     <link rel="stylesheet" href="/assets/fonts/the_league_of_orbitron/Orbitron.css" type="text/css" />
-    <link href='http://fonts.googleapis.com/css?family=Electrolize' rel='stylesheet' type='text/css' />
+    <link href='https://fonts.googleapis.com/css?family=Electrolize' rel='stylesheet' type='text/css' />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="UTF-8">
     <meta name="keywords"
@@ -22,11 +22,11 @@
     <meta name="og:type" 
         content="game" />
     <meta name="og:url" 
-        content="http://www.seedofandromeda.com/" />
+        content="https://www.seedofandromeda.com/" />
     <meta name="og:image"
-	    content="http://www.seedofandromeda.com/assets/images/soa_icon.png" />
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js" type="text/javascript"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js" type="text/javascript"></script>
+	    content="https://www.seedofandromeda.com/assets/images/soa_icon.png" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js" type="text/javascript"></script>
     <script src="/scripts/lightbox-2.6.js"></script>
     <link href="/styles/lightbox.css" rel="stylesheet" />
     <script src="/scripts/soa.js"></script>

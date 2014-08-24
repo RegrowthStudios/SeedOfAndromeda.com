@@ -8,7 +8,7 @@ RewriteBase /
 #     RewriteCond %{REQUEST_URI} !\.(jpe?g?|png|gif) [NC]
  
      # serve default 503 response
-#     RewriteRule .* http://www.seedofandromeda.com/maintenance.php [R=503,L]
+     #RewriteRule .* http://www.seedofandromeda.com/maintenance.php [R=503,L]
 # serve custom 503 response
 #ErrorDocument 503 /maintenance.php
  

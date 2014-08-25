@@ -24,11 +24,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="blocks\index.php" />
+    <Compile Include="closewindow.php" />
     <Compile Include="db_connect.php" />
     <Compile Include="draft-saver.php" />
     <Compile Include="files\download.php" />
     <Compile Include="footer.php" />
-    <Compile Include="maintenance.php" />
     <Compile Include="pages\404.php" />
     <Compile Include="pages\blog-admin.php" />
     <Compile Include="pages\blogs.php" />
@@ -349,6 +349,7 @@
     <Compile Include="jbimages\is_allowed.php" />
     <Compile Include="pages\maintenance.php" />
     <Compile Include="pages\screenshots.php" />
+    <Compile Include="maintenance.php" />
     <Compile Include="pages\the-team.php" />
     <Compile Include="pages\the-game.php" />
     <Compile Include="pages\under-construction.php" />
@@ -356,7 +357,8 @@
     <Compile Include="thumb.php" />
     <Compile Include="pages\home.php" />
     <Compile Include="pages\videos.php" />
-    <Compile Include="update.php" />
+    <Compile Include="updater\auth.php" />
+    <Compile Include="updater\update.php" />
     <Compile Include="xftest.php" />
   </ItemGroup>
   <ItemGroup>
@@ -630,6 +632,7 @@
     <Folder Include="tinymce\skins\lightgray-OLD\img\" />
     <Folder Include="tinymce\themes\" />
     <Folder Include="tinymce\themes\modern\" />
+    <Folder Include="updater\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include=".errordocs\.htaccess" />
@@ -1458,5 +1461,6 @@
     <Content Include="tinymce\skins\lightgray-OLD\skin.min.css" />
     <Content Include="tinymce\themes\modern\theme.min.js" />
     <Content Include="tinymce\tinymce.min.js" />
+    <Content Include="updater\.htaccess" />
   </ItemGroup>
 </Project>

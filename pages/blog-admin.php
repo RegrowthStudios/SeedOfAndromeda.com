@@ -418,7 +418,7 @@ if (! $loggedIn) {
 						"<h2>Click here to edit!</h2><p>Click the title to edit it.</p>",
                         "<p>Click here to write up a brief.</p>",
                         "<p>Click here to edit!</p>",
-                        "assets/images/blogs/default/Plains.jpg"
+                        "/assets/images/blogs/default/Plains.jpg"
 				) );
 				
 				$id = $connection->lastInsertId ();

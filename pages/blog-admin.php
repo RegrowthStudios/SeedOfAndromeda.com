@@ -169,14 +169,14 @@ if (! $loggedIn) {
                                             </div>';
                                 } else {
                                 
-                                    if ( ! file_exists( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "seedofandromeda_com/assets/images/blogs/" . $_REQUEST ['postid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['blog-post-title'] ) ) ) ) {
-                                        mkdir ( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "seedofandromeda_com/assets/images/blogs/" . $_REQUEST ['postid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['blog-post-title'] ) ), 0755, true );
-                                    } else if ( file_exists( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "seedofandromeda_com/assets/images/blogs/" . $_REQUEST ['postid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['blog-post-title'] ) ) . "/DevNewsSummaryBackground." . $extension ) ) {
-                                        unlink (dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "seedofandromeda_com/assets/images/blogs/" . $_REQUEST ['postid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['blog-post-title'] ) ) . "/DevNewsSummaryBackground." . $extension );
+                                    if ( ! file_exists( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "/seedofandromeda_com/assets/images/blogs/" . $_REQUEST ['postid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['blog-post-title'] ) ) ) ) {
+                                        mkdir ( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "/seedofandromeda_com/assets/images/blogs/" . $_REQUEST ['postid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['blog-post-title'] ) ), 0755, true );
+                                    } else if ( file_exists( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "/seedofandromeda_com/assets/images/blogs/" . $_REQUEST ['postid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['blog-post-title'] ) ) . "/DevNewsSummaryBackground." . $extension ) ) {
+                                        unlink (dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "/seedofandromeda_com/assets/images/blogs/" . $_REQUEST ['postid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['blog-post-title'] ) ) . "/DevNewsSummaryBackground." . $extension );
                                     }
                                 
                                     move_uploaded_file($_FILES['dev-news-summary-background']['tmp_name'],
-                                       dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "seedofandromeda_com/assets/images/blogs/" . $_REQUEST ['postid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['blog-post-title'] ) ) . "/DevNewsSummaryBackground." . $extension);
+                                       dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "/seedofandromeda_com/assets/images/blogs/" . $_REQUEST ['postid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['blog-post-title'] ) ) . "/DevNewsSummaryBackground." . $extension);
                                  
                                     //if ( ! file_exists( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "/SoAWebDev/assets/images/blogs/" . $_REQUEST ['postid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['blog-post-title'] ) ) ) ) {
                                     //    mkdir ( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "/SoAWebDev/assets/images/blogs/" . $_REQUEST ['postid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['blog-post-title'] ) ), 0755, true );

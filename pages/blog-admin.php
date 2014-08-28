@@ -142,6 +142,7 @@ if (! $loggedIn) {
                                         </div>
                                     </div>';    
 						} else {
+                            $extension = "";
                             if ( isset ( $_FILES['dev-news-summary-background'] ) && $_FILES['dev-news-summary-background']['size'] > 0 ) {
                             
                                 $allowedExts = array("jpg", "png", "jpeg", "gif");
@@ -175,8 +176,17 @@ if (! $loggedIn) {
                                     }
                                 
                                     move_uploaded_file($_FILES['dev-news-summary-background']['tmp_name'],
-                                       dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "seedofandromeda_com/assets/images/blogs/" . $_REQUEST ['postid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['blog-post-title'] ) ) . "/DevNewsSummaryBackground." . $extension); 
-                            
+                                       dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "seedofandromeda_com/assets/images/blogs/" . $_REQUEST ['postid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['blog-post-title'] ) ) . "/DevNewsSummaryBackground." . $extension);
+                                 
+                                    //if ( ! file_exists( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "/SoAWebDev/assets/images/blogs/" . $_REQUEST ['postid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['blog-post-title'] ) ) ) ) {
+                                    //    mkdir ( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "/SoAWebDev/assets/images/blogs/" . $_REQUEST ['postid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['blog-post-title'] ) ), 0755, true );
+                                    //} else if ( file_exists( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "/SoAWebDev/assets/images/blogs/" . $_REQUEST ['postid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['blog-post-title'] ) ) . "/DevNewsSummaryBackground." . $extension ) ) {
+                                    //    unlink (dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "/SoAWebDev/assets/images/blogs/" . $_REQUEST ['postid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['blog-post-title'] ) ) . "/DevNewsSummaryBackground." . $extension );
+                                    //}
+                                
+                                    //move_uploaded_file($_FILES['dev-news-summary-background']['tmp_name'],
+                                    //   dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "/SoAWebDev/assets/images/blogs/" . $_REQUEST ['postid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['blog-post-title'] ) ) . "/DevNewsSummaryBackground." . $extension);
+   
                                 }
                             }
                             
@@ -192,7 +202,7 @@ if (! $loggedIn) {
 									isset ( $_REQUEST ['anonymous'] ) && $_REQUEST ['anonymous'] == 1,
 									isset ( $_REQUEST ['no-sign-off'] ) && $_REQUEST ['no-sign-off'] == 1,
                                     $_REQUEST ['dev-news-summary-content'],
-                                    "/assets/images/blogs/" . $_REQUEST ['postid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['blog-post-title'] ) ) . "/DevNewsSummaryBackground." . $extension),
+                                    ("/assets/images/blogs/" . $_REQUEST ['postid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['blog-post-title'] ) ) . "/DevNewsSummaryBackground." . $extension),
                                     isset ( $_REQUEST ['prioritisescreenshots'] ) && $_REQUEST ['prioritisescreenshots'] == 1,
                                     isset ( $_REQUEST ['hidescreenshots'] ) && $_REQUEST ['hidescreenshots'] == 1,
 									0,
@@ -285,7 +295,7 @@ if (! $loggedIn) {
     </script>
     <form
 	    action="/<?php echo $pageurl . '?postid=' . $blogpost ["id"]; ?>&submit&notemplate"
-	    method="post">
+	    enctype="multipart/form-data" method="post">
         <div class="row clearfix">
             <div class="header"><h1><p id="blog-post-title" class="edittitle"><?php echo $blogpost["title"];?></p></h1></div>
             <div class="col double-col-2">
@@ -338,8 +348,10 @@ if (! $loggedIn) {
                     </div>
                     <div style="width: 100%;">
                         <label for="dev-news-summary-background"><h3>Dev News Background Image:</h3></label> 
+                        <br />
                         <input id="dev-news-summary-background" value="1"
 					        type="file" name="dev-news-summary-background" />
+                        <?php echo '<img class="img medium-wide right" style="margin-top:-2em;" src="' . $blogpost["dev_news_background"] . '" />'; ?>
                     </div>
                 </div>
             </div>
@@ -406,7 +418,7 @@ if (! $loggedIn) {
 						"<h2>Click here to edit!</h2><p>Click the title to edit it.</p>",
                         "<p>Click here to write up a brief.</p>",
                         "<p>Click here to edit!</p>",
-                        '<p><img class="img large-wide" src="http://www.seedofandromeda.com/Assets/images/Blogs/Default/Plains.jpg" alt="Default Dev News Background" /></p>'
+                        "assets/images/blogs/default/Plains.jpg"
 				) );
 				
 				$id = $connection->lastInsertId ();

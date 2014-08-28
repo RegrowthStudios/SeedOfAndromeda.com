@@ -10,7 +10,7 @@
         </div>
 
         <div id="footer-buffer"></div>
-        <div id="footer">Copyright &copy; 2014 SeedofAndromeda.com</div>
+        <div id="footer">Copyright &copy; 2012-<?php echo date("Y"); ?> SeedofAndromeda.com</div>
 
     </div>
     

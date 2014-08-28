@@ -62,10 +62,6 @@
             <?php
             while ( $row = $query->fetch () ) {
                 $postlink = gen_postlink ( $row );
-                $background = $row ["dev_news_background"];
-                $src_start = strpos('\'' . $background . '\'', 'src="') + 5;
-                $src_end = strpos('\'' . $background . '\'', '"', $src_start);
-                $backgroundurl = substr('\'' . $background . '\'', $src_start, $src_end - $src_start);
                 $disp = "";
                 echo '
                 <div class="media-wrapper card-wrapper" style="display: none;">
@@ -78,7 +74,7 @@
                                 <p>' . $row ["dev_news_body"] . '</p>
                             </strong></div>
                         </div>
-                        <div class="card-background" style="background-image: url(\'' . $backgroundurl . '\');"></div>
+                        <div class="card-background" style="background-image: url(\'' . $row ["dev_news_background"] . '\');"></div>
                     </a>
                 </div>
             ';

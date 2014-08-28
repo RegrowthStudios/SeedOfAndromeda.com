@@ -142,6 +142,44 @@ if (! $loggedIn) {
                                         </div>
                                     </div>';    
 						} else {
+                            if ( isset ( $_FILES['dev-news-summary-background'] ) && $_FILES['dev-news-summary-background']['size'] > 0 ) {
+                            
+                                $allowedExts = array("jpg", "png", "jpeg", "gif");
+                                $temp = explode(".", $_FILES['dev-news-summary-background']['name']);
+                                $extension = end($temp);
+                            
+                                if (! in_array ( $extension, $allowedExts ) ) {
+                                    echo '
+                                        <div class="row clearfix">
+                                            <div class="header"><h1 class="error">Download Editor - Error</h1></div>
+                                            <div class="col double-col-2">
+                                                <div class="text">
+                                                    <h3 class="error">Image must be a jpeg, png or gif!</h3>
+                                                </div>
+                                            </div>';
+                                } else if ( $_FILES['dev-news-summary-background']['error'] > 0 ) {
+                                    echo '
+                                        <div class="row clearfix">
+                                            <div class="header"><h1 class="error">Download Editor - Error</h1></div>
+                                            <div class="col double-col-2">
+                                                <div class="text">
+                                                    <h3 class="error">Error: ' . $_FILES['dev-news-summary-background']['error'] . '</h3>
+                                                </div>
+                                            </div>';
+                                } else {
+                                
+                                    if ( ! file_exists( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "seedofandromeda_com/assets/images/blogs/" . $_REQUEST ['postid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['blog-post-title'] ) ) ) ) {
+                                        mkdir ( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "seedofandromeda_com/assets/images/blogs/" . $_REQUEST ['postid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['blog-post-title'] ) ), 0755, true );
+                                    } else if ( file_exists( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "seedofandromeda_com/assets/images/blogs/" . $_REQUEST ['postid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['blog-post-title'] ) ) . "/DevNewsSummaryBackground." . $extension ) ) {
+                                        unlink (dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "seedofandromeda_com/assets/images/blogs/" . $_REQUEST ['postid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['blog-post-title'] ) ) . "/DevNewsSummaryBackground." . $extension );
+                                    }
+                                
+                                    move_uploaded_file($_FILES['dev-news-summary-background']['tmp_name'],
+                                       dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "seedofandromeda_com/assets/images/blogs/" . $_REQUEST ['postid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['blog-post-title'] ) ) . "/DevNewsSummaryBackground." . $extension); 
+                            
+                                }
+                            }
+                            
 							$query = $connection->prepare ( "UPDATE blog_posts SET title = ?, post_body = ?, post_brief = ?, updatetime = ?, disablecomments = ?, published = ?, devnews = ?, anonymous = ?, removesignoff = ?, dev_news_body = ?, dev_news_background = ?, prioritisescreenshots = ?, hidescreenshots = ?, draftIsLatest = ? WHERE id = ?" );
 							$query->execute ( array (
 									$_REQUEST ['blog-post-title'],
@@ -154,7 +192,7 @@ if (! $loggedIn) {
 									isset ( $_REQUEST ['anonymous'] ) && $_REQUEST ['anonymous'] == 1,
 									isset ( $_REQUEST ['no-sign-off'] ) && $_REQUEST ['no-sign-off'] == 1,
                                     $_REQUEST ['dev-news-summary-content'],
-                                    $_REQUEST ['dev-news-summary-background'],
+                                    "/assets/images/blogs/" . $_REQUEST ['postid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['blog-post-title'] ) ) . "/DevNewsSummaryBackground." . $extension),
                                     isset ( $_REQUEST ['prioritisescreenshots'] ) && $_REQUEST ['prioritisescreenshots'] == 1,
                                     isset ( $_REQUEST ['hidescreenshots'] ) && $_REQUEST ['hidescreenshots'] == 1,
 									0,
@@ -299,8 +337,9 @@ if (! $loggedIn) {
                         <div id="dev-news-summary-content" class="editpost"><?php echo $blogpost["dev_news_body"];?></div>
                     </div>
                     <div style="width: 100%;">
-                        <h3>Dev News Background Image:</h3>
-                        <div id="dev-news-summary-background" class="editpost"><?php echo $blogpost["dev_news_background"];?></div>
+                        <label for="dev-news-summary-background"><h3>Dev News Background Image:</h3></label> 
+                        <input id="dev-news-summary-background" value="1"
+					        type="file" name="dev-news-summary-background" />
                     </div>
                 </div>
             </div>

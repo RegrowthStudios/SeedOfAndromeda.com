@@ -211,7 +211,7 @@ MediaSlider.prototype.automateSlideshow = function () {
 
 MediaSlider.prototype.playSlideshow = function () {
     var _this = this;
-    if (!_this.ignoreMouseOut) {
+    if (!_this.ignoreMouseOut && (_this.elems.length > 1)) {
         _this.clearTimeouts();
         _this.slideShowPaused = false;
         _this.automateID[_this.automateID.length] = setTimeout(function () {

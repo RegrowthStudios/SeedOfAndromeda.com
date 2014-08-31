@@ -5,7 +5,7 @@ $(document).ready(function () {
             var htmlWrapper = '<div class="media-wrapper card-wrapper" style="display: none;"><div class="video-title"><h2 class="indent-large">' + data.items[i].snippet.title + '</h2></div><div class="card-background" style="background-image: url(\'' + ((data.items[i].snippet.thumbnails.maxres == 1) ? data.items[i].snippet.thumbnails.maxres.url : data.items[i].snippet.thumbnails.high.url) + '\')" data-id="' + data.items[i].snippet.resourceId.videoId + '"></div><div class="video-play"></div></div>';
             var htmlColumn = '<div class="col tri-col-1"><img src="' + data.items[i].snippet.thumbnails.high.url + '" data-id="' + data.items[i].snippet.resourceId.videoId + '" title="' + data.items[i].snippet.title + '" class="img medium-wide video" /></div>';
             $('#video-viewer .media-slider-frame').append(htmlWrapper);
-            $('#videos').append(htmlColumn);
+            $('#all-videos').append(htmlColumn);
         }
 
         // Initiate Videos Slider
@@ -26,7 +26,6 @@ $(document).ready(function () {
                 $(v).css("left", leftVal + "px");
             });
         }
-        console.log(videoPlays);
         // Handle Video Play Interaction
         {
             var cover = $("#video-cover");

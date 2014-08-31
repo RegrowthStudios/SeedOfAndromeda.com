@@ -353,6 +353,7 @@
     <Compile Include="pages\the-team.php" />
     <Compile Include="pages\the-game.php" />
     <Compile Include="pages\under-construction.php" />
+    <Compile Include="pages\videos-admin.php" />
     <Compile Include="screenshot-loader.php" />
     <Compile Include="thumb.php" />
     <Compile Include="pages\home.php" />
@@ -1355,6 +1356,10 @@
     <Content Include="styles\pages\the-team.css.map" />
     <Content Include="styles\pages\the-team.less" />
     <Content Include="styles\pages\the-team.min.css" />
+    <Content Include="styles\pages\videos-admin.css" />
+    <Content Include="styles\pages\videos-admin.css.map" />
+    <Content Include="styles\pages\videos-admin.less" />
+    <Content Include="styles\pages\videos-admin.min.css" />
     <Content Include="styles\pages\videos.css" />
     <Content Include="styles\pages\videos.css.map" />
     <Content Include="styles\pages\videos.less" />

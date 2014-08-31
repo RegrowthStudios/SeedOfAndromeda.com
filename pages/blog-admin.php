@@ -360,7 +360,7 @@ if (! $loggedIn) {
             <div class="divider"></div>
             <div class="col double-col-2">
                 <div id="post-settings" class="text clearfix">
-		            <h3>Post settings</h3>
+		            <h3>Post Settings</h3>
                     <br/>
                     <div id="blog-settings">
                         <span>Disable Commenting:</span> <div class="checkbox"> <input id="commentsoff" value="1"

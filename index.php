@@ -62,7 +62,7 @@ switch ($cleanpageid) {
 		$cleanpageid = $pageurl;
 		if (isset ( $connection )) {
 			$currentblogpostlink = substr ( $pageurl, 6 );
-			$arr = explode ( "-", $currentblogpostlink, 1 );
+			$arr = explode ( "-", $currentblogpostlink );
 			if (count ( $arr ) == 0) {
 				$pagename = "";
 			} else {

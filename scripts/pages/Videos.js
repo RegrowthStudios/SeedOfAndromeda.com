@@ -1,11 +1,14 @@
 // Prepare and Display Video Thumbnails
 $(document).ready(function () {
     $.getJSON('https://gdata.youtube.com/feeds/api/videos?author=UCMlW2qG20hcFYo06rcit4CQ&max-results=48&v=2&alt=jsonc&orderby=published', function (data) {
-        for (var i = 0; i < data.data.items.length; i++) {
-            var htmlWrapper = '<div class="media-wrapper card-wrapper" style="display: none;"><div class="video-title"><h2 class="indent-large">' + data.data.items[i].title + '</h2></div><div class="card-background" style="background-image: url(\'https://i.ytimg.com/vi/' + data.data.items[i].id + '/maxresdefault.jpg\')" data-id="' + data.data.items[i].id + '"></div><div class="video-play"></div></div>';
-            var htmlColumn = '<div class="col tri-col-1"><img src="' + data.data.items[i].thumbnail.hqDefault + '" data-id="' + data.data.items[i].id + '" title="' + data.data.items[i].title + '" class="img medium-wide video" /></div>';
-            $('#video-viewer .media-slider-frame').append(htmlWrapper);
-            $('#videos').append(htmlColumn);
+        console.log(data);
+        if (data.data.totalItems > 0) {
+            for (var i = 0; i < data.data.items.length; i++) {
+                var htmlWrapper = '<div class="media-wrapper card-wrapper" style="display: none;"><div class="video-title"><h2 class="indent-large">' + data.data.items[i].title + '</h2></div><div class="card-background" style="background-image: url(\'https://i.ytimg.com/vi/' + data.data.items[i].id + '/maxresdefault.jpg\');" data-id="' + data.data.items[i].id + '"></div><div class="video-play"></div></div>';
+                var htmlColumn = '<div class="col tri-col-1"><img src="' + data.data.items[i].thumbnail.hqDefault + '" data-id="' + data.data.items[i].id + '" title="' + data.data.items[i].title + '" class="img medium-wide video" /></div>';
+                $('#video-viewer .media-slider-frame').append(htmlWrapper);
+                $('#all-videos').append(htmlColumn);
+            }
         }
 
         // Initiate Videos Slider
@@ -26,7 +29,7 @@ $(document).ready(function () {
                 $(v).css("left", leftVal + "px");
             });
         }
-        console.log(videoPlays);
+
         // Handle Video Play Interaction
         {
             var cover = $("#video-cover");

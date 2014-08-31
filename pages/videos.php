@@ -1,15 +1,17 @@
 <?php
-    $featuredQuery = $connection->prepare ( "SELECT * FROM videos WHERE category = ?" );
+    $featuredQuery = $connection->prepare ( "SELECT * FROM videos WHERE category = ? AND published = ?" );
     $featuredQuery->execute ( array (
-        "FEATURED"
+        "FEATURED",
+        1
     ) );
     $featuredFetched = array();
 	while ( $row = $featuredQuery->fetch () ) {
         $featuredFetched[] = $row;
     }
-    $streamQuery = $connection->prepare ( "SELECT * FROM videos WHERE category = ?" );
+    $streamQuery = $connection->prepare ( "SELECT * FROM videos WHERE category = ? AND published = ?" );
     $streamQuery->execute ( array (
-        "STREAM"
+        "STREAM",
+        1
     ) );
     $streamFetched = array();
 	while ( $row = $streamQuery->fetch () ) {

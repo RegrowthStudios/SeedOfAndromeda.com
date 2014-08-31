@@ -1356,6 +1356,10 @@
     <Content Include="styles\pages\the-team.css.map" />
     <Content Include="styles\pages\the-team.less" />
     <Content Include="styles\pages\the-team.min.css" />
+    <Content Include="styles\pages\videos-admin.css" />
+    <Content Include="styles\pages\videos-admin.css.map" />
+    <Content Include="styles\pages\videos-admin.less" />
+    <Content Include="styles\pages\videos-admin.min.css" />
     <Content Include="styles\pages\videos.css" />
     <Content Include="styles\pages\videos.css.map" />
     <Content Include="styles\pages\videos.less" />

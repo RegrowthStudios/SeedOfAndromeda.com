@@ -216,12 +216,23 @@ if (! $loggedIn) {
             <div class="header"><h1><p id="video-title" class="edittitle"><?php echo $video["title"];?></p></h1></div>
             <div class="col double-col-2">
                 <div class="text">
-	                <input type="text" name="video-url" <?php echo 'value="' . $video["vid_id"] . '"'; ?> />
+	                <input type="text" name="video-url" <?php echo 'value="https://www.youtube.com/?v=' . $video["vid_id"] . '"'; ?> />
                     <br/>
                     <br/>
-                    <input type="radio" name="category" value="STREAM" <?php if ( $video["category"] != "FEATURED" ) { echo "checked"; ?>><span>Stream</span>
-                    <br/>
-                    <input type="radio" name="category" value="FEATURED" <?php } else { echo "checked"; } ?>><span>Featured</span>
+                    <div id="video-category">
+                        <div id="video-category-header"><h1>Video Category:</h1></div>
+                        <div id="video-category-options">
+                            <span>Stream:</span> <div class="checkbox"> <input id="category-stream" value="STREAM"
+						        type="radio" name="category" <?php if( $video["category"] == "STREAM" ) echo "checked";?> />
+						        <label for="category-stream"></label>
+                            </div>
+                            <br/>
+                            <span>Featured:</span> <div class="checkbox"> <input id="category-featured" value="FEATURED"
+						        type="radio" name="category" <?php if( $video["category"] == "FEATURED" ) echo "checked";?> />
+						        <label for="category-featured"></label>
+                            </div>
+                        </div>
+                    </div>
                     <br/>
                 </div>
             </div>

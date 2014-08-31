@@ -61,6 +61,9 @@ Redirect permanent /SeedofAndromeda/ http://files.seedofandromeda.com/game/
 
 Redirect permanent /update.php http://updater.seedofandromeda.com/update.php
 
+Redirect permanent /screenshots https://www.seedofandromeda.com/images
+Redirect permanent /screenshots-admin https://www.seedofandromeda.com/images-admin
+
 #Hide .git directories and files if they get uploaded to the web server
 RedirectMatch 404 /\.git
 

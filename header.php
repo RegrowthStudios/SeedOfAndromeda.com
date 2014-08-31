@@ -83,7 +83,7 @@
                         <div class="dropdown-wrapper">
                             <ul class="dropdown">
                                 <li><a href="/downloads">Downloads</a></li>
-                                <li><a href="/screenshots">Screenshots</a></li>
+                                <li><a href="/images">Images</a></li>
                                 <li><a href="/videos">Videos</a></li>
                             </ul>
                         </div>

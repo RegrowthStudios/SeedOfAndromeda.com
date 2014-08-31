@@ -217,8 +217,7 @@ if (! $loggedIn) {
             <div class="col double-col-2">
                 <div class="text">
 	                <input type="text" name="video-url" <?php echo 'value="https://www.youtube.com/?v=' . $video["vid_id"] . '"'; ?> />
-                    <br/>
-                    <br/>
+                    <br/><br/>
                     <div id="video-category">
                         <div id="video-category-header"><h1>Video Category:</h1></div>
                         <div id="video-category-options">

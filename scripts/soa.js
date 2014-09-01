@@ -222,7 +222,6 @@ MediaSlider.prototype.playSlideshow = function () {
 
 MediaSlider.prototype.pauseSlideshow = function () {
     this.slideShowPaused = true;
-    console.log(this.slideShowPaused);
 };
 
 MediaSlider.prototype.pauseSlideshowDelay = function () {

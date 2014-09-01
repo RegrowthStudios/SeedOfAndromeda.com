@@ -20,8 +20,8 @@
             <div id="featured-video"></div>
             <script type="text/javascript">
                 function showVideo(response) {
-                    if (response.data && response.data.items) {
-                        var items = response.data.items;
+                    if (response.items) {
+                        var items = response.items;
                         if (items.length > 0) {
                             var item = items[0];
                             var videoid = "https://www.youtube.com/embed/" + item.snippet.resourceId.videoId + "?wmode=transparent";

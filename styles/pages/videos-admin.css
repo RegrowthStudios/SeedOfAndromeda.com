@@ -1,0 +1,15 @@
+﻿#video-category {
+  width: 100%;
+}
+#video-category-options {
+  width: 150px;
+  margin-top: 1em;
+  margin-left: 5em;
+}
+#video-category-options .checkbox {
+  float: right;
+}
+#video-category-options > span {
+  line-height: 32px;
+}
+/*# sourceMappingURL=videos-admin.css.map */

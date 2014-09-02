@@ -83,23 +83,143 @@ $(document).ready(function () {
 });
 
 function MediaSlider(elements, sliderFrame, slideShowPauseDelay, slideShowDelay, animationDur) {
+    var slideShowDelay = typeof slideShowDelay !== 'undefined' ? slideShowDelay : 6000;
+    var slideShowPauseDelay = typeof slideShowPauseDelay !== 'undefined' ? slideShowPauseDelay : 7000;
+    var animationDur = typeof animationDur !== 'undefined' ? animationDur : 500;
+    var elems = elements;
+    var ctrlsLocked = false;
+    var slideShowPaused = false;
+    var ignoreMouseOut = false;
+    var index = 0;
+    var automateID = new Array();
+    var elem = elems[index];
+    $(elem).show();
+    var leftControl = sliderFrame.children(".media-slider-control-left");
+    var rightControl = sliderFrame.children(".media-slider-control-right");
+    
     var _this = this;
-    _this.slideShowDelay = typeof slideShowDelay !== 'undefined' ? slideShowDelay : 6000;
-    _this.slideShowPauseDelay = typeof slideShowPauseDelay !== 'undefined' ? slideShowPauseDelay : 7000;
-    _this.animationDur = typeof animationDur !== 'undefined' ? animationDur : 500;
-    _this.elems = elements;
-    _this.ctrlsLocked = false;
-    _this.slideShowPaused = false;
-    _this.ignoreMouseOut = false;
-    _this.index = 0;
-    _this.automateID = new Array();
-    _this.elem = _this.elems[_this.index];
-    $(_this.elem).show();
-    _this.leftControl = sliderFrame.children(".media-slider-control-left");
-    _this.rightControl = sliderFrame.children(".media-slider-control-right");
-    if(_this.elems.length > 1) {
+    _this.nextItem = function () {
+        _this.lockCtrls();
+        if (index != (elems.length - 1)) {
+            var nextElem = $(elems[index + 1]);
+            nextElem.prop("right", "-100%");
+            $(elem).hide("slide", { direction: "left", easing: "easeInOutCirc" }, animationDur);
+            nextElem.show("slide", { direction: "right", easing: "easeInOutCirc" }, animationDur, function () {
+                _this.unlockCtrls();
+            });
+            elem = nextElem;
+            index++;
+        } else {
+            var nextElem = $(elems[0]);
+            nextElem.prop("right", "-100%");
+            $(elem).hide("slide", { direction: "left", easing: "easeInOutCirc" }, animationDur);
+            nextElem.show("slide", { direction: "right", easing: "easeInOutCirc" }, animationDur, function () {
+                _this.unlockCtrls();
+            });
+            elem = nextElem;
+            index = 0;
+        }
+    };
+    _this.previousItem = function () {
+        _this.lockCtrls();
+        if (index != 0) {
+            var nextElem = $(elems[index - 1]);
+            nextElem.prop("left", "-100%");
+            $(elem).hide("slide", { direction: "right", easing: "easeInOutCirc" }, animationDur);
+            nextElem.show("slide", { direction: "left", easing: "easeInOutCirc" }, animationDur, function () {
+                _this.unlockCtrls();
+            });
+            elem = nextElem;
+            index--;
+        } else {
+            var nextElem = $(elems[(elems.length - 1)]);
+            nextElem.prop("left", "-100%");
+            $(elem).hide("slide", { direction: "right", easing: "easeInOutCirc" }, animationDur);
+            nextElem.show("slide", { direction: "left", easing: "easeInOutCirc" }, animationDur, function () {
+                _this.unlockCtrls();
+            });
+            elem = nextElem;
+            index = (elems.length - 1);
+        }
+    };
+    _this.setItem = function (ind) {
+        _this.pauseSlideshowDelay();
+        _this.lockCtrls();
+        var nextElem = $(elems[ind]);
+        nextElem.prop("left", "-100%");
+        $(elem).hide("slide", { direction: "left", easing: "easeInOutCirc" }, animationDur);
+        nextElem.show("slide", { direction: "right", easing: "easeInOutCirc" }, animationDur, function () {
+            _this.unlockCtrls();
+        });
+        $('html, body').animate({
+            scrollTop: $(".media-slider-frame").offset().top - 200
+        }, 1000);
+        elem = nextElem;
+        index = ind;
+    };
+    _this.automateSlideshow = function () {
+        if (slideShowPaused == false) {
+            _this.nextItem();
+            _this.clearTimeouts();
+        }
+        automateID[automateID.length] = setTimeout(function () {
+            _this.automateSlideshow();
+        }, slideShowDelay);
+    };
+    _this.playSlideshow = function () {
+        if (!ignoreMouseOut && (elems.length > 1)) {
+            _this.clearTimeouts();
+            slideShowPaused = false;
+            automateID[automateID.length] = setTimeout(function () {
+                _this.automateSlideshow();
+            }, slideShowDelay);
+        }
+    };
+    _this.pauseSlideshow = function () {
+        slideShowPaused = true;
+    };
+    _this.pauseSlideshowDelay = function () {
+        slideShowPaused = true;
+        ignoreMouseOut = true;
+        setTimeout(function () {
+            ignoreMouseOut = false;
+            _this.playSlideshow();
+        }, slideShowPauseDelay);
+    };
+    _this.lockCtrls = function () {
+        ctrlsLocked = true;
+    };
+    _this.unlockCtrls = function () {
+        ctrlsLocked = false;
+    };
+    _this.lockCtrlsTemp = function (duration) {
+        var dur = typeof duration !== 'undefined' ? duration : animationDur;
+        ctrlsLocked = true;
+        setTimeout(function () {
+            ctrlsLocked = false;
+        }, dur);
+    };
+    _this.clearTimeouts = function () {
+        while (automateID.length > 0) {
+            clearTimeout(automateID[0]);
+            automateID.splice(0, 1);
+        }
+    };
+    _this.updateElems = function (selector) {
+        elems = $(selector);
 
-        $.each(_this.elems, function (i, v) {
+        $.each(elems, function (i, v) {
+            $(v).hover(function () {
+                _this.pauseSlideshow();
+            }, function () {
+                _this.playSlideshow();
+            });
+        });
+    };
+
+    if(elems.length > 1) {
+
+        $.each(elems, function (i, v) {
             $(v).hover(function () {
                 _this.pauseSlideshow();
             }, function () {
@@ -107,15 +227,15 @@ function MediaSlider(elements, sliderFrame, slideShowPauseDelay, slideShowDelay,
             });
         });        
 
-        _this.leftControl.click(function () {
-            if (_this.ctrlsLocked == false) {
+        leftControl.click(function () {
+            if (ctrlsLocked == false) {
                 _this.pauseSlideshowDelay();
                 _this.previousItem();
             }
         });
 
-        _this.rightControl.click(function () {
-            if (_this.ctrlsLocked == false) {
+        rightControl.click(function () {
+            if (ctrlsLocked == false) {
                 _this.pauseSlideshowDelay();
                 _this.nextItem();
             }
@@ -124,153 +244,13 @@ function MediaSlider(elements, sliderFrame, slideShowPauseDelay, slideShowDelay,
         (function () {
             setTimeout(function () {
                 _this.automateSlideshow();
-            }, _this.slideShowDelay);
+            }, slideShowDelay);
         })();
 
     } else {
-        _this.leftControl.hide();
-        _this.rightControl.hide();
+        leftControl.hide();
+        rightControl.hide();
     }
-}
-
-MediaSlider.prototype.nextItem = function () {
-    var _this = this;
-    _this.lockCtrls();
-    if (_this.index != (_this.elems.length - 1)) {
-        var nextElem = $(_this.elems[_this.index + 1]);
-        nextElem.prop("right", "-100%");
-        $(_this.elem).hide("slide", { direction: "left", easing: "easeInOutCirc" }, _this.animationDur);
-        nextElem.show("slide", { direction: "right", easing: "easeInOutCirc" }, _this.animationDur, function () {
-            _this.unlockCtrls();
-        });
-        _this.elem = nextElem;
-        _this.index++;
-    } else {
-        var nextElem = $(_this.elems[0]);
-        nextElem.prop("right", "-100%");
-        $(_this.elem).hide("slide", { direction: "left", easing: "easeInOutCirc" }, _this.animationDur);
-        nextElem.show("slide", { direction: "right", easing: "easeInOutCirc" }, _this.animationDur, function () {
-            _this.unlockCtrls();
-        });
-        _this.elem = nextElem;
-        _this.index = 0;
-    }
-};
-
-MediaSlider.prototype.previousItem = function () {
-    var _this = this;
-    _this.lockCtrls();
-    if (_this.index != 0) {
-        var nextElem = $(_this.elems[_this.index - 1]);
-        nextElem.prop("left", "-100%");
-        $(_this.elem).hide("slide", { direction: "right", easing: "easeInOutCirc" }, _this.animationDur);
-        nextElem.show("slide", { direction: "left", easing: "easeInOutCirc" }, _this.animationDur, function () {
-            _this.unlockCtrls();
-        });
-        _this.elem = nextElem;
-        _this.index--;
-    } else {
-        var nextElem = $(_this.elems[(_this.elems.length - 1)]);
-        nextElem.prop("left", "-100%");
-        $(_this.elem).hide("slide", { direction: "right", easing: "easeInOutCirc" }, _this.animationDur);
-        nextElem.show("slide", { direction: "left", easing: "easeInOutCirc" }, _this.animationDur, function () {
-            _this.unlockCtrls();
-        });
-        _this.elem = nextElem;
-        _this.index = (_this.elems.length - 1);
-    }
-};
-
-MediaSlider.prototype.setItem = function (index) {
-    var _this = this;
-    _this.pauseSlideshowDelay();
-    _this.lockCtrls();
-    var nextElem = $(_this.elems[index]);
-    nextElem.prop("left", "-100%");
-    $(_this.elem).hide("slide", { direction: "left", easing: "easeInOutCirc" }, _this.animationDur);
-    nextElem.show("slide", { direction: "right", easing: "easeInOutCirc" }, _this.animationDur, function () {
-        _this.unlockCtrls();
-    });
-    $('html, body').animate({
-        scrollTop: $(".media-slider-frame").offset().top - 200
-    }, 1000);
-    _this.elem = nextElem;
-    _this.index = index;
-};
-
-MediaSlider.prototype.automateSlideshow = function () {
-    var _this = this;
-    if (_this.slideShowPaused == false) {
-        _this.nextItem();
-        _this.clearTimeouts();
-    }
-    _this.automateID[_this.automateID.length] = setTimeout(function () {
-        _this.automateSlideshow();
-    }, _this.slideShowDelay);
-};
-
-MediaSlider.prototype.playSlideshow = function () {
-    var _this = this;
-    if (!_this.ignoreMouseOut && (_this.elems.length > 1)) {
-        _this.clearTimeouts();
-        _this.slideShowPaused = false;
-        _this.automateID[_this.automateID.length] = setTimeout(function () {
-            _this.automateSlideshow();
-        }, _this.slideShowDelay);
-    }
-};
-
-MediaSlider.prototype.pauseSlideshow = function () {
-    this.slideShowPaused = true;
-    console.log(this.slideShowPaused);
-};
-
-MediaSlider.prototype.pauseSlideshowDelay = function () {
-    var _this = this;
-    _this.slideShowPaused = true;
-    _this.ignoreMouseOut = true;
-    setTimeout(function () {
-        _this.ignoreMouseOut = false;
-        _this.playSlideshow();
-    }, _this.slideShowPauseDelay);
-};
-
-MediaSlider.prototype.lockCtrls = function () {
-    this.ctrlsLocked = true;
-};
-
-MediaSlider.prototype.unlockCtrls = function () {
-    this.ctrlsLocked = false;
-};
-
-MediaSlider.prototype.lockCtrlsTemp = function (duration) {
-    var _this = this;
-    var dur = typeof duration !== 'undefined' ? duration : _this.animationDur;
-    _this.ctrlsLocked = true;
-    setTimeout(function () {
-        _this.ctrlsLocked = false;
-    }, dur);
-}
-
-MediaSlider.prototype.clearTimeouts = function () {
-    var _this = this;
-    while (_this.automateID.length > 0) {
-        clearTimeout(_this.automateID[0]);
-        _this.automateID.splice(0, 1);
-    }
-};
-
-MediaSlider.prototype.updateElems = function (selector) {
-    var _this = this
-    _this.elems = $(selector);
-
-    $.each(_this.elems, function (i, v) {
-        $(v).hover(function () {
-            _this.pauseSlideshow();
-        }, function () {
-            _this.playSlideshow();
-        });
-    });
 }
 
 //Fix nav controls to hover state when on mobile devices for greater visibility
@@ -279,3 +259,124 @@ $(document).ready(function () {
         $(".media-slider-control-img").css("background", "rgba(255,255,255,0.15)");
     }
 });
+
+//---------------\\
+// Pagify Script \\
+//---------------\\
+
+function Pagify(outerWrapper, innerWrapper, loader, currPage, constArgsForLoader) {
+    var constArgsExist = typeof constArgsForLoader !== 'undefined' ? true : false;
+    var crPg = typeof currPage !== 'undefined' ? currPage : 1;
+    var url = "";
+    var currPid = crPg;
+    var totalPages = 0;
+
+    function checkWrappersExist() {
+        if ($(outerWrapper).length <= 0 || $(innerWrapper).length <= 0) {
+            return false;
+        }
+        return true;
+    };
+    function checkLoaderExists() {
+        $.get(loader)
+            .done(function () {
+                return true;
+            }).fail(function () {
+                return false;
+            })
+    };
+    function getTotalPages() {
+        return _this.getPageData({ "getTotalPages": true });
+    };
+    function addControls() {
+        //add controls for pagify
+    };
+    function createUrl() {
+        var l = "../" + loader;
+        l += "?";
+        if (constArgsExist) {
+            var keys = Object.keys(constArgsForLoader);
+            for (var i = 0; i < keys.length; ++i) {
+                l += keys[i];
+                l += "=";
+                l += constArgsForLoader[keys[i]];
+                l += "&";
+            }
+        }
+        return l;
+    };
+    function createClickEventListeners() {
+        //Create click even listeners for controls
+    };
+    function getAdjacentPage(isPrevious) {
+        var isPrev = (typeof isPrevious !== 'undefined' && isPrevious) ? -1 : 1;
+        _this.getPage(currPid + isPrev);
+    };
+
+    var _this = this;
+    // Get page data as specified by args and data provided.
+    // Returns:
+    //     Parsed JSON response from AJAX call on success.
+    //     -1 on failed AJAX call.
+    _this.getPageData = function (argsForLoader, data) {
+        var argsExist = typeof argsForLoader !== 'undefined' ? true : false;
+        var d = typeof data !== 'undefined' ? data : "";
+        var l = url;
+        var r;
+        if (argsExist) {
+            var keys = Object.keys(argsForLoader);
+            for (var i = 0; i < keys.length; ++i) {
+                l += keys[i];
+                l += "=";
+                l += argsForLoader[keys[i]];
+                l += "&";
+            }
+        }
+        $.ajax({
+            url: l,
+            type: "POST",
+            success: function (msg) {
+                r = JSON.parse(msg);
+            },
+            async: false
+        });
+        return r;
+    };
+    // Gets page identified by the given page id.
+    // If no page id is given, it gets the page of the current pid.
+    // Returns:
+    //     Parsed JSON response from AJAX call on success.
+    //     -1 on failed AJAX call.
+    //     -2 if pid lies outside range of pages accessible.
+    _this.getPage = function (pid, argsForLoader) {
+        var _pid = typeof pid !== 'undefined' ? pid : currPid;
+        if (_pid <= 0 || _pid > totalPages) {
+            return -2;
+        }
+        var argsExist = typeof argsForLoader !== 'undefined' ? true : false;
+        var result = null;
+        if (argsExist) {
+            argsForLoader["pid"] = pid;
+            console.log(argsForLoader);
+            result = _this.getPageData(argsForLoader);
+        } else {
+            result = _this.getPageData({ "pid": _pid });
+        }
+        if (result == null || !result) {
+            return -1;
+        }
+        currPid = _pid;
+        return result;
+    };
+    _this.refreshControls = function () {
+        //refresh controls for current page
+    };
+    
+    if (!checkLoaderExists() && !checkWrappersExist()) {
+        return;
+    }
+    url = createUrl();
+    totalPages = getTotalPages();
+    addControls();
+    createClickEventListeners();
+}

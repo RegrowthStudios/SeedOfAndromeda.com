@@ -1,56 +1,62 @@
-//Populate Screenshots and Initiate Screenshots Slider
+var pagifyGameplay = null;
+var pagifyConcept = null;
 var slider = null;
+
+var frame = null;
+var gameplayImageRow = null;
+var conceptImageRow = null;
 $(document).ready(function () {
-    loadMoreScreenshots(1, false);
-    var elems = $("#screenshot-viewer .media-wrapper");
-    var sliderFrame = $("#screenshot-viewer .media-slider-frame");
+    frame = $("#image-viewer .media-slider-frame");
+    gameplayImageRow = $("#gameplay-images");
+    conceptImageRow = $("#concept-images");
+
+    pagifyGameplay = new Pagify("html", "body", "loaders/image-loader.php");
+    pagifyConcept = new Pagify("html", "body", "loaders/image-loader.php");
+    loadImages(1, "GAMEPLAY", pagifyGameplay);
+    loadImages(1, "CONCEPT", pagifyConcept);
+
+    var elems = $("#image-viewer .media-wrapper");
+    var sliderFrame = $("#image-viewer .media-slider-frame");
     slider = new MediaSlider(elems, sliderFrame, 3000);
 });
 
-function loadMoreScreenshots(pid, async) {
-    var images = new Array();
-    $.ajax({
-        url: "../image-loader.php?pid=" + pid,
-        type: "POST",
-        success: function (msg) {
-            images = JSON.parse(msg);
+function loadImages(pid, category, pagify) {
+    var images = pagify.getPage(pid, { "category": category });
+    var noneReturned = true;
+    console.log(images);
+    $.each(images, function (i, v) {
+        var htmlWrapper = '<div class="media-wrapper card-wrapper" style="display: none;"><a href="' + v["url"] + ' - ' + v["description"] + '" id="screenshotlink" data-lightbox="screenshot" title="' + v["title"] + '"><div class="card-background" style="background-image: url(\'' + v["url"].substring(0, v["url"].lastIndexOf(".")) + '_thumb_781x398.jpg\');"></div></a></div>';
+        var htmlColumn = '<div class="col quad-col-1"><img class="img small-wide image" src="' + v["url"].substring(0, v["url"].lastIndexOf(".")) + '_thumb_213x128.jpg" /></div>';
 
-            var frame = $(".media-slider-frame");
-            var screenshotColumn = $("#screenshots");
-            $.each(images, function (i, v) {
-                var htmlWrapper = '<div class="media-wrapper card-wrapper" style="display: none;"><a href="' + v["url"] + '" id="screenshotlink" data-lightbox="screenshot" title="screenshot"><div class="card-background" style="background-image: url(\'' + v["url"].substring(0, v["url"].lastIndexOf(".")) + '_thumb_781x398.jpg\');"></div></a></div>';
-                var htmlColumn = '<div class="col quad-col-1"><img class="img small-wide screenshot" src="' + v["url"].substring(0, v["url"].lastIndexOf(".")) + '_thumb_213x128.jpg" /></div>';
-
-                frame.append(htmlWrapper);
-                screenshotColumn.append(htmlColumn);
-            });
-
-            var screenshots = $(".screenshot");
-            $.each(screenshots, function (i, v) {
-                $(v).click(function () {
-                    if (slider.ctrlsLocked == false) {
-                        slider.lockCtrls();
-                        slider.setItem(i);
-                    }
-                });
-            });
-
-            if (slider != null) {
-                slider.updateElems("#screenshot-viewer .media-wrapper");
-            }
-        },
-        async: async
+        frame.append(htmlWrapper);
+        if (category == "GAMEPLAY") {
+            gameplayImageRow.append(htmlColumn);
+        } else if (category == "CONCEPT") {
+            conceptImageRow.append(htmlColumn);
+        }
+        noneReturned = false;
     });
-}
+    console.log(noneReturned);
 
-var nextPID = 2;
-$(window).on('scroll', function () {
-    var docHeightWindowHeightDiff = $(document).height() - $(window).height();
-    var yScrollPos = window.pageYOffset;
-    var yScrollPosReq = 50; // Pixels from bottom of document
+    if (noneReturned && pid == 1) {
+        if (category == "GAMEPLAY") {
+            gameplayImageRow.hide();
+        } else if (category == "CONCEPT") {
+            conceptImageRow.hide();
+        }
+    } else if (noneReturned) {
+        return -1;
+    } else {
+        var imgs = $(".image");
+        $.each(imgs, function (i, v) {
+            $(v).click(function () {
+                slider.lockCtrls();
+                slider.setItem(i);
+            });
+        });
 
-    if ((docHeightWindowHeightDiff - yScrollPos) <= yScrollPosReq) {
-        loadMoreScreenshots(nextPID, true);
-        nextPID++;
+        if (slider != null) {
+            slider.updateElems("#image-viewer .media-wrapper");
+        }
     }
-});
+};

@@ -29,6 +29,7 @@
     <Compile Include="draft-saver.php" />
     <Compile Include="files\download.php" />
     <Compile Include="footer.php" />
+    <Compile Include="loaders\image-loader.php" />
     <Compile Include="pages\404.php" />
     <Compile Include="pages\blog-admin.php" />
     <Compile Include="pages\blogs.php" />
@@ -355,7 +356,6 @@
     <Compile Include="pages\the-game.php" />
     <Compile Include="pages\under-construction.php" />
     <Compile Include="pages\videos-admin.php" />
-    <Compile Include="image-loader.php" />
     <Compile Include="thumb.php" />
     <Compile Include="pages\home.php" />
     <Compile Include="pages\videos.php" />
@@ -577,6 +577,7 @@
     <Folder Include="jbimages\img\" />
     <Folder Include="jbimages\js\" />
     <Folder Include="jbimages\langs\" />
+    <Folder Include="loaders\" />
     <Folder Include="pages\" />
     <Folder Include="scripts\" />
     <Folder Include="scripts\pages\" />
@@ -1314,6 +1315,7 @@
     <Content Include="scripts\pages\blog-admin.js" />
     <Content Include="scripts\pages\blogs.js" />
     <Content Include="scripts\pages\home.js" />
+    <Content Include="scripts\pages\images - OLD.js" />
     <Content Include="scripts\pages\images.js" />
     <Content Include="scripts\pages\videos.js" />
     <Content Include="scripts\soa.js" />

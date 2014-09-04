@@ -6,7 +6,9 @@
     if (! isset ( $connection )) {
         echo "";
     } else {
-        if ( isset ( $_REQUEST['pid'] )) {
+        if ( isset ( $_REQUEST['check'] )) {
+            echo true;
+        } else if ( isset ( $_REQUEST['pid'] )) {
             $category = "GAMEPLAY";
             if ( isset ( $_REQUEST['category'] )) {
                 $category = $_REQUEST['category'];

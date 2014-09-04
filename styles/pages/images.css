@@ -18,9 +18,18 @@
 #image-viewer .card-background {
   opacity: 1;
 }
+.images-outer-wrapper {
+  position: relative;
+  height: 838px;
+}
+.images {
+  position: absolute;
+}
 .images .quad-col-1 {
-  text-align: center;
   margin-bottom: 5px;
+}
+.image {
+  margin: 0 auto;
 }
 .image:hover {
   cursor: pointer;

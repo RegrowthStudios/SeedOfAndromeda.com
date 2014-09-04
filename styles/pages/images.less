@@ -13,9 +13,20 @@
     opacity: 1;
 }
 
+@image-count-vert: 6;
+@col-margin-bottom: 5px;
+.images-outer-wrapper {
+    position: relative;
+    height: @image-count-vert * ( @image-height-small + @col-margin-bottom ) + @pagify-control-dim + @pagify-control-margin-top;
+}
+.images {
+    position: absolute;
+}
 .images .quad-col-1 {
-    text-align: center;
-    margin-bottom: 5px;
+    margin-bottom: @col-margin-bottom;
+}
+.image {
+    margin: 0 auto;
 }
 .image:hover {
     cursor: pointer;

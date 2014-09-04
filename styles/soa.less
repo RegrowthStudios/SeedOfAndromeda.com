@@ -96,6 +96,7 @@ ul {
 .img {
     border: 2px solid @color-bright-blue;
     .BoxSizing();
+    display: block;
 }
     img.xxx-small {
         height: @image-height-xxx-small;
@@ -507,6 +508,7 @@ ul {
 .row {
     height: auto;
     width: 100%;
+    position: relative;
 }
 .row .header {
     height: @row-header-height + @row-header-bottom-margin;
@@ -772,6 +774,47 @@ ul {
 }
 .card-slider-js-warning {
     line-height: @card-slider-height;
+}
+
+/***************************/
+/* Content - Pagify System */
+/***************************/
+
+.pagify-control-wrapper {
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+}
+.pagify-control {
+    width: @pagify-control-dim;
+    height: @pagify-control-dim;
+    line-height: @pagify-control-dim;
+    display: inline-block;
+    background: rgba(0,0,0,0.6);
+    .BoxSizing();
+    border: 1px solid #298fab;
+}
+.pagify-control:not(:last-child) {
+    margin-right: 3px;
+}
+.pagify-control.disabled {
+    color: gray;
+}
+.pagify-control:hover:not(.disabled) {
+    cursor: pointer;
+    border: 1px solid #10BEEF;
+}
+.pagify-control.disabled:hover {
+    cursor: default;
+}
+.pagify-control.pagify-control-ellipsis {
+    background: none;
+    border: none;
+}
+.pagify-control.pagify-control-ellipsis:hover {
+    background: none;
+    border: none;
+    cursor: default;
 }
 
 /********************/

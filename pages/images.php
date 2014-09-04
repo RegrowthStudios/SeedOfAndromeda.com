@@ -15,10 +15,18 @@
     </div>
 </div>
 
-<div id="gameplay-images" class="images row clearfix">
+<div id="gameplay-images" class="row clearfix">
     <div class="header"><h1>Gameplay Images</h1></div>
+    <div class="images-outer-wrapper">
+        <div class="images">
+        </div>
+    </div>
 </div>
 
-<div id="concept-images" class="images row clearfix">
+<div id="concept-images" class="row clearfix">
     <div class="header"><h1>Concept Images</h1></div>
+    <div class="images-outer-wrapper">
+        <div class="images">
+        </div>
+    </div>
 </div>

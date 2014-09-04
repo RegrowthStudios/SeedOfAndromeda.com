@@ -30,6 +30,7 @@
     <Compile Include="files\download.php" />
     <Compile Include="footer.php" />
     <Compile Include="loaders\image-loader.php" />
+    <Compile Include="loaders\video-loader.php" />
     <Compile Include="pages\404.php" />
     <Compile Include="pages\blog-admin.php" />
     <Compile Include="pages\blogs.php" />

@@ -142,7 +142,8 @@ function MediaSlider(elements, sliderFrame, slideShowPauseDelay, slideShowDelay,
             index = (elems.length - 1);
         }
     };
-    _this.setItem = function (ind) {
+    _this.setItem = function (ind, scroll) {
+        var scr = typeof scroll !== 'undefined' ? scroll : false;
         _this.pauseSlideshowDelay();
         _this.lockCtrls();
         var nextElem = $(elems[ind]);
@@ -151,9 +152,11 @@ function MediaSlider(elements, sliderFrame, slideShowPauseDelay, slideShowDelay,
         nextElem.show("slide", { direction: "right", easing: "easeInOutCirc" }, animationDur, function () {
             _this.unlockCtrls();
         });
-        $('html, body').animate({
-            scrollTop: $(".media-slider-frame").offset().top - 200
-        }, 1000);
+        if (scr) {
+            $('html, body').animate({
+                scrollTop: $(".media-slider-frame").offset().top - 200
+            }, 1000);
+        }
         elem = nextElem;
         index = ind;
     };
@@ -207,12 +210,21 @@ function MediaSlider(elements, sliderFrame, slideShowPauseDelay, slideShowDelay,
     };
     _this.updateElems = function (selector) {
         elems = $(selector);
-
         $.each(elems, function (i, v) {
             $(v).hover(function () {
                 _this.pauseSlideshow();
             }, function () {
                 _this.playSlideshow();
+            });
+        });
+    };
+    _this.bindItemsToSlider = function (selector) {
+        var items = $(selector);
+        $.each(items, function (i, v) {
+            $(v).unbind();
+            $(v).click(function () {
+                _this.lockCtrls();
+                _this.setItem(i, true);
             });
         });
     };
@@ -264,32 +276,37 @@ $(document).ready(function () {
 // Pagify Script \\
 //---------------\\
 
-function Pagify(outerWrapper, innerWrapper, loader, currPage, constArgsForLoader) {
+function Pagify(outerWrapper, innerWrapper, loader, startPage, callbackOnTransition, callbackOnSuccess, constArgsForLoader) {
+    var _this = this;
     var constArgsExist = typeof constArgsForLoader !== 'undefined' ? true : false;
-    var crPg = typeof currPage !== 'undefined' ? currPage : 1;
+    var startPid = typeof startPage !== 'undefined' ? startPage : 1;
+    var currPid = 0;
     var url = "";
-    var currPid = crPg;
     var totalPages = 0;
 
     function checkWrappersExist() {
-        if ($(outerWrapper).length <= 0 || $(innerWrapper).length <= 0) {
+        if (outerWrapper.length <= 0 || $(innerWrapper).length <= 0) {
             return false;
         }
         return true;
     };
     function checkLoaderExists() {
-        $.get(loader)
-            .done(function () {
-                return true;
-            }).fail(function () {
-                return false;
-            })
+        var r = false;
+        $.ajax( {
+            url: "../" + loader + "?check=true",
+            type: "GET",
+            success: function (msg) {
+                r = true;
+            },
+            async: false
+        } );
+        return r;
     };
-    function getTotalPages() {
-        return _this.getPageData({ "getTotalPages": true });
-    };
-    function addControls() {
-        //add controls for pagify
+    function checkCallbackExists() {
+        if (typeof callbackOnTransition !== 'function') {
+            return false;
+        }
+        return true;
     };
     function createUrl() {
         var l = "../" + loader;
@@ -305,22 +322,166 @@ function Pagify(outerWrapper, innerWrapper, loader, currPage, constArgsForLoader
         }
         return l;
     };
-    function createClickEventListeners() {
-        //Create click even listeners for controls
+    function getTotalPages() {
+        return getPageData({ "getTotalPages": true });
     };
-    function getAdjacentPage(isPrevious) {
-        var isPrev = (typeof isPrevious !== 'undefined' && isPrevious) ? -1 : 1;
-        _this.getPage(currPid + isPrev);
-    };
+    function addControls(hidden) {
+        if (totalPages < 2) {
+            return;
+        }
 
-    var _this = this;
+        var h = typeof hidden !== 'undefined' ? hidden : false;
+        function echoPgfyCtrl(pid, isDisabled) {
+            var iD = typeof isDisabled !== 'undefined' ? isDisabled : false;
+            return '<div class="pagify-control ' + (iD ? "disabled" : "") + '" data-id="' + pid + '">' + pid + '</div>';
+        }
+
+        var htmlControls = '<div class="col double-col-2 pagify-control-wrapper"' + (h ? 'style="opacity:0;"' : "") + '>'
+        var htmlEllipsis = '<div class="pagify-control pagify-control-ellipsis">. . .</div>';
+
+        htmlControls += '<div class="pagify-control ' + ((currPid > 1) ? "" : "disabled") + '" data-id="prev">&lt;</div>';
+        
+        if (currPid == 1) {
+            htmlControls += echoPgfyCtrl(1, true);
+        } else {
+            htmlControls += echoPgfyCtrl(1);
+        }
+
+        if (currPid == 1) {
+            if (totalPages > 3) {
+                htmlControls += echoPgfyCtrl(2);
+                htmlControls += htmlEllipsis;
+            } else if (totalPages == 3) {
+                htmlControls += echoPgfyCtrl(2);
+            }
+        } else if (currPid == 2) {
+            if (totalPages > 2) {
+                htmlControls += echoPgfyCtrl(2, true);
+            }
+            if (totalPages > 4) {
+                htmlControls += echoPgfyCtrl(3);
+                htmlControls += htmlEllipsis;
+            } else if (totalPages == 4) {
+                htmlControls += echoPgfyCtrl(3);
+            }
+        } else if (currPid == 3) {
+            htmlControls += echoPgfyCtrl(2);
+            if (totalPages > 3) {
+                htmlControls += echoPgfyCtrl(3, true);
+            }
+            if (totalPages > 5) {
+                htmlControls += echoPgfyCtrl(4);
+                htmlControls += htmlEllipsis;
+            } else if (totalPages == 5) {
+                htmlControls += echoPgfyCtrl(4);
+            }
+        } else if ((totalPages - 2) > 3 && currPid == (totalPages - 2)) {
+            htmlControls += htmlEllipsis;
+            htmlControls += echoPgfyCtrl(totalPages - 3);
+            htmlControls += echoPgfyCtrl((totalPages - 2), true);
+            htmlControls += echoPgfyCtrl(totalPages - 1);
+        } else if ((totalPages - 1) > 3 && currPid == (totalPages - 1)) {
+            htmlControls += htmlEllipsis;
+            htmlControls += echoPgfyCtrl(totalPages - 2);
+            htmlControls += echoPgfyCtrl((totalPages - 1), true);
+        } else if (totalPages > 3 && currPid == totalPages) {
+            htmlControls += htmlEllipsis;
+            htmlControls += echoPgfyCtrl(totalPages - 1);
+        } else {
+            htmlControls += htmlEllipsis;
+            htmlControls += echoPgfyCtrl(currPid - 1);
+            htmlControls += echoPgfyCtrl(currPid, true);
+            htmlControls += echoPgfyCtrl(currPid + 1);
+            htmlControls += htmlEllipsis;
+        }
+
+        if (totalPages > 1) {
+            if (totalPages == currPid) {
+                htmlControls += echoPgfyCtrl(totalPages, true);
+            } else {
+                htmlControls += echoPgfyCtrl(totalPages);
+            }
+        }
+
+        htmlControls += '<div class="pagify-control ' + ((currPid != totalPages) ? "" : "disabled") + '" data-id="next">&gt;</div>';
+
+        htmlControls += '</div>';
+
+        outerWrapper.append(htmlControls);
+    };
+    function createClickEventListeners() {
+        var controls = outerWrapper.find(".pagify-control:not('.disabled')");
+        $.each(controls, function (i, v) {
+            var id = $(v).data("id");
+            $(v).click(function () {
+                if (id != "prev" && id != "next") {
+                    _this.setPage(id);
+                } else if (id == "next") {
+                    _this.setPage(currPid + 1);
+                } else if (id == "prev") {
+                    _this.setPage(currPid - 1);
+                }
+            });
+        });
+    };
+    function refreshControls() {
+        outerWrapper.children(".pagify-control-wrapper").remove();
+        addControls();
+        createClickEventListeners();
+    };
+    function transitionToPage(pageData, direction) {
+        if (typeof pageData === 'undefined') {
+            return -1;
+        } else if (pageData.length == 0) {
+            callbackOnTransition(pageData);
+            return -1;
+        }
+        var dir = typeof direction !== 'undefined' ? direction : "left";
+        var reverseDir = (dir === "left" ? "right" : "left");
+        
+        var htmlPageContent = callbackOnTransition(pageData);
+        var classes = $(innerWrapper).attr("class").split(/\s+/);
+        var hasClasses = false;
+        if (classes !== 'undefined' && classes.length > 0) {
+            hasClasses = true;
+        }
+        var id = $(innerWrapper).attr("id");
+        var hasId = false;
+        if (typeof id !== 'undefined') {
+            hasId = true;
+        }
+        var htmlPage = '<div style="display: none;"' + (hasId ? 'id="' + id + '"' : '') + ' ';
+        if (hasClasses) {
+            htmlPage += 'class="'
+            $.each(classes, function (i, v) {
+                htmlPage += v + ' ';
+            });
+            htmlPage += '"';
+        }
+        htmlPage += '>' + htmlPageContent + '</div>';
+        outerWrapper.append(htmlPage);
+        $($(innerWrapper)[1]).prop(reverseDir, "-100%");
+        var dur = 400;
+        $($(innerWrapper)[0]).hide("slide", { direction: dir, easing: "easeInOutCirc" }, dur, function () {
+            $($(innerWrapper)[0]).remove();
+            if (typeof callbackOnSuccess === 'function') {
+                callbackOnSuccess();
+            }
+        });
+        if ($(innerWrapper).length > 1) {
+            $($(innerWrapper)[1]).show("slide", { direction: reverseDir, easing: "easeInOutCirc" }, dur);
+        } else {
+            $($(innerWrapper)[0]).show("slide", { direction: reverseDir, easing: "easeInOutCirc" }, dur);
+        }
+        refreshControls();
+        return 1;
+    };
     // Get page data as specified by args and data provided.
     // Returns:
     //     Parsed JSON response from AJAX call on success.
     //     -1 on failed AJAX call.
-    _this.getPageData = function (argsForLoader, data) {
+    function getPageData(argsForLoader) {
         var argsExist = typeof argsForLoader !== 'undefined' ? true : false;
-        var d = typeof data !== 'undefined' ? data : "";
         var l = url;
         var r;
         if (argsExist) {
@@ -347,36 +508,52 @@ function Pagify(outerWrapper, innerWrapper, loader, currPage, constArgsForLoader
     // Returns:
     //     Parsed JSON response from AJAX call on success.
     //     -1 on failed AJAX call.
-    //     -2 if pid lies outside range of pages accessible.
-    _this.getPage = function (pid, argsForLoader) {
-        var _pid = typeof pid !== 'undefined' ? pid : currPid;
-        if (_pid <= 0 || _pid > totalPages) {
-            return -2;
-        }
+    function getPage(pid, argsForLoader) {
         var argsExist = typeof argsForLoader !== 'undefined' ? true : false;
         var result = null;
         if (argsExist) {
             argsForLoader["pid"] = pid;
-            console.log(argsForLoader);
-            result = _this.getPageData(argsForLoader);
+            result = getPageData(argsForLoader);
         } else {
-            result = _this.getPageData({ "pid": _pid });
+            result = getPageData({ "pid": pid });
         }
         if (result == null || !result) {
             return -1;
         }
-        currPid = _pid;
         return result;
     };
-    _this.refreshControls = function () {
-        //refresh controls for current page
-    };
+
+    //Sets the page displayed to the page of the given page id.
+    //If no page id is given, it does not change the page displayed.
+    //Returns:
+    //    1 on success.
+    //    0 if pid is equal to the current id.
+    //    -1 on failed AJAX call.
+    //    -2 if pid lies outside range of pages accessible.
+    _this.setPage = function (pid, argsForLoader) {
+        var _pid = typeof pid !== 'undefined' ? pid : currPid;
+        if (_pid == currPid) {
+            return 0;
+        } else if (_pid <= 0 || _pid > totalPages) {
+            return -2;
+        }
+        var pgData = getPage(pid, argsForLoader);
+        if (!pgData) {
+            return -1;
+        }
+        if (currPid > pid) {
+            currPid = pid;
+            transitionToPage(pgData, "right");
+        } else {
+            currPid = pid;
+            transitionToPage(pgData);
+        }
+    }
     
-    if (!checkLoaderExists() && !checkWrappersExist()) {
-        return;
+    if (!checkWrappersExist() ||  !checkLoaderExists() || !checkCallbackExists()) {
+        return -1;
     }
     url = createUrl();
     totalPages = getTotalPages();
-    addControls();
-    createClickEventListeners();
+    _this.setPage(startPid);
 }

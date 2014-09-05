@@ -460,19 +460,21 @@ function Pagify(outerWrapper, innerWrapper, loader, startPage, callbackOnTransit
         }
         htmlPage += '>' + htmlPageContent + '</div>';
         outerWrapper.append(htmlPage);
-        $($(innerWrapper)[1]).prop(reverseDir, "-100%");
+        var _innerWrapperList = $(innerWrapper);
+        var _innerWrapperFirst = _innerWrapperList.first();
+        var _innerWrapperLast = _innerWrapperList.last();
+        _innerWrapperLast.prop(reverseDir, "-100%");
         var dur = 400;
-        $($(innerWrapper)[0]).hide("slide", { direction: dir, easing: "easeInOutCirc" }, dur, function () {
-            $($(innerWrapper)[0]).remove();
+        _innerWrapperFirst.hide("slide", { direction: dir, easing: "easeInOutCirc" }, dur, function () {
+            _innerWrapperFirst.remove();
             if (typeof callbackOnSuccess === 'function') {
                 callbackOnSuccess();
             }
         });
-        if ($(innerWrapper).length > 1) {
-            $($(innerWrapper)[1]).show("slide", { direction: reverseDir, easing: "easeInOutCirc" }, dur);
-        } else {
-            $($(innerWrapper)[0]).show("slide", { direction: reverseDir, easing: "easeInOutCirc" }, dur);
-        }
+        _innerWrapperLast.show("slide", { direction: reverseDir, easing: "easeInOutCirc" }, dur);
+        outerWrapper.animate({
+            height: (_innerWrapperLast.outerHeight() + 40 + "px")
+        }, dur, "easeInOutCirc");
         refreshControls();
         return 1;
     };

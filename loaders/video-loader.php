@@ -33,19 +33,19 @@
                 echo json_encode ( $videos );
             } else {
                 $nextPageToken = '';
-                //var_dump($_REQUEST["pid"]);
-                for ($i = 1; $i < $_REQUEST["pid"]; $i++) {
-                    $nextPageToken = json_decode( file_get_contents("https://www.googleapis.com/youtube/v3/playlistItems?part=id&maxResults=" . $VIDEOS_PER_PAGE . "&playlistId=UUMlW2qG20hcFYo06rcit4CQ&key=AIzaSyBb43dOH0L_dnbqKOQ8qpiXAOez7uGXO6o&pageToken=" . $nextPageToken) )->nextPageToken;
-                    //var_dump($nextPageToken);
+                for ($i = 4; $i < $_REQUEST["pid"]; $i+=4) {
+                    $nextPageToken = json_decode( file_get_contents("https://www.googleapis.com/youtube/v3/playlistItems?part=id&maxResults=" . ( $VIDEOS_PER_PAGE * 4 ) . "&playlistId=UUMlW2qG20hcFYo06rcit4CQ&key=AIzaSyBb43dOH0L_dnbqKOQ8qpiXAOez7uGXO6o&pageToken=" . $nextPageToken) )->nextPageToken;
                 }
-                //var_dump("https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=" . $VIDEOS_PER_PAGE . "&playlistId=UUMlW2qG20hcFYo06rcit4CQ&key=AIzaSyBb43dOH0L_dnbqKOQ8qpiXAOez7uGXO6o&pageToken=" . $nextPageToken);
-                $vids = json_decode( file_get_contents("https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=" . $VIDEOS_PER_PAGE . "&playlistId=UUMlW2qG20hcFYo06rcit4CQ&key=AIzaSyBb43dOH0L_dnbqKOQ8qpiXAOez7uGXO6o&pageToken=" . $nextPageToken) )->items;
+                $vids = json_decode( file_get_contents("https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=" . ( $VIDEOS_PER_PAGE * 4 ) . "&playlistId=UUMlW2qG20hcFYo06rcit4CQ&key=AIzaSyBb43dOH0L_dnbqKOQ8qpiXAOez7uGXO6o&pageToken=" . $nextPageToken) )->items;
                 $videos = array();
-                for ($i = 0; $i < $VIDEOS_PER_PAGE; $i++) {
-                    if ( $i >= sizeof ( $vids )) {
+                $mult = ( ( $_REQUEST["pid"] % 4 ) - 1 );
+                $j = $VIDEOS_PER_PAGE * ( $mult == -1 ? 3 : $mult );
+                $end = $j + $VIDEOS_PER_PAGE;
+                for ($j; $j < $end; $j++) {
+                    if ( $j >= sizeof ( $vids )) {
                         break;
                     }
-                    $vid = $vids[$i]->snippet;
+                    $vid = $vids[$j]->snippet;
                     $videos[] = array (
                         "title" => $vid->title,
                         "vid_id" => $vid->resourceId->videoId,
@@ -53,7 +53,6 @@
                         "category" => -1
                     );
                 }
-                //var_dump($videos);
                 echo json_encode ( $videos );
             }
         } else if ( isset ( $_REQUEST['getTotalPages'] )) {

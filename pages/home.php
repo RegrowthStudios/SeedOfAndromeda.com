@@ -20,19 +20,18 @@
             <div id="featured-video"></div>
             <script type="text/javascript">
                 function showVideo(response) {
-                    if (response.data && response.data.items) {
-                        var items = response.data.items;
+                    if (response.items) {
+                        var items = response.items;
                         if (items.length > 0) {
                             var item = items[0];
-                            var videoid = "https://www.youtube.com/embed/" + item.id + "?wmode=transparent";
-                            console.log("Latest ID: '" + videoid + "'");
+                            var videoid = "https://www.youtube.com/embed/" + item.snippet.resourceId.videoId + "?wmode=transparent";
                             var video = "<iframe width='610' height='314' src='" + videoid + "' frameborder='0' allowfullscreen></iframe>";
                             $('#featured-video').html(video);
                         }
                     }
                 }
             </script>
-            <script type="text/javascript" src="https://gdata.youtube.com/feeds/api/users/UCMlW2qG20hcFYo06rcit4CQ/uploads?max-results=1&orderby=published&v=2&alt=jsonc&callback=showVideo"></script>
+            <script type="text/javascript" src="https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=1&playlistId=UUMlW2qG20hcFYo06rcit4CQ&key=AIzaSyDDvpdu4_LQ0T07p8siXC2-pCUQXmi6tLA&callback=showVideo"></script>
         </div>
     </div>
 </div>

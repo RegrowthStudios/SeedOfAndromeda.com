@@ -96,118 +96,118 @@ function MediaSlider(elements, sliderFrame, slideShowPauseDelay, slideShowDelay,
     $(elem).show();
     var leftControl = sliderFrame.children(".media-slider-control-left");
     var rightControl = sliderFrame.children(".media-slider-control-right");
-    
+
     var _this = this;
     _this.nextItem = function () {
-        _this.lockCtrls();
+    _this.lockCtrls();
         if (index != (elems.length - 1)) {
             var nextElem = $(elems[index + 1]);
-            nextElem.prop("right", "-100%");
+        nextElem.prop("right", "-100%");
             $(elem).hide("slide", { direction: "left", easing: "easeInOutCirc" }, animationDur);
             nextElem.show("slide", { direction: "right", easing: "easeInOutCirc" }, animationDur, function () {
-                _this.unlockCtrls();
-            });
-            elem = nextElem;
-            index++;
-        } else {
-            var nextElem = $(elems[0]);
-            nextElem.prop("right", "-100%");
-            $(elem).hide("slide", { direction: "left", easing: "easeInOutCirc" }, animationDur);
-            nextElem.show("slide", { direction: "right", easing: "easeInOutCirc" }, animationDur, function () {
-                _this.unlockCtrls();
-            });
-            elem = nextElem;
-            index = 0;
-        }
-    };
-    _this.previousItem = function () {
-        _this.lockCtrls();
-        if (index != 0) {
-            var nextElem = $(elems[index - 1]);
-            nextElem.prop("left", "-100%");
-            $(elem).hide("slide", { direction: "right", easing: "easeInOutCirc" }, animationDur);
-            nextElem.show("slide", { direction: "left", easing: "easeInOutCirc" }, animationDur, function () {
-                _this.unlockCtrls();
-            });
-            elem = nextElem;
-            index--;
-        } else {
-            var nextElem = $(elems[(elems.length - 1)]);
-            nextElem.prop("left", "-100%");
-            $(elem).hide("slide", { direction: "right", easing: "easeInOutCirc" }, animationDur);
-            nextElem.show("slide", { direction: "left", easing: "easeInOutCirc" }, animationDur, function () {
-                _this.unlockCtrls();
-            });
-            elem = nextElem;
-            index = (elems.length - 1);
-        }
-    };
-    _this.setItem = function (ind, scroll) {
-        var scr = typeof scroll !== 'undefined' ? scroll : false;
-        _this.pauseSlideshowDelay();
-        _this.lockCtrls();
-        var nextElem = $(elems[ind]);
-        nextElem.prop("left", "-100%");
-        $(elem).hide("slide", { direction: "left", easing: "easeInOutCirc" }, animationDur);
-        nextElem.show("slide", { direction: "right", easing: "easeInOutCirc" }, animationDur, function () {
             _this.unlockCtrls();
         });
+            elem = nextElem;
+            index++;
+    } else {
+            var nextElem = $(elems[0]);
+        nextElem.prop("right", "-100%");
+            $(elem).hide("slide", { direction: "left", easing: "easeInOutCirc" }, animationDur);
+            nextElem.show("slide", { direction: "right", easing: "easeInOutCirc" }, animationDur, function () {
+            _this.unlockCtrls();
+        });
+            elem = nextElem;
+            index = 0;
+    }
+};
+    _this.previousItem = function () {
+    _this.lockCtrls();
+        if (index != 0) {
+            var nextElem = $(elems[index - 1]);
+        nextElem.prop("left", "-100%");
+            $(elem).hide("slide", { direction: "right", easing: "easeInOutCirc" }, animationDur);
+            nextElem.show("slide", { direction: "left", easing: "easeInOutCirc" }, animationDur, function () {
+            _this.unlockCtrls();
+        });
+            elem = nextElem;
+            index--;
+    } else {
+            var nextElem = $(elems[(elems.length - 1)]);
+        nextElem.prop("left", "-100%");
+            $(elem).hide("slide", { direction: "right", easing: "easeInOutCirc" }, animationDur);
+            nextElem.show("slide", { direction: "left", easing: "easeInOutCirc" }, animationDur, function () {
+            _this.unlockCtrls();
+        });
+            elem = nextElem;
+            index = (elems.length - 1);
+    }
+};
+    _this.setItem = function (ind, scroll) {
+        var scr = typeof scroll !== 'undefined' ? scroll : false;
+    _this.pauseSlideshowDelay();
+    _this.lockCtrls();
+        var nextElem = $(elems[ind]);
+    nextElem.prop("left", "-100%");
+        $(elem).hide("slide", { direction: "left", easing: "easeInOutCirc" }, animationDur);
+        nextElem.show("slide", { direction: "right", easing: "easeInOutCirc" }, animationDur, function () {
+        _this.unlockCtrls();
+    });
         if (scr) {
-            $('html, body').animate({
-                scrollTop: $(".media-slider-frame").offset().top - 200
-            }, 1000);
+    $('html, body').animate({
+        scrollTop: $(".media-slider-frame").offset().top - 200
+    }, 1000);
         }
         elem = nextElem;
         index = ind;
-    };
+};
     _this.automateSlideshow = function () {
         if (slideShowPaused == false) {
-            _this.nextItem();
-            _this.clearTimeouts();
-        }
+        _this.nextItem();
+        _this.clearTimeouts();
+    }
         automateID[automateID.length] = setTimeout(function () {
-            _this.automateSlideshow();
+        _this.automateSlideshow();
         }, slideShowDelay);
-    };
+};
     _this.playSlideshow = function () {
         if (!ignoreMouseOut && (elems.length > 1)) {
-            _this.clearTimeouts();
+        _this.clearTimeouts();
             slideShowPaused = false;
             automateID[automateID.length] = setTimeout(function () {
-                _this.automateSlideshow();
+            _this.automateSlideshow();
             }, slideShowDelay);
-        }
-    };
+    }
+};
     _this.pauseSlideshow = function () {
         slideShowPaused = true;
-    };
+};
     _this.pauseSlideshowDelay = function () {
         slideShowPaused = true;
         ignoreMouseOut = true;
-        setTimeout(function () {
+    setTimeout(function () {
             ignoreMouseOut = false;
-            _this.playSlideshow();
+        _this.playSlideshow();
         }, slideShowPauseDelay);
-    };
+};
     _this.lockCtrls = function () {
         ctrlsLocked = true;
-    };
+};
     _this.unlockCtrls = function () {
         ctrlsLocked = false;
-    };
+};
     _this.lockCtrlsTemp = function (duration) {
         var dur = typeof duration !== 'undefined' ? duration : animationDur;
         ctrlsLocked = true;
-        setTimeout(function () {
+    setTimeout(function () {
             ctrlsLocked = false;
-        }, dur);
+    }, dur);
     };
     _this.clearTimeouts = function () {
         while (automateID.length > 0) {
             clearTimeout(automateID[0]);
             automateID.splice(0, 1);
-        }
-    };
+    }
+};
     _this.updateElems = function (selector) {
         elems = $(selector);
         $.each(elems, function (i, v) {
@@ -232,11 +232,11 @@ function MediaSlider(elements, sliderFrame, slideShowPauseDelay, slideShowDelay,
     if(elems.length > 1) {
 
         $.each(elems, function (i, v) {
-            $(v).hover(function () {
-                _this.pauseSlideshow();
-            }, function () {
-                _this.playSlideshow();
-            });
+        $(v).hover(function () {
+            _this.pauseSlideshow();
+        }, function () {
+            _this.playSlideshow();
+        });
         });        
 
         leftControl.click(function () {
@@ -251,7 +251,7 @@ function MediaSlider(elements, sliderFrame, slideShowPauseDelay, slideShowDelay,
                 _this.pauseSlideshowDelay();
                 _this.nextItem();
             }
-        });
+    });
 
         (function () {
             setTimeout(function () {
@@ -470,7 +470,7 @@ function Pagify(outerWrapper, innerWrapper, loader, startPage, callbackOnTransit
             if (typeof callbackOnSuccess === 'function') {
                 callbackOnSuccess();
             }
-        });
+});
         _innerWrapperLast.show("slide", { direction: reverseDir, easing: "easeInOutCirc" }, dur);
         outerWrapper.animate({
             height: (_innerWrapperLast.outerHeight() + 40 + "px")

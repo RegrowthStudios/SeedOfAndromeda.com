@@ -537,6 +537,7 @@ function Pagify(outerWrapper, innerWrapper, loader, startPage, callbackOnTransit
         if (_pid == currPid) {
             return 0;
         } else if (_pid <= 0 || _pid > totalPages) {
+            callbackOnTransition(-1);
             return -2;
         }
         var pgData = getPage(pid, argsForLoader);
@@ -552,7 +553,7 @@ function Pagify(outerWrapper, innerWrapper, loader, startPage, callbackOnTransit
         }
     }
     
-    if (!checkWrappersExist() ||  !checkLoaderExists() || !checkCallbackExists()) {
+    if (!checkWrappersExist() || !checkLoaderExists() || !checkCallbackExists()) {
         return -1;
     }
     url = createUrl();

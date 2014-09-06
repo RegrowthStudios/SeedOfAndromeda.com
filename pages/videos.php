@@ -16,7 +16,7 @@
 </div>
 
 <div id="featured-videos" class="row clearfix">
-    <div class="header"><h1>Gameplay Images</h1></div>
+    <div class="header"><h1>Featured Videos</h1></div>
     <div class="videos-outer-wrapper">
         <div class="videos">
         </div>
@@ -24,7 +24,7 @@
 </div>
 
 <div id="stream-videos" class="row clearfix">
-    <div class="header"><h1>Concept Images</h1></div>
+    <div class="header"><h1>Stream Videos</h1></div>
     <div class="videos-outer-wrapper">
         <div class="videos">
         </div>

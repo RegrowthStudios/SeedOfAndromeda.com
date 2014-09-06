@@ -14,14 +14,14 @@ $(document).ready(function () {
     allVideosWrapper = $("#all-videos .videos-outer-wrapper");
 
     pagifyFeatured = new Pagify(featuredVideosWrapper, "#featured-videos .videos", "loaders/video-loader.php", 1, function (pgData) {
-        if (pgData == 0) {
+        if (pgData <= 0) {
             featuredVideosWrapper.parent().hide();
             return -1;
         }
         return prepareVideos(pgData);
     }, function () { refreshSlider(); }, { "category": "FEATURED" });
     pagifyStream = new Pagify(streamVideosWrapper, "#stream-videos .videos", "loaders/video-loader.php", 1, function (pgData) {
-        if (pgData == 0) {
+        if (pgData <= 0) {
             streamVideosWrapper.parent().hide();
             return -1;
         }

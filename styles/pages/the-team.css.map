@@ -1,9 +1,1 @@
-{
-  "version": 3,
-  "file": "the-team.css",
-  "sources": [
-    "the-team.less"
-  ],
-  "names": [],
-  "mappings": ";;;;;;;;;AAEA;EACI,iBAAA"
-}
+﻿{"version":3,"sources":["the-team.less"],"names":[],"mappings":";;;;;;;;;AAEA;EACI,iBAAA","file":"the-team.css"}

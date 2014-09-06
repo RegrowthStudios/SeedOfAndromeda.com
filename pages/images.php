@@ -1,5 +1,5 @@
-<div id="screenshot-viewer" class="row clearfix">
-    <div class="header"><h1>Screenshots</h1></div>
+<div id="image-viewer" class="row clearfix">
+    <div class="header"><h1>Images</h1></div>
     <div class="col double-col-2">
         <div class="media-slider-frame card-slider-frame">
             <div class="media-slider-control media-slider-control-left card-slider-control">
@@ -15,6 +15,18 @@
     </div>
 </div>
 
-<div id="screenshots" class="row clearfix">
-    <div class="divider"></div>
+<div id="gameplay-images" class="row clearfix">
+    <div class="header"><h1>Gameplay Images</h1></div>
+    <div class="images-outer-wrapper">
+        <div class="images">
+        </div>
+    </div>
+</div>
+
+<div id="concept-images" class="row clearfix">
+    <div class="header"><h1>Concept Images</h1></div>
+    <div class="images-outer-wrapper">
+        <div class="images">
+        </div>
+    </div>
 </div>

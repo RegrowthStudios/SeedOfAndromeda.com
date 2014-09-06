@@ -1,10 +1,1 @@
-{
-  "version": 3,
-  "file": "downloads.css",
-  "sources": [
-    "downloads.less",
-    "../data.less"
-  ],
-  "names": [],
-  "mappings": ";;;;;;;;;AAEA;EACI,qBAAA;;AAKJ;EACI,YAAA;EACA,cAAA;EACA,gBAAA;EACA,cAAA;ECiJA,iBAAA;EACA,YAAA;EACA,sBAAA;;AD/IJ;EACI,qBAAA;EACA,mBAAA"
-}
+﻿{"version":3,"sources":["downloads.less","../data.less"],"names":[],"mappings":";;;;;;;;;AAEA;EACI,qBAAA;;AAKJ;EACI,YAAA;EACA,cAAA;EACA,gBAAA;EACA,cAAA;ECoJA,iBAAA;EACA,YAAA;EACA,sBAAA;;ADlJJ;EACI,qBAAA;EACA,mBAAA","file":"downloads.css"}

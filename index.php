@@ -36,9 +36,9 @@ switch ($cleanpageid) {
 		$pagetitle .= "The Team";
 		$pagename = "the-team.php";
 		break;
-	case "screenshots" :
+	case "images" :
 		$pagetitle .= "Image Media";
-		$pagename = "screenshots.php";
+		$pagename = "images.php";
 		break;
 	case "videos" :
 		require_once ("db_connect.php");
@@ -137,6 +137,11 @@ switch ($cleanpageid) {
 		require_once ("db_connect.php");
 		$pagetitle .= "Video Admin";
 		$pagename = "videos-admin.php";
+		break;
+	case "images-admin":
+		require_once ("db_connect.php");
+		$pagetitle .= "Image Admin";
+		$pagename = "images-admin.php";
 		break;
 }
 

@@ -7,22 +7,31 @@
 /******************/
 /* Content Mixins */
 /******************/
-#screenshot-viewer .media-slider-frame {
+#image-viewer .media-slider-frame {
   width: 80%;
   margin-left: 10%;
   height: 400px;
 }
-#screenshot-viewer .media-slider-control-img {
+#image-viewer .media-slider-control-img {
   top: 179px;
 }
-#screenshot-viewer .card-background {
+#image-viewer .card-background {
   opacity: 1;
 }
-#screenshots .quad-col-1 {
-  text-align: center;
+.images-outer-wrapper {
+  position: relative;
+  height: 838px;
+}
+.images {
+  position: absolute;
+}
+.images .quad-col-1 {
   margin-bottom: 5px;
 }
-.screenshot:hover {
+.image {
+  margin: 0 auto;
+}
+.image:hover {
   cursor: pointer;
 }
-/*# sourceMappingURL=screenshots.css.map */
+/*# sourceMappingURL=images.css.map */

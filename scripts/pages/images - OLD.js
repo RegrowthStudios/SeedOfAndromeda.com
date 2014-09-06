@@ -10,19 +10,24 @@ $(document).ready(function () {
 function loadMoreScreenshots(pid, async) {
     var images = new Array();
     $.ajax({
-        url: "../screenshot-loader.php?pid=" + pid,
+        url: "../image-loader.php?pid=" + pid,
         type: "POST",
         success: function (msg) {
             images = JSON.parse(msg);
 
             var frame = $(".media-slider-frame");
-            var screenshotColumn = $("#screenshots");
+            var gameplayImageRow = $("#gameplay-images");
+            var conceptImageRow = $("#concept-images");
             $.each(images, function (i, v) {
-                var htmlWrapper = '<div class="media-wrapper card-wrapper" style="display: none;"><a href="' + v + '" id="screenshotlink" data-lightbox="screenshot" title="screenshot"><div class="card-background" style="background-image: url(\'' + v.substring(0, v.length - 4) + '_thumb_781x398.jpg\');"></div></a></div>';
-                var htmlColumn = '<div class="col quad-col-1"><img class="img small-wide screenshot" src="' + v.substring(0, v.length - 4) + '_thumb_213x128.jpg" /></div>';
+                var htmlWrapper = '<div class="media-wrapper card-wrapper" style="display: none;"><a href="' + v["url"] + ' - ' + v["description"] + '" id="screenshotlink" data-lightbox="screenshot" title="' + v["title"] + '"><div class="card-background" style="background-image: url(\'' + v["url"].substring(0, v["url"].lastIndexOf(".")) + '_thumb_781x398.jpg\');"></div></a></div>';
+                var htmlColumn = '<div class="col quad-col-1"><img class="img small-wide screenshot" src="' + v["url"].substring(0, v["url"].lastIndexOf(".")) + '_thumb_213x128.jpg" /></div>';
 
                 frame.append(htmlWrapper);
-                screenshotColumn.append(htmlColumn);
+                if ( v["category"] == "GAMEPLAY") {
+                    gameplayImageRow.append(htmlColumn);
+                } else if (v["category"] == "CONCEPT") {
+                    conceptImageRow.append(htmlColumn);
+                }
             });
 
             var screenshots = $(".screenshot");

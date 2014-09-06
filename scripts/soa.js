@@ -83,193 +83,186 @@ $(document).ready(function () {
 });
 
 function MediaSlider(elements, sliderFrame, slideShowPauseDelay, slideShowDelay, animationDur) {
-    var _this = this;
-    _this.slideShowDelay = typeof slideShowDelay !== 'undefined' ? slideShowDelay : 6000;
-    _this.slideShowPauseDelay = typeof slideShowPauseDelay !== 'undefined' ? slideShowPauseDelay : 7000;
-    _this.animationDur = typeof animationDur !== 'undefined' ? animationDur : 500;
-    _this.elems = elements;
-    _this.ctrlsLocked = false;
-    _this.slideShowPaused = false;
-    _this.ignoreMouseOut = false;
-    _this.index = 0;
-    _this.automateID = new Array();
-    _this.elem = _this.elems[_this.index];
-    $(_this.elem).show();
-    _this.leftControl = sliderFrame.children(".media-slider-control-left");
-    _this.rightControl = sliderFrame.children(".media-slider-control-right");
-    if(_this.elems.length > 1) {
+    var slideShowDelay = typeof slideShowDelay !== 'undefined' ? slideShowDelay : 6000;
+    var slideShowPauseDelay = typeof slideShowPauseDelay !== 'undefined' ? slideShowPauseDelay : 7000;
+    var animationDur = typeof animationDur !== 'undefined' ? animationDur : 500;
+    var elems = elements;
+    var ctrlsLocked = false;
+    var slideShowPaused = false;
+    var ignoreMouseOut = false;
+    var index = 0;
+    var automateID = new Array();
+    var elem = elems[index];
+    $(elem).show();
+    var leftControl = sliderFrame.children(".media-slider-control-left");
+    var rightControl = sliderFrame.children(".media-slider-control-right");
 
-        $.each(_this.elems, function (i, v) {
+    var _this = this;
+    _this.nextItem = function () {
+    _this.lockCtrls();
+        if (index != (elems.length - 1)) {
+            var nextElem = $(elems[index + 1]);
+        nextElem.prop("right", "-100%");
+            $(elem).hide("slide", { direction: "left", easing: "easeInOutCirc" }, animationDur);
+            nextElem.show("slide", { direction: "right", easing: "easeInOutCirc" }, animationDur, function () {
+            _this.unlockCtrls();
+        });
+            elem = nextElem;
+            index++;
+    } else {
+            var nextElem = $(elems[0]);
+        nextElem.prop("right", "-100%");
+            $(elem).hide("slide", { direction: "left", easing: "easeInOutCirc" }, animationDur);
+            nextElem.show("slide", { direction: "right", easing: "easeInOutCirc" }, animationDur, function () {
+            _this.unlockCtrls();
+        });
+            elem = nextElem;
+            index = 0;
+    }
+};
+    _this.previousItem = function () {
+    _this.lockCtrls();
+        if (index != 0) {
+            var nextElem = $(elems[index - 1]);
+        nextElem.prop("left", "-100%");
+            $(elem).hide("slide", { direction: "right", easing: "easeInOutCirc" }, animationDur);
+            nextElem.show("slide", { direction: "left", easing: "easeInOutCirc" }, animationDur, function () {
+            _this.unlockCtrls();
+        });
+            elem = nextElem;
+            index--;
+    } else {
+            var nextElem = $(elems[(elems.length - 1)]);
+        nextElem.prop("left", "-100%");
+            $(elem).hide("slide", { direction: "right", easing: "easeInOutCirc" }, animationDur);
+            nextElem.show("slide", { direction: "left", easing: "easeInOutCirc" }, animationDur, function () {
+            _this.unlockCtrls();
+        });
+            elem = nextElem;
+            index = (elems.length - 1);
+    }
+};
+    _this.setItem = function (ind, scroll) {
+        var scr = typeof scroll !== 'undefined' ? scroll : false;
+    _this.pauseSlideshowDelay();
+    _this.lockCtrls();
+        var nextElem = $(elems[ind]);
+    nextElem.prop("left", "-100%");
+        $(elem).hide("slide", { direction: "left", easing: "easeInOutCirc" }, animationDur);
+        nextElem.show("slide", { direction: "right", easing: "easeInOutCirc" }, animationDur, function () {
+        _this.unlockCtrls();
+    });
+        if (scr) {
+    $('html, body').animate({
+        scrollTop: $(".media-slider-frame").offset().top - 200
+    }, 1000);
+        }
+        elem = nextElem;
+        index = ind;
+};
+    _this.automateSlideshow = function () {
+        if (slideShowPaused == false) {
+        _this.nextItem();
+        _this.clearTimeouts();
+    }
+        automateID[automateID.length] = setTimeout(function () {
+        _this.automateSlideshow();
+        }, slideShowDelay);
+};
+    _this.playSlideshow = function () {
+        if (!ignoreMouseOut && (elems.length > 1)) {
+        _this.clearTimeouts();
+            slideShowPaused = false;
+            automateID[automateID.length] = setTimeout(function () {
+            _this.automateSlideshow();
+            }, slideShowDelay);
+    }
+};
+    _this.pauseSlideshow = function () {
+        slideShowPaused = true;
+};
+    _this.pauseSlideshowDelay = function () {
+        slideShowPaused = true;
+        ignoreMouseOut = true;
+    setTimeout(function () {
+            ignoreMouseOut = false;
+        _this.playSlideshow();
+        }, slideShowPauseDelay);
+};
+    _this.lockCtrls = function () {
+        ctrlsLocked = true;
+};
+    _this.unlockCtrls = function () {
+        ctrlsLocked = false;
+};
+    _this.lockCtrlsTemp = function (duration) {
+        var dur = typeof duration !== 'undefined' ? duration : animationDur;
+        ctrlsLocked = true;
+    setTimeout(function () {
+            ctrlsLocked = false;
+    }, dur);
+    };
+    _this.clearTimeouts = function () {
+        while (automateID.length > 0) {
+            clearTimeout(automateID[0]);
+            automateID.splice(0, 1);
+    }
+};
+    _this.updateElems = function (selector) {
+        elems = $(selector);
+        $.each(elems, function (i, v) {
             $(v).hover(function () {
                 _this.pauseSlideshow();
             }, function () {
                 _this.playSlideshow();
             });
-        });        
-
-        _this.leftControl.click(function () {
-            if (_this.ctrlsLocked == false) {
-                _this.pauseSlideshowDelay();
-                _this.previousItem();
-            }
         });
-
-        _this.rightControl.click(function () {
-            if (_this.ctrlsLocked == false) {
-                _this.pauseSlideshowDelay();
-                _this.nextItem();
-            }
+    };
+    _this.bindItemsToSlider = function (selector) {
+        var items = $(selector);
+        $.each(items, function (i, v) {
+            $(v).unbind();
+            $(v).click(function () {
+                _this.lockCtrls();
+                _this.setItem(i, true);
+            });
         });
+    };
 
-        (function () {
-            setTimeout(function () {
-                _this.automateSlideshow();
-            }, _this.slideShowDelay);
-        })();
+    if(elems.length > 1) {
 
-    } else {
-        _this.leftControl.hide();
-        _this.rightControl.hide();
-    }
-}
-
-MediaSlider.prototype.nextItem = function () {
-    var _this = this;
-    _this.lockCtrls();
-    if (_this.index != (_this.elems.length - 1)) {
-        var nextElem = $(_this.elems[_this.index + 1]);
-        nextElem.prop("right", "-100%");
-        $(_this.elem).hide("slide", { direction: "left", easing: "easeInOutCirc" }, _this.animationDur);
-        nextElem.show("slide", { direction: "right", easing: "easeInOutCirc" }, _this.animationDur, function () {
-            _this.unlockCtrls();
-        });
-        _this.elem = nextElem;
-        _this.index++;
-    } else {
-        var nextElem = $(_this.elems[0]);
-        nextElem.prop("right", "-100%");
-        $(_this.elem).hide("slide", { direction: "left", easing: "easeInOutCirc" }, _this.animationDur);
-        nextElem.show("slide", { direction: "right", easing: "easeInOutCirc" }, _this.animationDur, function () {
-            _this.unlockCtrls();
-        });
-        _this.elem = nextElem;
-        _this.index = 0;
-    }
-};
-
-MediaSlider.prototype.previousItem = function () {
-    var _this = this;
-    _this.lockCtrls();
-    if (_this.index != 0) {
-        var nextElem = $(_this.elems[_this.index - 1]);
-        nextElem.prop("left", "-100%");
-        $(_this.elem).hide("slide", { direction: "right", easing: "easeInOutCirc" }, _this.animationDur);
-        nextElem.show("slide", { direction: "left", easing: "easeInOutCirc" }, _this.animationDur, function () {
-            _this.unlockCtrls();
-        });
-        _this.elem = nextElem;
-        _this.index--;
-    } else {
-        var nextElem = $(_this.elems[(_this.elems.length - 1)]);
-        nextElem.prop("left", "-100%");
-        $(_this.elem).hide("slide", { direction: "right", easing: "easeInOutCirc" }, _this.animationDur);
-        nextElem.show("slide", { direction: "left", easing: "easeInOutCirc" }, _this.animationDur, function () {
-            _this.unlockCtrls();
-        });
-        _this.elem = nextElem;
-        _this.index = (_this.elems.length - 1);
-    }
-};
-
-MediaSlider.prototype.setItem = function (index) {
-    var _this = this;
-    _this.pauseSlideshowDelay();
-    _this.lockCtrls();
-    var nextElem = $(_this.elems[index]);
-    nextElem.prop("left", "-100%");
-    $(_this.elem).hide("slide", { direction: "left", easing: "easeInOutCirc" }, _this.animationDur);
-    nextElem.show("slide", { direction: "right", easing: "easeInOutCirc" }, _this.animationDur, function () {
-        _this.unlockCtrls();
-    });
-    $('html, body').animate({
-        scrollTop: $(".media-slider-frame").offset().top - 200
-    }, 1000);
-    _this.elem = nextElem;
-    _this.index = index;
-};
-
-MediaSlider.prototype.automateSlideshow = function () {
-    var _this = this;
-    if (_this.slideShowPaused == false) {
-        _this.nextItem();
-        _this.clearTimeouts();
-    }
-    _this.automateID[_this.automateID.length] = setTimeout(function () {
-        _this.automateSlideshow();
-    }, _this.slideShowDelay);
-};
-
-MediaSlider.prototype.playSlideshow = function () {
-    var _this = this;
-    if (!_this.ignoreMouseOut && (_this.elems.length > 1)) {
-        _this.clearTimeouts();
-        _this.slideShowPaused = false;
-        _this.automateID[_this.automateID.length] = setTimeout(function () {
-            _this.automateSlideshow();
-        }, _this.slideShowDelay);
-    }
-};
-
-MediaSlider.prototype.pauseSlideshow = function () {
-    this.slideShowPaused = true;
-};
-
-MediaSlider.prototype.pauseSlideshowDelay = function () {
-    var _this = this;
-    _this.slideShowPaused = true;
-    _this.ignoreMouseOut = true;
-    setTimeout(function () {
-        _this.ignoreMouseOut = false;
-        _this.playSlideshow();
-    }, _this.slideShowPauseDelay);
-};
-
-MediaSlider.prototype.lockCtrls = function () {
-    this.ctrlsLocked = true;
-};
-
-MediaSlider.prototype.unlockCtrls = function () {
-    this.ctrlsLocked = false;
-};
-
-MediaSlider.prototype.lockCtrlsTemp = function (duration) {
-    var _this = this;
-    var dur = typeof duration !== 'undefined' ? duration : _this.animationDur;
-    _this.ctrlsLocked = true;
-    setTimeout(function () {
-        _this.ctrlsLocked = false;
-    }, dur);
-}
-
-MediaSlider.prototype.clearTimeouts = function () {
-    var _this = this;
-    while (_this.automateID.length > 0) {
-        clearTimeout(_this.automateID[0]);
-        _this.automateID.splice(0, 1);
-    }
-};
-
-MediaSlider.prototype.updateElems = function (selector) {
-    var _this = this
-    _this.elems = $(selector);
-
-    $.each(_this.elems, function (i, v) {
+        $.each(elems, function (i, v) {
         $(v).hover(function () {
             _this.pauseSlideshow();
         }, function () {
             _this.playSlideshow();
         });
+        });        
+
+        leftControl.click(function () {
+            if (ctrlsLocked == false) {
+                _this.pauseSlideshowDelay();
+                _this.previousItem();
+            }
+        });
+
+        rightControl.click(function () {
+            if (ctrlsLocked == false) {
+                _this.pauseSlideshowDelay();
+                _this.nextItem();
+            }
     });
+
+        (function () {
+            setTimeout(function () {
+                _this.automateSlideshow();
+            }, slideShowDelay);
+        })();
+
+    } else {
+        leftControl.hide();
+        rightControl.hide();
+    }
 }
 
 //Fix nav controls to hover state when on mobile devices for greater visibility
@@ -278,3 +271,291 @@ $(document).ready(function () {
         $(".media-slider-control-img").css("background", "rgba(255,255,255,0.15)");
     }
 });
+
+//---------------\\
+// Pagify Script \\
+//---------------\\
+
+function Pagify(outerWrapper, innerWrapper, loader, startPage, callbackOnTransition, callbackOnSuccess, constArgsForLoader) {
+    var _this = this;
+    var constArgsExist = typeof constArgsForLoader !== 'undefined' ? true : false;
+    var startPid = typeof startPage !== 'undefined' ? startPage : 1;
+    var currPid = 0;
+    var url = "";
+    var totalPages = 0;
+
+    function checkWrappersExist() {
+        if (outerWrapper.length <= 0 || $(innerWrapper).length <= 0) {
+            return false;
+        }
+        return true;
+    };
+    function checkLoaderExists() {
+        var r = false;
+        $.ajax( {
+            url: "../" + loader + "?check=true",
+            type: "GET",
+            success: function (msg) {
+                r = true;
+            },
+            async: false
+        } );
+        return r;
+    };
+    function checkCallbackExists() {
+        if (typeof callbackOnTransition !== 'function') {
+            return false;
+        }
+        return true;
+    };
+    function createUrl() {
+        var l = "../" + loader;
+        l += "?";
+        if (constArgsExist) {
+            var keys = Object.keys(constArgsForLoader);
+            for (var i = 0; i < keys.length; ++i) {
+                l += keys[i];
+                l += "=";
+                l += constArgsForLoader[keys[i]];
+                l += "&";
+            }
+        }
+        return l;
+    };
+    function getTotalPages() {
+        return getPageData({ "getTotalPages": true });
+    };
+    function addControls(hidden) {
+        if (totalPages < 2) {
+            return;
+        }
+
+        var h = typeof hidden !== 'undefined' ? hidden : false;
+        function echoPgfyCtrl(pid, isDisabled) {
+            var iD = typeof isDisabled !== 'undefined' ? isDisabled : false;
+            return '<div class="pagify-control ' + (iD ? "disabled" : "") + '" data-id="' + pid + '">' + pid + '</div>';
+        }
+
+        var htmlControls = '<div class="col double-col-2 pagify-control-wrapper"' + (h ? 'style="opacity:0;"' : "") + '>'
+        var htmlEllipsis = '<div class="pagify-control pagify-control-ellipsis">. . .</div>';
+
+        htmlControls += '<div class="pagify-control ' + ((currPid > 1) ? "" : "disabled") + '" data-id="prev">&lt;</div>';
+        
+        if (currPid == 1) {
+            htmlControls += echoPgfyCtrl(1, true);
+        } else {
+            htmlControls += echoPgfyCtrl(1);
+        }
+
+        if (currPid == 1) {
+            if (totalPages > 3) {
+                htmlControls += echoPgfyCtrl(2);
+                htmlControls += htmlEllipsis;
+            } else if (totalPages == 3) {
+                htmlControls += echoPgfyCtrl(2);
+            }
+        } else if (currPid == 2) {
+            if (totalPages > 2) {
+                htmlControls += echoPgfyCtrl(2, true);
+            }
+            if (totalPages > 4) {
+                htmlControls += echoPgfyCtrl(3);
+                htmlControls += htmlEllipsis;
+            } else if (totalPages == 4) {
+                htmlControls += echoPgfyCtrl(3);
+            }
+        } else if (currPid == 3) {
+            htmlControls += echoPgfyCtrl(2);
+            if (totalPages > 3) {
+                htmlControls += echoPgfyCtrl(3, true);
+            }
+            if (totalPages > 5) {
+                htmlControls += echoPgfyCtrl(4);
+                htmlControls += htmlEllipsis;
+            } else if (totalPages == 5) {
+                htmlControls += echoPgfyCtrl(4);
+            }
+        } else if ((totalPages - 2) > 3 && currPid == (totalPages - 2)) {
+            htmlControls += htmlEllipsis;
+            htmlControls += echoPgfyCtrl(totalPages - 3);
+            htmlControls += echoPgfyCtrl((totalPages - 2), true);
+            htmlControls += echoPgfyCtrl(totalPages - 1);
+        } else if ((totalPages - 1) > 3 && currPid == (totalPages - 1)) {
+            htmlControls += htmlEllipsis;
+            htmlControls += echoPgfyCtrl(totalPages - 2);
+            htmlControls += echoPgfyCtrl((totalPages - 1), true);
+        } else if (totalPages > 3 && currPid == totalPages) {
+            htmlControls += htmlEllipsis;
+            htmlControls += echoPgfyCtrl(totalPages - 1);
+        } else {
+            htmlControls += htmlEllipsis;
+            htmlControls += echoPgfyCtrl(currPid - 1);
+            htmlControls += echoPgfyCtrl(currPid, true);
+            htmlControls += echoPgfyCtrl(currPid + 1);
+            htmlControls += htmlEllipsis;
+        }
+
+        if (totalPages > 1) {
+            if (totalPages == currPid) {
+                htmlControls += echoPgfyCtrl(totalPages, true);
+            } else {
+                htmlControls += echoPgfyCtrl(totalPages);
+            }
+        }
+
+        htmlControls += '<div class="pagify-control ' + ((currPid != totalPages) ? "" : "disabled") + '" data-id="next">&gt;</div>';
+
+        htmlControls += '</div>';
+
+        outerWrapper.append(htmlControls);
+    };
+    function createClickEventListeners() {
+        var controls = outerWrapper.find(".pagify-control:not('.disabled')");
+        $.each(controls, function (i, v) {
+            var id = $(v).data("id");
+            $(v).click(function () {
+                if (id != "prev" && id != "next") {
+                    _this.setPage(id);
+                } else if (id == "next") {
+                    _this.setPage(currPid + 1);
+                } else if (id == "prev") {
+                    _this.setPage(currPid - 1);
+                }
+            });
+        });
+    };
+    function refreshControls() {
+        outerWrapper.children(".pagify-control-wrapper").remove();
+        addControls();
+        createClickEventListeners();
+    };
+    function transitionToPage(pageData, direction) {
+        if (typeof pageData === 'undefined') {
+            return -1;
+        } else if (pageData.length == 0) {
+            callbackOnTransition(pageData);
+            return -1;
+        }
+        var dir = typeof direction !== 'undefined' ? direction : "left";
+        var reverseDir = (dir === "left" ? "right" : "left");
+        
+        var htmlPageContent = callbackOnTransition(pageData);
+        var classes = $(innerWrapper).attr("class").split(/\s+/);
+        var hasClasses = false;
+        if (classes !== 'undefined' && classes.length > 0) {
+            hasClasses = true;
+        }
+        var id = $(innerWrapper).attr("id");
+        var hasId = false;
+        if (typeof id !== 'undefined') {
+            hasId = true;
+        }
+        var htmlPage = '<div style="display: none;"' + (hasId ? 'id="' + id + '"' : '') + ' ';
+        if (hasClasses) {
+            htmlPage += 'class="'
+            $.each(classes, function (i, v) {
+                htmlPage += v + ' ';
+            });
+            htmlPage += '"';
+        }
+        htmlPage += '>' + htmlPageContent + '</div>';
+        outerWrapper.append(htmlPage);
+        var _innerWrapperList = $(innerWrapper);
+        var _innerWrapperFirst = _innerWrapperList.first();
+        var _innerWrapperLast = _innerWrapperList.last();
+        _innerWrapperLast.prop(reverseDir, "-100%");
+        var dur = 400;
+        _innerWrapperFirst.hide("slide", { direction: dir, easing: "easeInOutCirc" }, dur, function () {
+            _innerWrapperFirst.remove();
+            if (typeof callbackOnSuccess === 'function') {
+                callbackOnSuccess();
+            }
+});
+        _innerWrapperLast.show("slide", { direction: reverseDir, easing: "easeInOutCirc" }, dur);
+        outerWrapper.animate({
+            height: (_innerWrapperLast.outerHeight() + 40 + "px")
+        }, dur, "easeInOutCirc");
+        refreshControls();
+        return 1;
+    };
+    // Get page data as specified by args and data provided.
+    // Returns:
+    //     Parsed JSON response from AJAX call on success.
+    //     -1 on failed AJAX call.
+    function getPageData(argsForLoader) {
+        var argsExist = typeof argsForLoader !== 'undefined' ? true : false;
+        var l = url;
+        var r;
+        if (argsExist) {
+            var keys = Object.keys(argsForLoader);
+            for (var i = 0; i < keys.length; ++i) {
+                l += keys[i];
+                l += "=";
+                l += argsForLoader[keys[i]];
+                l += "&";
+            }
+        }
+        $.ajax({
+            url: l,
+            type: "POST",
+            success: function (msg) {
+                r = JSON.parse(msg);
+            },
+            async: false
+        });
+        return r;
+    };
+    // Gets page identified by the given page id.
+    // If no page id is given, it gets the page of the current pid.
+    // Returns:
+    //     Parsed JSON response from AJAX call on success.
+    //     -1 on failed AJAX call.
+    function getPage(pid, argsForLoader) {
+        var argsExist = typeof argsForLoader !== 'undefined' ? true : false;
+        var result = null;
+        if (argsExist) {
+            argsForLoader["pid"] = pid;
+            result = getPageData(argsForLoader);
+        } else {
+            result = getPageData({ "pid": pid });
+        }
+        if (result == null || !result) {
+            return -1;
+        }
+        return result;
+    };
+
+    //Sets the page displayed to the page of the given page id.
+    //If no page id is given, it does not change the page displayed.
+    //Returns:
+    //    1 on success.
+    //    0 if pid is equal to the current id.
+    //    -1 on failed AJAX call.
+    //    -2 if pid lies outside range of pages accessible.
+    _this.setPage = function (pid, argsForLoader) {
+        var _pid = typeof pid !== 'undefined' ? pid : currPid;
+        if (_pid == currPid) {
+            return 0;
+        } else if (_pid <= 0 || _pid > totalPages) {
+            return -2;
+        }
+        var pgData = getPage(pid, argsForLoader);
+        if (!pgData) {
+            return -1;
+        }
+        if (currPid > pid) {
+            currPid = pid;
+            transitionToPage(pgData, "right");
+        } else {
+            currPid = pid;
+            transitionToPage(pgData);
+        }
+    }
+    
+    if (!checkWrappersExist() ||  !checkLoaderExists() || !checkCallbackExists()) {
+        return -1;
+    }
+    url = createUrl();
+    totalPages = getTotalPages();
+    _this.setPage(startPid);
+}

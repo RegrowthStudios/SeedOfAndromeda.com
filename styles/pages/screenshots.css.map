@@ -1,9 +1,0 @@
-{
-  "version": 3,
-  "file": "screenshots.css",
-  "sources": [
-    "screenshots.less"
-  ],
-  "names": [],
-  "mappings": ";;;;;;;;;AAGA,kBAAmB;EACf,UAAA;EACA,gBAAA;EACA,aAAA;;AAEJ,kBAAmB;EACf,UAAA;;AAEJ,kBAAmB;EACf,UAAA;;AAGJ,YAAa;EACT,kBAAA;EACA,kBAAA;;AAEJ,WAAW;EACP,eAAA"
-}

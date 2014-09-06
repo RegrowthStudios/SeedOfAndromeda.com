@@ -1,0 +1,33 @@
+﻿@import "../data.less";
+
+@screenshot-viewer-width: 80%;
+#image-viewer .media-slider-frame {
+    width: @screenshot-viewer-width;
+    margin-left: ( ( 100 - @screenshot-viewer-width ) / 2 );
+    height: @media-slider-default-height;
+}
+#image-viewer .media-slider-control-img {
+    top: ( ( @media-slider-default-height - 2 - @media-slider-control-width ) / 2 );
+}
+#image-viewer .card-background {
+    opacity: 1;
+}
+
+@image-count-vert: 6;
+@col-margin-bottom: 5px;
+.images-outer-wrapper {
+    position: relative;
+    height: @image-count-vert * ( @image-height-small + @col-margin-bottom ) + @pagify-control-dim + @pagify-control-margin-top;
+}
+.images {
+    position: absolute;
+}
+.images .quad-col-1 {
+    margin-bottom: @col-margin-bottom;
+}
+.image {
+    margin: 0 auto;
+}
+.image:hover {
+    cursor: pointer;
+}

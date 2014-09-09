@@ -82,11 +82,15 @@ $(document).ready(function () {
     $('.media-slider-js-warning').hide();
 });
 
-function MediaSlider(elements, sliderFrame, slideShowPauseDelay, slideShowDelay, animationDur) {
+function MediaSlider(sliderWrapper, slideShowPauseDelay, slideShowDelay, animationDur) {
+    if (typeof sliderWrapper !== 'object') {
+        return -1;
+    }
     var slideShowDelay = typeof slideShowDelay !== 'undefined' ? slideShowDelay : 6000;
     var slideShowPauseDelay = typeof slideShowPauseDelay !== 'undefined' ? slideShowPauseDelay : 7000;
     var animationDur = typeof animationDur !== 'undefined' ? animationDur : 500;
-    var elems = elements;
+    var elems = sliderWrapper.find(".media-wrapper");
+    var sliderFrame = sliderWrapper.find(".media-slider-frame");
     var ctrlsLocked = false;
     var slideShowPaused = false;
     var ignoreMouseOut = false;
@@ -96,120 +100,134 @@ function MediaSlider(elements, sliderFrame, slideShowPauseDelay, slideShowDelay,
     $(elem).show();
     var leftControl = sliderFrame.children(".media-slider-control-left");
     var rightControl = sliderFrame.children(".media-slider-control-right");
-
+    
     var _this = this;
     _this.nextItem = function () {
-    _this.lockCtrls();
-        if (index != (elems.length - 1)) {
-            var nextElem = $(elems[index + 1]);
-        nextElem.prop("right", "-100%");
-            $(elem).hide("slide", { direction: "left", easing: "easeInOutCirc" }, animationDur);
-            nextElem.show("slide", { direction: "right", easing: "easeInOutCirc" }, animationDur, function () {
-            _this.unlockCtrls();
-        });
-            elem = nextElem;
-            index++;
-    } else {
-            var nextElem = $(elems[0]);
-        nextElem.prop("right", "-100%");
-            $(elem).hide("slide", { direction: "left", easing: "easeInOutCirc" }, animationDur);
-            nextElem.show("slide", { direction: "right", easing: "easeInOutCirc" }, animationDur, function () {
-            _this.unlockCtrls();
-        });
-            elem = nextElem;
-            index = 0;
-    }
-};
+        if (elems.length > 1) {
+            _this.lockCtrls();
+            if (index != (elems.length - 1)) {
+                var nextElem = $(elems[index + 1]);
+                nextElem.prop("right", "-100%");
+                $(elem).hide("slide", { direction: "left", easing: "easeInOutCirc" }, animationDur);
+                nextElem.show("slide", { direction: "right", easing: "easeInOutCirc" }, animationDur, function () {
+                    _this.unlockCtrls();
+                });
+                elem = nextElem;
+                index++;
+            } else {
+                var nextElem = $(elems[0]);
+                nextElem.prop("right", "-100%");
+                $(elem).hide("slide", { direction: "left", easing: "easeInOutCirc" }, animationDur);
+                nextElem.show("slide", { direction: "right", easing: "easeInOutCirc" }, animationDur, function () {
+                    _this.unlockCtrls();
+                });
+                elem = nextElem;
+                index = 0;
+            }
+        }
+    };
     _this.previousItem = function () {
-    _this.lockCtrls();
-        if (index != 0) {
-            var nextElem = $(elems[index - 1]);
-        nextElem.prop("left", "-100%");
-            $(elem).hide("slide", { direction: "right", easing: "easeInOutCirc" }, animationDur);
-            nextElem.show("slide", { direction: "left", easing: "easeInOutCirc" }, animationDur, function () {
-            _this.unlockCtrls();
-        });
-            elem = nextElem;
-            index--;
-    } else {
-            var nextElem = $(elems[(elems.length - 1)]);
-        nextElem.prop("left", "-100%");
-            $(elem).hide("slide", { direction: "right", easing: "easeInOutCirc" }, animationDur);
-            nextElem.show("slide", { direction: "left", easing: "easeInOutCirc" }, animationDur, function () {
-            _this.unlockCtrls();
-        });
-            elem = nextElem;
-            index = (elems.length - 1);
-    }
-};
+        if (elems.length > 1) {
+            _this.lockCtrls();
+            if (index != 0) {
+                var nextElem = $(elems[index - 1]);
+                nextElem.prop("left", "-100%");
+                $(elem).hide("slide", { direction: "right", easing: "easeInOutCirc" }, animationDur);
+                nextElem.show("slide", { direction: "left", easing: "easeInOutCirc" }, animationDur, function () {
+                    _this.unlockCtrls();
+                });
+                elem = nextElem;
+                index--;
+            } else {
+                var nextElem = $(elems[(elems.length - 1)]);
+                nextElem.prop("left", "-100%");
+                $(elem).hide("slide", { direction: "right", easing: "easeInOutCirc" }, animationDur);
+                nextElem.show("slide", { direction: "left", easing: "easeInOutCirc" }, animationDur, function () {
+                    _this.unlockCtrls();
+                });
+                elem = nextElem;
+                index = (elems.length - 1);
+            }
+        }
+    };
     _this.setItem = function (ind, scroll) {
+        if (ind < 0 || ind > elems.length) {
+            return -1;
+        }
         var scr = typeof scroll !== 'undefined' ? scroll : false;
-    _this.pauseSlideshowDelay();
-    _this.lockCtrls();
+        _this.pauseSlideshowDelay();
+        _this.lockCtrls();
         var nextElem = $(elems[ind]);
-    nextElem.prop("left", "-100%");
+        nextElem.prop("left", "-100%");
         $(elem).hide("slide", { direction: "left", easing: "easeInOutCirc" }, animationDur);
         nextElem.show("slide", { direction: "right", easing: "easeInOutCirc" }, animationDur, function () {
-        _this.unlockCtrls();
-    });
+            _this.unlockCtrls();
+        });
         if (scr) {
-    $('html, body').animate({
-        scrollTop: $(".media-slider-frame").offset().top - 200
-    }, 1000);
+            $('html, body').animate({
+                scrollTop: $(".media-slider-frame").offset().top - 200
+            }, 1000);
         }
         elem = nextElem;
         index = ind;
-};
+    };
     _this.automateSlideshow = function () {
         if (slideShowPaused == false) {
-        _this.nextItem();
-        _this.clearTimeouts();
-    }
+            _this.nextItem();
+            _this.clearTimeouts();
+        }
         automateID[automateID.length] = setTimeout(function () {
-        _this.automateSlideshow();
+            _this.automateSlideshow();
         }, slideShowDelay);
-};
+    };
     _this.playSlideshow = function () {
         if (!ignoreMouseOut && (elems.length > 1)) {
-        _this.clearTimeouts();
+            _this.clearTimeouts();
             slideShowPaused = false;
             automateID[automateID.length] = setTimeout(function () {
-            _this.automateSlideshow();
+                _this.automateSlideshow();
             }, slideShowDelay);
-    }
-};
+        }
+    };
     _this.pauseSlideshow = function () {
         slideShowPaused = true;
-};
+    };
     _this.pauseSlideshowDelay = function () {
         slideShowPaused = true;
         ignoreMouseOut = true;
-    setTimeout(function () {
+        setTimeout(function () {
             ignoreMouseOut = false;
-        _this.playSlideshow();
+            _this.playSlideshow();
         }, slideShowPauseDelay);
-};
+    };
     _this.lockCtrls = function () {
         ctrlsLocked = true;
-};
+    };
     _this.unlockCtrls = function () {
         ctrlsLocked = false;
-};
+    };
     _this.lockCtrlsTemp = function (duration) {
         var dur = typeof duration !== 'undefined' ? duration : animationDur;
         ctrlsLocked = true;
-    setTimeout(function () {
+        setTimeout(function () {
             ctrlsLocked = false;
-    }, dur);
+        }, dur);
     };
     _this.clearTimeouts = function () {
         while (automateID.length > 0) {
             clearTimeout(automateID[0]);
             automateID.splice(0, 1);
-    }
-};
-    _this.updateElems = function (selector) {
-        elems = $(selector);
+        }
+    };
+    _this.updateElems = function () {
+        elems = sliderWrapper.find(".media-wrapper");
+        if (elems.length > 1) {
+            leftControl.fadeIn();
+            rightControl.fadeIn();
+        } else {
+            leftControl.fadeOut();
+            rightControl.fadeOut();
+        }
         $.each(elems, function (i, v) {
             $(v).hover(function () {
                 _this.pauseSlideshow();
@@ -218,8 +236,7 @@ function MediaSlider(elements, sliderFrame, slideShowPauseDelay, slideShowDelay,
             });
         });
     };
-    _this.bindItemsToSlider = function (selector) {
-        var items = $(selector);
+    _this.bindItemsToSlider = function (items) {
         $.each(items, function (i, v) {
             $(v).unbind();
             $(v).click(function () {
@@ -229,40 +246,35 @@ function MediaSlider(elements, sliderFrame, slideShowPauseDelay, slideShowDelay,
         });
     };
 
-    if(elems.length > 1) {
-
-        $.each(elems, function (i, v) {
-        $(v).hover(function () {
-            _this.pauseSlideshow();
-        }, function () {
-            _this.playSlideshow();
-        });
-        });        
-
-        leftControl.click(function () {
-            if (ctrlsLocked == false) {
-                _this.pauseSlideshowDelay();
-                _this.previousItem();
-            }
-        });
-
-        rightControl.click(function () {
-            if (ctrlsLocked == false) {
-                _this.pauseSlideshowDelay();
-                _this.nextItem();
-            }
+    sliderFrame.hover(function () {
+        _this.pauseSlideshow();
+    }, function () {
+        _this.playSlideshow();
     });
 
-        (function () {
-            setTimeout(function () {
-                _this.automateSlideshow();
-            }, slideShowDelay);
-        })();
+    leftControl.click(function () {
+        if (ctrlsLocked == false) {
+            _this.pauseSlideshowDelay();
+            _this.previousItem();
+        }
+    });
+    rightControl.click(function () {
+        if (elems.length > 1 && ctrlsLocked == false) {
+            _this.pauseSlideshowDelay();
+            _this.nextItem();
+        }
+    });
 
-    } else {
-        leftControl.hide();
-        rightControl.hide();
+    if (elems.length < 2) {
+        leftControl.fadeOut();
+        rightControl.fadeOut();
     }
+
+    (function () {
+        setTimeout(function () {
+            _this.automateSlideshow();
+        }, slideShowDelay);
+    })();
 }
 
 //Fix nav controls to hover state when on mobile devices for greater visibility
@@ -272,17 +284,61 @@ $(document).ready(function () {
     }
 });
 
+//------------------------\\
+// Spinner Wrapper Script \\
+//------------------------\\
+
+function SpinnerWrapper(spinnerOpts) {
+    var sliderSpinnerOpts = {
+        lines: 13,
+        length: 32,
+        width: 10,
+        radius: 30,
+        corners: 1,
+        rotate: 0,
+        direction: 1,
+        color: '#10beef',
+        speed: 1,
+        trail: 57,
+        shadow: false,
+        hwaccel: true,
+        className: 'spinner',
+        zIndex: 1,
+        top: '50%',
+        left: '50%'
+    };
+    if (typeof spinnerOpts === 'object') {
+        var keys = Object.keys(spinnerOpts);
+        $.each(keys, function (i, v) {
+            sliderSpinnerOpts[v] = spinnerOpts[v];
+        });
+    }
+    this.spinner = new Spinner(sliderSpinnerOpts);
+}
+
 //---------------\\
 // Pagify Script \\
 //---------------\\
 
-function Pagify(outerWrapper, innerWrapper, loader, startPage, callbackOnTransition, callbackOnSuccess, constArgsForLoader) {
+function Pagify(outerWrapper, innerWrapper, loader, startPage, callbackOnTransition, callbackOnSuccess, constArgsForLoader, spinnerOpts) {
     var _this = this;
     var constArgsExist = typeof constArgsForLoader !== 'undefined' ? true : false;
     var startPid = typeof startPage !== 'undefined' ? startPage : 1;
     var currPid = 0;
     var url = "";
     var totalPages = 0;
+    var dur = 400;
+
+    var transitionSpinnerOpts = {
+        color: '#075d74'
+    };
+    if (typeof spinnerOpts === 'object') {
+        var keys = Object.keys(spinnerOpts);
+        $.each(keys, function (i, v) {
+            transitionSpinnerOpts[v] = spinnerOpts[v];
+        });
+    }
+    var spinnerWrapper = new SpinnerWrapper(transitionSpinnerOpts);
 
     function checkWrappersExist() {
         if (outerWrapper.length <= 0 || $(innerWrapper).length <= 0) {
@@ -429,63 +485,73 @@ function Pagify(outerWrapper, innerWrapper, loader, startPage, callbackOnTransit
         addControls();
         createClickEventListeners();
     };
-    function transitionToPage(pageData, direction) {
+    function transitionFromPage(direction) {
+        var dir = typeof direction !== 'undefined' ? direction : "left";
+
+        outerWrapper.append('<div class="loading" style="display:none;"></div>');
+        var target = outerWrapper.find(".loading")[0];
+        spinnerWrapper.spinner.spin(target);
+
+        var _innerWrapperList = outerWrapper.children(":not(.pagify-control-wrapper)");
+        var _innerWrapperFirst = _innerWrapperList.first();
+        var _innerWrapperLast = _innerWrapperList.last();
+
+        _innerWrapperFirst.hide("slide", { direction: dir, easing: "easeInOutCirc" }, dur, function () {
+            _innerWrapperList.filter(":not(.loading)").remove();
+        });
+        _innerWrapperLast.fadeIn(dur, "easeInOutCirc");
+        return 1;
+    }
+    function transitionToPage(pageData, direction, delay) {
         if (typeof pageData === 'undefined') {
             return -1;
         } else if (pageData.length == 0) {
             callbackOnTransition(pageData);
             return -1;
         }
-        var dir = typeof direction !== 'undefined' ? direction : "left";
-        var reverseDir = (dir === "left" ? "right" : "left");
-        
-        var htmlPageContent = callbackOnTransition(pageData);
-        var classes = $(innerWrapper).attr("class").split(/\s+/);
-        var hasClasses = false;
-        if (classes !== 'undefined' && classes.length > 0) {
-            hasClasses = true;
-        }
-        var id = $(innerWrapper).attr("id");
-        var hasId = false;
-        if (typeof id !== 'undefined') {
-            hasId = true;
-        }
-        var htmlPage = '<div style="display: none;"' + (hasId ? 'id="' + id + '"' : '') + ' ';
-        if (hasClasses) {
-            htmlPage += 'class="'
-            $.each(classes, function (i, v) {
-                htmlPage += v + ' ';
-            });
-            htmlPage += '"';
-        }
-        htmlPage += '>' + htmlPageContent + '</div>';
+        var reverseDir = ((typeof direction !== 'undefined' ? direction : "left") === "left" ? "right" : "left");
+        var del = typeof delay !== 'undefined' ? delay : true;
+
+        var htmlPage = callbackOnTransition(pageData);
         outerWrapper.append(htmlPage);
-        var _innerWrapperList = $(innerWrapper);
-        var _innerWrapperFirst = _innerWrapperList.first();
-        var _innerWrapperLast = _innerWrapperList.last();
-        _innerWrapperLast.prop(reverseDir, "-100%");
-        var dur = 400;
-        _innerWrapperFirst.hide("slide", { direction: dir, easing: "easeInOutCirc" }, dur, function () {
-            _innerWrapperFirst.remove();
-            if (typeof callbackOnSuccess === 'function') {
-                callbackOnSuccess();
-            }
-});
-        _innerWrapperLast.show("slide", { direction: reverseDir, easing: "easeInOutCirc" }, dur);
-        outerWrapper.animate({
-            height: (_innerWrapperLast.outerHeight() + 40 + "px")
-        }, dur, "easeInOutCirc");
-        refreshControls();
-        return 1;
+
+        function transTo() {
+            var _innerWrapperList = outerWrapper.children(":not(.pagify-control-wrapper)").filter(":not(.ui-effects-wrapper)");
+            var _innerWrapperFirst = _innerWrapperList.first();
+            var _innerWrapperLast = _innerWrapperList.last();
+
+            _innerWrapperFirst.fadeOut(dur, "easeInOutCirc", function () {
+                _innerWrapperLast.show("slide", { direction: reverseDir, easing: "easeInOutCirc" }, dur, function () {
+                    spinnerWrapper.spinner.stop();
+                    _innerWrapperFirst.remove();
+                    if (typeof callbackOnSuccess === 'function') {
+                        callbackOnSuccess();
+                    }
+                });
+            });
+            outerWrapper.animate({
+                height: (_innerWrapperLast.outerHeight() + 40 + "px")
+            }, dur, "easeInOutCirc");
+            refreshControls();
+            return 1;
+        }
+
+        if (del) {
+            setTimeout(function () {
+                transTo();
+            }, dur);
+        } else {
+            transTo();
+        }
     };
     // Get page data as specified by args and data provided.
     // Returns:
-    //     Parsed JSON response from AJAX call on success.
-    //     -1 on failed AJAX call.
-    function getPageData(argsForLoader) {
+    //     1 on AJAX call made and callback provided.
+    //     JSON Parsed data on successful AJAX call with no callback.
+    function getPageData(argsForLoader, callbackOnCompletion) {
         var argsExist = typeof argsForLoader !== 'undefined' ? true : false;
+        var callbackExists = typeof callbackOnCompletion === 'function' ? true : false;
         var l = url;
-        var r;
         if (argsExist) {
             var keys = Object.keys(argsForLoader);
             for (var i = 0; i < keys.length; ++i) {
@@ -495,40 +561,44 @@ function Pagify(outerWrapper, innerWrapper, loader, startPage, callbackOnTransit
                 l += "&";
             }
         }
+        var r = 1;
         $.ajax({
             url: l,
             type: "POST",
             success: function (msg) {
-                r = JSON.parse(msg);
+                if (callbackExists) {
+                    callbackOnCompletion(JSON.parse(msg));
+                } else {
+                    r = JSON.parse(msg);
+                }
             },
-            async: false
+            async: callbackExists
         });
         return r;
     };
     // Gets page identified by the given page id.
     // If no page id is given, it gets the page of the current pid.
     // Returns:
-    //     Parsed JSON response from AJAX call on success.
-    //     -1 on failed AJAX call.
-    function getPage(pid, argsForLoader) {
-        var argsExist = typeof argsForLoader !== 'undefined' ? true : false;
-        var result = null;
-        if (argsExist) {
-            argsForLoader["pid"] = pid;
-            result = getPageData(argsForLoader);
-        } else {
-            result = getPageData({ "pid": pid });
-        }
-        if (result == null || !result) {
+    //     1 on AJAX call made.
+    //     -1 on if callback is not provided.
+    function getPage(pid, callbackOnCompletion, extraArgsForLoader) {
+        var argsExist = typeof extraArgsForLoader !== 'undefined' ? true : false;
+        if (typeof callbackOnCompletion !== 'function') {
             return -1;
         }
-        return result;
+        if (argsExist) {
+            extraArgsForLoader["pid"] = pid;
+            getPageData(extraArgsForLoader, callbackOnCompletion);
+        } else {
+            getPageData({ "pid": pid }, callbackOnCompletion);
+        }
+        return 1;
     };
 
     //Sets the page displayed to the page of the given page id.
     //If no page id is given, it does not change the page displayed.
     //Returns:
-    //    1 on success.
+    //    1 on AJAX call made.
     //    0 if pid is equal to the current id.
     //    -1 on failed AJAX call.
     //    -2 if pid lies outside range of pages accessible.
@@ -540,16 +610,18 @@ function Pagify(outerWrapper, innerWrapper, loader, startPage, callbackOnTransit
             callbackOnTransition(-1);
             return -2;
         }
-        var pgData = getPage(pid, argsForLoader);
-        if (!pgData) {
-            return -1;
-        }
         if (currPid > pid) {
             currPid = pid;
-            transitionToPage(pgData, "right");
+            transitionFromPage("right");
+            return getPage(pid, function (msg) {
+                transitionToPage(msg, "right");
+            }, argsForLoader);
         } else {
             currPid = pid;
-            transitionToPage(pgData);
+            transitionFromPage();
+            return getPage(pid, function (msg) {
+                transitionToPage(msg);
+            }, argsForLoader);
         }
     }
     
@@ -558,5 +630,8 @@ function Pagify(outerWrapper, innerWrapper, loader, startPage, callbackOnTransit
     }
     url = createUrl();
     totalPages = getTotalPages();
-    _this.setPage(startPid);
+    currPid = startPid;
+    getPage(currPid, function (msg) {
+        transitionToPage(msg);
+    });
 }

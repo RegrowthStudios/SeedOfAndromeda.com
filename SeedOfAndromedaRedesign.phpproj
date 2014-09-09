@@ -699,6 +699,7 @@
     <Content Include="assets\images\DefaultUser_NoSignIn_ProfImg.png" />
     <Content Include="assets\images\disquslogin_new.png" />
     <Content Include="assets\images\favicon.ico" />
+    <Content Include="assets\images\loading.gif" />
     <Content Include="assets\images\None.png" />
     <Content Include="assets\images\profile_images\AndreasR.jpg" />
     <Content Include="assets\images\profile_images\AnthonyK.jpg" />
@@ -1359,13 +1360,13 @@
     <Content Include="jbimages\plugin.js" />
     <Content Include="jbimages\plugin.min.js" />
     <Content Include="jbimages\readme" />
+    <Content Include="scripts\spin.min.js" />
     <Content Include="scripts\jquery.sticky.js" />
     <Content Include="scripts\less-1.7.3.min.js" />
     <Content Include="scripts\lightbox-2.6.js" />
     <Content Include="scripts\pages\blog-admin.js" />
     <Content Include="scripts\pages\blogs.js" />
     <Content Include="scripts\pages\home.js" />
-    <Content Include="scripts\pages\images - OLD.js" />
     <Content Include="scripts\pages\images.js" />
     <Content Include="scripts\pages\videos.js" />
     <Content Include="scripts\soa.js" />

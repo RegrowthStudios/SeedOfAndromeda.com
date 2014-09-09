@@ -783,6 +783,13 @@ img.overflowfix {
 .card-slider-js-warning {
   line-height: 350px;
 }
+/*********************/
+/* Content - Loading */
+/*********************/
+.loading {
+  height: 100%;
+  width: 100%;
+}
 /***************************/
 /* Content - Pagify System */
 /***************************/

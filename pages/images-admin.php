@@ -22,22 +22,22 @@ if(! $loggedIn) {
 		$groups = explode ( ",", $userinfo ["secondary_group_ids"] );
 		$groups [] = $userinfo ["user_group_id"];
         
-        $canmanagescreenshots = false;
+        $canmanageimages = false;
         
-        $managescreenshotsgroups = array (
+        $manageimagesgroups = array (
 				7,
 				13,
                 3
         );
         
-        foreach ( $managescreenshotsgroups as $groupid ) {
+        foreach ( $manageimagesgroups as $groupid ) {
             if (in_array ( $groupid, $groups )) {
-                $canmanagescreenshots = true;
+                $canmanageimages = true;
                 break;
             }
         }
         
-        if (! $canmanagescreenshots) {
+        if (! $canmanageimages) {
 			echo '
                 <div class="row clearfix">
                     <div class="header"><h1 class="error">Images Manager - Error</h1></div>
@@ -48,15 +48,15 @@ if(! $loggedIn) {
                     </div>';
         } else {
             if (isset ( $_REQUEST ['delete'] )) {
-                $screenshot = false;
-                if ($canmanagescreenshots) {
-					$query = $connection->prepare ( "SELECT * FROM screenshots WHERE id = ?" );
+                $image = false;
+                if ($canmanageimages) {
+					$query = $connection->prepare ( "SELECT * FROM images WHERE id = ?" );
 					$query->execute ( array (
 							$_REQUEST ['imageid'] 
 					) );
-					$screenshot = $query->fetch ();
+					$image = $query->fetch ();
                 }
-				if (! $screenshot) {
+				if (! $image) {
 					echo '
                         <div class="row clearfix">
                             <div class="header"><h1>Images Manager - Error</h1></div>
@@ -66,12 +66,12 @@ if(! $loggedIn) {
                                 </div>
                             </div>';
                 } else {
-                    foreach ( glob ( "assets/images/screenshots/*.jpg" ) as $image ) {
-                        if ( strpos ( $image, $_REQUEST ['imageid'] . "-" . clean_pageid ( str_replace ( " ", "-", $screenshot ['title'] ) ) ) ) {
-                            unlink ( $image );
+                    foreach ( glob ( "assets/images/screenshots/*.jpg" ) as $img ) {
+                        if ( strpos ( $img, $_REQUEST ['imageid'] . "-" . clean_pageid ( str_replace ( " ", "-", $img ['title'] ) ) ) ) {
+                            unlink ( $img );
                         }
                     }
-                    $query = $connection->prepare ( "DELETE FROM screenshots WHERE id = ?" );
+                    $query = $connection->prepare ( "DELETE FROM images WHERE id = ?" );
                     $query->execute ( array (
                             $_REQUEST ['imageid']
                     ) );
@@ -85,15 +85,15 @@ if(! $loggedIn) {
                             </div>';
                 }
             } else if (isset ( $_REQUEST ['imageid'] )) {
-                $screenshot = false;
-                if ($canmanagescreenshots) {
-					$query = $connection->prepare ( "SELECT * FROM screenshots WHERE id = ?" );
+                $image = false;
+                if ($canmanageimages) {
+					$query = $connection->prepare ( "SELECT * FROM images WHERE id = ?" );
 					$query->execute ( array (
 							$_REQUEST ['imageid'] 
 					) );
-					$screenshot = $query->fetch ();
+					$image = $query->fetch ();
                 }
-				if (! $screenshot) {
+				if (! $image) {
 					echo '
                         <div class="row clearfix">
                             <div class="header"><h1>Images Manager - Error</h1></div>
@@ -115,10 +115,10 @@ if(! $loggedIn) {
                                         </div>
                                     </div>';
                         } else {
-                            if ( isset ( $_FILES['screenshot'] ) && $_FILES['screenshot']['size'] > 0 ) {
+                            if ( isset ( $_FILES['image'] ) && $_FILES['image']['size'] > 0 ) {
                             
                                 $allowedExts = array("jpg", "jpeg");
-                                $temp = explode(".", $_FILES['screenshot']['name']);
+                                $temp = explode(".", $_FILES['image']['name']);
                                 $extension = end($temp);
                             
                                 if (! in_array ( $extension, $allowedExts ) ) {
@@ -130,39 +130,39 @@ if(! $loggedIn) {
                                                     <h3 class="error">Image file must be a jpeg!</h3>
                                                 </div>
                                             </div>';
-                                } else if ( $_FILES['screenshot']['error'] > 0 ) {
+                                } else if ( $_FILES['image']['error'] > 0 ) {
                                     echo '
                                         <div class="row clearfix">
                                             <div class="header"><h1 class="error">Images Manager - Error</h1></div>
                                             <div class="col double-col-2">
                                                 <div class="text">
-                                                    <h3 class="error">Error: ' . $_FILES['screenshot']['error'] . '</h3>
+                                                    <h3 class="error">Error: ' . $_FILES['image']['error'] . '</h3>
                                                 </div>
                                             </div>';
                                 } else {
                                 
-                                    //if ( ! file_exists( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "seedofandromeda_com/assets/images/screenshots/" . $_REQUEST ['imageid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['title'] ) ) . $extension ) ) {
-                                    //    mkdir ( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "seedofandromeda_com/assets/images/screenshots/" . $_REQUEST ['imageid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['title'] ) ) . $extension, 0755, true );
-                                    //} else if ( file_exists( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "seedofandromeda_com/assets/images/screenshots/" . $_REQUEST ['imageid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['title'] ) ) . $extension ) ) {
-                                    //    unlink (dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "seedofandromeda_com/assets/images/screenshots/" . $_REQUEST ['imageid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['title'] ) ) . $extension );
-                                    //}
-                                
-                                    //move_uploaded_file( $_FILES['screenshot']['tmp_name'],
-                                    //   dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "seedofandromeda_com/assets/images/screenshots/" . $_REQUEST ['imageid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['title'] ) ) . $extension ); 
-                            
-                                    if ( ! file_exists( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "/SoAWebDev/assets/images/screenshots/" ) ) {
-                                        mkdir ( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "/SoAWebDev/assets/images/screenshots/", 0755, true );
-                                    } else if ( file_exists( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "/SoAWebDev/assets/images/screenshots/" . $_REQUEST ['imageid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['title'] ) ) . "." . $extension ) ) {
-                                        unlink (dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "/SoAWebDev/assets/images/screenshots/" . $_REQUEST ['imageid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['title'] ) ) . "." . $extension );
+                                    if ( ! file_exists( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "seedofandromeda_com/assets/images/screenshots/" . $_REQUEST ['imageid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['title'] ) ) . $extension ) ) {
+                                        mkdir ( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "seedofandromeda_com/assets/images/screenshots/" . $_REQUEST ['imageid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['title'] ) ) . $extension, 0755, true );
+                                    } else if ( file_exists( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "seedofandromeda_com/assets/images/screenshots/" . $_REQUEST ['imageid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['title'] ) ) . $extension ) ) {
+                                        unlink (dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "seedofandromeda_com/assets/images/screenshots/" . $_REQUEST ['imageid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['title'] ) ) . $extension );
                                     }
                                 
+                                    move_uploaded_file( $_FILES['image']['tmp_name'],
+                                       dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "seedofandromeda_com/assets/images/screenshots/" . $_REQUEST ['imageid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['title'] ) ) . $extension ); 
+                            
+                                    //if ( ! file_exists( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "/SoAWebDev/assets/images/screenshots/" ) ) {
+                                    //    mkdir ( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "/SoAWebDev/assets/images/screenshots/", 0755, true );
+                                    //} else if ( file_exists( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "/SoAWebDev/assets/images/screenshots/" . $_REQUEST ['imageid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['title'] ) ) . "." . $extension ) ) {
+                                    //    unlink (dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "/SoAWebDev/assets/images/screenshots/" . $_REQUEST ['imageid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['title'] ) ) . "." . $extension );
+                                    //}
+                                
                                    
-                                    move_uploaded_file( $_FILES['screenshot']['tmp_name'],
-                                       dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "/SoAWebDev/assets/images/screenshots/" . $_REQUEST ['imageid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['title'] ) ) . "." . $extension ); 
+                                    //move_uploaded_file( $_FILES['screenshot']['tmp_name'],
+                                    //   dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "/SoAWebDev/assets/images/screenshots/" . $_REQUEST ['imageid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['title'] ) ) . "." . $extension ); 
                                     
                                 }
                             }
-                            $q = $connection->prepare ( "SELECT * FROM screenshots WHERE id = ?");
+                            $q = $connection->prepare ( "SELECT * FROM images WHERE id = ?");
                             $q->execute ( array ( 
                                 $_REQUEST ['imageid']
                             ) );
@@ -172,7 +172,7 @@ if(! $loggedIn) {
                                     unlink ( $image );
                                 }
                             }
-                            $query = $connection->prepare ( "UPDATE screenshots SET title = ?, description = ?, img_url = ?, category = ?, updatetime = ?, published = ? WHERE id = ?" );
+                            $query = $connection->prepare ( "UPDATE images SET title = ?, description = ?, img_url = ?, category = ?, updatetime = ?, published = ? WHERE id = ?" );
 						    $query->execute ( array (
 								    $_REQUEST ['title'],
 								    $_REQUEST ['description'],
@@ -268,29 +268,29 @@ if(! $loggedIn) {
     });
 </script>
 <form
-	action="/<?php echo $pageurl . '?imageid=' . $screenshot ["id"]; ?>&submit&notemplate"
+	action="/<?php echo $pageurl . '?imageid=' . $image ["id"]; ?>&submit&notemplate"
 	enctype="multipart/form-data" method="post">
     <div class="row clearfix">
-        <div class="header"><h1><p id="title" class="edittitle"><?php echo $screenshot["title"];?></p></h1></div>
+        <div class="header"><h1><p id="title" class="edittitle"><?php echo $image["title"];?></p></h1></div>
         <div class="col double-col-2">
             <div class="text">
-		        <div id="description" class="editpost"><?php echo $screenshot["description"];?></div>
+		        <div id="description" class="editpost"><?php echo $image["description"];?></div>
                 <br/>
-                <label for="screenshot">Screenshot:</label> 
-                <input id="screenshot" value="1"
-					type="file" name="screenshot" />
+                <label for="image">Screenshot:</label> 
+                <input id="image" value="1"
+					type="file" name="image" />
                 <br/><br/>
-                <?php echo '<img class="img medium-wide right" style="margin-top:-2em;" src="' . $screenshot["img_url"] . '" />'; ?>
+                <?php echo '<img class="img medium-wide right" style="margin-top:-2em;" src="' . $image["img_url"] . '" />'; ?>
                 <div id="screenshot-category">
                     <div id="screenshot-category-header"><h1>Screenshot Category:</h1></div>
                     <div id="screenshot-category-options">
                         <span>Gameplay:</span> <div class="checkbox"> <input id="category-gameplay" value="GAMEPLAY"
-						    type="radio" name="category" <?php if( $screenshot["category"] == "GAMEPLAY" ) echo "checked";?> />
+						    type="radio" name="category" <?php if( $image["category"] == "GAMEPLAY" ) echo "checked";?> />
 						    <label for="category-gameplay"></label>
                         </div>
                         <br/>
                         <span>Concept:</span> <div class="checkbox"> <input id="category-concept" value="CONCEPT"
-						    type="radio" name="category" <?php if( $screenshot["category"] == "CONCEPT" ) echo "checked";?> />
+						    type="radio" name="category" <?php if( $image["category"] == "CONCEPT" ) echo "checked";?> />
 						    <label for="category-concept"></label>
                         </div>
                     </div>
@@ -303,7 +303,7 @@ if(! $loggedIn) {
         <div class="col double-col-2">
             <div id="screenshot-settings" class="text clearfix">
                 <span>Publish Screenshot:</span> <div class="checkbox"> <input id="published" value="1"
-				    type="checkbox" name="published" <?php if($screenshot["published"] == "1") echo "checked";?> />
+				    type="checkbox" name="published" <?php if($image["published"] == "1") echo "checked";?> />
 				    <label for="published"></label>
                 </div>
                 <br/><br/>
@@ -317,7 +317,7 @@ if(! $loggedIn) {
                     }
                 }
             } else if (isset ( $_REQUEST ['newimage'] )) {
-				$query = $connection->prepare ( "INSERT INTO screenshots (title, description, img_url, category, timestamp) VALUES (?, ?, ?, ?, ?)" );
+				$query = $connection->prepare ( "INSERT INTO images (title, description, img_url, category, timestamp) VALUES (?, ?, ?, ?, ?)" );
 				$query->execute ( array (
 						"Screenshot Title",
 						"<p>Click here to write up a description of the screenshot.</p>",
@@ -334,11 +334,11 @@ if(! $loggedIn) {
                     <div class="header"><h1>Images Manager</h1></div>
                     <div class="col double-col-2">
                         <div class="text">';
-                if ($canmanagescreenshots) {
+                if ($canmanageimages) {
                 
                     echo '<a class="btn right" href="/' . $pageurl . '?newimage&notemplate">New Image</a>';
 					
-                    $query = $connection->prepare ( "SELECT * FROM screenshots ORDER BY id DESC" );
+                    $query = $connection->prepare ( "SELECT * FROM images ORDER BY id DESC" );
 					$query->execute();
                     
                     echo "<h2>Images:</h2><br><ul>";

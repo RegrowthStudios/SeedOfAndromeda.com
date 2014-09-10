@@ -23,6 +23,8 @@
     <IncludeDebugInformation>false</IncludeDebugInformation>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="apps\api.php" />
+    <Compile Include="apps\t3mod.php" />
     <Compile Include="blocks\index.php" />
     <Compile Include="closewindow.php" />
     <Compile Include="db_connect.php" />
@@ -295,6 +297,7 @@
     <Compile Include="pages\downloads.php" />
     <Compile Include="header.php" />
     <Compile Include="index.php" />
+    <Compile Include="pages\chat.php" />
     <Compile Include="pages\irc.php" />
     <Compile Include="jbimages\ci\application\config\autoload.php" />
     <Compile Include="jbimages\ci\application\config\config.php" />
@@ -579,6 +582,7 @@
     <Folder Include="jbimages\js\" />
     <Folder Include="jbimages\langs\" />
     <Folder Include="loaders\" />
+    <Folder Include="apps\" />
     <Folder Include="pages\" />
     <Folder Include="scripts\" />
     <Folder Include="scripts\pages\" />

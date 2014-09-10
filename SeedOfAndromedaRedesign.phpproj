@@ -32,7 +32,11 @@
     <Compile Include="loaders\image-loader.php" />
     <Compile Include="loaders\video-loader.php" />
     <Compile Include="pages\404.php" />
-    <Compile Include="pages\blog-admin.php" />
+    <Compile Include="pages\admin.php" />
+    <Compile Include="pages\admin\blogs.php" />
+    <Compile Include="pages\admin\downloads.php" />
+    <Compile Include="pages\admin\images.php" />
+    <Compile Include="pages\admin\videos.php" />
     <Compile Include="pages\blogs.php" />
     <Compile Include="community\avatar.php" />
     <Compile Include="community\donation_callback.php" />
@@ -291,7 +295,6 @@
     <Compile Include="community\library\XenResource\WarningHandler\Rating.php" />
     <Compile Include="community\library\XenResource\WarningHandler\Update.php" />
     <Compile Include="community\XenForoSDK.php" />
-    <Compile Include="pages\downloads-admin.php" />
     <Compile Include="pages\downloads.php" />
     <Compile Include="header.php" />
     <Compile Include="index.php" />
@@ -350,13 +353,11 @@
     <Compile Include="jbimages\config.php" />
     <Compile Include="jbimages\is_allowed.php" />
     <Compile Include="pages\maintenance.php" />
-    <Compile Include="pages\images-admin.php" />
     <Compile Include="pages\images.php" />
     <Compile Include="maintenance.php" />
     <Compile Include="pages\the-team.php" />
     <Compile Include="pages\the-game.php" />
     <Compile Include="pages\under-construction.php" />
-    <Compile Include="pages\videos-admin.php" />
     <Compile Include="thumb.php" />
     <Compile Include="pages\home.php" />
     <Compile Include="pages\videos.php" />
@@ -580,6 +581,7 @@
     <Folder Include="jbimages\langs\" />
     <Folder Include="loaders\" />
     <Folder Include="pages\" />
+    <Folder Include="pages\admin\" />
     <Folder Include="scripts\" />
     <Folder Include="scripts\pages\" />
     <Folder Include="stats\" />

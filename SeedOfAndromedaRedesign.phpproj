@@ -701,7 +701,6 @@
     <Content Include="assets\images\DefaultUser_NoSignIn_ProfImg.png" />
     <Content Include="assets\images\disquslogin_new.png" />
     <Content Include="assets\images\favicon.ico" />
-    <Content Include="assets\images\loading.gif" />
     <Content Include="assets\images\None.png" />
     <Content Include="assets\images\profile_images\AndreasR.jpg" />
     <Content Include="assets\images\profile_images\AnthonyK.jpg" />

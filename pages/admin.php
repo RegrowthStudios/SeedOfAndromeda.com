@@ -1,7 +1,7 @@
 <?php
     if (!$loggedIn) {
     
-	    echo '
+        echo '
             <div class="row clearfix">
                 <div class="header"><h1 class="error">Admin - Error</h1></div>
                 <div class="col double-col-2">
@@ -29,25 +29,25 @@
 		    $groups [] = $userinfo ["user_group_id"];
             
             $manageOwnBlogsGroups = array (
-				7,
-				13 
-		    );
+                7,
+                13 
+            );
             $manageAllBlogsGroups = array (
-				3 
-		    );
+                3 
+            );
             $manageDownloadsGroups = array (
-				7,
-				13,
+                7,
+                13,
                 3
             );
             $manageImagesGroups = array (
-				7,
-				13,
+                7,
+                13,
                 3
             );
             $manageVideosGroups = array (
-				7,
-				13,
+                7,
+                13,
                 3
             );
             $totalGroups = array_unique( array_merge($manageOwnBlogsGroups, $manageAllBlogsGroups, $manageDownloadsGroups, $manageImagesGroups, $manageVideosGroups) );
@@ -182,9 +182,23 @@
                     }
                     
                 } else {
-                
-                    //Show admin home page
-                
+?>
+                    <div class="row clearfix">
+                        <div class="header"><h1>Admin Panel</h1></div>
+                            <div class="col quad-col-1 centerInners">
+                                <a class="btn download" href="/admin?blogs">Blogs</a>
+                            </div>
+                            <div class="col quad-col-1 centerInners">
+                                <a class="btn download" href="/admin?downloads">Downloads</a>
+                            </div>
+                            <div class="col quad-col-1 centerInners">
+                                <a class="btn download" href="/admin?images">Images</a>
+                            </div>
+                            <div class="col quad-col-1 centerInners">
+                                <a class="btn download" href="/admin?videos">Videos</a>
+                            </div>
+                    </div>
+<?php
                 }
                 
             }

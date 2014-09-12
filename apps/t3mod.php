@@ -29,7 +29,24 @@
     <div style="visibility: visible; width:100%;">
         <!-- Templates for messenger -->
         <div id="mesgin">
-                
+            <div style="width:100%;">
+                <div style="width:80%; float:left;">
+                    <div style="background-color:#eeeecc; padding:5px;">
+                        Fuck you!
+                        <div style="width:1px; height:9px;"></div>
+                    </div>
+                    <div style="float:left; width:1px; height:5px; position:relative;">
+                        <div style="font-size:9px; position: absolute; top:-14px; left: 5px;">
+                            15:01:11
+                        </div>
+                        <div style="font-size:9px; position: absolute; top:-14px; left: 45px; width:200px;">
+                            <div style="float:left;">
+                                Some dickhead just said that.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         
         <div id="mesgout" style="width:100%;">
@@ -39,7 +56,7 @@
                         This swaggy Chat client better be working!<br/> yo
                         <div style="width:1px; height:9px;"></div>
                     </div>
-                    <div style="float:right; width:1px; height:1px; position:relative;">
+                    <div style="float:right; width:1px; height:5px; position:relative;">
                         <div style="font-size:9px; position: absolute; top:-14px; right: 5px;">
                             15:02:21
                         </div>

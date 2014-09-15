@@ -87,7 +87,7 @@
 </div>
 
 <div class="row clearfix the-team">
-    <div class="header"><h1 class="name">Georg Hammerschmid</h1><h3 class="title">&nbsp;- Texture Artist</h3></div>
+    <div class="header"><h1 class="name">Georg Hammerschmid</h1><h3 class="title">&nbsp;- Artist and Designer</h3></div>
     <div class="col tri-col-1">
         <a href="/assets/images/profile_images/GeorgH.png" data-lightbox="images" title="Georg Hammerschmid">
             <img src="/assets/images/profile_images/GeorgH_thumb_320x192.png" class="img medium-wide overflowfix"/>

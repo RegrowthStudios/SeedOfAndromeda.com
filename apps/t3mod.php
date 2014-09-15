@@ -8,7 +8,7 @@
 
     <div id="window" style="width:100%; height:550px; position:absolute; overflow:hidden; top:0px; left:0px;">
         <div style="height:50px; width:100%; position: absolute; background-color:#dddddd;">
-            <div>Chan name</div><div>|</div> ([- for status) Buttons
+            <div style="float:left;">Chan name</div><div style="float:left;">|</div> ([- for status) Buttons
         </div>
         <div id="msgs" style="height:450px; width:100%; padding:0px; position: absolute; top:50px; background-color:#ffffff;">
            

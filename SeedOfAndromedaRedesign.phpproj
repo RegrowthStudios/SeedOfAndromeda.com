@@ -23,7 +23,6 @@
     <IncludeDebugInformation>false</IncludeDebugInformation>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="apps\api.php" />
     <Compile Include="apps\t3mod.php" />
     <Compile Include="blocks\index.php" />
     <Compile Include="closewindow.php" />
@@ -31,6 +30,8 @@
     <Compile Include="draft-saver.php" />
     <Compile Include="files\download.php" />
     <Compile Include="footer.php" />
+    <Compile Include="JereNet\api\index.php" />
+    <Compile Include="JereNet\auth.php" />
     <Compile Include="loaders\image-loader.php" />
     <Compile Include="loaders\video-loader.php" />
     <Compile Include="pages\404.php" />
@@ -581,8 +582,10 @@
     <Folder Include="jbimages\img\" />
     <Folder Include="jbimages\js\" />
     <Folder Include="jbimages\langs\" />
+    <Folder Include="JereNet\api\" />
     <Folder Include="loaders\" />
     <Folder Include="apps\" />
+    <Folder Include="JereNet\" />
     <Folder Include="pages\" />
     <Folder Include="scripts\" />
     <Folder Include="scripts\pages\" />

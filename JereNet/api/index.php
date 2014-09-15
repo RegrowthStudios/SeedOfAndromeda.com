@@ -1,5 +1,5 @@
 <?php
-    $mashape_key = "<your key here>";
+    $mashape_key = "abMdiba0hHmsha90MmDv77mL1jYkp1dYqwmjsnqh5foXJ9FMoU";
     set_time_limit(35);
     $turl = "https://jere".$_GET['api'].".p.mashape.com/?prot=".$_GET['prot'];
     echo file_get_contents(

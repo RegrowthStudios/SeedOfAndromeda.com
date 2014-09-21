@@ -195,7 +195,7 @@
 <div class="row clearfix the-team">
     <div class="header"><h1 class="name">Brian Bruggeman</h1><h3 class="title">&nbsp;- Software Engineering Consultant</h3></div>
     <div class="col tri-col-1">
-        <a href="/assets/images/profile_images/BrianB.jpg" data-lightbox="images" title="Cristian Zaloj">
+        <a href="/assets/images/profile_images/BrianB.jpg" data-lightbox="images" title="Brian Bruggeman">
             <img src="/assets/images/profile_images/BrianB_thumb_320x192.jpg" class="img medium-wide overflowfix"/>
         </a>
     </div>
@@ -224,7 +224,7 @@
             </div>
     </div>
     <div class="col tri-col-1">
-        <a href="/assets/images/profile_images/JeremyF.jpg" data-lightbox="images" title="Cristian Zaloj">
+        <a href="/assets/images/profile_images/JeremyF.jpg" data-lightbox="images" title="Jeremy Fischer">
             <img src="/assets/images/profile_images/JeremyF_thumb_320x192.jpg" class="img medium-wide overflowfix"/>
         </a>
     </div>
@@ -233,7 +233,7 @@
 <div class="row clearfix the-team">
     <div class="header"><h1 class="name">Frank McCoy</h1><h3 class="title">&nbsp;- Programmer</h3></div>
     <div class="col tri-col-1">
-        <a href="/assets/images/profile_images/FrankF.jpg" data-lightbox="images" title="Cristian Zaloj">
+        <a href="/assets/images/profile_images/FrankF.jpg" data-lightbox="images" title="Frank McCoy">
             <img src="/assets/images/profile_images/FrankF_thumb_320x192.jpg" class="img medium-wide overflowfix"/>
         </a>
     </div>

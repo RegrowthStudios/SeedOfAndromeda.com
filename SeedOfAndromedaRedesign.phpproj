@@ -378,6 +378,8 @@
     <Folder Include="assets\images\blogs\Dev-News-June-2014-6-16\" />
     <Folder Include="assets\images\blogs\Flood-Fill-Lighting-2014-6-14\" />
     <Folder Include="assets\images\blogs\Region-File-System--2013-12-04\" />
+    <Folder Include="assets\images\modding\" />
+    <Folder Include="assets\images\modding\texture\" />
     <Folder Include="assets\images\profile_images\" />
     <Folder Include="assets\images\screenshots\" />
     <Folder Include="assets\lightbox\" />
@@ -699,7 +701,14 @@
     <Content Include="assets\images\DefaultUser_NoSignIn_ProfImg.png" />
     <Content Include="assets\images\disquslogin_new.png" />
     <Content Include="assets\images\favicon.ico" />
-    <Content Include="assets\images\loading.gif" />
+    <Content Include="assets\images\modding\texture\method_connect.png" />
+    <Content Include="assets\images\modding\texture\method_connect_innerSeams_false.png" />
+    <Content Include="assets\images\modding\texture\method_connect_innerSeams_true.png" />
+    <Content Include="assets\images\modding\texture\method_grass.png" />
+    <Content Include="assets\images\modding\texture\method_horizontal.png" />
+    <Content Include="assets\images\modding\texture\method_horizontal_innerSeams_false.png" />
+    <Content Include="assets\images\modding\texture\method_horizontal_innerSeams_true.png" />
+    <Content Include="assets\images\modding\texture\method_vertical.png" />
     <Content Include="assets\images\None.png" />
     <Content Include="assets\images\profile_images\AndreasR.jpg" />
     <Content Include="assets\images\profile_images\AnthonyK.jpg" />

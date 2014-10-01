@@ -36,7 +36,7 @@
     </div>
 </div>
 
-<div class="row clearfix">
+<div id="dev-news" class="row clearfix">
     <div class="header"><h1>Latest Dev News</h1></div>
     <div class="col double-col-2">
         <?php
@@ -48,7 +48,7 @@
                     1
             ) );
         ?>
-        <div id="dev-news" class="media-slider-frame card-slider-frame">
+        <div class="media-slider-frame card-slider-frame">
             <div class="media-slider-control media-slider-control-left card-slider-control">
                 <img class="media-slider-control-img" src="/assets/images/arrowLeft.png" />
             </div>

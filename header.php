@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.ico" />
     <link rel="stylesheet" href="/styles/normalise.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/soa.min.css?ver=6" type="text/css" />
+    <link rel="stylesheet" href="/styles/soa.min.css?ver=9" type="text/css" />
     <link rel="stylesheet" href="/assets/fonts/the_league_of_orbitron/Orbitron.css" type="text/css" />
     <link href='https://fonts.googleapis.com/css?family=Electrolize' rel='stylesheet' type='text/css' />
     <meta name="viewport" content="width=device-width, initial-scale=1" />

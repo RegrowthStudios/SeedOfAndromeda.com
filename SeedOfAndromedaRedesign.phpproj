@@ -32,7 +32,11 @@
     <Compile Include="loaders\image-loader.php" />
     <Compile Include="loaders\video-loader.php" />
     <Compile Include="pages\404.php" />
-    <Compile Include="pages\blog-admin.php" />
+    <Compile Include="pages\admin.php" />
+    <Compile Include="pages\admin\blogs.php" />
+    <Compile Include="pages\admin\downloads.php" />
+    <Compile Include="pages\admin\images.php" />
+    <Compile Include="pages\admin\videos.php" />
     <Compile Include="pages\blogs.php" />
     <Compile Include="community\avatar.php" />
     <Compile Include="community\donation_callback.php" />
@@ -291,7 +295,6 @@
     <Compile Include="community\library\XenResource\WarningHandler\Rating.php" />
     <Compile Include="community\library\XenResource\WarningHandler\Update.php" />
     <Compile Include="community\XenForoSDK.php" />
-    <Compile Include="pages\downloads-admin.php" />
     <Compile Include="pages\downloads.php" />
     <Compile Include="header.php" />
     <Compile Include="index.php" />
@@ -350,13 +353,11 @@
     <Compile Include="jbimages\config.php" />
     <Compile Include="jbimages\is_allowed.php" />
     <Compile Include="pages\maintenance.php" />
-    <Compile Include="pages\images-admin.php" />
     <Compile Include="pages\images.php" />
     <Compile Include="maintenance.php" />
     <Compile Include="pages\the-team.php" />
     <Compile Include="pages\the-game.php" />
     <Compile Include="pages\under-construction.php" />
-    <Compile Include="pages\videos-admin.php" />
     <Compile Include="thumb.php" />
     <Compile Include="pages\home.php" />
     <Compile Include="pages\videos.php" />
@@ -378,8 +379,6 @@
     <Folder Include="assets\images\blogs\Dev-News-June-2014-6-16\" />
     <Folder Include="assets\images\blogs\Flood-Fill-Lighting-2014-6-14\" />
     <Folder Include="assets\images\blogs\Region-File-System--2013-12-04\" />
-    <Folder Include="assets\images\modding\" />
-    <Folder Include="assets\images\modding\texture\" />
     <Folder Include="assets\images\profile_images\" />
     <Folder Include="assets\images\screenshots\" />
     <Folder Include="assets\lightbox\" />
@@ -582,6 +581,7 @@
     <Folder Include="jbimages\langs\" />
     <Folder Include="loaders\" />
     <Folder Include="pages\" />
+    <Folder Include="pages\admin\" />
     <Folder Include="scripts\" />
     <Folder Include="scripts\pages\" />
     <Folder Include="stats\" />
@@ -701,14 +701,6 @@
     <Content Include="assets\images\DefaultUser_NoSignIn_ProfImg.png" />
     <Content Include="assets\images\disquslogin_new.png" />
     <Content Include="assets\images\favicon.ico" />
-    <Content Include="assets\images\modding\texture\method_connect.png" />
-    <Content Include="assets\images\modding\texture\method_connect_innerSeams_false.png" />
-    <Content Include="assets\images\modding\texture\method_connect_innerSeams_true.png" />
-    <Content Include="assets\images\modding\texture\method_grass.png" />
-    <Content Include="assets\images\modding\texture\method_horizontal.png" />
-    <Content Include="assets\images\modding\texture\method_horizontal_innerSeams_false.png" />
-    <Content Include="assets\images\modding\texture\method_horizontal_innerSeams_true.png" />
-    <Content Include="assets\images\modding\texture\method_vertical.png" />
     <Content Include="assets\images\None.png" />
     <Content Include="assets\images\profile_images\AndreasR.jpg" />
     <Content Include="assets\images\profile_images\AnthonyK.jpg" />

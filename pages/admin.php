@@ -76,7 +76,7 @@
                 if (isset ($_REQUEST['blogs'])) {
                 
                     $canAccessBlogs = false;
-                    foreach (array_unique( array_merge($editowngroups, $editallgroups) ) as $groupId) {
+                    foreach (array_unique( array_merge($manageOwnBlogsGroups, $manageAllBlogsGroups) ) as $groupId) {
                         if (in_array($groupId, $groups)) {
                             $canAccessBlogs = true;
                             break;

@@ -16,7 +16,7 @@
                 other survivors! The game focusses on modability and customisation,
                 many tools will come packaged with the game, including world, tree,
                 biome and block editors!
-                <a href="/thegame" class="right read-more">Read more here!</a>
+                <a href="/the-game" class="right read-more">Read more here!</a>
             <div id="featured-video"></div>
             <script type="text/javascript">
                 function showVideo(response) {

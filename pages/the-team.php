@@ -230,3 +230,20 @@
         </a>
     </div>
 </div>
+    
+<div class="row clearfix the-team">
+    <div class="header"><h1 class="name">Isaque Dutra</h1><h3 class="title">&nbsp;- Programmer</h3></div>
+    <div class="col tri-col-1">
+        <a href="/assets/images/profile_images/IsaqueD.jpg" data-lightbox="images" title="Jeremy Fischer">
+            <img src="/assets/images/profile_images/IsaqueD_thumb_320x192.jpg" class="img medium-wide overflowfix"/>
+        </a>
+    </div>
+    <div class="col tri-col-2">
+        <div class="text">
+                Isaque is an extremely hard-working scholar and programmer. He is a current student of MIT 
+                who is working on a degree in Physics as well as Computer Science. He is also very interested in 
+                Astronomy, Photography, and cheese making! Isaque is a quick learner who has high ambition for 
+                furthering the development of Seed of Andromeda!
+            </div>
+    </div>
+</div>

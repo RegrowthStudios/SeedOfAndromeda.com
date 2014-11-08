@@ -587,16 +587,7 @@ function Pagify(outerWrapper, innerWrapper, loader, startPage, callbackOnTransit
             var _innerWrapperFirst = _innerWrapperList.first();
             var _innerWrapperLast = _innerWrapperList.last();
 
-            var heightOuterWrapper = _innerWrapperLast.outerHeight() + 40;
-            //console.log(_innerWrapperFirst);
-            //console.log(_innerWrapperLast);
-            //console.log(_innerWrapperFirst.siblings());
-            //console.log(_innerWrapperLast.siblings());
-            //console.log(_innerWrapperFirst.parent().children(".row"));
-            //console.log(_innerWrapperLast.parent().children(".row"));
-            $.each(_innerWrapperFirst.siblings(), function () {
-                heightOuterWrapper += $(this).outerHeight(true);
-            })
+            var heightOuterWrapper = _innerWrapperLast.outerHeight();
 
             _innerWrapperFirst.fadeOut(dur, "easeInOutCirc", function () {
                 _innerWrapperLast.show("slide", { direction: reverseDir, easing: "easeInOutCirc" }, dur, function () {
@@ -608,10 +599,11 @@ function Pagify(outerWrapper, innerWrapper, loader, startPage, callbackOnTransit
                 });
             });
 
-            outerWrapper.animate({
-                height: (heightOuterWrapper + "px")
-            }, dur, "easeInOutCirc");
+            _innerWrapperList.filter(".loading").remove();
             refreshControls();
+            outerWrapper.animate({
+                height: (heightOuterWrapper + _innerWrapperFirst.siblings().last().outerHeight() + "px")
+            }, dur, "easeInOutCirc");
             return 1;
         }
 

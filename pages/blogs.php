@@ -77,8 +77,8 @@ if (isset ( $connection )) {
 			echo_disqus ( $blogpost ["title"], $pageurl, "blogs-" . $blogpost ["id"] );
 		}
 ?>
-        </div>
     </div>
+        </div>
 </div>
 <?php
     } else {

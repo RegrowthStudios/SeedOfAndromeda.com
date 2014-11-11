@@ -95,7 +95,7 @@ if (isset ( $_REQUEST ['delete'] )) {
                 $extension = "";
                 if ( isset ( $_FILES['dev-news-summary-background'] ) && $_FILES['dev-news-summary-background']['size'] > 0 ) {
                             
-                    $allowedExts = array("jpg", "png", "jpeg", "gif");
+                    $allowedExts = array("jpg", "png", "PNG", "jpeg", "gif");
                     $temp = explode(".", $_FILES['dev-news-summary-background']['name']);
                     $extension = end($temp);
                             
@@ -160,6 +160,7 @@ if (isset ( $_REQUEST ['delete'] )) {
                     
                 } else {
                 
+                    //Update without changing background image for dev news slider.
 				    $query = $connection->prepare ( "UPDATE blog_posts SET title = ?, post_body = ?, post_brief = ?, updatetime = ?, disablecomments = ?, published = ?, devnews = ?, anonymous = ?, removesignoff = ?, dev_news_body = ?, prioritisescreenshots = ?, hidescreenshots = ?, draftIsLatest = ? WHERE id = ?" );
 				    $query->execute ( array (
 						    $_REQUEST ['blog-post-title'],

@@ -195,7 +195,7 @@
 </div>
 
 <div class="row clearfix the-team">
-    <div class="header"><h1 class="name">Jeremy Fischer</h1><h3 class="title">&nbsp;- Intern Programmer</h3></div>
+    <div class="header"><h1 class="name">Jeremy Fischer</h1><h3 class="title">&nbsp;- Programmer / Media</h3></div>
     <div class="col tri-col-1">
         <a href="/assets/images/profile_images/JeremyF.jpg" data-lightbox="images" title="Jeremy Fischer">
             <img src="/assets/images/profile_images/JeremyF_thumb_320x192.jpg" class="img medium-wide overflowfix"/>
@@ -207,7 +207,8 @@
             person. He has experience with network programming and server management, and
             he is going to host the first dedicated SoA team server when multiplayer is
             implemented! Jeremy's dedication and talent ensure that he will grow into
-            a very skilled game programmer!
+            a very skilled game programmer! He is also doing weird things in
+			a language nobody will ever understand.
             </div>
     </div>
 </div>

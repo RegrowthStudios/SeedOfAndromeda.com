@@ -83,9 +83,11 @@ if (isset ( $connection )) {
 <?php
     } else {
 ?>
-<div id="blog-list-outer">
-    <div id="blog-list-inner">
-    
+<div id="blog-list" class="row clearfix">
+    <div class="blogs-outer-wrapper">
+        <div class="blogs">
+        
+        </div>
     </div>
 </div>
 <script type="text/javascript">

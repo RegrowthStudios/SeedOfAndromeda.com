@@ -454,11 +454,7 @@ function Pagify(outerWrapper, innerWrapper, loader, startPage, callbackOnTransit
             var iD = typeof isDisabled !== 'undefined' ? isDisabled : false;
             return '<div class="pagify-control ' + (iD ? "disabled" : "") + '" data-id="' + pid + '">' + pid + '</div>';
         }
-        if (outerWrapper.parent().hasClass("content-border")) {
-            var htmlControls = '<div class="row clearfix"><div class="divider"></div><div class="col double-col-2 pagify-control-wrapper"' + (h ? 'style="opacity:0;position:inherit!important;"' : 'style="position:inherit!important"') + '>'
-        } else {
-            var htmlControls = '<div class="col double-col-2 pagify-control-wrapper"' + (h ? 'style="opacity:0;"' : "") + '>'
-        }
+        var htmlControls = '<div class="col double-col-2 pagify-control-wrapper"' + (h ? 'style="opacity:0;"' : "") + '>';
         var htmlEllipsis = '<div class="pagify-control pagify-control-ellipsis">. . .</div>';
 
         htmlControls += '<div class="pagify-control ' + ((currPid > 1) ? "" : "disabled") + '" data-id="prev">&lt;</div>';
@@ -527,7 +523,7 @@ function Pagify(outerWrapper, innerWrapper, loader, startPage, callbackOnTransit
 
         htmlControls += '<div class="pagify-control ' + ((currPid != totalPages) ? "" : "disabled") + '" data-id="next">&gt;</div>';
 
-        htmlControls += '</div></div>';
+        htmlControls += '</div>';
 
         outerWrapper.append(htmlControls);
     };
@@ -558,8 +554,7 @@ function Pagify(outerWrapper, innerWrapper, loader, startPage, callbackOnTransit
         var target = outerWrapper.find(".loading")[0];
         spinnerWrapper.spinner.spin(target);
 
-        var _innerWrapperList = outerWrapper.children(":not(.row)");
-        console.log(_innerWrapperList);
+        var _innerWrapperList = outerWrapper.children(":not(.pagify-control-wrapper)");
         var _innerWrapperFirst = _innerWrapperList.first();
         var _innerWrapperLast = _innerWrapperList.last();
 
@@ -587,8 +582,6 @@ function Pagify(outerWrapper, innerWrapper, loader, startPage, callbackOnTransit
             var _innerWrapperFirst = _innerWrapperList.first();
             var _innerWrapperLast = _innerWrapperList.last();
 
-            var heightOuterWrapper = _innerWrapperLast.outerHeight();
-
             _innerWrapperFirst.fadeOut(dur, "easeInOutCirc", function () {
                 _innerWrapperLast.show("slide", { direction: reverseDir, easing: "easeInOutCirc" }, dur, function () {
                     spinnerWrapper.spinner.stop();
@@ -599,11 +592,10 @@ function Pagify(outerWrapper, innerWrapper, loader, startPage, callbackOnTransit
                 });
             });
 
-            _innerWrapperList.filter(".loading").remove();
-            refreshControls();
             outerWrapper.animate({
-                height: (heightOuterWrapper + _innerWrapperFirst.siblings().last().outerHeight() + "px")
+                height: (_innerWrapperLast.outerHeight() + 40 + "px")
             }, dur, "easeInOutCirc");
+            refreshControls();
             return 1;
         }
 

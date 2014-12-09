@@ -14,11 +14,10 @@
     }
 
     if ($("#single-blog").length === 0) {
-        var blogListWrapperOuter = $("#blog-list-outer");
-        var blogListWrapperInner = $("#blog-list-inner");
-        pagifyBlogs = new Pagify(blogListWrapperOuter, blogListWrapperInner, "loaders/blog-loader.php", 1, function (pgData) {
+        var blogListWrapperOuter = $("#blog-list .blogs-outer-wrapper");
+        pagifyBlogs = new Pagify(blogListWrapperOuter, "#blog-list .blogs", "loaders/blog-loader.php", 1, function (pgData) {
             if (pgData == 0) {
-                blogListWrapper.hide();
+                blogListWrapperOuter.parent().hide();
                 return -1;
             }
             return prepareBlogs(pgData);
@@ -27,13 +26,13 @@
 });
 
 function prepareBlogs(pgData) {
-    var totalHtmlBlog = '<div id="blog-list-inner" style="display:none;">';
+    var totalHtmlBlog = '<div class="blogs" style="display:none;">';
     $.each(pgData, function (i, v) {
         var postlink = genPostLink(v);
-        totalHtmlBlog += '<div class="blog-item row clearfix">';
-            totalHtmlBlog += '<div class="header"><h1>';
+        totalHtmlBlog += '<div class="blog-item row ng clearfix">';
+            totalHtmlBlog += '<div class="header"><h2>';
                 totalHtmlBlog += '<a href="/blogs/' + postlink + '">' + trimWholeWord(strip_tags(v["title"]), 60) + '</a>';
-            totalHtmlBlog += '</h1></div>';
+            totalHtmlBlog += '</h2></div>';
             totalHtmlBlog += '<div class="double-col-2"><div class="text"><div id="blog-post" class="clearfix"><div>';
                 totalHtmlBlog += trimWholeWord(strip_tags(v["post_brief"]), 1400);
                 totalHtmlBlog += '<span id="blog-post-footer">';

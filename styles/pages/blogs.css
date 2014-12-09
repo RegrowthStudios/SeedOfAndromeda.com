@@ -44,4 +44,8 @@
 #blog-image-slider .card-background {
   opacity: 1;
 }
+.blogs-outer-wrapper {
+  position: relative;
+  height: 40vh;
+}
 /*# sourceMappingURL=blogs.css.map */

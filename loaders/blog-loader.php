@@ -1,7 +1,7 @@
 <?php
     require_once ("../db_connect.php");
     
-    $BLOGS_PER_PAGE = 10;
+    $BLOGS_PER_PAGE = 5;
     
     if (! isset ( $connection )) {
         echo "";

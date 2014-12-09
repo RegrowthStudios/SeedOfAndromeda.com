@@ -49,7 +49,7 @@
                     $videos[] = array (
                         "title" => $vid->title,
                         "vid_id" => $vid->resourceId->videoId,
-                        "thumb_url" => ( $vid->thumbnails->maxres ? $vid->thumbnails->maxres->url : ( $vid->thumbnails->standard ? $vid->thumbnails->standard->url : $vid->thumbnails->high->url ) ),
+                        "thumb_url" => ( !empty($vid->thumbnails->maxres) ? $vid->thumbnails->maxres->url : ( !empty($vid->thumbnails->standard) ? $vid->thumbnails->standard->url : $vid->thumbnails->high->url ) ),
                         "category" => -1
                     );
                 }

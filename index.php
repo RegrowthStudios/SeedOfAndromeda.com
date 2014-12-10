@@ -96,7 +96,6 @@ switch ($cleanpageid) {
 		// var_dump(get_defined_vars());
 		// die();
 		break;
-	case "devlog" :
 	case "blogs" :
 		require_once ("db_connect.php");
 		$pagetitle .= "Blogs";

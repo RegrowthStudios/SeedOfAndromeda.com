@@ -41,10 +41,32 @@
     </script>
     <?php
     $pagestyle = "styles/pages/" . str_replace ( ".php", ".min.css", $pagename );
+    if (strcmp($pagename, "admin.php") == 0) {
+        if (isset($_REQUEST['blogs'])) {
+            $pagestyle = "styles/pages/admin/blogs.min.css";
+        } else if (isset($_REQUEST['downloads'])) {
+            $pagestyle = "styles/pages/admin/downloads.min.css";
+        } else if (isset($_REQUEST['images'])) {
+            $pagestyle = "styles/pages/admin/images.min.css";
+        } else if (isset($_REQUEST['videos'])) {
+            $pagestyle = "styles/pages/admin/videos.min.css";
+        }
+    }    
     if (file_exists ( $pagestyle )) {
 	    echo '<link rel="stylesheet" href="/' . $pagestyle . '?ver=14" type="text/css" />';
     }
     $pagestyle = "scripts/pages/" . str_replace ( ".php", ".js", $pagename );
+    if (strcmp($pagename, "admin.php") == 0) {
+        if (isset($_REQUEST['blogs'])) {
+            $pagestyle = "scripts/pages/admin/blogs.js";
+        } else if (isset($_REQUEST['downloads'])) {
+            $pagestyle = "scripts/pages/admin/downloads.js";
+        } else if (isset($_REQUEST['images'])) {
+            $pagestyle = "scripts/pages/admin/images.js";
+        } else if (isset($_REQUEST['videos'])) {
+            $pagestyle = "scripts/pages/admin/videos.js";
+        }
+    }   
     if (file_exists ( $pagestyle )) {
 	    echo '<script src="/' . $pagestyle . '?ver=10"></script>';
     }

@@ -59,7 +59,7 @@ files/game/
 files/updater/
 
 #Wiki
-wiki/
+#wiki/
 
 # Visual Studio User-specific files
 *.suo

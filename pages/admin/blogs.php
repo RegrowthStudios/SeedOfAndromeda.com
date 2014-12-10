@@ -95,7 +95,7 @@ if (isset ( $_REQUEST ['delete'] )) {
                 $extension = "";
                 if ( isset ( $_FILES['dev-news-summary-background'] ) && $_FILES['dev-news-summary-background']['size'] > 0 ) {
                             
-                    $allowedExts = array("jpg", "png", "jpeg", "gif");
+                    $allowedExts = array("jpg", "png", "PNG", "jpeg", "gif");
                     $temp = explode(".", $_FILES['dev-news-summary-background']['name']);
                     $extension = end($temp);
                             
@@ -138,27 +138,51 @@ if (isset ( $_REQUEST ['delete'] )) {
                         //   dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "/SoAWebDev/assets/images/blogs/" . $_REQUEST ['postid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['blog-post-title'] ) ) . "/DevNewsSummaryBackground." . $extension);
    
                     }
+                    
+				    $query = $connection->prepare ( "UPDATE blog_posts SET title = ?, post_body = ?, post_brief = ?, updatetime = ?, disablecomments = ?, published = ?, publishtime = ?, devnews = ?, anonymous = ?, removesignoff = ?, dev_news_body = ?, dev_news_background = ?, prioritisescreenshots = ?, hidescreenshots = ?, draftIsLatest = ? WHERE id = ?" );
+				    $query->execute ( array (
+						    $_REQUEST ['blog-post-title'],
+						    $_REQUEST ['blog-post-content'],
+						    $_REQUEST ['blog-brief'],
+						    time (),
+						    isset ( $_REQUEST ['commentsoff'] ) && $_REQUEST ['commentsoff'] == 1,
+						    isset ( $_REQUEST ['publish'] ) && $_REQUEST ['publish'] == 1,
+                            time (),
+						    isset ( $_REQUEST ['devnews'] ) && $_REQUEST ['devnews'] == 1,
+						    isset ( $_REQUEST ['anonymous'] ) && $_REQUEST ['anonymous'] == 1,
+						    isset ( $_REQUEST ['no-sign-off'] ) && $_REQUEST ['no-sign-off'] == 1,
+                            $_REQUEST ['dev-news-summary-content'],
+                            ("/assets/images/blogs/" . $_REQUEST ['postid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['blog-post-title'] ) ) . "/DevNewsSummaryBackground." . $extension),
+                            isset ( $_REQUEST ['prioritisescreenshots'] ) && $_REQUEST ['prioritisescreenshots'] == 1,
+                            isset ( $_REQUEST ['hidescreenshots'] ) && $_REQUEST ['hidescreenshots'] == 1,
+						    0,
+                            $_REQUEST ['postid']
+				    ) );
+                    
+                } else {
+                
+                    //Update without changing background image for dev news slider.
+				    $query = $connection->prepare ( "UPDATE blog_posts SET title = ?, post_body = ?, post_brief = ?, updatetime = ?, disablecomments = ?, published = ?, publishtime = ?, devnews = ?, anonymous = ?, removesignoff = ?, dev_news_body = ?, prioritisescreenshots = ?, hidescreenshots = ?, draftIsLatest = ? WHERE id = ?" );
+				    $query->execute ( array (
+						    $_REQUEST ['blog-post-title'],
+						    $_REQUEST ['blog-post-content'],
+						    $_REQUEST ['blog-brief'],
+						    time (),
+						    isset ( $_REQUEST ['commentsoff'] ) && $_REQUEST ['commentsoff'] == 1,
+						    isset ( $_REQUEST ['publish'] ) && $_REQUEST ['publish'] == 1,
+						    time (),
+						    isset ( $_REQUEST ['devnews'] ) && $_REQUEST ['devnews'] == 1,
+						    isset ( $_REQUEST ['anonymous'] ) && $_REQUEST ['anonymous'] == 1,
+						    isset ( $_REQUEST ['no-sign-off'] ) && $_REQUEST ['no-sign-off'] == 1,
+                            $_REQUEST ['dev-news-summary-content'],
+                            isset ( $_REQUEST ['prioritisescreenshots'] ) && $_REQUEST ['prioritisescreenshots'] == 1,
+                            isset ( $_REQUEST ['hidescreenshots'] ) && $_REQUEST ['hidescreenshots'] == 1,
+						    0,
+                            $_REQUEST ['postid']
+				    ) );
+                    
                 }
-                            
-				$query = $connection->prepare ( "UPDATE blog_posts SET title = ?, post_body = ?, post_brief = ?, updatetime = ?, disablecomments = ?, published = ?, publishtime = ?, devnews = ?, anonymous = ?, removesignoff = ?, dev_news_body = ?, dev_news_background = ?, prioritisescreenshots = ?, hidescreenshots = ?, draftIsLatest = ? WHERE id = ?" );
-				$query->execute ( array (
-						$_REQUEST ['blog-post-title'],
-						$_REQUEST ['blog-post-content'],
-						$_REQUEST ['blog-brief'],
-						time (),
-						isset ( $_REQUEST ['commentsoff'] ) && $_REQUEST ['commentsoff'] == 1,
-						isset ( $_REQUEST ['publish'] ) && $_REQUEST ['publish'] == 1,
-                        time (),
-						isset ( $_REQUEST ['devnews'] ) && $_REQUEST ['devnews'] == 1,
-						isset ( $_REQUEST ['anonymous'] ) && $_REQUEST ['anonymous'] == 1,
-						isset ( $_REQUEST ['no-sign-off'] ) && $_REQUEST ['no-sign-off'] == 1,
-                        $_REQUEST ['dev-news-summary-content'],
-                        ("/assets/images/blogs/" . $_REQUEST ['postid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['blog-post-title'] ) ) . "/DevNewsSummaryBackground." . $extension),
-                        isset ( $_REQUEST ['prioritisescreenshots'] ) && $_REQUEST ['prioritisescreenshots'] == 1,
-                        isset ( $_REQUEST ['hidescreenshots'] ) && $_REQUEST ['hidescreenshots'] == 1,
-						0,
-                        $_REQUEST ['postid']
-				) );
+                
 				header ( "Location: /" . $pageurl . "?blogs&postid=" . $_REQUEST ['postid'] );
 			}
 		} else {

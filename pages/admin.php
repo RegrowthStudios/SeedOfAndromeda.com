@@ -1,4 +1,11 @@
 <?php
+    if (!isset($_REQUEST["notemplate"])) {
+        ?>
+            <div id="admin-nav-bar">
+                <!-- HERE MUST LIE THE ADMIN NAV BAR! -->
+            </div>
+        <?php
+    }
     if (!$loggedIn) {
     
         echo '

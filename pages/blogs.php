@@ -77,55 +77,34 @@ if (isset ( $connection )) {
 			echo_disqus ( $blogpost ["title"], $pageurl, "blogs-" . $blogpost ["id"] );
 		}
 ?>
+    </div>
+        </div>
+</div>
+<?php
+    } else {
+?>
+<div id="blog-list" class="row clearfix">
+    <div class="blogs-outer-wrapper">
+        <div class="blogs">
+        
         </div>
     </div>
-</div>                                        
-<?php
-	} else {
-		$query = $connection->prepare ( "SELECT * FROM blog_posts WHERE published = ? ORDER BY id DESC" );
-		$query->execute ( array (
-				1 
-		) );
-		
-		while ( $row = $query->fetch () ) {
-			$postlink = gen_postlink ( $row );
-			echo '
-            <div class="row clearfix">
-                <div class="header"><h1><a href="/blogs/' . $postlink . '">' . XenForo_Helper_String::wholeWordTrim( strip_tags ( $row ["title"] ), 60) . '</a></h1></div>
-                <div class="double-col-2">
-                    <div class="text">
-	                    <div id="blog-post" class="clearfix">
-		                    <div>' . XenForo_Helper_String::wholeWordTrim( strip_tags ( $row ["post_brief"] ), 1400) . '</div>
-	                        <span id="blog-post-footer">
-                                <a
-				                    href="/blogs/' . $postlink . '">Read
-				                    More...</a> ';
-			                    if (! $row ["disablecomments"]) {
-				                    echo '<small> - (<a
-				                    href="/blogs/' . $postlink . '#disqus_thread" data-disqus-identifier="blogs-' . $row ["id"] . '">Comments</a>)
-			                    </small>';
-			                    }
-                                echo '
-	                        </span>
-	                    </div>
-                    </div>
-                </div>
-            </div>
-            ';
-            }
-		?>
-
+</div>
 <script type="text/javascript">
     var disqus_shortname = 'seedofandromeda';
- 
-    (function () {
-    var s = document.createElement('script'); s.async = true;
-    s.type = 'text/javascript';
-    s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
-    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-    }());
-    </script>
-
+    
+    //setTimeout delay to allow for loading of blogs from database asynchronously.
+    $(document).ready(function() {
+        setTimeout(function() {
+            (function () {
+            var s = document.createElement('script'); s.async = true;
+            s.type = 'text/javascript';
+            s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+            }());
+        }, 200);
+    });
+</script>
 <?php
 	}
 } else {

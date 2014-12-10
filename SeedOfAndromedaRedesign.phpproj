@@ -29,6 +29,7 @@
     <Compile Include="draft-saver.php" />
     <Compile Include="files\download.php" />
     <Compile Include="footer.php" />
+    <Compile Include="loaders\blog-loader.php" />
     <Compile Include="loaders\image-loader.php" />
     <Compile Include="loaders\video-loader.php" />
     <Compile Include="pages\404.php" />

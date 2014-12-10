@@ -31,7 +31,7 @@
 function refreshDisqus() {
     // Undefine disquswidgets to force a refresh also on ajax reload
     window.DISQUSWIDGETS = undefined;
-    $.getScript("http://" + disqus_shortname + ".disqus.com/count.js");
+    $.getScript("https://" + disqus_shortname + ".disqus.com/count.js");
 }
 
 function prepareBlogs(pgData) {

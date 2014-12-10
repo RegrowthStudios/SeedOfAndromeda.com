@@ -21,9 +21,18 @@
                 return -1;
             }
             return prepareBlogs(pgData);
+        }, function () {
+            refreshDisqus();
+            return 1;
         });
     }
 });
+
+function refreshDisqus() {
+    // Undefine disquswidgets to force a refresh also on ajax reload
+    window.DISQUSWIDGETS = undefined;
+    $.getScript("http://" + disqus_shortname + ".disqus.com/count.js");
+}
 
 function prepareBlogs(pgData) {
     var totalHtmlBlog = '<div class="blogs" style="display:none;">';

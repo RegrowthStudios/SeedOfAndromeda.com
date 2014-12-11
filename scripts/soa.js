@@ -585,7 +585,8 @@ function Pagify(outerWrapper, innerWrapper, loader, startPage, callbackOnTransit
             _innerWrapperFirst.fadeOut(dur, "easeInOutCirc", function () {
                 _innerWrapperLast.show("slide", { direction: reverseDir, easing: "easeInOutCirc" }, dur, function () {
                     spinnerWrapper.spinner.stop();
-                    _innerWrapperFirst.remove();
+                    //Removes all loading divs in case of double pressing controls.
+                    _innerWrapperList.filter(".loading").remove();
                     if (typeof callbackOnSuccess === 'function') {
                         callbackOnSuccess();
                     }
@@ -630,8 +631,12 @@ function Pagify(outerWrapper, innerWrapper, loader, startPage, callbackOnTransit
             type: "POST",
             success: function (msg) {
                 if (callbackExists) {
+                    console.log("Page Data: ");
+                    console.log(msg);
                     callbackOnCompletion(JSON.parse(msg));
                 } else {
+                    console.log("Page Data: ");
+                    console.log(msg);
                     r = JSON.parse(msg);
                 }
             },
@@ -676,14 +681,18 @@ function Pagify(outerWrapper, innerWrapper, loader, startPage, callbackOnTransit
         if (currPid > pid) {
             currPid = pid;
             transitionFromPage("right");
+            console.log("TransFrom: " + currPid);
             return getPage(pid, function (msg) {
                 transitionToPage(msg, "right");
+                console.log("TransTo");
             }, argsForLoader);
         } else {
             currPid = pid;
             transitionFromPage();
+            console.log("TransFrom: " + currPid);
             return getPage(pid, function (msg) {
                 transitionToPage(msg);
+                console.log("TransTo");
             }, argsForLoader);
         }
     }

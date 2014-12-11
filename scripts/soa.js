@@ -585,7 +585,8 @@ function Pagify(outerWrapper, innerWrapper, loader, startPage, callbackOnTransit
             _innerWrapperFirst.fadeOut(dur, "easeInOutCirc", function () {
                 _innerWrapperLast.show("slide", { direction: reverseDir, easing: "easeInOutCirc" }, dur, function () {
                     spinnerWrapper.spinner.stop();
-                    _innerWrapperFirst.remove();
+                    //Removes all loading divs in case of double pressing controls.
+                    _innerWrapperList.filter(".loading").remove();
                     if (typeof callbackOnSuccess === 'function') {
                         callbackOnSuccess();
                     }

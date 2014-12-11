@@ -631,12 +631,8 @@ function Pagify(outerWrapper, innerWrapper, loader, startPage, callbackOnTransit
             type: "POST",
             success: function (msg) {
                 if (callbackExists) {
-                    console.log("Page Data: ");
-                    console.log(msg);
                     callbackOnCompletion(JSON.parse(msg));
                 } else {
-                    console.log("Page Data: ");
-                    console.log(msg);
                     r = JSON.parse(msg);
                 }
             },
@@ -681,18 +677,14 @@ function Pagify(outerWrapper, innerWrapper, loader, startPage, callbackOnTransit
         if (currPid > pid) {
             currPid = pid;
             transitionFromPage("right");
-            console.log("TransFrom: " + currPid);
             return getPage(pid, function (msg) {
                 transitionToPage(msg, "right");
-                console.log("TransTo");
             }, argsForLoader);
         } else {
             currPid = pid;
             transitionFromPage();
-            console.log("TransFrom: " + currPid);
             return getPage(pid, function (msg) {
                 transitionToPage(msg);
-                console.log("TransTo");
             }, argsForLoader);
         }
     }

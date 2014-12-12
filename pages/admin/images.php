@@ -116,7 +116,7 @@ if (isset ( $_REQUEST ['delete'] )) {
                         if ( strpos ( $image, $_REQUEST ['imageid'] . "-" . clean_pageid ( str_replace ( " ", "-", $img ['title'] ) ) ) ) {
                             $temp = explode(".", $img["img_url"]);
                             $extension = end($temp);
-                            rename ( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "/SoAWebDev" . $img["img_url"], dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "/SoAWebDev/assets/images/screenshots/" . $_REQUEST ['imageid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['title'] ) ) . "." . $extension );
+                            rename ( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "seedofandromeda_com" . $img["img_url"], dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "seedofandromeda_com/assets/images/screenshots/" . $_REQUEST ['imageid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['title'] ) ) . "." . $extension );
                             break;
                         }
                     }

@@ -93,11 +93,51 @@ if (isset ( $_REQUEST ['delete'] )) {
                             
                     }
                 }
-                $query = $connection->prepare ( "UPDATE downloads SET version = ?, description = ?, url = ?, updatetime = ?, published = ? WHERE id = ?" );
+                if ( isset ( $_FILES['bgImage'] ) && $_FILES['bgImage']['size'] > 0 ) {
+                            
+                    $allowedExts = array("jpg", "jpeg");
+                    $temp = explode(".", $_FILES['image']['name']);
+                    $bgExtension = end($temp);
+                            
+                    if (! in_array ( $bgExtension, $allowedExts ) ) {
+                        echo '
+                            <div class="row clearfix">
+                                <div class="header"><h1 class="error">Image Manager - Error</h1></div>
+                                <div class="col double-col-2">
+                                    <div class="text">
+                                        <h3 class="error">Image file must be a jpeg!</h3>
+                                    </div>
+                                </div>';
+                    } else if ( $_FILES['image']['error'] > 0 ) {
+                        echo '
+                            <div class="row clearfix">
+                                <div class="header"><h1 class="error">Image Manager - Error</h1></div>
+                                <div class="col double-col-2">
+                                    <div class="text">
+                                        <h3 class="error">Error: ' . $_FILES['image']['error'] . '</h3>
+                                    </div>
+                                </div>';
+                    } else {
+                    
+                        if ( ! file_exists( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "file_seedofandromeda_com/game/" . $_REQUEST ['download-version'] . "/DlBackground" . $bgExtension ) ) {
+                            mkdir ( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "file_seedofandromeda_com/game/" . $_REQUEST ['download-version'] . "/DlBackground" . $bgExtension, 0755, true );
+                        } else if ( file_exists( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "file_seedofandromeda_com/game/" . $_REQUEST ['download-version'] . "/SoA_DlBackground" . $bgExtension ) ) {
+                            unlink (dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "file_seedofandromeda_com/game/" . $_REQUEST ['download-version'] . "/DlBackground" . $bgExtension );
+                        }
+                                
+                        move_uploaded_file( $_FILES['image']['tmp_name'],
+                            dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "file_seedofandromeda_com/game/" . $_REQUEST ['download-version'] . "/DlBackground" . $bgExtension ); 
+                            
+                    }
+                } else {
+                
+                }
+                $query = $connection->prepare ( "UPDATE downloads SET version = ?, description = ?, url = ?, bgUrl = ?, updatetime = ?, published = ? WHERE id = ?" );
 				$query->execute ( array (
 						$_REQUEST ['download-version'],
 						$_REQUEST ['download-description'],
-						"file/" . $_REQUEST ['download-version'] . "/SoA." . $extension,
+						"game/" . $_REQUEST ['download-version'] . "/SoA." . $extension,
+						"game/" . $_REQUEST ['download-version'] . "/DlBackground." . $bgExtension,
 						time (),
                         isset ( $_REQUEST ['published'] ) && $_REQUEST ['published'] == 1,
 						$_REQUEST ['downloadid']
@@ -205,6 +245,11 @@ enctype="multipart/form-data" method="post">
                 <label for="download">File:</label> 
                 <input id="download" value="1"
 		            type="file" name="download" />
+                <br/>
+                <br/>
+                <label for="bgImage">Background Image:</label> 
+                <input id="bgImage" value="1"
+					type="file" name="bgImage" />
                 <br/>
                 <br/>
                 <span>Publish Download:</span> <div class="checkbox"> <input id="published" value="1"

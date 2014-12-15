@@ -42,7 +42,7 @@ function refreshSlider() {
     var imgs = $('.image');
     $.each(imgs, function (i, v) {
         var _v = $(v);
-        totalHtmlWrapper += '<div class="media-wrapper card-wrapper" style="display: none;"><a href="' + _v.data("url") + '" id="screenshotlink" data-lightbox="screenshot" title="' + _v.data("title") + ' - ' + _v.data("description") + '"><div class="card-background" style="background-image: url(\'' + _v.data("url").substring(0, _v.data("url").lastIndexOf(".")) + '_thumb_781x398.jpg\');"></div></a></div>';
+        totalHtmlWrapper += '<div class="media-wrapper card-wrapper" style="display: none;"><a href="' + _v.data("url") + '" id="screenshotlink" data-lightbox="screenshot" title="' + _v.data("title") + ' - ' + _v.data("desc") + '"><div class="card-background" style="background-image: url(\'' + _v.data("url").substring(0, _v.data("url").lastIndexOf(".")) + '_thumb_781x398.jpg\');"></div></a></div>';
     });
     frameWrapper.find(".media-wrapper").remove();
     frame.append(totalHtmlWrapper);

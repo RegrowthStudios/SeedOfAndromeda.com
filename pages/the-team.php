@@ -9,8 +9,8 @@
             </div>
     </div>
     <div class="col tri-col-1">
-        <a href="/assets/images/profile_images/BenA.png" data-lightbox="images" title="Benjamin Arnold">
-            <img src="/assets/images/profile_images/BenA_thumb_320x192.png" class="img medium-wide overflowfix"/>
+        <a href="/assets/images/profile_images/BenA.jpg" data-lightbox="images" title="Benjamin Arnold">
+            <img src="/assets/images/profile_images/BenA_thumb_320x192.jpg" class="img medium-wide overflowfix"/>
         </a>
     </div>
 </div>
@@ -18,8 +18,8 @@
 <div class="row clearfix the-team">
     <div class="header"><h1 class="name">Sebastian Corfitzen</h1><h3 class="title">&nbsp;- Designer</h3></div>
     <div class="col tri-col-1">
-        <a href="/assets/images/profile_images/SebastianC.png" data-lightbox="images" title="Sebastian Corfitzen">
-            <img src="/assets/images/profile_images/SebastianC_thumb_320x192.png" class="img medium-wide overflowfix"/>
+        <a href="/assets/images/profile_images/SebastianC.jpg" data-lightbox="images" title="Sebastian Corfitzen">
+            <img src="/assets/images/profile_images/SebastianC_thumb_320x192.jpg" class="img medium-wide overflowfix"/>
         </a>
     </div>
     <div class="col tri-col-2">
@@ -80,8 +80,8 @@
             </div>
     </div>
     <div class="col tri-col-1">
-        <a href="/assets/images/profile_images/GeorgH.png" data-lightbox="images" title="Georg Hammerschmid">
-            <img src="/assets/images/profile_images/GeorgH_thumb_320x192.png" class="img medium-wide overflowfix"/>
+        <a href="/assets/images/profile_images/GeorgH.jpg" data-lightbox="images" title="Georg Hammerschmid">
+            <img src="/assets/images/profile_images/GeorgH_thumb_320x192.jpg" class="img medium-wide overflowfix"/>
         </a>
     </div>
 </div>
@@ -160,8 +160,8 @@
 <div class="row clearfix the-team">
     <div class="header"><h1 class="name">Cristian Zaloj</h1><h3 class="title">&nbsp;- Programmer</h3></div>
     <div class="col tri-col-1">
-        <a href="/assets/images/profile_images/CristianZ.png" data-lightbox="images" title="Cristian Zaloj">
-            <img src="/assets/images/profile_images/CristianZ_thumb_320x192.png" class="img medium-wide overflowfix"/>
+        <a href="/assets/images/profile_images/CristianZ.jpg" data-lightbox="images" title="Cristian Zaloj">
+            <img src="/assets/images/profile_images/CristianZ_thumb_320x192.jpg" class="img medium-wide overflowfix"/>
         </a>
     </div>
     <div class="col tri-col-2">
@@ -260,8 +260,8 @@
         </div>
     </div>
     <div class="col tri-col-1">
-        <a href="/assets/images/profile_images/WispX.png" data-lightbox="images" title="Wisp X">
-            <img src="/assets/images/profile_images/WispX_thumb_320x192.png" class="img medium-wide overflowfix"/>
+        <a href="/assets/images/profile_images/WispX.jpg" data-lightbox="images" title="Wisp X">
+            <img src="/assets/images/profile_images/WispX_thumb_320x192.jpg" class="img medium-wide overflowfix"/>
         </a>
     </div>
 </div>

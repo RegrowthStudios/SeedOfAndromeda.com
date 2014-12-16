@@ -716,11 +716,11 @@
     <Content Include="assets\images\modding\texture\method_vertical.png" />
     <Content Include="assets\images\None.png" />
     <Content Include="assets\images\profile_images\AndreasR.jpg" />
-    <Content Include="assets\images\profile_images\BenA.png" />
+    <Content Include="assets\images\profile_images\BenA.jpg" />
     <Content Include="assets\images\profile_images\BrianB.jpg" />
-    <Content Include="assets\images\profile_images\CristianZ.png" />
+    <Content Include="assets\images\profile_images\CristianZ.jpg" />
     <Content Include="assets\images\profile_images\FrankF.jpg" />
-    <Content Include="assets\images\profile_images\GeorgH.png" />
+    <Content Include="assets\images\profile_images\GeorgH.jpg" />
     <Content Include="assets\images\profile_images\IsaqueD.jpg" />
     <Content Include="assets\images\profile_images\JeremyF.jpg" />
     <Content Include="assets\images\profile_images\Jesses_dog.jpg" />
@@ -728,8 +728,8 @@
     <Content Include="assets\images\profile_images\MatthewM.jpg" />
     <Content Include="assets\images\profile_images\NathanM.jpg" />
     <Content Include="assets\images\profile_images\PatrickC.jpg" />
-    <Content Include="assets\images\profile_images\SebastianC.png" />
-    <Content Include="assets\images\profile_images\WispX.png" />
+    <Content Include="assets\images\profile_images\SebastianC.jpg" />
+    <Content Include="assets\images\profile_images\WispX.jpg" />
     <Content Include="assets\images\screenshots\10-quadtrees.jpg" />
     <Content Include="assets\images\screenshots\10-quadtrees_thumb_213x128.jpg" />
     <Content Include="assets\images\screenshots\11-snowy-mountains.jpg" />

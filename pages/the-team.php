@@ -207,8 +207,7 @@
             person. He has experience with network programming and server management, and
             he is going to host the first dedicated SoA team server when multiplayer is
             implemented! Jeremy's dedication and talent ensure that he will grow into
-            a very skilled game programmer! He is also doing weird things in
-			a language nobody will ever understand.
+            a very skilled game programmer!
             </div>
     </div>
 </div>

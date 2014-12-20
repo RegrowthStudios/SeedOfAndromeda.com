@@ -42,24 +42,21 @@ debug form<br>
 
 function echo_userdata($user){
 echo file_get_contents(
-        //This needs to make the following call 
+        //This needs to make the following call s
         
-        //https://seedofandromeda.com/JereNet/api/
+        //https://seedofandromeda.com/JereNet/api/?api=net&prot=tosess
         //Call 1
-        // tosess=
-        //
         
         
         
-        //Post-Data:
-        //  JerX_Sess= from call 1
-        //  prot=prtauth
-        //  prt= //TODO GET NICE COMBO!
-        //  key= //SAME LOL
-        //  met=ownu
-        //  username=<username>
-        //  
-        
+        //https://seedofandromeda.com/JereNet/api/?api=net&prot=prtauth
+        // post data:
+        //JerX_Sess= [result from call 1]
+        //prt=SOAC
+        //key=f7fc2a9f7d22138
+        //met=ownu
+        //username=<username>
+
         'https://seedofandromeda.com/JereNet/api/',
         false,
         stream_context_create(

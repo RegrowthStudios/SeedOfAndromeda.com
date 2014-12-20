@@ -56,6 +56,9 @@ if (isset ( $_REQUEST ['delete'] )) {
                             </div>
                         </div>';
             } else {
+                if ( ! file_exists( dirname( $_SERVER{'DOCUMENT_ROOT'} ) . "/files_seedofandromeda_com/game/" . $_REQUEST ['download-version'] ) ) {
+                    mkdir ( dirname( $_SERVER{'DOCUMENT_ROOT'} ) . "/files_seedofandromeda_com/game/" . $_REQUEST ['download-version'], 0755, true );
+                }
                 if ( isset ( $_FILES['download'] ) && $_FILES['download']['size'] > 0 ) {
                             
                     $allowedExts = array("zip", "exe");
@@ -82,57 +85,51 @@ if (isset ( $_REQUEST ['delete'] )) {
                                 </div>';
                     } else {
                                 
-                        if ( ! file_exists( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "file_seedofandromeda_com/game/" . $_REQUEST ['download-version'] ) ) {
-                            mkdir ( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "file_seedofandromeda_com/game/" . $_REQUEST ['download-version'], 0755, true );
-                        } else if ( file_exists( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "file_seedofandromeda_com/game/" . $_REQUEST ['download-version'] . "/SoA." . $extension ) ) {
-                            unlink (dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "file_seedofandromeda_com/game/" . $_REQUEST ['download-version'] . "/SoA." . $extension );
+                        if ( file_exists( dirname( $_SERVER{'DOCUMENT_ROOT'} ) . "/files_seedofandromeda_com/game/" . $_REQUEST ['download-version'] . "/SoA." . $extension ) ) {
+                            unlink ( dirname( $_SERVER{'DOCUMENT_ROOT'} ) . "/files_seedofandromeda_com/game/" . $_REQUEST ['download-version'] . "/SoA." . $extension );
                         }
                                 
                         move_uploaded_file($_FILES['download']['tmp_name'],
-                            dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "file_seedofandromeda_com/game/" . $_REQUEST ['download-version'] . "/SoA." . $extension); 
+                            dirname( $_SERVER{'DOCUMENT_ROOT'} ) . "/files_seedofandromeda_com/game/" . $_REQUEST ['download-version'] . "/SoA." . $extension); 
                             
                     }
                 }
                 if ( isset ( $_FILES['bgImage'] ) && $_FILES['bgImage']['size'] > 0 ) {
                             
                     $allowedExts = array("jpg", "jpeg");
-                    $temp = explode(".", $_FILES['image']['name']);
+                    $temp = explode(".", $_FILES['bgImage']['name']);
                     $bgExtension = end($temp);
                             
                     if (! in_array ( $bgExtension, $allowedExts ) ) {
                         echo '
                             <div class="row clearfix">
-                                <div class="header"><h1 class="error">Image Manager - Error</h1></div>
+                                <div class="header"><h1 class="error">Download Manager - Error</h1></div>
                                 <div class="col double-col-2">
                                     <div class="text">
-                                        <h3 class="error">Image file must be a jpeg!</h3>
+                                        <h3 class="error">Background image file must be a jpeg!</h3>
                                     </div>
                                 </div>';
-                    } else if ( $_FILES['image']['error'] > 0 ) {
+                    } else if ( $_FILES['bgImage']['error'] > 0 ) {
                         echo '
                             <div class="row clearfix">
-                                <div class="header"><h1 class="error">Image Manager - Error</h1></div>
+                                <div class="header"><h1 class="error">Download Manager - Error</h1></div>
                                 <div class="col double-col-2">
                                     <div class="text">
-                                        <h3 class="error">Error: ' . $_FILES['image']['error'] . '</h3>
+                                        <h3 class="error">Error: ' . $_FILES['bgImage']['error'] . '</h3>
                                     </div>
                                 </div>';
                     } else {
                     
-                        if ( ! file_exists( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "file_seedofandromeda_com/game/" . $_REQUEST ['download-version'] . "/DlBackground" . $bgExtension ) ) {
-                            mkdir ( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "file_seedofandromeda_com/game/" . $_REQUEST ['download-version'] . "/DlBackground" . $bgExtension, 0755, true );
-                        } else if ( file_exists( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "file_seedofandromeda_com/game/" . $_REQUEST ['download-version'] . "/SoA_DlBackground" . $bgExtension ) ) {
-                            unlink (dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "file_seedofandromeda_com/game/" . $_REQUEST ['download-version'] . "/DlBackground" . $bgExtension );
+                        if ( file_exists( dirname( $_SERVER{'DOCUMENT_ROOT'} ) . "/files_seedofandromeda_com/game/" . $_REQUEST ['download-version'] . "/DlBackground." . $bgExtension ) ) {
+                            unlink ( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "/files_seedofandromeda_com/game/" . $_REQUEST ['download-version'] . "/DlBackground." . $bgExtension );
                         }
                                 
-                        move_uploaded_file( $_FILES['image']['tmp_name'],
-                            dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "file_seedofandromeda_com/game/" . $_REQUEST ['download-version'] . "/DlBackground" . $bgExtension ); 
+                        move_uploaded_file( $_FILES['bgImage']['tmp_name'],
+                            dirname( $_SERVER{'DOCUMENT_ROOT'} ) . "/files_seedofandromeda_com/game/" . $_REQUEST ['download-version'] . "/DlBackground." . $bgExtension ); 
                             
                     }
-                } else {
-                
                 }
-                $query = $connection->prepare ( "UPDATE downloads SET version = ?, description = ?, url = ?, bgUrl = ?, updatetime = ?, published = ? WHERE id = ?" );
+                $query = $connection->prepare ( "UPDATE downloads SET version = ?, description = ?, url = ?, backgroundurl = ?, updatetime = ?, published = ? WHERE id = ?" );
 				$query->execute ( array (
 						$_REQUEST ['download-version'],
 						$_REQUEST ['download-description'],

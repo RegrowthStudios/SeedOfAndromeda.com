@@ -20,7 +20,7 @@
         $i ++;
     }
 ?>
-<div id="latest-download" class="row clearfix" style="background: url('<?php echo 'http://files.seedofandromeda.com/' . $downloads[$i]['bgUrl']; ?>') center center no-repeat;">
+<div id="latest-download" class="row clearfix" style="background: url('<?php echo 'http://files.seedofandromeda.com/' . $downloads[$i]['backgroundurl']; ?>') center center no-repeat;">
     <div class="header"><h1>Latest Version ( V<?php echo $downloads[$i]['version']; ?> )</h1><h3>&nbsp;-&nbsp;<a onclick="var that=this;_gaq.push(['_trackEvent','Download','ZIP',this.href]);setTimeout(function(){location.href=that.href;},400);return false;" href="<?php echo 'http://files.seedofandromeda.com/' . $downloads[$i]['url']; ?>">download</a></h3></div>
     <div class="col double-col-2">
         <div class="text">

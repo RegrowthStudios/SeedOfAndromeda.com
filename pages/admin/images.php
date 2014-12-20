@@ -86,25 +86,14 @@ if (isset ( $_REQUEST ['delete'] )) {
                                     </div>
                                 </div>';
                     } else {
-                                
-                        if ( ! file_exists( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "seedofandromeda_com/assets/images/screenshots/" . $_REQUEST ['imageid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['title'] ) ) . $extension ) ) {
-                            mkdir ( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "seedofandromeda_com/assets/images/screenshots/" . $_REQUEST ['imageid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['title'] ) ) . $extension, 0755, true );
-                        } else if ( file_exists( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "seedofandromeda_com/assets/images/screenshots/" . $_REQUEST ['imageid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['title'] ) ) . $extension ) ) {
-                            unlink (dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "seedofandromeda_com/assets/images/screenshots/" . $_REQUEST ['imageid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['title'] ) ) . $extension );
+                    
+                        if ( file_exists( $_SERVER{'DOCUMENT_ROOT'} . "/assets/images/screenshots/" . $_REQUEST ['imageid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['title'] ) ) . "." . $extension ) ) {
+                            unlink ($_SERVER{'DOCUMENT_ROOT'} . "/assets/images/screenshots/" . $_REQUEST ['imageid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['title'] ) ) . "." . $extension );
                         }
                                 
                         move_uploaded_file( $_FILES['image']['tmp_name'],
-                            dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "seedofandromeda_com/assets/images/screenshots/" . $_REQUEST ['imageid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['title'] ) ) . $extension ); 
-                            
-                        //if ( ! file_exists( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "/SoAWebDev/assets/images/screenshots/" ) ) {
-                        //    mkdir ( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "/SoAWebDev/assets/images/screenshots/", 0755, true );
-                        //} else if ( file_exists( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "/SoAWebDev/assets/images/screenshots/" . $_REQUEST ['imageid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['title'] ) ) . "." . $extension ) ) {
-                        //    unlink (dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "/SoAWebDev/assets/images/screenshots/" . $_REQUEST ['imageid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['title'] ) ) . "." . $extension );
-                        //}
-                         
-                        //move_uploaded_file( $_FILES['image']['tmp_name'],
-                        //   dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "/SoAWebDev/assets/images/screenshots/" . $_REQUEST ['imageid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['title'] ) ) . "." . $extension ); 
-                                    
+                            $_SERVER{'DOCUMENT_ROOT'} . "/assets/images/screenshots/" . $_REQUEST ['imageid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['title'] ) ) . "." . $extension ); 
+                                  
                     }
                 } else {
                     $q = $connection->prepare ( "SELECT * FROM images WHERE id = ?");
@@ -116,7 +105,7 @@ if (isset ( $_REQUEST ['delete'] )) {
                         if ( strpos ( $image, $_REQUEST ['imageid'] . "-" . clean_pageid ( str_replace ( " ", "-", $img ['title'] ) ) ) ) {
                             $temp = explode(".", $img["img_url"]);
                             $extension = end($temp);
-                            rename ( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "seedofandromeda_com" . $img["img_url"], dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "seedofandromeda_com/assets/images/screenshots/" . $_REQUEST ['imageid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['title'] ) ) . "." . $extension );
+                            rename ( $_SERVER{'DOCUMENT_ROOT'} . $img["img_url"], $_SERVER{'DOCUMENT_ROOT'} . "/assets/images/screenshots/" . $_REQUEST ['imageid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['title'] ) ) . "." . $extension );
                             break;
                         }
                     }

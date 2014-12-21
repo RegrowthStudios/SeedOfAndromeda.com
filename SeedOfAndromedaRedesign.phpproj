@@ -23,12 +23,15 @@
     <IncludeDebugInformation>false</IncludeDebugInformation>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="apps\t3mod.php" />
     <Compile Include="blocks\index.php" />
     <Compile Include="closewindow.php" />
     <Compile Include="db_connect.php" />
     <Compile Include="draft-saver.php" />
     <Compile Include="files\download.php" />
     <Compile Include="footer.php" />
+    <Compile Include="JereNet\api\index.php" />
+    <Compile Include="JereNet\auth.php" />
     <Compile Include="loaders\blog-loader.php" />
     <Compile Include="loaders\image-loader.php" />
     <Compile Include="loaders\video-loader.php" />
@@ -369,6 +372,7 @@
   <ItemGroup>
     <Folder Include=".errordocs\" />
     <Folder Include=".settings\" />
+    <Folder Include="apps\" />
     <Folder Include="assets\" />
     <Folder Include="assets\fonts\" />
     <Folder Include="assets\fonts\the_league_of_orbitron\" />
@@ -582,6 +586,8 @@
     <Folder Include="jbimages\img\" />
     <Folder Include="jbimages\js\" />
     <Folder Include="jbimages\langs\" />
+    <Folder Include="JereNet\" />
+    <Folder Include="JereNet\api\" />
     <Folder Include="loaders\" />
     <Folder Include="pages\" />
     <Folder Include="pages\admin\" />

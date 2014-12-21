@@ -2,19 +2,19 @@
 require_once ('../community/XenForoSDK.php');
 $sdk = new XenForoSDK ();
 
-if ( !isset ( $_POST["u"] ) || !isset ( $_POST["p"] ) ) {
+if ( !isset ( $_GET["u"] ) || !isset ( $_GET["p"] ) ) {
     echo 0;
 } else {
-    if ( $sdk->validateLogin($_POST["u"], $_POST["p"]) === true ) {
+    if ( $sdk->validateLogin($_GET["u"], $_GET["p"]) === true ) {
         $r = echo_userdata();
         if ($r == -1) {
             // Fail /w Email
-            echo 0;
+            echo 1;
         } else {
             echo $r;
         }
     } else {
-        echo 0;
+        echo 2;
     }
 }
 
@@ -26,7 +26,7 @@ function echo_userdata(){
         "prt" => "SOAC",
         "key" => "f7fc2a9f7d22138",
         "met" => "ownu",
-        "username" => $_POST["u"]
+        "username" => $_GET["u"]
     );
     
     $err = file_get_contents(
@@ -35,7 +35,7 @@ function echo_userdata(){
         stream_context_create(
             array( 'http' => array(
                 'method' => 'post',
-                'content' => http_build_query($post),
+                'content' => $post,
                 ),
             )
         )
@@ -54,7 +54,7 @@ function echo_userdata(){
             "prt" => "SOAC",
             "key" => "f7fc2a9f7d22138",
             "met" => "ownu",
-            "username" => ( $_POST["u"] . "_SoA" )
+            "username" => ( $_GET["u"] . "_SoA" )
         );
         $err = file_get_contents(
             'https://seedofandromeda.com/JereNet/api/?api=net&prot=prtauth',
@@ -62,7 +62,7 @@ function echo_userdata(){
             stream_context_create(
                 array( 'http' => array(
                     'method' => 'post',
-                    'content' => http_build_query($post),
+                    'content' => $post,
                     ),
                 )
             )

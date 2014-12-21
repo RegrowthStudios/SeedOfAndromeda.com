@@ -96,7 +96,6 @@ switch ($cleanpageid) {
 		// var_dump(get_defined_vars());
 		// die();
 		break;
-	case "devlog" :
 	case "blogs" :
 		require_once ("db_connect.php");
 		$pagetitle .= "Blogs";
@@ -123,25 +122,10 @@ switch ($cleanpageid) {
 		$pagetitle .= "Log in";
 		$pagename = "login.php";
 		break;
-	case "blog-admin":
+	case "admin":
 		require_once ("db_connect.php");
-		$pagetitle .= "Blog Admin";
-		$pagename = "blog-admin.php";
-		break;
-	case "downloads-admin":
-		require_once ("db_connect.php");
-		$pagetitle .= "Download Admin";
-		$pagename = "downloads-admin.php";
-		break;
-	case "videos-admin":
-		require_once ("db_connect.php");
-		$pagetitle .= "Video Admin";
-		$pagename = "videos-admin.php";
-		break;
-	case "images-admin":
-		require_once ("db_connect.php");
-		$pagetitle .= "Image Admin";
-		$pagename = "images-admin.php";
+		$pagetitle .= "Admin";
+		$pagename = "admin.php";
 		break;
 }
 

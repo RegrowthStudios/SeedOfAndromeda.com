@@ -31,6 +31,7 @@
 }
 .videos {
   position: absolute;
+  z-index: 3;
 }
 .videos .tri-col-1 {
   margin-bottom: 5px;

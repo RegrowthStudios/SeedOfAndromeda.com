@@ -10,6 +10,9 @@
 .header > * {
   font-size: 1.6em;
 }
+#blog-list-outer {
+  position: relative;
+}
 #blog-post blockquote {
   margin-left: auto;
   margin-right: auto;
@@ -41,6 +44,10 @@
 #blog-image-slider .card-background {
   opacity: 1;
 }
+.blogs-outer-wrapper {
+  position: relative;
+  height: 40vh;
+}
 #post-settings .btn {
   float: right;
   margin-top: -96.896px;
@@ -57,4 +64,4 @@
 #blog-settings .checkbox {
   float: right;
 }
-/*# sourceMappingURL=blog-admin.css.map */
+/*# sourceMappingURL=blogs.css.map */

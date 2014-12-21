@@ -24,6 +24,7 @@
 }
 .images {
   position: absolute;
+  z-index: 3;
 }
 .images .quad-col-1 {
   margin-bottom: 5px;

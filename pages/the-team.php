@@ -9,32 +9,19 @@
             </div>
     </div>
     <div class="col tri-col-1">
-        <a href="/assets/images/profile_images/BenA.png" data-lightbox="images" title="Benjamin Arnold">
-            <img src="/assets/images/profile_images/BenA_thumb_320x192.png" class="img medium-wide overflowfix"/>
+        <a href="/assets/images/profile_images/BenA.jpg" data-lightbox="images" title="Benjamin Arnold">
+            <img src="/assets/images/profile_images/BenA_thumb_320x192.jpg" class="img medium-wide overflowfix"/>
         </a>
-    </div>
-</div>
-
-<div class="row clearfix the-team">
-    <div class="header"><h1 class="name">Anthony Keeton</h1><h3 class="title">&nbsp;- Lead Designer</h3></div>
-    <div class="col tri-col-1">
-        <a href="/assets/images/profile_images/AnthonyK.jpg" data-lightbox="images" title="Anthony Keeton">
-            <img src="/assets/images/profile_images/AnthonyK_thumb_320x192.jpg" class="img medium-wide overflowfix"/>
-        </a>
-    </div>
-    <div class="col tri-col-2">
-        <div class="text">
-            Anthony AKA Damion Rayne, previously of military occupation, has worked as 
-            Community Manager of Kerbal Space Program, and has recenlty worked on Legends 
-            of Aetherius. He has since joined the Seed of Andromeda team as lead designer, 
-            and works to ensure that Seed of Andromeda will be as enjoyable and challenging 
-            as has been envisioned for the game's future.
-            </div>
     </div>
 </div>
 
 <div class="row clearfix the-team">
     <div class="header"><h1 class="name">Sebastian Corfitzen</h1><h3 class="title">&nbsp;- Designer</h3></div>
+    <div class="col tri-col-1">
+        <a href="/assets/images/profile_images/SebastianC.jpg" data-lightbox="images" title="Sebastian Corfitzen">
+            <img src="/assets/images/profile_images/SebastianC_thumb_320x192.jpg" class="img medium-wide overflowfix"/>
+        </a>
+    </div>
     <div class="col tri-col-2">
         <div class="text">
             Sebastian worked his way on to the team through bombarding Ben with great ideas, 
@@ -44,20 +31,10 @@
             and playing about in PhotoShop.
             </div>
     </div>
-    <div class="col tri-col-1">
-        <a href="/assets/images/profile_images/SebastianC.png" data-lightbox="images" title="Sebastian Corfitzen">
-            <img src="/assets/images/profile_images/SebastianC_thumb_320x192.png" class="img medium-wide overflowfix"/>
-        </a>
-    </div>
 </div>
 
 <div class="row clearfix the-team">
     <div class="header"><h1 class="name">Joshua Arnold</h1><h3 class="title">&nbsp;- Sound Artist</h3></div>
-    <div class="col tri-col-1">
-        <a href="/assets/images/profile_images/JoshA.jpg" data-lightbox="images" title="Joshua Arnold">
-            <img src="/assets/images/profile_images/JoshA_thumb_320x192.jpg" class="img medium-wide overflowfix"/>
-        </a>
-    </div>
     <div class="col tri-col-2">
         <div class="text">
             Josh is the creative genius behind all of Seed of Andromeda's music and sound, he has 
@@ -65,10 +42,20 @@
             talent towards producing all manner of music and sounds for your ears to enjoy!
             </div>
     </div>
+    <div class="col tri-col-1">
+        <a href="/assets/images/profile_images/JoshA.jpg" data-lightbox="images" title="Joshua Arnold">
+            <img src="/assets/images/profile_images/JoshA_thumb_320x192.jpg" class="img medium-wide overflowfix"/>
+        </a>
+    </div>
 </div>
 
 <div class="row clearfix the-team">
     <div class="header"><h1 class="name">Matthew Marshall</h1><h3 class="title">&nbsp;- Designer and Web Developer</h3></div>
+    <div class="col tri-col-1">
+        <a href="/assets/images/profile_images/MatthewM.jpg" data-lightbox="images" title="Matthew Marshall">
+            <img src="/assets/images/profile_images/MatthewM_thumb_320x192.jpg" class="img medium-wide overflowfix"/>
+        </a>
+    </div>
     <div class="col tri-col-2">
         <div class="text">
             Matthew is the creative force behind the Seed of Andromeda website, and he 
@@ -79,20 +66,10 @@
             always willing to offer his perspective on an idea!
             </div>
     </div>
-    <div class="col tri-col-1">
-        <a href="/assets/images/profile_images/MatthewM.jpg" data-lightbox="images" title="Matthew Marshall">
-            <img src="/assets/images/profile_images/MatthewM_thumb_320x192.jpg" class="img medium-wide overflowfix"/>
-        </a>
-    </div>
 </div>
 
 <div class="row clearfix the-team">
-    <div class="header"><h1 class="name">Georg Hammerschmid</h1><h3 class="title">&nbsp;- Texture Artist</h3></div>
-    <div class="col tri-col-1">
-        <a href="/assets/images/profile_images/GeorgH.png" data-lightbox="images" title="Georg Hammerschmid">
-            <img src="/assets/images/profile_images/GeorgH_thumb_320x192.png" class="img medium-wide overflowfix"/>
-        </a>
-    </div>
+    <div class="header"><h1 class="name">Georg Hammerschmid</h1><h3 class="title">&nbsp;- Artist and Designer</h3></div>
     <div class="col tri-col-2">
         <div class="text">
             Georg is a talented graphics artist and scientist! He started out by creating 
@@ -102,10 +79,20 @@
             Andromeda development!
             </div>
     </div>
+    <div class="col tri-col-1">
+        <a href="/assets/images/profile_images/GeorgH.jpg" data-lightbox="images" title="Georg Hammerschmid">
+            <img src="/assets/images/profile_images/GeorgH_thumb_320x192.jpg" class="img medium-wide overflowfix"/>
+        </a>
+    </div>
 </div>
 
 <div class="row clearfix the-team">
     <div class="header"><h1 class="name">Andreas Ressl</h1><h3 class="title">&nbsp;- Texture and 3D Artist</h3></div>
+    <div class="col tri-col-1">
+        <a href="/assets/images/profile_images/AndreasR.jpg" data-lightbox="images" title="Andreas Ressl">
+            <img src="/assets/images/profile_images/AndreasR_thumb_320x192.jpg" class="img medium-wide overflowfix"/>
+        </a>
+    </div>
     <div class="col tri-col-2">
         <div class="text">
             Andreas is an incredibly talented hobby artist! He currently works in construction 
@@ -116,20 +103,10 @@
             systems!
             </div>
     </div>
-    <div class="col tri-col-1">
-        <a href="/assets/images/profile_images/AndreasR.jpg" data-lightbox="images" title="Andreas Ressl">
-            <img src="/assets/images/profile_images/AndreasR_thumb_320x192.jpg" class="img medium-wide overflowfix"/>
-        </a>
-    </div>
 </div>
 
 <div class="row clearfix the-team">
     <div class="header"><h1 class="name">Jesse Leskinen</h1><h3 class="title">&nbsp;- Programmer and Web Developer</h3></div>
-    <div class="col tri-col-1">
-        <a href="/assets/images/profile_images/Jesses_dog.jpg" data-lightbox="images" title="Jesse Leskinen">
-            <img src="/assets/images/profile_images/Jesses_dog_thumb_320x192.jpg" class="img medium-wide overflowfix"/>
-        </a>
-    </div>
     <div class="col tri-col-2">
         <div class="text">
             Jesse is an incredibly talented web developer, and is working on the backend of the website, 
@@ -138,10 +115,20 @@
             the challenges of such a project as this.
             </div>
     </div>
+    <div class="col tri-col-1">
+        <a href="/assets/images/profile_images/Jesses_dog.jpg" data-lightbox="images" title="Jesse Leskinen">
+            <img src="/assets/images/profile_images/Jesses_dog_thumb_320x192.jpg" class="img medium-wide overflowfix"/>
+        </a>
+    </div>
 </div>
 
 <div class="row clearfix the-team">
     <div class="header"><h1 class="name">Patrick Cavanagh</h1><h3 class="title">&nbsp;- Community Manager</h3></div>
+    <div class="col tri-col-1">
+        <a href="/assets/images/profile_images/PatrickC.jpg" data-lightbox="images" title="Patrick Cavanagh">
+            <img src="/assets/images/profile_images/PatrickC_thumb_320x192.jpg" class="img medium-wide overflowfix"/>
+        </a>
+    </div>
     <div class="col tri-col-2">
         <div class="text">
             Patrick is our community manager, he runs most - no doubt, soon, all - of our social media 
@@ -150,20 +137,10 @@
             iron, so be warned - don't antagonise him, or a soft tickle may turn deadly.
             </div>
     </div>
-    <div class="col tri-col-1">
-        <a href="/assets/images/profile_images/PatrickC.jpg" data-lightbox="images" title="Patrick Cavanagh">
-            <img src="/assets/images/profile_images/PatrickC_thumb_320x192.jpg" class="img medium-wide overflowfix"/>
-        </a>
-    </div>
 </div>
 
 <div class="row clearfix the-team">
     <div class="header"><h1 class="name">Nathan Matthews</h1><h3 class="title">&nbsp;- Programmer</h3></div>
-    <div class="col tri-col-1">
-        <a href="/assets/images/profile_images/NathanM.jpg" data-lightbox="images" title="Nathan Matthews">
-            <img src="/assets/images/profile_images/NathanM_thumb_320x192.jpg" class="img medium-wide overflowfix"/>
-        </a>
-    </div>
     <div class="col tri-col-2">
         <div class="text">
             Nathan has been a friend and classmate of Ben at the University Of Tennessee at Knoxville. They 
@@ -173,10 +150,20 @@
             asset to the team, starting by helping to develop a custom voxel editor!
             </div>
     </div>
+    <div class="col tri-col-1">
+        <a href="/assets/images/profile_images/NathanM.jpg" data-lightbox="images" title="Nathan Matthews">
+            <img src="/assets/images/profile_images/NathanM_thumb_320x192.jpg" class="img medium-wide overflowfix"/>
+        </a>
+    </div>
 </div>
 
 <div class="row clearfix the-team">
     <div class="header"><h1 class="name">Cristian Zaloj</h1><h3 class="title">&nbsp;- Programmer</h3></div>
+    <div class="col tri-col-1">
+        <a href="/assets/images/profile_images/CristianZ.jpg" data-lightbox="images" title="Cristian Zaloj">
+            <img src="/assets/images/profile_images/CristianZ_thumb_320x192.jpg" class="img medium-wide overflowfix"/>
+        </a>
+    </div>
     <div class="col tri-col-2">
         <div class="text">
                 Cristian is a Romanian vampire ninja pirate currently studying
@@ -185,20 +172,10 @@
             and is going to surely be a great programmer on the team!
             </div>
     </div>
-    <div class="col tri-col-1">
-        <a href="/assets/images/profile_images/CristianZ.png" data-lightbox="images" title="Cristian Zaloj">
-            <img src="/assets/images/profile_images/CristianZ_thumb_320x192.png" class="img medium-wide overflowfix"/>
-        </a>
-    </div>
 </div>
 
 <div class="row clearfix the-team">
     <div class="header"><h1 class="name">Brian Bruggeman</h1><h3 class="title">&nbsp;- Software Engineering Consultant</h3></div>
-    <div class="col tri-col-1">
-        <a href="/assets/images/profile_images/BrianB.jpg" data-lightbox="images" title="Cristian Zaloj">
-            <img src="/assets/images/profile_images/BrianB_thumb_320x192.jpg" class="img medium-wide overflowfix"/>
-        </a>
-    </div>
     <div class="col tri-col-2">
         <div class="text">
                 Brian is a seasoned software
@@ -210,10 +187,20 @@
             will surely help us all grow as a team!
             </div>
     </div>
+    <div class="col tri-col-1">
+        <a href="/assets/images/profile_images/BrianB.jpg" data-lightbox="images" title="Brian Bruggeman">
+            <img src="/assets/images/profile_images/BrianB_thumb_320x192.jpg" class="img medium-wide overflowfix"/>
+        </a>
+    </div>
 </div>
 
 <div class="row clearfix the-team">
-    <div class="header"><h1 class="name">Jeremy Fischer</h1><h3 class="title">&nbsp;- Intern Programmer</h3></div>
+    <div class="header"><h1 class="name">Jeremy Fischer</h1><h3 class="title">&nbsp;- Programmer / Media</h3></div>
+    <div class="col tri-col-1">
+        <a href="/assets/images/profile_images/JeremyF.jpg" data-lightbox="images" title="Jeremy Fischer">
+            <img src="/assets/images/profile_images/JeremyF_thumb_320x192.jpg" class="img medium-wide overflowfix"/>
+        </a>
+    </div>
     <div class="col tri-col-2">
         <div class="text">
                 Jeremy is an extremely intelligent and technically minded
@@ -223,20 +210,10 @@
             a very skilled game programmer!
             </div>
     </div>
-    <div class="col tri-col-1">
-        <a href="/assets/images/profile_images/JeremyF.jpg" data-lightbox="images" title="Cristian Zaloj">
-            <img src="/assets/images/profile_images/JeremyF_thumb_320x192.jpg" class="img medium-wide overflowfix"/>
-        </a>
-    </div>
 </div>
 
 <div class="row clearfix the-team">
     <div class="header"><h1 class="name">Frank McCoy</h1><h3 class="title">&nbsp;- Programmer</h3></div>
-    <div class="col tri-col-1">
-        <a href="/assets/images/profile_images/FrankF.jpg" data-lightbox="images" title="Cristian Zaloj">
-            <img src="/assets/images/profile_images/FrankF_thumb_320x192.jpg" class="img medium-wide overflowfix"/>
-        </a>
-    </div>
     <div class="col tri-col-2">
         <div class="text">
             Frank is a talented programmer
@@ -246,5 +223,44 @@
             APIs, and he since he is a fast learner he will likely make great progress
             on the SoA team!
             </div>
+    </div>
+    <div class="col tri-col-1">
+        <a href="/assets/images/profile_images/FrankF.jpg" data-lightbox="images" title="Frank McCoy">
+            <img src="/assets/images/profile_images/FrankF_thumb_320x192.jpg" class="img medium-wide overflowfix"/>
+        </a>
+    </div>
+</div>
+    
+<div class="row clearfix the-team">
+    <div class="header"><h1 class="name">Isaque Dutra</h1><h3 class="title">&nbsp;- Programmer</h3></div>
+    <div class="col tri-col-1">
+        <a href="/assets/images/profile_images/IsaqueD.jpg" data-lightbox="images" title="Jeremy Fischer">
+            <img src="/assets/images/profile_images/IsaqueD_thumb_320x192.jpg" class="img medium-wide overflowfix"/>
+        </a>
+    </div>
+    <div class="col tri-col-2">
+        <div class="text">
+                Isaque is an extremely hard-working scholar and programmer. He is a current student of MIT 
+                who is working on a degree in Physics as well as Computer Science. He is also very interested in 
+                Astronomy, Photography, and cheese making! Isaque is a quick learner who has high ambition for 
+                furthering the development of Seed of Andromeda!
+            </div>
+    </div>
+</div>
+
+<div class="row clearfix the-team">
+    <div class="header"><h1 class="name">Wisp X</h1><h3 class="title">&nbsp;- Music Artist</h3></div>
+    <div class="col tri-col-2">
+        <div class="text">
+            Wisp is a hobbyist musician of awesome talent, making music 
+            for the enjoyment of it! Alongside his personal music, Wisp 
+            will be making background music for the soundtrack of Seed of
+            Andromeda!
+        </div>
+    </div>
+    <div class="col tri-col-1">
+        <a href="/assets/images/profile_images/WispX.jpg" data-lightbox="images" title="Wisp X">
+            <img src="/assets/images/profile_images/WispX_thumb_320x192.jpg" class="img medium-wide overflowfix"/>
+        </a>
     </div>
 </div>

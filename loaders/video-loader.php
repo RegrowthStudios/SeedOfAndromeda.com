@@ -49,7 +49,7 @@
                     $videos[] = array (
                         "title" => $vid->title,
                         "vid_id" => $vid->resourceId->videoId,
-                        "thumb_url" => ( $vid->thumbnails->maxres ? $vid->thumbnails->maxres->url : ( $vid->thumbnails->standard ? $vid->thumbnails->standard->url : $vid->thumbnails->high->url ) ),
+                        "thumb_url" => ( !empty($vid->thumbnails->maxres) ? $vid->thumbnails->maxres->url : ( !empty($vid->thumbnails->standard) ? $vid->thumbnails->standard->url : $vid->thumbnails->high->url ) ),
                         "category" => -1
                     );
                 }
@@ -63,7 +63,9 @@
                 ) );
                 echo json_encode ( ceil ( $query->rowCount() / $VIDEOS_PER_PAGE ) );
             } else {
-                echo json_encode ( ceil ( json_decode( file_get_contents("https://www.googleapis.com/youtube/v3/playlists?part=contentDetails&id=UUMlW2qG20hcFYo06rcit4CQ&key=AIzaSyBb43dOH0L_dnbqKOQ8qpiXAOez7uGXO6o&") )->items[0]->contentDetails->itemCount / $VIDEOS_PER_PAGE ) );
+                $d = json_decode( file_get_contents("https://www.googleapis.com/youtube/v3/playlists?part=contentDetails&id=UUMlW2qG20hcFYo06rcit4CQ&key=AIzaSyBb43dOH0L_dnbqKOQ8qpiXAOez7uGXO6o&") );
+                $total = ceil ( ( $d->items[0]->contentDetails->itemCount - 1 ) / $VIDEOS_PER_PAGE );
+                echo json_encode ( $total );
             }
         }
     }

@@ -285,9 +285,17 @@ enctype="multipart/form-data" method="post">
 					type="file" name="bgImage" />
                 <br/>
                 <br/>
-                <span>Publish Download:</span> <div class="checkbox"> <input id="published" value="1"
-		            type="checkbox" name="published" <?php if($download["published"] == "1") echo "checked";?> />
-		            <label for="published"></label>
+                <span>Publish Download to Testers:</span> <div class="checkbox"> <input id="publishedtester" value="1"
+		            type="checkbox" name="publishedtester" <?php if($download["publishedtester"] == "1") echo "checked";?> />
+		            <label for="publishedtester"></label>
+                </div>
+                <span>Publish Download to Media:</span> <div class="checkbox"> <input id="publishedmedia" value="1"
+		            type="checkbox" name="publishedmedia" <?php if($download["publishedmedia"] == "1") echo "checked";?> />
+		            <label for="publishedmedia"></label>
+                </div>
+                <span>Publish Download to Public:</span> <div class="checkbox"> <input id="publishedpublic" value="1"
+		            type="checkbox" name="publishedpublic" <?php if($download["publishedpublic"] == "1") echo "checked";?> />
+		            <label for="publishedpublic"></label>
                 </div>
                 <br/> 
                 <br/>

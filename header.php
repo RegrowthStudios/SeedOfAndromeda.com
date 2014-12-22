@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.ico" />
     <link rel="stylesheet" href="/styles/normalise.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/soa.min.css?ver=9" type="text/css" />
+    <link rel="stylesheet" href="/styles/soa.min.css?ver=11" type="text/css" />
     <link rel="stylesheet" href="/assets/fonts/the_league_of_orbitron/Orbitron.css" type="text/css" />
     <link href='https://fonts.googleapis.com/css?family=Electrolize' rel='stylesheet' type='text/css' />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -32,7 +32,7 @@
     <script src="/scripts/spin.min.js" type="text/javascript"></script>
     <script src="/scripts/lightbox-2.6.js"></script>
     <link href="/styles/lightbox.css" rel="stylesheet" />
-    <script src="/scripts/soa.js?=2"></script>
+    <script src="/scripts/soa.js?=4"></script>
     <script src="/scripts/jquery.sticky.js"></script>
     <script>
         $(document).ready(function () {
@@ -53,7 +53,7 @@
         }
     }    
     if (file_exists ( $pagestyle )) {
-	    echo '<link rel="stylesheet" href="/' . $pagestyle . '?ver=14" type="text/css" />';
+	    echo '<link rel="stylesheet" href="/' . $pagestyle . '?ver=15" type="text/css" />';
     }
     $pagestyle = "scripts/pages/" . str_replace ( ".php", ".js", $pagename );
     if (strcmp($pagename, "admin.php") == 0) {
@@ -68,7 +68,7 @@
         }
     }   
     if (file_exists ( $pagestyle )) {
-	    echo '<script src="/' . $pagestyle . '?ver=10"></script>';
+	    echo '<script src="/' . $pagestyle . '?ver=14"></script>';
     }
     ?>
     <script>

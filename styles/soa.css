@@ -624,7 +624,7 @@ img.overflowfix {
 /* Content */
 /***********/
 .text {
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.8);
   border: 1px solid #38aecf;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;

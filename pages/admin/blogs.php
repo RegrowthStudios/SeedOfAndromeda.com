@@ -215,23 +215,24 @@ if (isset ( $_REQUEST ['delete'] )) {
     remove_script_host: true,
     document_base_url: "/blogs/",
     image_class_list: [
-                        { title: 'Medium Wide', value: 'img medium-wide'},
-                        { title: 'No', value: 'img xxx-small' },
+                        { title: 'Freeform', value: 'img' },
+                        { title: 'Tote', value: 'img xxx-small' },
+                        { title: 'Tote Wide', value: 'img xxx-small-wide' },
                         { title: 'Tiny', value: 'img xx-small' },
-                        { title: 'Very Small', value: 'img x-small' },
-                        { title: 'Small', value: 'img small' },
-                        { title: 'Medium', value: 'img medium'},
-                        { title: 'Large', value: 'img large' },
-                        { title: 'Very Large', value: 'img x-large' },
-                        { title: 'Huge', value: 'img xx-large' },
-                        { title: 'Gigantic', value: 'img xxx-large' },
-                        { title: 'No Wide', value: 'img xxx-small-wide' },
                         { title: 'Tiny Wide', value: 'img xx-small-wide' },
+                        { title: 'Very Small', value: 'img x-small' },
                         { title: 'Very Small Wide', value: 'img x-small-wide' },
+                        { title: 'Small', value: 'img small' },
                         { title: 'Small Wide', value: 'img small-wide' },
+                        { title: 'Medium', value: 'img medium'},
+                        { title: 'Medium Wide', value: 'img medium-wide'},
+                        { title: 'Large', value: 'img large' },
                         { title: 'Large Wide', value: 'img large-wide' },
+                        { title: 'Very Large', value: 'img x-large' },
                         { title: 'Very Large Wide', value: 'img x-large-wide' },
+                        { title: 'Huge', value: 'img xx-large' },
                         { title: 'Huge Wide', value: 'img xx-large-wide' },
+                        { title: 'Gigantic', value: 'img xxx-large' },
                         { title: 'Gigantic Wide', value: 'img xxx-large-wide' }
                     ],
     image_list: [
@@ -249,7 +250,7 @@ if (isset ( $_REQUEST ['delete'] )) {
                         foreach($it as $file)
                         {
                             if( pathinfo($file,PATHINFO_EXTENSION) == "jpg" || pathinfo($file,PATHINFO_EXTENSION) == "png" || pathinfo($file,PATHINFO_EXTENSION) == "gif" ) {
-                                echo "{title: '" . pathinfo($file,PATHINFO_BASENAME) . "', value: '/assets/images/blogs/" . pathinfo($file,PATHINFO_BASENAME) . "'},";
+                                echo "{title: '" . pathinfo($file,PATHINFO_BASENAME) . "', value: '/assets/images/screenshots/" . pathinfo($file,PATHINFO_BASENAME) . "'},";
                             }
                         }
 					?>

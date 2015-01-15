@@ -39,6 +39,10 @@
                 7,
                 13 
             );
+            $viewAllBlogsGroups = array (
+                7,
+                13 
+            );
             $manageAllBlogsGroups = array (
                 3 
             );

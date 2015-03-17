@@ -7,7 +7,13 @@
 /******************/
 /* Content Mixins */
 /******************/
-.text {
+.the-team .text {
   min-height: 192px;
+}
+.the-contributors .text {
+  text-align: center;
+}
+.the-contributors .contributor:not(:first-of-type) {
+  margin-top: 0.5em;
 }
 /*# sourceMappingURL=the-team.css.map */

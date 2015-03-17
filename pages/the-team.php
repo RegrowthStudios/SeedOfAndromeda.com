@@ -37,7 +37,7 @@
     <div class="header"><h1 class="name">Joshua Arnold</h1><h3 class="title">&nbsp;- Sound Artist</h3></div>
     <div class="col tri-col-2">
         <div class="text">
-            Josh is the creative genius behind all of Seed of Andromeda's music and sound, he has 
+            Josh is the creative genius behind almost all of Seed of Andromeda's music and is also one of our sound artists. He has 
             produced many high quality soundtracks of his own previously, and has now turned his 
             talent towards producing all manner of music and sounds for your ears to enjoy!
             </div>

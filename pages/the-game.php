@@ -6,9 +6,9 @@
                 first wave of colonists to leave Earth for the stars, your destination: the Trinity star system. On your arrival, you are greeted 
                 by a none too friendly, advanced race, who launch a viscous attack on your colonial fleet. In the carnage, you descend in an escape 
                 capsule to the surface of Aldrin, a moon of Hyperion, a gas giant in the Trinity star system. You must make what you can of this new 
-                world, with your limited supplies, what you do is your choice... it is your story that is to unfold.
+                world, with your limited supplies; what you do is your choice... it is your story that is to unfold.
                 <br/><br/>Seed of Andromeda is your game, you play it, you make your own decisions, and you are the driver of your story. When you play Seed of 
-                Andromeda, you will always create your own story, and every time you play again, you will have an entirely new and unique story to tell! 
+                Andromeda, you will always create your own story and, every time you play again, you will have an entirely new and unique story to tell! 
                 Seed of Andromeda is a decision-driven game. We want Seed of Andromeda to be about you, the player, not about a pre-written story that 
                 your actions are dictated by.
             </div>
@@ -32,7 +32,7 @@
         <div class="text">
                 While we stand by the idea of not forcing a story on you, we don't want to leave you with nothing! Seed of Andromeda has a fully-realised 
                 technology tree for you, and other inhabitants of the game's worlds, to progress along. Always wanted that ray gun your mum promised for 
-                your 18th? Well get researching and engineering wondrous technologies! Don't want to while away in a lab? Then get out and explore, find 
+                your birthday? Well get researching and engineering wondrous technologies! Don't want to while away in a lab? Then get out and explore, find 
                 alien crash sites and learn from the past! Don't much like the idea of trekking through the wilderness? Butter up some NPCs with flattery 
                 and sweet talk and they might divulge some of their hard earned technologies! Or just blow them up and steal it... it's all up to you!
             </div>

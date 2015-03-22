@@ -341,6 +341,27 @@ if (isset ( $_REQUEST ['delete'] )) {
 	    action="/<?php echo $pageurl . '?blogs&postid=' . $blogpost ["id"]; ?>&submit&notemplate"
 	    enctype="multipart/form-data" method="post">
         <div class="row clearfix">
+            <div class="header"><h1>Blog Post Guideline</h1></div>
+            <div class="col double-col-2">
+                <div class="text">
+                    <h4>The following is a set of standards required of a blog post BEFORE it is published.</h4>
+                    <br/>
+                    <ul style="list-style-type:disc;padding-left:40px;">
+                        <li>Images added to a blog must not come from a third party hosting service - they must be uploaded to the server and added from there.</li>
+                        <li>Images added to a blog post must be given one of the image classes that encloses it in a blue border if the image is predominantly opaque.</li>
+                        <li>Images and Videos must be centred, and sized to not overflow the dotted box enclosing the editable space.</li>
+                        <li>Videos must be embedded, not linked, using the embedding tool in the editor.</li>
+                        <li>Sections must be given headers utilising the headers offered by the editor.</li>
+                        <li>Written sentences only, no lists unless the lists are utterly necessary (e.g. listing a set of stats for an object).</li>
+                        <li>Aim for full paragraphs, not standalone, one line sentences as much as possible.</li>
+                        <li>Links should utilise the anchor tool in the editor, and the link be in the text, rather than displaying the full URL below.</li>
+                        <br/>
+                        <li><em>Before publication, blogs must be proof-read by one of the strong English writers of the group (e.g. Ben or Matthew).</em></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row clearfix">
             <div class="header"><h1><p id="blog-post-title" class="edittitle"><?php echo $blogpost["title"];?></p></h1></div>
             <div class="col double-col-2">
                 <div class="text">

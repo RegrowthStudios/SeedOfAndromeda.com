@@ -463,7 +463,7 @@ if (isset ( $_REQUEST ['delete'] )) {
 						    <label for="anonymous"></label>
                         </div> 
                     </div>
-                    <br /> 
+                    <br/><br/>
                     <?php echo '<a class="btn" href="/' . $pageurl . '?blogs">Return</a>'; ?>
                     <input class="btn" type="submit" value="Save" />
 	            </div>

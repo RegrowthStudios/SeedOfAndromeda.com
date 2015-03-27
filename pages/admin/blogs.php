@@ -509,7 +509,7 @@ if (isset ( $_REQUEST ['delete'] )) {
 					
 		echo "</ul>";
 	}
-	if ($canEditAll) {
+	if ($canEditAll || $viewAllBlogsGroups) {
 		$query = $connection->prepare ( "SELECT * FROM blog_posts WHERE author != ? ORDER BY id DESC" );
 		$query->execute ( array (
 				$userinfo ['user_id'] 
@@ -524,10 +524,17 @@ if (isset ( $_REQUEST ['delete'] )) {
             <div class="text">
                 <h2>Blog posts by others:</h2><br><ul>
         ';
-		while ( $row = $query->fetch () ) {
-			$author = $sdk->getUser ( $row ["author"] );
-			echo '<li>' . $row ["title"] . ' by ' . $author ["username"] . ' - <a href="/' . $pageurl . '?blogs&postid=' . $row ["id"] . '">Edit</a> - <a href="/' . $pageurl . '?blogs&view&postid=' . $row ["id"] . '">View</a> - <a onclick="return confirmAction(\'Are you sure you wish to delete this blog? You will not be able to recover it.\');" href="/' . $pageurl . '?blogs&postid=' . $row ["id"] . '&delete=1">Delete</a></li></li>';
-		}
+        if ($canEditAll) {
+		    while ( $row = $query->fetch () ) {
+			    $author = $sdk->getUser ( $row ["author"] );
+			    echo '<li>' . $row ["title"] . ' by ' . $author ["username"] . ' - <a href="/' . $pageurl . '?blogs&postid=' . $row ["id"] . '">Edit</a> - <a href="/' . $pageurl . '?blogs&view&postid=' . $row ["id"] . '">View</a> - <a onclick="return confirmAction(\'Are you sure you wish to delete this blog? You will not be able to recover it.\');" href="/' . $pageurl . '?blogs&postid=' . $row ["id"] . '&delete=1">Delete</a></li></li>';
+		    }
+        } else {
+		    while ( $row = $query->fetch () ) {
+			    $author = $sdk->getUser ( $row ["author"] );
+			    echo '<li>' . $row ["title"] . ' by ' . $author ["username"] . ' - <a href="/' . $pageurl . '?blogs&view&postid=' . $row ["id"] . '">View</a></li></li>';
+		    }
+        }
 		echo "</ul>";
 	}
     echo '

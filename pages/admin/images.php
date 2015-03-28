@@ -284,16 +284,17 @@ if (isset ( $_REQUEST ['delete'] )) {
         <div class="header"><h1>Image Manager</h1></div>
         <div class="col double-col-2">
             <div class="text">
-              <a class="btn right" href="/' . $pageurl . '?images&newimage&notemplate">New Image</a>';
+                <br/>
+                <a class="btn right" href="/' . $pageurl . '?images&newimage&notemplate">New Image</a>';
 					
         $query = $connection->prepare ( "SELECT * FROM images ORDER BY id DESC" );
 		$query->execute();
                     
-        echo "<h2>Images:</h2><br><ul>";
+        echo "<h2>Images:</h2><br/><br/>";
 		while ( $row = $query->fetch() ) {
-			echo '<li>' . $row ["title"] . ' - <a href="/' . $pageurl . '?images&imageid=' . $row ["id"] . '">Edit</a> - <a onclick="return confirmAction(\'Are you sure you wish to delete this image? You will not be able to recover it.\');" href="/' . $pageurl . '?images&imageid=' . $row ["id"] . '&delete=1">Delete</a></li>';
+			echo '<div class="col quad-col-1"><img class="img medium admin-image" src="' . $row ["img_url"] . '"/><div class="admin-image-overlay">' . $row ["title"] . '<br/><a href="/' . $pageurl . '?images&imageid=' . $row ["id"] . '">Edit</a><br/><a onclick="return confirmAction(\'Are you sure you wish to delete this image? You will not be able to recover it.\');" href="/' . $pageurl . '?images&imageid=' . $row ["id"] . '&delete=1">Delete</a></div></div>';
 		}
-		echo '</ul>
+		echo '</ul>1
         </div>
     </div>
     ';

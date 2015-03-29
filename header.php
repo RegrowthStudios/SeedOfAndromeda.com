@@ -134,31 +134,10 @@
                     <div class="account-overview">
                         <span class="account-name">Not Logged In</span>
                     </div>
-                    <div class="account-log-in-wrapper">
-                        <ul class="account-log-in">
-                            <form method='post' action='<?php echo XenForo_Link::buildPublicLink('canonical:login'); ?>'>
-                                <div class="input"> 
-						            <span>Username:</span> <input type='text'
-							            style="padding-right: 0;" id="username" name='login'
-							            placeholder="Username" />
-                                </div>
-                                <div class="input"> 
-						            <span>Password:</span> <input type='password'
-							            style="padding-right: 0;" id='password' name='password'
-							            placeholder="Password" />
-                                </div>
-                                <div class="input">
-                                    <span>Remember Me:</span> <div class="checkbox"> <input id="remember" 
-								        type='checkbox' style="padding-right: 0;" name='remember' />
-							            <label for="remember"></label>
-                                    </div>
-                                </div>
-						        <input type="hidden" name="cookie_check" value="1"> <input
-							        type="hidden" name="redirect" value="/<?php echo $pageurl;?>">
-						        <div class="account-log-in-submit"><input type="hidden" name="_xfToken" value="<?php isset($visitor['csrf_token_page']) ? $visitor['csrf_token_page'] : "";?>"> <input
-							        type='submit' value='submit' onClick='prepare_login();'
-							        class="left" /><span class="account-log-in-register">&nbsp;or <a href="<?php echo XenForo_Link::buildPublicLink("canonical:register");?>">register</a>.</span></div>
-					        </form>
+                    <div class="account-options-wrapper">
+                        <ul class="account-options">
+                            <li><a href="<?php echo XenForo_Link::buildPublicLink('canonical:login'); ?>">Log In</a></li>
+                            <li><a href="<?php echo XenForo_Link::buildPublicLink("canonical:register");?>">register</a></li>
                         </ul>
                     </div>
                 <?php

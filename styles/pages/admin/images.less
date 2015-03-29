@@ -1,4 +1,6 @@
-﻿#screenshot-category {
+﻿@import "../../data.less";
+
+#screenshot-category {
     width: 100%;
 }
 #screenshot-category-options {
@@ -11,4 +13,15 @@
 }
 #screenshot-category-options > span {
     line-height: 32px;
+}
+
+.admin-image + .admin-image-overlay {
+    position: absolute;
+    width: @image-height-medium;
+    height: @image-height-medium;
+    display: none;
+}
+
+.admin-image:hover + .admin-image-overlay {
+    display: block;
 }

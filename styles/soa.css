@@ -814,12 +814,16 @@ img.overflowfix {
 .btn {
   height: 96.896px;
   width: 128px;
-  line-height: 96.896px;
   background: url("../assets/images/Button.png");
   background-size: contain;
   background-repeat: no-repeat;
+  padding: 0 10px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
   display: inline-block;
-  color: white !important;
   -webkit-transition: all 0.2s linear;
   -moz-transition: all 0.2s linear;
   -o-transition: all 0.2s linear;
@@ -828,6 +832,17 @@ img.overflowfix {
   -ms-filter: drop-shadow(0 0 10px #000000);
   filter: drop-shadow(0 0 10px #000000);
   text-align: center;
+}
+.btn > a {
+  color: white !important;
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  display: block;
 }
 .btn:hover {
   background: url("../assets/images/Button_Hover.png");

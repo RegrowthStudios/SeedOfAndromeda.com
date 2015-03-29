@@ -8,6 +8,43 @@ $loggedIn = $sdk->isLoggedIn ();
 $userinfo = $sdk->getUser ();
 $visitor = $sdk->getVisitor ();
 
+$groups = explode ( ",", $userinfo ["secondary_group_ids"] );
+$groups [] = $userinfo ["user_group_id"];
+$manageOwnBlogsGroups = array (
+    7,
+    13 
+);
+$viewAllBlogsGroups = array (
+    7,
+    13 
+);
+$manageAllBlogsGroups = array (
+    3 
+);
+$manageDownloadsGroups = array (
+    7,
+    13,
+    3
+);
+$manageImagesGroups = array (
+    7,
+    13,
+    3
+);
+$manageVideosGroups = array (
+    7,
+    13,
+    3
+);
+$canManageAdmin = array_unique( array_merge($manageOwnBlogsGroups, $manageAllBlogsGroups, $manageDownloadsGroups, $manageImagesGroups, $manageVideosGroups) );
+            
+$canAccessAdmin = false;
+foreach ($canManageAdmin as $groupId) {
+    if (in_array($groupId, $groups)) {
+        $canAccessAdmin = true;
+        break;
+    }
+}
 $pagetitle = "SoA - ";
 $pagename = "";
 if (! isset ( $_REQUEST ['page'] )) {

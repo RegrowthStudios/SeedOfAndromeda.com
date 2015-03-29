@@ -10,6 +10,9 @@
 .version {
   display: inline-block;
 }
+.main-download {
+  margin-right: 40px !important;
+}
 .download {
   float: right;
   display: block;
@@ -17,7 +20,6 @@
   color: #61b7cf !important;
   height: 145.344px;
   width: 192px;
-  line-height: 145.344px;
 }
 .ver-description {
   min-height: 145.344px;

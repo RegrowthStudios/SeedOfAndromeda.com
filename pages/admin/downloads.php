@@ -152,7 +152,7 @@ if (isset ( $_REQUEST ['delete'] )) {
 						        $_REQUEST ['downloadid']
 				        ) );
                     }
-                } else 
+                } else {
                     if ( isset ( $_FILES['bgImage'] ) && $_FILES['bgImage']['size'] > 0 ) {
                         $query = $connection->prepare ( "UPDATE downloads SET version = ?, description = ?, backgroundurl = ?, updatetime = ?, published = ? WHERE id = ?" );
 				        $query->execute ( array (
@@ -292,8 +292,8 @@ enctype="multipart/form-data" method="post">
                 </div>
                 <br/> 
                 <br/>
-                <?php echo '<a class="btn" href="/' . $pageurl . '?downloads">Return</a>'; ?>
-                <input class="btn" type="submit" value="Save" />
+                <?php echo '<div class="btn"><a href="/' . $pageurl . '?downloads">Return</a></div>'; ?>
+                <input class="btn left" type="submit" value="Save" />
             </div>
         </div>
     </div>
@@ -318,7 +318,7 @@ enctype="multipart/form-data" method="post">
         <div class="header"><h1>Download Editor</h1></div>
         <div class="col double-col-2">
             <div class="text">
-                <a class="btn right" href="/' . $pageurl . '?downloads&newdownload&notemplate">New post</a>';
+                <div class="right btn"><a href="/' . $pageurl . '?downloads&newdownload&notemplate">New post</a></div>';
 					
         $query = $connection->prepare ( "SELECT * FROM downloads ORDER BY id DESC" );
 		$query->execute();

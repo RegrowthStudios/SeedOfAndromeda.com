@@ -194,8 +194,8 @@ tinymce.init({
                     </div>
                 </div>
                 <br /> 
-                <?php echo '<a class="btn" href="/' . $pageurl . '?videos">Return</a>'; ?>
-                <input class="btn" type="submit" value="Save" />
+                <?php echo '<div class="btn"><a href="/' . $pageurl . '?videos">Return</a></div>'; ?>
+                <input class="btn left" type="submit" value="Save" />
 	        </div>
         </div>
     </div>
@@ -222,7 +222,7 @@ tinymce.init({
         <div class="header"><h1>Video Manager</h1></div>
         <div class="col double-col-2">
             <div class="text">
-                <a class="btn right" href="/' . $pageurl . '?videos&newvideo&notemplate">New Video</a>';
+                <div class="right btn"><a href="/' . $pageurl . '?videos&newvideo&notemplate">New Video</a></div>';
                 
 		$query = $connection->prepare ( "SELECT * FROM videos ORDER BY id DESC" );
 		$query->execute();

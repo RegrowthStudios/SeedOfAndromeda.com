@@ -1,11 +1,4 @@
 <?php
-    if (!isset($_REQUEST["notemplate"])) {
-        ?>
-            <div id="admin-nav-bar">
-                <!-- HERE MUST LIE THE ADMIN NAV BAR! -->
-            </div>
-        <?php
-    }
     if (!$loggedIn) {
     
         echo '
@@ -158,16 +151,24 @@
                     <div class="row clearfix">
                         <div class="header"><h1>Admin Panel</h1></div>
                             <div class="col quad-col-1 centerInners">
-                                <a class="btn download" href="/admin?blogs">Blogs</a>
+                                <div class="btn">
+                                    <a href="/admin?blogs">Blogs</a>
+                                </div>
                             </div>
                             <div class="col quad-col-1 centerInners">
-                                <a class="btn download" href="/admin?downloads">Downloads</a>
+                                <div class="btn">
+                                    <a href="/admin?downloads">Downloads</a>
+                                </div>
                             </div>
                             <div class="col quad-col-1 centerInners">
-                                <a class="btn download" href="/admin?images">Images</a>
+                                <div class="btn">
+                                    <a href="/admin?images">Images</a>
+                                </div>
                             </div>
                             <div class="col quad-col-1 centerInners">
-                                <a class="btn download" href="/admin?videos">Videos</a>
+                                <div class="btn">
+                                    <a href="/admin?videos">Videos</a>
+                                </div>
                             </div>
                     </div>
 <?php

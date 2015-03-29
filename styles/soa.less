@@ -837,11 +837,20 @@ ul {
     background: url("../assets/images/Button.png");
     background-size: contain;
     background-repeat: no-repeat;
+    padding: 0 10px;
+    .BoxSizing();
+    .TransformStyle();
     display: inline-block;
-    color: white !important;
     .Transition();
     .DropShadow(0, 0, 10px, @btn-drop-shadow-color);
     text-align: center;
+}
+.btn > a {
+    color: white !important;
+    position: relative;
+    top: 50%;
+    .Transform(translateY(-50%));
+    display: block;
 }
 .btn:hover {
     background: url("../assets/images/Button_Hover.png");

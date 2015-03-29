@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.ico" />
     <link rel="stylesheet" href="/styles/normalise.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/soa.min.css?ver=12" type="text/css" />
+    <link rel="stylesheet" href="/styles/soa.min.css?ver=13" type="text/css" />
     <link rel="stylesheet" href="/assets/fonts/the_league_of_orbitron/Orbitron.css" type="text/css" />
     <link href='https://fonts.googleapis.com/css?family=Electrolize' rel='stylesheet' type='text/css' />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -53,7 +53,7 @@
         }
     }    
     if (file_exists ( $pagestyle )) {
-	    echo '<link rel="stylesheet" href="/' . $pagestyle . '?ver=16" type="text/css" />';
+	    echo '<link rel="stylesheet" href="/' . $pagestyle . '?ver=22" type="text/css" />';
     }
     $pagestyle = "scripts/pages/" . str_replace ( ".php", ".js", $pagename );
     if (strcmp($pagename, "admin.php") == 0) {
@@ -134,31 +134,10 @@
                     <div class="account-overview">
                         <span class="account-name">Not Logged In</span>
                     </div>
-                    <div class="account-log-in-wrapper">
+                    <div id="account-control-wrapper" class="account-log-in-wrapper">
                         <ul class="account-log-in">
-                            <form method='post' action='<?php echo XenForo_Link::buildPublicLink('canonical:login'); ?>'>
-                                <div class="input"> 
-						            <span>Username:</span> <input type='text'
-							            style="padding-right: 0;" id="username" name='login'
-							            placeholder="Username" />
-                                </div>
-                                <div class="input"> 
-						            <span>Password:</span> <input type='password'
-							            style="padding-right: 0;" id='password' name='password'
-							            placeholder="Password" />
-                                </div>
-                                <div class="input">
-                                    <span>Remember Me:</span> <div class="checkbox"> <input id="remember" 
-								        type='checkbox' style="padding-right: 0;" name='remember' />
-							            <label for="remember"></label>
-                                    </div>
-                                </div>
-						        <input type="hidden" name="cookie_check" value="1"> <input
-							        type="hidden" name="redirect" value="/<?php echo $pageurl;?>">
-						        <div class="account-log-in-submit"><input type="hidden" name="_xfToken" value="<?php isset($visitor['csrf_token_page']) ? $visitor['csrf_token_page'] : "";?>"> <input
-							        type='submit' value='submit' onClick='prepare_login();'
-							        class="left" /><span class="account-log-in-register">&nbsp;or <a href="<?php echo XenForo_Link::buildPublicLink("canonical:register");?>">register</a>.</span></div>
-					        </form>
+                            <li><a href="<?php echo XenForo_Link::buildPublicLink('canonical:login'); ?>">Log In</a></li>
+                            <li><a href="<?php echo XenForo_Link::buildPublicLink("canonical:register");?>">register</a></li>
                         </ul>
                     </div>
                 <?php
@@ -171,7 +150,7 @@
                         <span class="account-name"><?php echo $userinfo['username']; ?></span>
                         <span class="account-alerts"><?php echo $userinfo['alerts_unread']+$userinfo['conversations_unread']; ?></span>
                     </div>
-                    <div class="account-options-wrapper">
+                    <div id="account-control-wrapper" class="account-options-wrapper">
                         <ul class="account-options">
                             <li><a href="<?php echo XenForo_Link::buildPublicLink("canonical:account/alerts");?>">Alerts (<?php echo $userinfo['alerts_unread']; ?>)</a></li>
                             <li><a href="<?php echo XenForo_Link::buildPublicLink("canonical:conversations");?>">Inbox (<?php echo $userinfo['conversations_unread']; ?>)</a></li>

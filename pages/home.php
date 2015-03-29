@@ -25,7 +25,7 @@
                         if (items.length > 0) {
                             var item = items[0];
                             var videoid = "https://www.youtube.com/embed/" + item.snippet.resourceId.videoId + "?wmode=transparent";
-                            var video = "<iframe width='610' height='314' src='" + videoid + "' frameborder='0' allowfullscreen></iframe>";
+                            var video = "<iframe width='622' height='350' src='" + videoid + "' frameborder='0' allowfullscreen></iframe>";
                             $('#featured-video').html(video);
                         }
                     }

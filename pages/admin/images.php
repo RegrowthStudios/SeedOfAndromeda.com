@@ -290,7 +290,7 @@ if (isset ( $_REQUEST ['delete'] )) {
         $query = $connection->prepare ( "SELECT * FROM images ORDER BY id DESC" );
 		$query->execute();
                     
-        echo "<h2>Images:</h2><br/><br/><br/>";
+        echo "<h2>Images:</h2><br/><br/><br/><br/>";
 		while ( $row = $query->fetch() ) {
 			echo '<div class="col quad-col-1"><img class="img medium admin-image" src="' . $row ["img_url"] . '"/><div class="admin-image-overlay">' . $row ["title"] . '<br/><a href="/' . $pageurl . '?images&imageid=' . $row ["id"] . '">Edit</a><br/><a onclick="return confirmAction(\'Are you sure you wish to delete this image? You will not be able to recover it.\');" href="/' . $pageurl . '?images&imageid=' . $row ["id"] . '&delete=1">Delete</a></div></div>';
 		}

@@ -412,8 +412,7 @@ img.overflowfix {
   text-align: center;
   line-height: 30px;
 }
-#account-bar .account-options-wrapper,
-#account-bar .account-log-in-wrapper {
+#account-control-wrapper {
   overflow: hidden;
   position: relative;
   height: 0;
@@ -427,22 +426,15 @@ img.overflowfix {
   /* + 4 for border width*/
 }
 #account-bar:hover .account-log-in-wrapper {
-  height: 144px;
+  height: 78px;
 }
-#account-bar .account-options,
-#account-bar .account-log-in {
+#account-control-wrapper > ul {
   width: 180px;
   margin-left: 20px;
   position: absolute;
   bottom: 0;
 }
-#account-bar .account-log-in {
-  background: url("/assets/images/SOASprite.png");
-  background-position: 0 -368px;
-  height: 144px;
-  font-size: 0.8rem;
-}
-#account-bar .account-options > li {
+#account-control-wrapper > ul > li {
   height: 38px;
   width: 100%;
   line-height: 38px;
@@ -451,34 +443,17 @@ img.overflowfix {
   background: url("/assets/images/SOASprite.png");
   background-position: -255px -255px;
 }
-#account-bar .account-options > li:hover {
+#account-control-wrapper > ul > li:hover {
   background: url("/assets/images/SOASprite.png");
   background-position: -435px -255px;
 }
-#account-bar .account-options > li:last-child {
+#account-control-wrapper > ul > li:last-child {
   background: url("/assets/images/SOASprite.png");
   background-position: -255px -295px;
 }
-#account-bar .account-options > li:last-child:hover {
+#account-control-wrapper > ul > li:last-child:hover {
   background: url("/assets/images/SOASprite.png");
   background-position: -435px -295px;
-}
-#account-bar .account-log-in form {
-  margin-left: 20px;
-}
-#account-bar .account-log-in input {
-  max-width: 120px;
-}
-#account-bar .account-log-in-submit {
-  float: right;
-  margin-right: 20px;
-}
-#account-bar .account-log-in-register,
-#account-bar .account-log-in-register a {
-  font-size: 0.9em;
-}
-#account-bar .account-log-in-register a {
-  text-transform: none;
 }
 /***************/
 /* Content Box */

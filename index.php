@@ -15,9 +15,12 @@ if (! isset ( $_REQUEST ['page'] )) {
 }
 $cleanpageid = clean_pageid ( $_REQUEST ['page'] );
 $pageurl = $cleanpageid;
+$subpage = "";
 if (startsWith ( $cleanpageid, "blogs/" )) {
-	$pageurl = "blogs/" . substr ( $cleanpageid, 6 );
 	$cleanpageid = "blogs/";
+} else if (startsWith ( $cleanpageid, "about-the-game/" )) {
+    $subpage = substr ( $cleanpageid, 15 );
+    $cleanpageid = "about-the-game/";
 } else if (endsWith ( $cleanpageid, "/" )) {
 	$cleanpageid = substr ( $cleanpageid, 0, strlen ( $cleanpageid ) - 1 );
 }
@@ -28,9 +31,27 @@ switch ($cleanpageid) {
 		$pagename = "home.php";
 		$pageurl = "";
 		break;
-	case "the-game" :
-		$pagetitle .= "The Game";
-		$pagename = "the-game.php";
+	case "about-the-game/" :
+		$pagetitle .= "About The Game";
+        $pagename = "about-the-game/";
+        switch ($subpage) {
+            case "general" :
+            case "general/" :
+            $pagename .= "general.php";
+            break;
+            case "character-scale" :
+            case "character-scale/" :
+            $pagename .= "character-scale.php";
+            break;
+            case "planetary-scale" :
+            case "planetary-scale/" :
+            $pagename .= "planetary-scale.php";
+            break;
+            case "beyond-planetary":
+            case "beyond-planetary/":
+            $pagename .= "beyond-planetary.php";
+            break;
+        }
 		break;
 	case "the-team" :
 		$pagetitle .= "The Team";

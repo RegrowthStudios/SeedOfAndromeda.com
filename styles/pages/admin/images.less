@@ -15,13 +15,22 @@
     line-height: 32px;
 }
 
+@admin-image-bottom-margin: 20px;
+.admin-image {
+    margin: 0 auto;
+    margin-bottom: @admin-image-bottom-margin;
+}
 .admin-image + .admin-image-overlay {
-    position: absolute;
+    margin: 0 auto;
+    margin-top: (-1 * (@image-height-medium + @admin-image-bottom-margin)) + 1px;
     width: @image-height-medium;
     height: @image-height-medium;
+    padding-top: (@image-height-medium / 2) - 45px;
+    .BoxSizing();
+    .Transition();
+    text-align: center;
     display: none;
 }
-
-.admin-image:hover + .admin-image-overlay {
+.admin-image:hover + .admin-image-overlay, .admin-image-overlay:hover {
     display: block;
 }

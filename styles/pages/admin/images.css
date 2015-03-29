@@ -21,13 +21,28 @@
 #screenshot-category-options > span {
   line-height: 32px;
 }
+.admin-image {
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
 .admin-image + .admin-image-overlay {
-  position: absolute;
+  margin: 0 auto;
+  margin-top: -211px;
   width: 192px;
   height: 192px;
+  padding-top: 51px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+  text-align: center;
   display: none;
 }
-.admin-image:hover + .admin-image-overlay {
+.admin-image:hover + .admin-image-overlay,
+.admin-image-overlay:hover {
   display: block;
 }
 /*# sourceMappingURL=images.css.map */

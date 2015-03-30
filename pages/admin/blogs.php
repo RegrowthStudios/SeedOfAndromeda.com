@@ -1,5 +1,6 @@
 <?php
 $canEditOwn = false;
+$canViewAll = false;
 $canEditAll = false;
 		
 foreach ( $manageAllBlogsGroups as $groupid ) {
@@ -8,6 +9,12 @@ foreach ( $manageAllBlogsGroups as $groupid ) {
 		$canEditOwn = true;
 		break;
 	}
+}
+foreach ( $viewAllBlogsGroups as $groupid ) {
+    if (in_array ( $groupid, $groups )) {
+        $canViewAll = true;
+        break;
+    }
 }
 if (! $canEditOwn) {
 	foreach ( $manageOwnBlogsGroups as $groupid ) {
@@ -57,7 +64,7 @@ if (isset ( $_REQUEST ['delete'] )) {
                 </div>';
     }
 } else if (isset ( $_REQUEST ['postid'] )) {
-    if ($canEditAll) {
+    if ($canEditAll || ( $canViewAll && isset ( $_REQUEST ['view'] ))) {
 		$query = $connection->prepare ( "SELECT * FROM blog_posts WHERE id = ?" );
 		$query->execute ( array (
 				$_REQUEST ['postid'] 
@@ -185,7 +192,68 @@ if (isset ( $_REQUEST ['delete'] )) {
                 
 				header ( "Location: /" . $pageurl . "?blogs&postid=" . $_REQUEST ['postid'] );
 			}
-		} else {
+		} else if (isset ( $_REQUEST ['view'] )) {
+        ?>
+        <div class="row clearfix">
+            <div class="header"><h1><p id="blog-post-title" class="edittitle"><?php echo $blogpost["title"];?></p></h1></div>
+            <div class="col double-col-2">
+                <div class="text">
+	                <div id="blog-post" class="clearfix">
+		                <div id="blog-post-content">
+                            <?php 
+                                if ( $blogpost["draftIsLatest"] == 1 ) {
+                                    echo $blogpost["draft"];
+                                } else {
+                                    echo $blogpost["post_body"];
+                                }
+                            ?>
+                        </div>
+                        <span id="blog-post-footer" class="right">
+                            <?php
+                                if(! $blogpost["removesignoff"]) {
+                                    if($blogpost["anonymous"]) {
+                                        echo "Seed of Andromeda Team";
+                                    } else {
+                            ?>
+			                    <?php echo $author["username"]." - ".$author["custom_title"];?>
+                            <?php 
+                                    }
+                                }
+                            ?>
+                        </span>
+	                </div>
+                </div>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="divider"></div>
+            <div class="col double-col-2">
+                <div class="text">
+                    <div style="width: 100%;">
+                        <h2>Blog Brief:</h2>
+                        <div id="blog-brief"><?php echo $blogpost["post_brief"];?></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="dev-news-summary-content-cover" class="row clearfix" <?php if($blogpost["devnews"] != "1") echo "style='display: none;'";?>>
+            <div class="divider"></div>
+            <div class="col double-col-2">
+                <div class="text">
+                    <div style="width: 100%;">
+                        <h2>Dev News Summary:</h2>
+                        <div id="dev-news-summary-content"><?php echo $blogpost["dev_news_body"];?></div>
+                    </div>
+                    <div style="width: 100%;">
+                        <h3>Dev News Background Image:</h3>
+                        <br />
+                        <?php echo '<img class="img medium-wide right" style="margin-top:-2em;" src="' . $blogpost["dev_news_background"] . '" />'; ?>
+                    </div>
+                </div>
+            </div>
+        </div>       
+        <?php
+        } else {
 			$author = $sdk->getUser ( $blogpost ["author"] );
 						?>
 <script src="./tinymce/tinymce.min.js"></script>
@@ -215,23 +283,24 @@ if (isset ( $_REQUEST ['delete'] )) {
     remove_script_host: true,
     document_base_url: "/blogs/",
     image_class_list: [
-                        { title: 'Medium Wide', value: 'img medium-wide'},
-                        { title: 'No', value: 'img xxx-small' },
+                        { title: 'Freeform', value: 'img' },
+                        { title: 'Tote', value: 'img xxx-small' },
+                        { title: 'Tote Wide', value: 'img xxx-small-wide' },
                         { title: 'Tiny', value: 'img xx-small' },
-                        { title: 'Very Small', value: 'img x-small' },
-                        { title: 'Small', value: 'img small' },
-                        { title: 'Medium', value: 'img medium'},
-                        { title: 'Large', value: 'img large' },
-                        { title: 'Very Large', value: 'img x-large' },
-                        { title: 'Huge', value: 'img xx-large' },
-                        { title: 'Gigantic', value: 'img xxx-large' },
-                        { title: 'No Wide', value: 'img xxx-small-wide' },
                         { title: 'Tiny Wide', value: 'img xx-small-wide' },
+                        { title: 'Very Small', value: 'img x-small' },
                         { title: 'Very Small Wide', value: 'img x-small-wide' },
+                        { title: 'Small', value: 'img small' },
                         { title: 'Small Wide', value: 'img small-wide' },
+                        { title: 'Medium', value: 'img medium'},
+                        { title: 'Medium Wide', value: 'img medium-wide'},
+                        { title: 'Large', value: 'img large' },
                         { title: 'Large Wide', value: 'img large-wide' },
+                        { title: 'Very Large', value: 'img x-large' },
                         { title: 'Very Large Wide', value: 'img x-large-wide' },
+                        { title: 'Huge', value: 'img xx-large' },
                         { title: 'Huge Wide', value: 'img xx-large-wide' },
+                        { title: 'Gigantic', value: 'img xxx-large' },
                         { title: 'Gigantic Wide', value: 'img xxx-large-wide' }
                     ],
     image_list: [
@@ -249,7 +318,7 @@ if (isset ( $_REQUEST ['delete'] )) {
                         foreach($it as $file)
                         {
                             if( pathinfo($file,PATHINFO_EXTENSION) == "jpg" || pathinfo($file,PATHINFO_EXTENSION) == "png" || pathinfo($file,PATHINFO_EXTENSION) == "gif" ) {
-                                echo "{title: '" . pathinfo($file,PATHINFO_BASENAME) . "', value: '/assets/images/blogs/" . pathinfo($file,PATHINFO_BASENAME) . "'},";
+                                echo "{title: '" . pathinfo($file,PATHINFO_BASENAME) . "', value: '/assets/images/screenshots/" . pathinfo($file,PATHINFO_BASENAME) . "'},";
                             }
                         }
 					?>
@@ -271,6 +340,27 @@ if (isset ( $_REQUEST ['delete'] )) {
     <form
 	    action="/<?php echo $pageurl . '?blogs&postid=' . $blogpost ["id"]; ?>&submit&notemplate"
 	    enctype="multipart/form-data" method="post">
+        <div class="row clearfix">
+            <div class="header"><h1>Blog Post Guideline</h1></div>
+            <div class="col double-col-2">
+                <div class="text">
+                    <h4>The following is a set of standards required of a blog post BEFORE it is published.</h4>
+                    <br/>
+                    <ul style="list-style-type:disc;padding-left:40px;">
+                        <li>Images added to a blog must not come from a third party hosting service - they must be uploaded to the server and added from there.</li>
+                        <li>Images added to a blog post must be given one of the image classes that encloses it in a blue border if the image is predominantly opaque.</li>
+                        <li>Images and Videos must be centred, and sized to not overflow the dotted box enclosing the editable space.</li>
+                        <li>Videos must be embedded, not linked, using the embedding tool in the editor.</li>
+                        <li>Sections must be given headers utilising the headers offered by the editor.</li>
+                        <li>Written sentences only, no lists unless the lists are utterly necessary (e.g. listing a set of stats for an object).</li>
+                        <li>Aim for full paragraphs, not standalone, one line sentences as much as possible.</li>
+                        <li>Links should utilise the anchor tool in the editor, and the link be in the text, rather than displaying the full URL below.</li>
+                        <br/>
+                        <li><em>Before publication, blogs must be proof-read by one of the strong English writers of the group (e.g. Ben or Matthew).</em></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
         <div class="row clearfix">
             <div class="header"><h1><p id="blog-post-title" class="edittitle"><?php echo $blogpost["title"];?></p></h1></div>
             <div class="col double-col-2">
@@ -373,14 +463,14 @@ if (isset ( $_REQUEST ['delete'] )) {
 						    <label for="anonymous"></label>
                         </div> 
                     </div>
-                    <br /> 
-                    <?php echo '<a class="btn" href="/' . $pageurl . '?blogs">Return</a>'; ?>
-                    <input class="btn" type="submit" value="Save" />
+                    <br/><br/>
+                    <?php echo '<div class="btn"><a href="/' . $pageurl . '?blogs">Return</a></div>'; ?>
+                    <input class="btn left" type="submit" value="Save" />
 	            </div>
             </div>
         </div>
     </form>
-<?php
+        <?php
 		}
 	}
 } elseif (isset ( $_REQUEST ['newpost'] )) {
@@ -406,7 +496,7 @@ if (isset ( $_REQUEST ['delete'] )) {
             <div class="text">';
 	if ($canEditOwn) {
 					
-		echo '<a class="btn right" href="/' . $pageurl . '?blogs&newpost&notemplate">New post</a>';
+		echo '<div class="right btn"><a href="/' . $pageurl . '?blogs&newpost&notemplate">New post</a></div>';
 					
 		$query = $connection->prepare ( "SELECT * FROM blog_posts WHERE author = ? ORDER BY id DESC" );
 		$query->execute ( array (
@@ -419,7 +509,7 @@ if (isset ( $_REQUEST ['delete'] )) {
 					
 		echo "</ul>";
 	}
-	if ($canEditAll) {
+	if ($canEditAll || $viewAllBlogsGroups) {
 		$query = $connection->prepare ( "SELECT * FROM blog_posts WHERE author != ? ORDER BY id DESC" );
 		$query->execute ( array (
 				$userinfo ['user_id'] 
@@ -434,10 +524,17 @@ if (isset ( $_REQUEST ['delete'] )) {
             <div class="text">
                 <h2>Blog posts by others:</h2><br><ul>
         ';
-		while ( $row = $query->fetch () ) {
-			$author = $sdk->getUser ( $row ["author"] );
-			echo '<li>' . $row ["title"] . ' by ' . $author ["username"] . ' - <a href="/' . $pageurl . '?blogs&postid=' . $row ["id"] . '">Edit</a> - <a onclick="return confirmAction(\'Are you sure you wish to delete this blog? You will not be able to recover it.\');" href="/' . $pageurl . '?blogs&postid=' . $row ["id"] . '&delete=1">Delete</a></li></li>';
-		}
+        if ($canEditAll) {
+		    while ( $row = $query->fetch () ) {
+			    $author = $sdk->getUser ( $row ["author"] );
+			    echo '<li>' . $row ["title"] . ' by ' . $author ["username"] . ' - <a href="/' . $pageurl . '?blogs&postid=' . $row ["id"] . '">Edit</a> - <a href="/' . $pageurl . '?blogs&view&postid=' . $row ["id"] . '">View</a> - <a onclick="return confirmAction(\'Are you sure you wish to delete this blog? You will not be able to recover it.\');" href="/' . $pageurl . '?blogs&postid=' . $row ["id"] . '&delete=1">Delete</a></li></li>';
+		    }
+        } else {
+		    while ( $row = $query->fetch () ) {
+			    $author = $sdk->getUser ( $row ["author"] );
+			    echo '<li>' . $row ["title"] . ' by ' . $author ["username"] . ' - <a href="/' . $pageurl . '?blogs&view&postid=' . $row ["id"] . '">View</a></li></li>';
+		    }
+        }
 		echo "</ul>";
 	}
     echo '

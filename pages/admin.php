@@ -1,11 +1,4 @@
 <?php
-    if (!isset($_REQUEST["notemplate"])) {
-        ?>
-            <div id="admin-nav-bar">
-                <!-- HERE MUST LIE THE ADMIN NAV BAR! -->
-            </div>
-        <?php
-    }
     if (!$loggedIn) {
     
         echo '
@@ -32,41 +25,6 @@
                     
         } else {
         
-		    $groups = explode ( ",", $userinfo ["secondary_group_ids"] );
-		    $groups [] = $userinfo ["user_group_id"];
-            
-            $manageOwnBlogsGroups = array (
-                7,
-                13 
-            );
-            $manageAllBlogsGroups = array (
-                3 
-            );
-            $manageDownloadsGroups = array (
-                7,
-                13,
-                3
-            );
-            $manageImagesGroups = array (
-                7,
-                13,
-                3
-            );
-            $manageVideosGroups = array (
-                7,
-                13,
-                3
-            );
-            $totalGroups = array_unique( array_merge($manageOwnBlogsGroups, $manageAllBlogsGroups, $manageDownloadsGroups, $manageImagesGroups, $manageVideosGroups) );
-            
-            $canAccessAdmin = false;
-            foreach ($totalGroups as $groupId) {
-                if (in_array($groupId, $groups)) {
-                    $canAccessAdmin = true;
-                    break;
-                }
-            }
-            
             if (!$canAccessAdmin) {
             
                 echo '
@@ -193,16 +151,24 @@
                     <div class="row clearfix">
                         <div class="header"><h1>Admin Panel</h1></div>
                             <div class="col quad-col-1 centerInners">
-                                <a class="btn download" href="/admin?blogs">Blogs</a>
+                                <div class="btn">
+                                    <a href="/admin?blogs">Blogs</a>
+                                </div>
                             </div>
                             <div class="col quad-col-1 centerInners">
-                                <a class="btn download" href="/admin?downloads">Downloads</a>
+                                <div class="btn">
+                                    <a href="/admin?downloads">Downloads</a>
+                                </div>
                             </div>
                             <div class="col quad-col-1 centerInners">
-                                <a class="btn download" href="/admin?images">Images</a>
+                                <div class="btn">
+                                    <a href="/admin?images">Images</a>
+                                </div>
                             </div>
                             <div class="col quad-col-1 centerInners">
-                                <a class="btn download" href="/admin?videos">Videos</a>
+                                <div class="btn">
+                                    <a href="/admin?videos">Videos</a>
+                                </div>
                             </div>
                     </div>
 <?php

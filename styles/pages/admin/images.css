@@ -1,4 +1,13 @@
-﻿#screenshot-category {
+﻿/*************/
+/* Variables */
+/*************/
+/*******************************/
+/* Proprietary Property Mixins */
+/*******************************/
+/******************/
+/* Content Mixins */
+/******************/
+#screenshot-category {
   width: 100%;
 }
 #screenshot-category-options {
@@ -11,5 +20,31 @@
 }
 #screenshot-category-options > span {
   line-height: 32px;
+}
+.admin-image {
+  margin: 0 auto;
+}
+.admin-image + .admin-image-overlay {
+  position: relative;
+  background: rgba(0, 0, 0, 0.6);
+  margin: 0 auto;
+  margin-top: -191px;
+  margin-bottom: 20px;
+  width: 190px;
+  height: 190px;
+  padding-top: 51px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+  text-align: center;
+  opacity: 0;
+}
+.admin-image:hover + .admin-image-overlay,
+.admin-image-overlay:hover {
+  opacity: 1;
 }
 /*# sourceMappingURL=images.css.map */

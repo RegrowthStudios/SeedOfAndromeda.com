@@ -56,7 +56,6 @@ h3 {
 }
 h4 {
 	font-size: 1.1em;
-	text-shadow: 0 0 5px rgba(255, 255, 255, 1);
 }
 
 ul {
@@ -410,7 +409,7 @@ ul {
 	line-height: @account-bar-alerts-dim;
 }
 
-#account-bar .account-options-wrapper, #account-bar .account-log-in-wrapper {
+#account-control-wrapper {
     overflow: hidden;
     position: relative;
     height: 0;
@@ -420,22 +419,16 @@ ul {
     height: ( ( @account-bar-options-height * 4 ) + 4 ); /* + 4 for border width*/
 }
 #account-bar:hover .account-log-in-wrapper {
-    height: @account-bar-log-in-form-height;
+    height: ( ( @account-bar-options-height * 2 ) + 2 );
 }
 
-#account-bar .account-options, #account-bar .account-log-in {
+#account-control-wrapper > ul {
     width: @account-bar-options-width;
     margin-left: 20px;
     position: absolute;
     bottom: 0;
 }
-#account-bar .account-log-in {
-    background: url("/assets/images/SOASprite.png");
-	background-position: 0 -368px;
-    height: @account-bar-log-in-form-height;
-    font-size: 0.8rem;
-}
-#account-bar .account-options > li {
+#account-control-wrapper > ul > li {
     height: @account-bar-options-height;
     width: 100%;
     line-height: @account-bar-options-height;
@@ -444,34 +437,17 @@ ul {
 	background: url("/assets/images/SOASprite.png");
 	background-position: -255px -255px;
 }
-#account-bar .account-options > li:hover {
+#account-control-wrapper > ul > li:hover {
 	background: url("/assets/images/SOASprite.png");
 	background-position: -435px -255px;
 }
-#account-bar .account-options > li:last-child {
+#account-control-wrapper > ul > li:last-child {
 	background: url("/assets/images/SOASprite.png");
 	background-position: -255px -295px;
 }
-#account-bar .account-options > li:last-child:hover {
+#account-control-wrapper > ul > li:last-child:hover {
 	background: url("/assets/images/SOASprite.png");
 	background-position: -435px -295px;
-}
-
-#account-bar .account-log-in form {
-    margin-left: @account-bar-log-in-form-margin;
-}
-#account-bar .account-log-in input {
-    max-width: 120px;
-}
-#account-bar .account-log-in-submit {
-    float: right;
-    margin-right: @account-bar-log-in-form-margin;
-}
-#account-bar .account-log-in-register, #account-bar .account-log-in-register a {
-    font-size: 0.9em;
-}
-#account-bar .account-log-in-register a {
-    text-transform: none;
 }
 
 /***************/
@@ -624,7 +600,7 @@ ul {
 /***********/
 
 .text {
-	background: rgba(0, 0, 0, 0.7);
+	background: rgba(0, 0, 0, 0.8);
 	border: 1px solid @color-dull-blue;
     .BoxSizing();
     .BoxShadow(false, 0, 0, 10px, 5px, fade(@color-dull-blue, 50%));
@@ -769,7 +745,7 @@ ul {
     background-position: center center;
     position: relative;
     z-index: 1;
-    opacity: 0.7;
+    opacity: 0.55;
     .Transition();
 }
 .card-slider-frame:hover .card-background {
@@ -838,11 +814,20 @@ ul {
     background: url("../assets/images/Button.png");
     background-size: contain;
     background-repeat: no-repeat;
+    padding: 0 10px;
+    .BoxSizing();
+    .TransformStyle();
     display: inline-block;
-    color: white !important;
     .Transition();
     .DropShadow(0, 0, 10px, @btn-drop-shadow-color);
     text-align: center;
+}
+.btn > a {
+    color: white !important;
+    position: relative;
+    top: 50%;
+    .Transform(translateY(-50%));
+    display: block;
 }
 .btn:hover {
     background: url("../assets/images/Button_Hover.png");

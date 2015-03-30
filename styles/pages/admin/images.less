@@ -1,4 +1,6 @@
-﻿#screenshot-category {
+﻿@import "../../data.less";
+
+#screenshot-category {
     width: 100%;
 }
 #screenshot-category-options {
@@ -11,4 +13,26 @@
 }
 #screenshot-category-options > span {
     line-height: 32px;
+}
+
+@admin-image-bottom-margin: 20px;
+.admin-image {
+    margin: 0 auto;
+}
+.admin-image + .admin-image-overlay {
+    position: relative;
+    background: rgba(0,0,0,0.6);
+    margin: 0 auto;
+    margin-top: (-1 * (@image-height-medium + @admin-image-bottom-margin)) + @admin-image-bottom-margin + 1px;
+    margin-bottom: @admin-image-bottom-margin;
+    width: @image-height-medium - 2px;
+    height: @image-height-medium - 2px;
+    padding-top: (@image-height-medium / 2) - 45px;
+    .BoxSizing();
+    .Transition();
+    text-align: center;
+    opacity: 0;
+}
+.admin-image:hover + .admin-image-overlay, .admin-image-overlay:hover {
+    opacity: 1;
 }

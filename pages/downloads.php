@@ -20,8 +20,8 @@
         $i ++;
     }
 ?>
-<div id="latest-download" class="row clearfix" style="background: url('<?php echo 'http://files.seedofandromeda.com/' . $downloads[$i]['backgroundurl']; ?>') center center no-repeat;">
-    <div class="header"><h1>Latest Version ( V<?php echo $downloads[$i]['version']; ?> )</h1><h3>&nbsp;-&nbsp;<a onclick="var that=this;_gaq.push(['_trackEvent','Download','ZIP',this.href]);setTimeout(function(){location.href=that.href;},400);return false;" href="<?php echo 'http://files.seedofandromeda.com/' . $downloads[$i]['url']; ?>">download</a></h3></div>
+<div id="latest-download" class="row clearfix">
+    <div class="header"><h1>Latest Version ( V<?php echo $downloads[$i]['version']; ?> )</h1><h3 class="main-download right"><a onclick="var that=this;_gaq.push(['_trackEvent','Download','ZIP',this.href]);setTimeout(function(){location.href=that.href;},400);return false;" href="<?php echo 'http://files.seedofandromeda.com/' . $downloads[$i]['url']; ?>">DOWNLOAD</a></h3></div>
     <div class="col double-col-2">
         <div class="text">
                 <?php echo $downloads[$i]['description']; ?>
@@ -45,7 +45,7 @@
             </div>
         </div>
         <div class="col tri-col-1">
-            <a class="btn download" onclick="var that=this;_gaq.push([\'_trackEvent\',\'Download\',\'ZIP\',this.href]);setTimeout(function(){location.href=that.href;},400);return false;" href="http://files.seedofandromeda.com/' . $downloads[$i]['url'] . '">Download!</a>
+            <div class="btn download"><a onclick="var that=this;_gaq.push([\'_trackEvent\',\'Download\',\'ZIP\',this.href]);setTimeout(function(){location.href=that.href;},400);return false;" href="http://files.seedofandromeda.com/' . $downloads[$i]['url'] . '">Download!</a></div>
         </div>
                 ';
             }

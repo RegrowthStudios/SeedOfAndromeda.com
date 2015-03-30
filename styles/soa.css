@@ -69,7 +69,6 @@ h3 {
 }
 h4 {
   font-size: 1.1em;
-  text-shadow: 0 0 5px #ffffff;
 }
 ul {
   list-style-type: none;
@@ -413,8 +412,7 @@ img.overflowfix {
   text-align: center;
   line-height: 30px;
 }
-#account-bar .account-options-wrapper,
-#account-bar .account-log-in-wrapper {
+#account-control-wrapper {
   overflow: hidden;
   position: relative;
   height: 0;
@@ -428,22 +426,15 @@ img.overflowfix {
   /* + 4 for border width*/
 }
 #account-bar:hover .account-log-in-wrapper {
-  height: 144px;
+  height: 78px;
 }
-#account-bar .account-options,
-#account-bar .account-log-in {
+#account-control-wrapper > ul {
   width: 180px;
   margin-left: 20px;
   position: absolute;
   bottom: 0;
 }
-#account-bar .account-log-in {
-  background: url("/assets/images/SOASprite.png");
-  background-position: 0 -368px;
-  height: 144px;
-  font-size: 0.8rem;
-}
-#account-bar .account-options > li {
+#account-control-wrapper > ul > li {
   height: 38px;
   width: 100%;
   line-height: 38px;
@@ -452,34 +443,17 @@ img.overflowfix {
   background: url("/assets/images/SOASprite.png");
   background-position: -255px -255px;
 }
-#account-bar .account-options > li:hover {
+#account-control-wrapper > ul > li:hover {
   background: url("/assets/images/SOASprite.png");
   background-position: -435px -255px;
 }
-#account-bar .account-options > li:last-child {
+#account-control-wrapper > ul > li:last-child {
   background: url("/assets/images/SOASprite.png");
   background-position: -255px -295px;
 }
-#account-bar .account-options > li:last-child:hover {
+#account-control-wrapper > ul > li:last-child:hover {
   background: url("/assets/images/SOASprite.png");
   background-position: -435px -295px;
-}
-#account-bar .account-log-in form {
-  margin-left: 20px;
-}
-#account-bar .account-log-in input {
-  max-width: 120px;
-}
-#account-bar .account-log-in-submit {
-  float: right;
-  margin-right: 20px;
-}
-#account-bar .account-log-in-register,
-#account-bar .account-log-in-register a {
-  font-size: 0.9em;
-}
-#account-bar .account-log-in-register a {
-  text-transform: none;
 }
 /***************/
 /* Content Box */
@@ -624,7 +598,7 @@ img.overflowfix {
 /* Content */
 /***********/
 .text {
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.8);
   border: 1px solid #38aecf;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -774,7 +748,7 @@ img.overflowfix {
   background-position: center center;
   position: relative;
   z-index: 1;
-  opacity: 0.7;
+  opacity: 0.55;
   -webkit-transition: all 0.2s linear;
   -moz-transition: all 0.2s linear;
   -o-transition: all 0.2s linear;
@@ -840,12 +814,16 @@ img.overflowfix {
 .btn {
   height: 96.896px;
   width: 128px;
-  line-height: 96.896px;
   background: url("../assets/images/Button.png");
   background-size: contain;
   background-repeat: no-repeat;
+  padding: 0 10px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
   display: inline-block;
-  color: white !important;
   -webkit-transition: all 0.2s linear;
   -moz-transition: all 0.2s linear;
   -o-transition: all 0.2s linear;
@@ -854,6 +832,17 @@ img.overflowfix {
   -ms-filter: drop-shadow(0 0 10px #000000);
   filter: drop-shadow(0 0 10px #000000);
   text-align: center;
+}
+.btn > a {
+  color: white !important;
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  display: block;
 }
 .btn:hover {
   background: url("../assets/images/Button_Hover.png");

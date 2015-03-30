@@ -51,7 +51,7 @@ if (isset ( $_REQUEST ['delete'] )) {
 	} else {
 		if (isset ( $_REQUEST ['submit'] )) {
                         
-            if (! isset ( $_REQUEST ['title'] ) || ! isset ( $_REQUEST ['description'] )) {
+            if ( ! isset ( $_REQUEST ['title'] ) || ! isset ( $_REQUEST ['description'] )) {
 				echo '
                     <div class="row clearfix">
                         <div class="header"><h1 class="error">Image Manager - Error</h1></div>
@@ -63,7 +63,7 @@ if (isset ( $_REQUEST ['delete'] )) {
             } else {
                 if ( isset ( $_FILES['image'] ) && $_FILES['image']['size'] > 0 ) {
                             
-                    $allowedExts = array("jpg", "jpeg");
+                    $allowedExts = array("jpg");
                     $temp = explode(".", $_FILES['image']['name']);
                     $extension = end($temp);
                             
@@ -73,7 +73,7 @@ if (isset ( $_REQUEST ['delete'] )) {
                                 <div class="header"><h1 class="error">Image Manager - Error</h1></div>
                                 <div class="col double-col-2">
                                     <div class="text">
-                                        <h3 class="error">Image file must be a jpeg!</h3>
+                                        <h3 class="error">Image file must be a .jpg!</h3>
                                     </div>
                                 </div>';
                     } else if ( $_FILES['image']['error'] > 0 ) {
@@ -86,35 +86,22 @@ if (isset ( $_REQUEST ['delete'] )) {
                                     </div>
                                 </div>';
                     } else {
-                    
-                        if ( file_exists( $_SERVER{'DOCUMENT_ROOT'} . "/assets/images/screenshots/" . $_REQUEST ['imageid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['title'] ) ) . "." . $extension ) ) {
-                            unlink ($_SERVER{'DOCUMENT_ROOT'} . "/assets/images/screenshots/" . $_REQUEST ['imageid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['title'] ) ) . "." . $extension );
+                                
+                        if ( ! file_exists( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "seedofandromeda_com/assets/images/screenshots/" . $_REQUEST ['imageid'] . $extension ) ) {
+                            mkdir ( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "seedofandromeda_com/assets/images/screenshots/" . $_REQUEST ['imageid'] . $extension, 0755, true );
+                        } else if ( file_exists( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "seedofandromeda_com/assets/images/screenshots/" . $_REQUEST ['imageid'] . $extension ) ) {
+                            unlink (dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "seedofandromeda_com/assets/images/screenshots/" . $_REQUEST ['imageid'] . $extension );
                         }
                                 
                         move_uploaded_file( $_FILES['image']['tmp_name'],
-                            $_SERVER{'DOCUMENT_ROOT'} . "/assets/images/screenshots/" . $_REQUEST ['imageid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['title'] ) ) . "." . $extension ); 
-                                  
-                    }
-                } else {
-                    $q = $connection->prepare ( "SELECT * FROM images WHERE id = ?");
-                    $q->execute ( array ( 
-                        $_REQUEST ['imageid']
-                    ) );
-                    $img = $q->fetch();
-                    foreach ( glob ( "assets/images/screenshots/*.jpg" ) as $image ) {
-                        if ( strpos ( $image, $_REQUEST ['imageid'] . "-" . clean_pageid ( str_replace ( " ", "-", $img ['title'] ) ) ) ) {
-                            $temp = explode(".", $img["img_url"]);
-                            $extension = end($temp);
-                            rename ( $_SERVER{'DOCUMENT_ROOT'} . $img["img_url"], $_SERVER{'DOCUMENT_ROOT'} . "/assets/images/screenshots/" . $_REQUEST ['imageid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['title'] ) ) . "." . $extension );
-                            break;
-                        }
+                            dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "seedofandromeda_com/assets/images/screenshots/" . $_REQUEST ['imageid'] . $extension ); 
+                               
                     }
                 }
-                $query = $connection->prepare ( "UPDATE images SET title = ?, description = ?, img_url = ?, category = ?, updatetime = ?, published = ? WHERE id = ?" );
+                $query = $connection->prepare ( "UPDATE images SET title = ?, description = ?, category = ?, updatetime = ?, published = ? WHERE id = ?" );
 				$query->execute ( array (
 						$_REQUEST ['title'],
 						strip_tags($_REQUEST ['description']),
-						"/assets/images/screenshots/" . $_REQUEST ['imageid'] . "-" . clean_pageid ( str_replace ( " ", "-", $_REQUEST ['title'] ) ) . "." . $extension,
                         $_REQUEST ['category'],
 						time (),
                         isset ( $_REQUEST ['published'] ) && $_REQUEST ['published'] == 1,
@@ -142,7 +129,7 @@ if (isset ( $_REQUEST ['delete'] )) {
         },
         toolbar1: "bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | blockquote code",
         //toolbar2: "blockquote code | emoticons link media image jbimages",
-        contextmenu: "link image jbimages inserttable | cut copy paste | cell row column deletetable",
+        contextmenu: "link jbimages inserttable | cut copy paste | cell row column deletetable",
         image_advtab: true,
         add_unload_trigger: false,
         inline: true,
@@ -151,46 +138,6 @@ if (isset ( $_REQUEST ['delete'] )) {
         relative_urls: false,
         remove_script_host: true,
         document_base_url: "/blogs/",
-        image_class_list: [
-            { title: 'Medium Wide', value: 'img medium-wide'},
-            { title: 'No', value: 'img xxx-small' },
-            { title: 'Tiny', value: 'img xx-small' },
-            { title: 'Very Small', value: 'img x-small' },
-            { title: 'Small', value: 'img small' },
-            { title: 'Medium', value: 'img medium'},
-            { title: 'Large', value: 'img large' },
-            { title: 'Very Large', value: 'img x-large' },
-            { title: 'Huge', value: 'img xx-large' },
-            { title: 'Gigantic', value: 'img xxx-large' },
-            { title: 'No Wide', value: 'img xxx-small-wide' },
-            { title: 'Tiny Wide', value: 'img xx-small-wide' },
-            { title: 'Very Small Wide', value: 'img x-small-wide' },
-            { title: 'Small Wide', value: 'img small-wide' },
-            { title: 'Large Wide', value: 'img large-wide' },
-            { title: 'Very Large Wide', value: 'img x-large-wide' },
-            { title: 'Huge Wide', value: 'img xx-large-wide' },
-            { title: 'Gigantic Wide', value: 'img xxx-large-wide' }
-        ],
-        image_list: [
-<?php
-            $di = new RecursiveDirectoryIterator("assets/images/blogs/",RecursiveDirectoryIterator::SKIP_DOTS);
-            $it = new RecursiveIteratorIterator($di);
-            foreach($it as $file)
-            {
-                if( pathinfo($file,PATHINFO_EXTENSION) == "jpg" || pathinfo($file,PATHINFO_EXTENSION) == "png" || pathinfo($file,PATHINFO_EXTENSION) == "gif" ) {
-                    echo "{title: '" . pathinfo($file,PATHINFO_BASENAME) . "', value: '/assets/images/blogs/" . pathinfo($file,PATHINFO_BASENAME) . "'},";
-                }
-            }
-            $di = new RecursiveDirectoryIterator("assets/images/screenshots/",RecursiveDirectoryIterator::SKIP_DOTS);
-            $it = new RecursiveIteratorIterator($di);
-            foreach($it as $file)
-            {
-                if( pathinfo($file,PATHINFO_EXTENSION) == "jpg" || pathinfo($file,PATHINFO_EXTENSION) == "png" || pathinfo($file,PATHINFO_EXTENSION) == "gif" ) {
-                    echo "{title: '" . pathinfo($file,PATHINFO_BASENAME) . "', value: '/assets/images/blogs/" . pathinfo($file,PATHINFO_BASENAME) . "'},";
-                }
-            }
-?>
-        ],
     });
     tinymce.init({
         selector: "p.edittitle",
@@ -214,13 +161,13 @@ if (isset ( $_REQUEST ['delete'] )) {
             <div class="text">
 		        <div id="description" class="editpost"><?php echo $image["description"];?></div>
                 <br/>
-                <label for="image">Screenshot:</label> 
+                <label for="image">Image:</label> 
                 <input id="image" value="1"
 					type="file" name="image" />
                 <br/><br/>
                 <?php echo '<img class="img medium-wide right" style="margin-top:-2em;" src="' . $image["img_url"] . '" />'; ?>
                 <div id="screenshot-category">
-                    <div id="screenshot-category-header"><h1>Screenshot Category:</h1></div>
+                    <div id="screenshot-category-header"><h1>Image Category:</h1></div>
                     <div id="screenshot-category-options">
                         <span>Gameplay:</span> <div class="checkbox"> <input id="category-gameplay" value="GAMEPLAY"
 						    type="radio" name="category" <?php if( $image["category"] == "GAMEPLAY" ) echo "checked";?> />
@@ -240,13 +187,13 @@ if (isset ( $_REQUEST ['delete'] )) {
         <div class="divider"></div>
         <div class="col double-col-2">
             <div id="screenshot-settings" class="text clearfix">
-                <span>Publish Screenshot:</span> <div class="checkbox"> <input id="published" value="1"
+                <span>Publish Image:</span> <div class="checkbox"> <input id="published" value="1"
 				    type="checkbox" name="published" <?php if($image["published"] == "1") echo "checked";?> />
 				    <label for="published"></label>
                 </div>
                 <br/><br/>
-                <?php echo '<a class="btn" href="/' . $pageurl . '?images">Return</a>'; ?>
-                <input class="btn" type="submit" value="Save" />
+                <?php echo '<div class="btn"><a href="/' . $pageurl . '?images">Return</a></div>'; ?>
+                <input class="btn left" type="submit" value="Save" />
             </div>
         </div>
     </div>
@@ -257,14 +204,17 @@ if (isset ( $_REQUEST ['delete'] )) {
 } else if (isset ( $_REQUEST ['newimage'] )) {
 	$query = $connection->prepare ( "INSERT INTO images (title, description, img_url, category, timestamp) VALUES (?, ?, ?, ?, ?)" );
 	$query->execute ( array (
-			"Screenshot Title",
-			"<p>Click here to write up a description of the screenshot.</p>",
-            "empty",
-            "GAMEPLAY",
-			time ()
+        "Image Title",
+		"<p>Click here to write up a description of the screenshot.</p>",
+        "empty",
+        "GAMEPLAY",
+		time ()
 	) );
-                
 	$id = $connection->lastInsertId ();
+    $query = $connection->prepare ( "UPDATE images SET img_url = ? WHERE id = " . $id );
+    $query->execute ( array ( 
+        "/assets/images/screenshots/" . $id . ".jpg"
+    ) );
 	header ( "Location: /" . $pageurl . "?images&imageid=" . $id );
 } else {
 	echo '
@@ -272,14 +222,35 @@ if (isset ( $_REQUEST ['delete'] )) {
         <div class="header"><h1>Image Manager</h1></div>
         <div class="col double-col-2">
             <div class="text">
-              <a class="btn right" href="/' . $pageurl . '?images&newimage&notemplate">New Image</a>';
-					
-        $query = $connection->prepare ( "SELECT * FROM images ORDER BY id DESC" );
-		$query->execute();
-                    
-        echo "<h2>Images:</h2><br><ul>";
+                <br/>
+                <div class="btn right"><a href="/' . $pageurl . '?images&newimage&notemplate">New Image</a></div>';
+        $query;
+        if (isset ( $_REQUEST ['show'] ) && $_REQUEST ['show'] == "published") {
+            echo '
+            <div class="btn right"><a href="/' . $pageurl . '?images">All Images</a></div>
+            <div class="btn right"><a href="/' . $pageurl . '?images&show=private">Private Images</a></div>';
+            $query = $connection->prepare ( "SELECT * FROM images WHERE published = ? ORDER BY id DESC" );
+		    $query->execute( array (
+                1
+            ) );
+        } else if (isset ( $_REQUEST ['show'] ) && $_REQUEST ['show'] == "private") {
+            echo '
+            <div class="btn right"><a href="/' . $pageurl . '?images">All Images</a></div>
+            <div class="btn right"><a href="/' . $pageurl . '?images&show=published">Public<br> Images</a></div>';
+            $query = $connection->prepare ( "SELECT * FROM images WHERE published = ? ORDER BY id DESC" );
+		    $query->execute( array (
+                0
+            ) );
+        } else {
+            echo '
+            <div class="btn right"><a href="/' . $pageurl . '?images&show=private">Private Images</a></div>
+            <div class="btn right"><a href="/' . $pageurl . '?images&show=published">Public<br> Images</a></div>';
+            $query = $connection->prepare ( "SELECT * FROM images ORDER BY id DESC" );
+		    $query->execute();
+        }
+        echo "<h2>Images:</h2><br/><br/><br/><br/>";
 		while ( $row = $query->fetch() ) {
-			echo '<li>' . $row ["title"] . ' - <a href="/' . $pageurl . '?images&imageid=' . $row ["id"] . '">Edit</a> - <a onclick="return confirmAction(\'Are you sure you wish to delete this image? You will not be able to recover it.\');" href="/' . $pageurl . '?images&imageid=' . $row ["id"] . '&delete=1">Delete</a></li>';
+			echo '<div class="col quad-col-1"><img class="img medium admin-image" src="' . $row ["img_url"] . '"/><div class="admin-image-overlay">' . $row ["title"] . '<br/><a href="/' . $pageurl . '?images&imageid=' . $row ["id"] . '">Edit</a><br/><a onclick="return confirmAction(\'Are you sure you wish to delete this image? You will not be able to recover it.\');" href="/' . $pageurl . '?images&imageid=' . $row ["id"] . '&delete=1">Delete</a></div></div>';
 		}
 		echo '</ul>
         </div>

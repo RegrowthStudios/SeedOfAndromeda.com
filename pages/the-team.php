@@ -37,7 +37,7 @@
     <div class="header"><h1 class="name">Joshua Arnold</h1><h3 class="title">&nbsp;- Sound Artist</h3></div>
     <div class="col tri-col-2">
         <div class="text">
-            Josh is the creative genius behind all of Seed of Andromeda's music and sound, he has 
+            Josh is the creative genius behind almost all of Seed of Andromeda's music and is also one of our sound artists. He has 
             produced many high quality soundtracks of his own previously, and has now turned his 
             talent towards producing all manner of music and sounds for your ears to enjoy!
             </div>
@@ -139,7 +139,7 @@
     </div>
 </div>
 
-<div class="row clearfix the-team">
+<!--<div class="row clearfix the-team">
     <div class="header"><h1 class="name">Nathan Matthews</h1><h3 class="title">&nbsp;- Programmer</h3></div>
     <div class="col tri-col-2">
         <div class="text">
@@ -155,15 +155,10 @@
             <img src="/assets/images/profile_images/NathanM_thumb_320x192.jpg" class="img medium-wide overflowfix"/>
         </a>
     </div>
-</div>
+</div>-->
 
 <div class="row clearfix the-team">
     <div class="header"><h1 class="name">Cristian Zaloj</h1><h3 class="title">&nbsp;- Programmer</h3></div>
-    <div class="col tri-col-1">
-        <a href="/assets/images/profile_images/CristianZ.jpg" data-lightbox="images" title="Cristian Zaloj">
-            <img src="/assets/images/profile_images/CristianZ_thumb_320x192.jpg" class="img medium-wide overflowfix"/>
-        </a>
-    </div>
     <div class="col tri-col-2">
         <div class="text">
                 Cristian is a Romanian vampire ninja pirate currently studying
@@ -172,10 +167,20 @@
             and is going to surely be a great programmer on the team!
             </div>
     </div>
+    <div class="col tri-col-1">
+        <a href="/assets/images/profile_images/CristianZ.jpg" data-lightbox="images" title="Cristian Zaloj">
+            <img src="/assets/images/profile_images/CristianZ_thumb_320x192.jpg" class="img medium-wide overflowfix"/>
+        </a>
+    </div>
 </div>
 
 <div class="row clearfix the-team">
     <div class="header"><h1 class="name">Brian Bruggeman</h1><h3 class="title">&nbsp;- Software Engineering Consultant</h3></div>
+    <div class="col tri-col-1">
+        <a href="/assets/images/profile_images/BrianB.jpg" data-lightbox="images" title="Brian Bruggeman">
+            <img src="/assets/images/profile_images/BrianB_thumb_320x192.jpg" class="img medium-wide overflowfix"/>
+        </a>
+    </div>
     <div class="col tri-col-2">
         <div class="text">
                 Brian is a seasoned software
@@ -187,34 +192,33 @@
             will surely help us all grow as a team!
             </div>
     </div>
-    <div class="col tri-col-1">
-        <a href="/assets/images/profile_images/BrianB.jpg" data-lightbox="images" title="Brian Bruggeman">
-            <img src="/assets/images/profile_images/BrianB_thumb_320x192.jpg" class="img medium-wide overflowfix"/>
-        </a>
-    </div>
 </div>
 
 <div class="row clearfix the-team">
     <div class="header"><h1 class="name">Jeremy Fischer</h1><h3 class="title">&nbsp;- Programmer / Media</h3></div>
-    <div class="col tri-col-1">
-        <a href="/assets/images/profile_images/JeremyF.jpg" data-lightbox="images" title="Jeremy Fischer">
-            <img src="/assets/images/profile_images/JeremyF_thumb_320x192.jpg" class="img medium-wide overflowfix"/>
-        </a>
-    </div>
     <div class="col tri-col-2">
         <div class="text">
                 Jeremy is an extremely intelligent and technically minded
             person. He has experience with network programming and server management, and
             he is going to host the first dedicated SoA team server when multiplayer is
             implemented! Jeremy's dedication and talent ensure that he will grow into
-            a very skilled game programmer! He is also doing weird things in
-			a language nobody will ever understand.
+            a very skilled game programmer!
             </div>
+    </div>
+    <div class="col tri-col-1">
+        <a href="/assets/images/profile_images/JeremyF.jpg" data-lightbox="images" title="Jeremy Fischer">
+            <img src="/assets/images/profile_images/JeremyF_thumb_320x192.jpg" class="img medium-wide overflowfix"/>
+        </a>
     </div>
 </div>
 
 <div class="row clearfix the-team">
     <div class="header"><h1 class="name">Frank McCoy</h1><h3 class="title">&nbsp;- Programmer</h3></div>
+    <div class="col tri-col-1">
+        <a href="/assets/images/profile_images/FrankF.jpg" data-lightbox="images" title="Frank McCoy">
+            <img src="/assets/images/profile_images/FrankF_thumb_320x192.jpg" class="img medium-wide overflowfix"/>
+        </a>
+    </div>
     <div class="col tri-col-2">
         <div class="text">
             Frank is a talented programmer
@@ -225,14 +229,9 @@
             on the SoA team!
             </div>
     </div>
-    <div class="col tri-col-1">
-        <a href="/assets/images/profile_images/FrankF.jpg" data-lightbox="images" title="Frank McCoy">
-            <img src="/assets/images/profile_images/FrankF_thumb_320x192.jpg" class="img medium-wide overflowfix"/>
-        </a>
-    </div>
 </div>
     
-<div class="row clearfix the-team">
+<!--<div class="row clearfix the-team">
     <div class="header"><h1 class="name">Isaque Dutra</h1><h3 class="title">&nbsp;- Programmer</h3></div>
     <div class="col tri-col-1">
         <a href="/assets/images/profile_images/IsaqueD.jpg" data-lightbox="images" title="Jeremy Fischer">
@@ -247,7 +246,7 @@
                 furthering the development of Seed of Andromeda!
             </div>
     </div>
-</div>
+</div>-->
 
 <div class="row clearfix the-team">
     <div class="header"><h1 class="name">Wisp X</h1><h3 class="title">&nbsp;- Music Artist</h3></div>
@@ -263,5 +262,15 @@
         <a href="/assets/images/profile_images/WispX.jpg" data-lightbox="images" title="Wisp X">
             <img src="/assets/images/profile_images/WispX_thumb_320x192.jpg" class="img medium-wide overflowfix"/>
         </a>
+    </div>
+</div>
+
+<div class="row clearfix the-contributors">
+    <div class="header"><h1>Contributors</h1></div>
+    <div class="col double-col-2">
+        <div class="text">
+            <h3 class="contributor">Isaque Dutra</h3>
+            <h3 class="contributor">Nathan Matthews</h3>
+        </div>
     </div>
 </div>

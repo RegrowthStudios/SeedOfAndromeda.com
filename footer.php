@@ -10,7 +10,7 @@
         </div>
 
         <div id="footer-buffer"></div>
-        <div id="footer">Copyright &copy; 2012-<?php echo date("Y"); ?> SeedofAndromeda.com<?php if ($canAccessAdmin) { ?><span class="indent-medium">- <a href="https://www.seedofandromeda.com/admin">Admin Panel</a></span><?php } ?></div>
+        <div id="footer">Copyright &copy; 2012-<?php echo date("Y"); ?> SeedofAndromeda.com<?php if ($canAccessAdmin) { ?><span class="indent-medium">- <a href="/admin">Admin Panel</a></span><?php } ?></div>
 
     </div>
     

@@ -12,6 +12,8 @@ if (isset ( $_REQUEST ['delete'] )) {
                 <div class="col double-col-2">
                     <div class="text">
                         <h3 class="error">Download not found or you don\'t have permissions to delete it!</h3>
+                        <br/><br/>
+                        <h3><a href="/' . $pageurl . '?downloads">Return</a></h3>
                     </div>
                 </div>';
     } else {
@@ -41,11 +43,13 @@ if (isset ( $_REQUEST ['delete'] )) {
                 <div class="col double-col-2">
                     <div class="text">
                         <h3 class="error">Download not found or you don\'t have permissions to edit it!</h3>
+                        <br/><br/>
+                        <h3><a href="/' . $pageurl . '?downloads&downloadid=' . $_REQUEST ['downloadid'] . '">Return</a></h3>
                     </div>
                 </div>';
 	} else {
 		if (isset ( $_REQUEST ['submit'] )) {
-                        
+            $success = true;   
             if (! isset ( $_REQUEST ['download-version'] ) || ! isset ( $_REQUEST ['download-description'] )) {
 				echo '
                     <div class="row clearfix">
@@ -53,14 +57,18 @@ if (isset ( $_REQUEST ['delete'] )) {
                         <div class="col double-col-2">
                             <div class="text">
                                 <h3 class="error">Download version and description are required!</h3>
+                                <br/><br/>
+                                <h3><a href="/' . $pageurl . '?downloads&downloadid=' . $_REQUEST ['downloadid'] . '">Return</a></h3>
                             </div>
                         </div>';
+                $success = false;   
             } else {
-                if ( ! file_exists( dirname( $_SERVER{'DOCUMENT_ROOT'} ) . "/files_seedofandromeda_com/game/" . $_REQUEST ['download-version'] ) ) {
-                    mkdir ( dirname( $_SERVER{'DOCUMENT_ROOT'} ) . "/files_seedofandromeda_com/game/" . $_REQUEST ['download-version'], 0755, true );
+                if ( ! file_exists( dirname( $_SERVER{'DOCUMENT_ROOT'} ) . "/files_seedofandromeda_com/game/" . $_REQUEST ['downloadid'] ) ) {
+                    mkdir ( dirname( $_SERVER{'DOCUMENT_ROOT'} ) . "/files_seedofandromeda_com/game/" . $_REQUEST ['downloadid'], 0755, true );
                 }
+                $extension;
                 if ( isset ( $_FILES['download'] ) && $_FILES['download']['size'] > 0 ) {
-                            
+                    
                     $allowedExts = array("zip", "exe");
                     $temp = explode(".", $_FILES['download']['name']);
                     $extension = end($temp);
@@ -72,8 +80,11 @@ if (isset ( $_REQUEST ['delete'] )) {
                                 <div class="col double-col-2">
                                     <div class="text">
                                         <h3 class="error">Download file must be a zip or executable!</h3>
+                                        <br/><br/>
+                                        <h3><a href="/' . $pageurl . '?downloads&downloadid=' . $_REQUEST ['downloadid'] . '">Return</a></h3>
                                     </div>
                                 </div>';
+                        $success = false;  
                     } else if ( $_FILES['download']['error'] > 0 ) {
                         echo '
                             <div class="row clearfix">
@@ -81,22 +92,25 @@ if (isset ( $_REQUEST ['delete'] )) {
                                 <div class="col double-col-2">
                                     <div class="text">
                                         <h3 class="error">Error: ' . $_FILES['download']['error'] . '</h3>
+                                        <br/><br/>
+                                        <h3><a href="/' . $pageurl . '?downloads&downloadid=' . $_REQUEST ['downloadid'] . '">Return</a></h3>
                                     </div>
                                 </div>';
+                        $success = false;  
                     } else {
                                 
-                        if ( file_exists( dirname( $_SERVER{'DOCUMENT_ROOT'} ) . "/files_seedofandromeda_com/game/" . $_REQUEST ['download-version'] . "/SoA." . $extension ) ) {
-                            unlink ( dirname( $_SERVER{'DOCUMENT_ROOT'} ) . "/files_seedofandromeda_com/game/" . $_REQUEST ['download-version'] . "/SoA." . $extension );
+                        if ( file_exists( dirname( $_SERVER{'DOCUMENT_ROOT'} ) . "/files_seedofandromeda_com/game/" . $_REQUEST ['downloadid'] . "/SoA." . $extension ) ) {
+                            unlink ( dirname( $_SERVER{'DOCUMENT_ROOT'} ) . "/files_seedofandromeda_com/game/" . $_REQUEST ['downloadid'] . "/SoA." . $extension );
                         }
                                 
                         move_uploaded_file($_FILES['download']['tmp_name'],
-                            dirname( $_SERVER{'DOCUMENT_ROOT'} ) . "/files_seedofandromeda_com/game/" . $_REQUEST ['download-version'] . "/SoA." . $extension); 
+                            dirname( $_SERVER{'DOCUMENT_ROOT'} ) . "/files_seedofandromeda_com/game/" . $_REQUEST ['downloadid'] . "/SoA." . $extension); 
                             
                     }
                 }
                 if ( isset ( $_FILES['bgImage'] ) && $_FILES['bgImage']['size'] > 0 ) {
                             
-                    $allowedExts = array("jpg", "jpeg");
+                    $allowedExts = array("jpg");
                     $temp = explode(".", $_FILES['bgImage']['name']);
                     $bgExtension = end($temp);
                             
@@ -106,9 +120,12 @@ if (isset ( $_REQUEST ['delete'] )) {
                                 <div class="header"><h1 class="error">Download Manager - Error</h1></div>
                                 <div class="col double-col-2">
                                     <div class="text">
-                                        <h3 class="error">Background image file must be a jpeg!</h3>
+                                        <h3 class="error">Background image file must be a .jpg!</h3>
+                                        <br/><br/>
+                                        <h3><a href="/' . $pageurl . '?downloads&downloadid=' . $_REQUEST ['downloadid'] . '">Return</a></h3>
                                     </div>
                                 </div>';
+                        $success = false;  
                     } else if ( $_FILES['bgImage']['error'] > 0 ) {
                         echo '
                             <div class="row clearfix">
@@ -116,49 +133,56 @@ if (isset ( $_REQUEST ['delete'] )) {
                                 <div class="col double-col-2">
                                     <div class="text">
                                         <h3 class="error">Error: ' . $_FILES['bgImage']['error'] . '</h3>
+                                        <br/><br/>
+                                        <h3><a href="/' . $pageurl . '?downloads&downloadid=' . $_REQUEST ['downloadid'] . '">Return</a></h3>
                                     </div>
                                 </div>';
+                        $success = false;  
                     } else {
                     
-                        if ( file_exists( dirname( $_SERVER{'DOCUMENT_ROOT'} ) . "/files_seedofandromeda_com/game/" . $_REQUEST ['download-version'] . "/DlBackground." . $bgExtension ) ) {
-                            unlink ( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "/files_seedofandromeda_com/game/" . $_REQUEST ['download-version'] . "/DlBackground." . $bgExtension );
+                        if ( file_exists( dirname( $_SERVER{'DOCUMENT_ROOT'} ) . "/files_seedofandromeda_com/game/" . $_REQUEST ['downloadid'] . "/DlBackground.jpg" ) ) {
+                            unlink ( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "/files_seedofandromeda_com/game/" . $_REQUEST ['downloadid'] . "/DlBackground.jpg" );
                         }
                                 
                         move_uploaded_file( $_FILES['bgImage']['tmp_name'],
-                            dirname( $_SERVER{'DOCUMENT_ROOT'} ) . "/files_seedofandromeda_com/game/" . $_REQUEST ['download-version'] . "/DlBackground." . $bgExtension ); 
+                            dirname( $_SERVER{'DOCUMENT_ROOT'} ) . "/files_seedofandromeda_com/game/" . $_REQUEST ['downloadid'] . "/DlBackground.jpg" ); 
                             
                     }
                 }
-                if ( isset ( $_FILES['download'] ) && $_FILES['download']['size'] > 0 ) {
-                    if ( isset ( $_FILES['bgImage'] ) && $_FILES['bgImage']['size'] > 0 ) {
-                        $query = $connection->prepare ( "UPDATE downloads SET version = ?, description = ?, url = ?, backgroundurl = ?, updatetime = ?, published = ? WHERE id = ?" );
-				        $query->execute ( array (
-						        $_REQUEST ['download-version'],
-						        $_REQUEST ['download-description'],
-						        "game/" . $_REQUEST ['download-version'] . "/SoA." . $extension,
-						        "game/" . $_REQUEST ['download-version'] . "/DlBackground." . $bgExtension,
-						        time (),
-                                isset ( $_REQUEST ['published'] ) && $_REQUEST ['published'] == 1,
-						        $_REQUEST ['downloadid']
-				        ) );
-                    } else {
+                if (isset ( $_REQUEST ['published'] ) && $_REQUEST ['published'] == 1) {
+                    if ( ! file_exists( dirname( $_SERVER{'DOCUMENT_ROOT'} ) . "/files_seedofandromeda_com/game/" . $_REQUEST ['downloadid'] . "/SoA." . $extension ) ) {
+                        echo '
+                            <div class="row clearfix">
+                                <div class="header"><h1 class="error">Download Manager - Error</h1></div>
+                                <div class="col double-col-2">
+                                    <div class="text">
+                                        <h3 class="error">A download must be provided to publish!</h3>
+                                        <br/><br/>
+                                        <h3><a href="/' . $pageurl . '?downloads&downloadid=' . $_REQUEST ['downloadid'] . '">Return</a></h3>
+                                    </div>
+                                </div>';
+                        $success = false;  
+                    } else if ( ! file_exists( dirname( $_SERVER{'DOCUMENT_ROOT'} ) . "/files_seedofandromeda_com/game/" . $_REQUEST ['downloadid'] . "/DlBackground.jpg" ) ) {
+                        echo '
+                            <div class="row clearfix">
+                                <div class="header"><h1 class="error">Download Manager - Error</h1></div>
+                                <div class="col double-col-2">
+                                    <div class="text">
+                                        <h3 class="error">A download background must be provided to publish!</h3>
+                                        <br/><br/>
+                                        <h3><a href="/' . $pageurl . '?downloads&downloadid=' . $_REQUEST ['downloadid'] . '">Return</a></h3>
+                                    </div>
+                                </div>';
+                        $success = false;  
+                    }
+                }
+                if ( $success ) {
+                    if ( isset ( $_FILES['download'] ) && $_FILES['download']['size'] > 0 ) {
                         $query = $connection->prepare ( "UPDATE downloads SET version = ?, description = ?, url = ?, updatetime = ?, published = ? WHERE id = ?" );
 				        $query->execute ( array (
 						        $_REQUEST ['download-version'],
 						        $_REQUEST ['download-description'],
-						        "game/" . $_REQUEST ['download-version'] . "/SoA." . $extension,
-						        time (),
-                                isset ( $_REQUEST ['published'] ) && $_REQUEST ['published'] == 1,
-						        $_REQUEST ['downloadid']
-				        ) );
-                    }
-                } else {
-                    if ( isset ( $_FILES['bgImage'] ) && $_FILES['bgImage']['size'] > 0 ) {
-                        $query = $connection->prepare ( "UPDATE downloads SET version = ?, description = ?, backgroundurl = ?, updatetime = ?, published = ? WHERE id = ?" );
-				        $query->execute ( array (
-						        $_REQUEST ['download-version'],
-						        $_REQUEST ['download-description'],
-						        "game/" . $_REQUEST ['download-version'] . "/DlBackground." . $bgExtension,
+						        "game/" . $_REQUEST ['downloadid'] . "/SoA." . $extension,
 						        time (),
                                 isset ( $_REQUEST ['published'] ) && $_REQUEST ['published'] == 1,
 						        $_REQUEST ['downloadid']
@@ -173,10 +197,8 @@ if (isset ( $_REQUEST ['delete'] )) {
 						        $_REQUEST ['downloadid']
 				        ) );
                     }
-                
+                    header ( "Location: /" . $pageurl . "?downloads");
                 }
-                        
-                header ( "Location: /" . $pageurl . "?downloads");
             }
         } else {
 ?>
@@ -187,7 +209,7 @@ if (isset ( $_REQUEST ['delete'] )) {
         //theme: "modern",
         skin: "darktheme",
         plugins: [
-            "advlist autolink lists link image charmap hr anchor pagebreak",
+            "advlist autolink lists link charmap hr anchor pagebreak",
             "searchreplace wordcount visualblocks visualchars code fullscreen",
             "insertdatetime media nonbreaking save table contextmenu directionality",
             "emoticons template paste textcolor"
@@ -196,8 +218,8 @@ if (isset ( $_REQUEST ['delete'] )) {
         "jbimages": "/jbimages/plugin.min.js"
         },
         toolbar1: "bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | blockquote code",
-        //toolbar2: "blockquote code | emoticons link media image jbimages",
-        contextmenu: "link image jbimages inserttable | cut copy paste | cell row column deletetable",
+        //toolbar2: "blockquote code | emoticons link media jbimages",
+        contextmenu: "link jbimages inserttable | cut copy paste | cell row column deletetable",
         image_advtab: true,
         add_unload_trigger: false,
         inline: true,
@@ -206,47 +228,6 @@ if (isset ( $_REQUEST ['delete'] )) {
         relative_urls: false,
         remove_script_host: true,
         document_base_url: "/blogs/",
-        image_class_list: [
-            { title: 'Freeform', value: 'img' },
-            { title: 'Tote', value: 'img xxx-small' },
-            { title: 'Tote Wide', value: 'img xxx-small-wide' },
-            { title: 'Tiny', value: 'img xx-small' },
-            { title: 'Tiny Wide', value: 'img xx-small-wide' },
-            { title: 'Very Small', value: 'img x-small' },
-            { title: 'Very Small Wide', value: 'img x-small-wide' },
-            { title: 'Small', value: 'img small' },
-            { title: 'Small Wide', value: 'img small-wide' },
-            { title: 'Medium', value: 'img medium'},
-            { title: 'Medium Wide', value: 'img medium-wide'},
-            { title: 'Large', value: 'img large' },
-            { title: 'Large Wide', value: 'img large-wide' },
-            { title: 'Very Large', value: 'img x-large' },
-            { title: 'Very Large Wide', value: 'img x-large-wide' },
-            { title: 'Huge', value: 'img xx-large' },
-            { title: 'Huge Wide', value: 'img xx-large-wide' },
-            { title: 'Gigantic', value: 'img xxx-large' },
-            { title: 'Gigantic Wide', value: 'img xxx-large-wide' }
-        ],
-        image_list: [
-<?php
-            $di = new RecursiveDirectoryIterator("assets/images/blogs/",RecursiveDirectoryIterator::SKIP_DOTS);
-            $it = new RecursiveIteratorIterator($di);
-            foreach($it as $file)
-            {
-                if( pathinfo($file,PATHINFO_EXTENSION) == "jpg" || pathinfo($file,PATHINFO_EXTENSION) == "png" || pathinfo($file,PATHINFO_EXTENSION) == "gif" ) {
-                    echo "{title: '" . pathinfo($file,PATHINFO_BASENAME) . "', value: '/assets/images/blogs/" . pathinfo($file,PATHINFO_BASENAME) . "'},";
-                }
-            }
-            $di = new RecursiveDirectoryIterator("assets/images/screenshots/",RecursiveDirectoryIterator::SKIP_DOTS);
-            $it = new RecursiveIteratorIterator($di);
-            foreach($it as $file)
-            {
-                if( pathinfo($file,PATHINFO_EXTENSION) == "jpg" || pathinfo($file,PATHINFO_EXTENSION) == "png" || pathinfo($file,PATHINFO_EXTENSION) == "gif" ) {
-                    echo "{title: '" . pathinfo($file,PATHINFO_BASENAME) . "', value: '/assets/images/screenshots/" . pathinfo($file,PATHINFO_BASENAME) . "'},";
-                }
-            }
-?>
-        ],
     });
     tinymce.init({
         selector: "p.edittitle",
@@ -302,15 +283,18 @@ enctype="multipart/form-data" method="post">
         }
     }
 } else if (isset ( $_REQUEST ['newdownload'] )) {
-	$query = $connection->prepare ( "INSERT INTO downloads (version, description, timestamp, url) VALUES (?, ?, ?, ?)" );
+	$query = $connection->prepare ( "INSERT INTO downloads (version, description, timestamp) VALUES (?, ?, ?)" );
 	$query->execute ( array (
-			"0.0.0",
-			"<p>Click here to write up a description of the download.</p>",
-			time (),
-			"game/0.0.0/SoA.zip"
+		"0.0.0",
+		"<p>Click here to write up a description of the download.</p>",
+		time ()
 	) );
-                
 	$id = $connection->lastInsertId ();
+    $query = $connection->prepare ( "UPDATE downloads SET backgroundurl = ? WHERE id = ?" );
+    $query->execute ( array (
+		"game/" . $id . "/DlBackground.jpg",
+        $id
+    ) );
 	header ( "Location: /" . $pageurl . "?downloads&downloadid=" . $id );
 } else {
 	echo '

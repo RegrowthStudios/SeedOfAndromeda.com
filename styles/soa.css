@@ -858,6 +858,9 @@ input.btn {
   -webkit-appearance: none;
   -moz-appearance: none;
 }
+.btn.center {
+  margin: 0 auto;
+}
 /******************/
 /* Content - Form */
 /******************/

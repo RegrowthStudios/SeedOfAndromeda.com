@@ -10,11 +10,7 @@
 .version {
   display: inline-block;
 }
-.main-download {
-  margin-right: 40px !important;
-}
 .download {
-  float: right;
   display: block;
   font-size: 1.4em;
   color: #61b7cf !important;
@@ -24,5 +20,17 @@
 .ver-description {
   min-height: 145.344px;
   margin-bottom: 20px;
+}
+#latest-download > .col {
+  font-size: 0.9rem;
+  text-align: center;
+}
+#latest-download h4 {
+  text-shadow: none !important;
+  margin-top: 100px;
+}
+#latest-download .text {
+  font-size: 11.5pt;
+  margin-top: 20px;
 }
 /*# sourceMappingURL=downloads.css.map */

@@ -16,7 +16,7 @@
     
     $i = 0;
 ?>
-<div id="latest-download" class="row clearfix" style="background:url('<?php echo $downloads[$i]["backgroundurl"] ?>');background-position:center center;background-repeat:no-repeat;background-size:cover;">
+<div id="latest-download" class="row clearfix" style="background:url('/files/<?php echo $downloads[$i]["backgroundurl"] ?>');background-position:center center;background-repeat:no-repeat;background-size:cover;">
     <div class="header"><h1>Latest Version ( V<?php echo $downloads[$i]['version']; ?> )</h1></div>
     <div class="col tri-col-2">
         <div class="text">

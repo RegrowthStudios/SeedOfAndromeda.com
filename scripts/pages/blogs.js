@@ -49,7 +49,7 @@ function prepareBlogs(pgData) {
                     if (v["disablecomments"] == 0) {
                         totalHtmlBlog += '<small> - (<a href="/blogs/' + postlink + '#disqus_thread" data-disqus-identifier="blogs-' + v["id"] + '">Comments</a>)</small>';
                     }
-                totalHtmlBlog += '</span>'
+                totalHtmlBlog += '</span>';
             totalHtmlBlog += '</div></div></div></div>';
         totalHtmlBlog += '</div>';
     });

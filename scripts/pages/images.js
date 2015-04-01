@@ -33,7 +33,7 @@ function prepareImages(pgData) {
     $.each(pgData, function (i, v) {
         totalHtmlColumn += '<div class="col quad-col-1"><img class="img small-wide image" src="' + v["url"].substring(0, v["url"].lastIndexOf(".")) + '_thumb_213x128.jpg" data-url="' + v["url"] + '" data-title="' + v["title"] + '" data-desc="' + v["description"] + '" /></div>';
     });
-    totalHtmlColumn += '</div>'
+    totalHtmlColumn += '</div>';
     return totalHtmlColumn;
 };
 

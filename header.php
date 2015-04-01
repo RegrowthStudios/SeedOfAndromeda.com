@@ -14,11 +14,11 @@
     <meta name="keywords"
 	    content="seed of andromeda, SoA, Windows, PC, Mac, Linux, Voxel, Voxel-Based, Voxel Game, Voxel-Based Game, indie game, independent game, independently developed, video game, pc game, creation, survival, chunks, blocks, sci fi" />
     <meta name="description"
-	    content="Seed Of Andromeda is a Voxel based Sandbox RPG in a futuristic setting. The player will crash land on a fully round voxel planet and will be forced to survive hostile creatures. As the player progresses through the game, they will be able to form settlements, develop technology, and eventually escape the rock they are stranded on!" />
+	    content="The Earth is no longer sufficient for humanity, which has looked to the stars for new homes to expand to. You are amongst the first wave of colonists to leave Earth, your destination: the Trinity star system. On your arrival, you are greeted by a none too friendly, advanced race, who launch a vicious attack on your colonial fleet. In the carnage, you descend in an escape capsule to the surface of Aldrin, a moon of the gas giant Hyperion. With your limited supplies, you must make what you can of this new world. What you do is your choice... it is your story that is to unfold." />
     <meta name="og:title" 
         content="Seed of Andromeda" />
     <meta name="og:description"
-	    content="Seed Of Andromeda is a Voxel based Sandbox RPG in a futuristic setting. The player will crash land on a fully round voxel planet and will be forced to survive hostile creatures. As the player progresses through the game, they will be able to form settlements, develop technology, and eventually escape the rock they are stranded on!" />
+	    content="The Earth is no longer sufficient for humanity, which has looked to the stars for new homes to expand to. You are amongst the first wave of colonists to leave Earth, your destination: the Trinity star system. On your arrival, you are greeted by a none too friendly, advanced race, who launch a vicious attack on your colonial fleet. In the carnage, you descend in an escape capsule to the surface of Aldrin, a moon of the gas giant Hyperion. With your limited supplies, you must make what you can of this new world. What you do is your choice... it is your story that is to unfold." />
     <meta name="og:site_name" 
         content="seedofandromeda" />
     <meta name="og:type" 

@@ -1,6 +1,6 @@
 var frameWrapper;
 var frame;
-var slider
+var slider;
 $(document).ready(function () {
     frameWrapper = $('#video-viewer');
     frame = frameWrapper.find(".media-slider-frame");

@@ -24,9 +24,7 @@
         </div>
     </div>
     <div class="col tri-col-1">
-        <div class="btn download right">
-            <a onclick="var that=this;_gaq.push(['_trackEvent','Download','ZIP',this.href]);setTimeout(function(){location.href=that.href;},400);return false;" href="<?php echo 'http://files.seedofandromeda.com/' . $downloads[$i]['url']; ?>">Download</a>
-        </div>
+        <?php insertButton("Download", "http://files.seedofandromeda.com/" . $downloads[$i]['url'], "download right", "var that=this;_gaq.push(['_trackEvent','Download','ZIP',this.href]);setTimeout(function(){location.href=that.href;},400);return false;"); ?>
     </div>
 </div>
 
@@ -47,7 +45,7 @@
                 </div>
             </div>
             <div class="col tri-col-1">
-                <div class="btn download right"><a onclick="var that=this;_gaq.push([\'_trackEvent\',\'Download\',\'ZIP\',this.href]);setTimeout(function(){location.href=that.href;},400);return false;" href="http://files.seedofandromeda.com/' . $downloads[$i]['url'] . '">Download!</a></div>
+                ' . insertButton("Download", "http://files.seedofandromeda.com/" . $downloads[$i]['url'], "download right", "var that=this;_gaq.push([\'_trackEvent\',\'Download\',\'ZIP\',this.href]);setTimeout(function(){location.href=that.href;},400);return false;") . '
             </div>
                     ';
                 }
@@ -61,9 +59,9 @@
 <div id="old-downloads" class="row clearfix">
     <div class="header"><h1>Older Versions</h1></div>
     <div class="col double-col-2">
-        <div class="btn download center">
-            <a href="/downloads?show=archived">Show Old Downloads</a>
-        </div>
+        <?php
+            insertButton("Show Old Downloads", "/downloads?show=archived", "download center");
+        ?>
     </div>
 </div>
 <?php

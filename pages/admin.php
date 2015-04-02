@@ -151,24 +151,16 @@
                     <div class="row clearfix">
                         <div class="header"><h1>Admin Panel</h1></div>
                             <div class="col quad-col-1 centerInners">
-                                <div class="btn">
-                                    <a href="/admin?blogs">Blogs</a>
-                                </div>
+                                <?php insertButton("Blogs", "/admin?blogs"); ?>
                             </div>
                             <div class="col quad-col-1 centerInners">
-                                <div class="btn">
-                                    <a href="/admin?downloads">Downloads</a>
-                                </div>
+                                <?php insertButton("Downloads", "/admin?downloads"); ?>
                             </div>
                             <div class="col quad-col-1 centerInners">
-                                <div class="btn">
-                                    <a href="/admin?images">Images</a>
-                                </div>
+                                <?php insertButton("Images", "/admin?images"); ?>
                             </div>
                             <div class="col quad-col-1 centerInners">
-                                <div class="btn">
-                                    <a href="/admin?videos">Videos</a>
-                                </div>
+                                <?php insertButton("Videos", "/admin?videos"); ?>
                             </div>
                     </div>
 <?php

@@ -273,7 +273,7 @@ enctype="multipart/form-data" method="post">
                 </div>
                 <br/> 
                 <br/>
-                <?php echo '<div class="btn"><a href="/' . $pageurl . '?downloads">Return</a></div>'; ?>
+                <?php insertButton("Return", "/" . $pageurl . "?downloads"); ?>
                 <input class="btn left" type="submit" value="Save" />
             </div>
         </div>
@@ -302,7 +302,7 @@ enctype="multipart/form-data" method="post">
         <div class="header"><h1>Download Editor</h1></div>
         <div class="col double-col-2">
             <div class="text">
-                <div class="right btn"><a href="/' . $pageurl . '?downloads&newdownload&notemplate">New post</a></div>';
+                ' . insertButton("New Post", "/" . $pageurl . "?downloads&newdownload&notemplate", "right");
 					
         $query = $connection->prepare ( "SELECT * FROM downloads ORDER BY id DESC" );
 		$query->execute();

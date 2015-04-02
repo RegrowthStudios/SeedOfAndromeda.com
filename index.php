@@ -284,3 +284,12 @@ function startsWith($haystack, $needle) {
 function endsWith($haystack, $needle) {
 	return $needle === "" || substr ( $haystack, - strlen ( $needle ) ) === $needle;
 }
+function insertButton($text, $link, $btnClasses = "", $onClick = "return true;") {
+    echo '
+        <div class="btn ' . $btnClasses . '">
+            <div class="btn-content">
+                <a href="' . $link . '" onclick="' . $onClick . '">' . $text . '</a>
+            </div>
+        </div>
+    ';
+}

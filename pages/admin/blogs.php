@@ -464,7 +464,7 @@ if (isset ( $_REQUEST ['delete'] )) {
                         </div> 
                     </div>
                     <br/><br/>
-                    <?php echo '<div class="btn"><a href="/' . $pageurl . '?blogs">Return</a></div>'; ?>
+                    <?php insertButton("Return", "/" . $pageurl . "?blogs"); ?>
                     <input class="btn left" type="submit" value="Save" />
 	            </div>
             </div>
@@ -495,8 +495,8 @@ if (isset ( $_REQUEST ['delete'] )) {
         <div class="col double-col-2">
             <div class="text">';
 	if ($canEditOwn) {
-					
-		echo '<div class="right btn"><a href="/' . $pageurl . '?blogs&newpost&notemplate">New post</a></div>';
+		
+        insertButton("New Post", "/" . $pageurl . "?blogs&newpost&notemplate", "right");
 					
 		$query = $connection->prepare ( "SELECT * FROM blog_posts WHERE author = ? ORDER BY id DESC" );
 		$query->execute ( array (

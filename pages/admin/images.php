@@ -192,7 +192,7 @@ if (isset ( $_REQUEST ['delete'] )) {
 				    <label for="published"></label>
                 </div>
                 <br/><br/>
-                <?php echo '<div class="btn"><a href="/' . $pageurl . '?images">Return</a></div>'; ?>
+                <?php insertButton("Return", "/" . $pageurl . "?images"); ?>
                 <input class="btn left" type="submit" value="Save" />
             </div>
         </div>
@@ -223,28 +223,25 @@ if (isset ( $_REQUEST ['delete'] )) {
         <div class="col double-col-2">
             <div class="text">
                 <br/>
-                <div class="btn right"><a href="/' . $pageurl . '?images&newimage&notemplate">New Image</a></div>';
+                ' . insertButton("New Image", "/" . $pageurl . "?images&newimage&notemplate", "right");
         $query;
         if (isset ( $_REQUEST ['show'] ) && $_REQUEST ['show'] == "published") {
-            echo '
-            <div class="btn right"><a href="/' . $pageurl . '?images">All Images</a></div>
-            <div class="btn right"><a href="/' . $pageurl . '?images&show=private">Private Images</a></div>';
+            insertButton("All Images", "/" . $pageurl . "?images", "right");
+            insertButton("Private Images", "/" . $pageurl . "?images&show=private", "right");
             $query = $connection->prepare ( "SELECT * FROM images WHERE published = ? ORDER BY id DESC" );
 		    $query->execute( array (
                 1
             ) );
         } else if (isset ( $_REQUEST ['show'] ) && $_REQUEST ['show'] == "private") {
-            echo '
-            <div class="btn right"><a href="/' . $pageurl . '?images">All Images</a></div>
-            <div class="btn right"><a href="/' . $pageurl . '?images&show=published">Public<br> Images</a></div>';
+            insertButton("All Images", "/" . $pageurl . "?images", "right");
+            insertButton("Public Images", "/" . $pageurl . "?images&show=published", "right");
             $query = $connection->prepare ( "SELECT * FROM images WHERE published = ? ORDER BY id DESC" );
 		    $query->execute( array (
                 0
             ) );
         } else {
-            echo '
-            <div class="btn right"><a href="/' . $pageurl . '?images&show=private">Private Images</a></div>
-            <div class="btn right"><a href="/' . $pageurl . '?images&show=published">Public<br> Images</a></div>';
+            insertButton("Private Images", "/" . $pageurl . "?images&show=private", "right");
+            insertButton("Public Images", "/" . $pageurl . "?images&show=published", "right");
             $query = $connection->prepare ( "SELECT * FROM images ORDER BY id DESC" );
 		    $query->execute();
         }

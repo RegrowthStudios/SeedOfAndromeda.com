@@ -194,7 +194,7 @@ tinymce.init({
                     </div>
                 </div>
                 <br /> 
-                <?php echo '<div class="btn"><a href="/' . $pageurl . '?videos">Return</a></div>'; ?>
+                <?php insertButton("Return", "/" . $pageurl . "?videos"); ?>
                 <input class="btn left" type="submit" value="Save" />
 	        </div>
         </div>
@@ -222,7 +222,7 @@ tinymce.init({
         <div class="header"><h1>Video Manager</h1></div>
         <div class="col double-col-2">
             <div class="text">
-                <div class="right btn"><a href="/' . $pageurl . '?videos&newvideo&notemplate">New Video</a></div>';
+                ' . insertButton("New Videos", "/" . $pageurl . "?videos&newimage&notemplate", "right");
                 
 		$query = $connection->prepare ( "SELECT * FROM videos ORDER BY id DESC" );
 		$query->execute();

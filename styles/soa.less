@@ -379,6 +379,8 @@ ul {
 #account-bar a {
     font-family: @light-font;
     font-size: 0.8em;
+    width: 100%;
+    height: 100%;
 }
 
 #account-bar .account-image {
@@ -814,20 +816,23 @@ ul {
     background: url("../assets/images/Button.png");
     background-size: contain;
     background-repeat: no-repeat;
-    padding: 0 10px;
+    padding: 10px;
     .BoxSizing();
     .TransformStyle();
     display: inline-block;
-    .Transition();
-    .DropShadow(0, 0, 10px, @btn-drop-shadow-color);
+    .Transition(all, .1s);
+    .DropShadow(0, 0, 5px, @btn-drop-shadow-color);
     text-align: center;
 }
-.btn > a {
+.btn-content {
+    display: table;
+    width: 100%;
+    height: 100%;
+}
+.btn-content > a {
     color: white !important;
-    position: relative;
-    top: 50%;
-    .Transform(translateY(-50%));
-    display: block;
+    display: table-cell;
+    vertical-align: middle;
 }
 .btn:hover {
     background: url("../assets/images/Button_Hover.png");

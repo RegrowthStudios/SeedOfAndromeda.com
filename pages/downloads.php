@@ -44,10 +44,10 @@
                     <h4 class="version">V' . $downloads[$i]['version'] . '</h4>&nbsp;- ' . substr( $downloads[$i]['description'], 3, -4 ) . '
                 </div>
             </div>
-            <div class="col tri-col-1">
-                ' . insertButton("Download", "http://files.seedofandromeda.com/" . $downloads[$i]['url'], "download right", "var that=this;_gaq.push([\'_trackEvent\',\'Download\',\'ZIP\',this.href]);setTimeout(function(){location.href=that.href;},400);return false;") . '
-            </div>
-                    ';
+            <div class="col tri-col-1">';
+                insertButton("Download", "http://files.seedofandromeda.com/" . $downloads[$i]['url'], "download right", "var that=this;_gaq.push([\'_trackEvent\',\'Download\',\'ZIP\',this.href]);setTimeout(function(){location.href=that.href;},400);return false;");
+                echo '
+            </div>';
                 }
             }
 ?>

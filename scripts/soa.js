@@ -54,6 +54,16 @@ function strip_tags(input, allowed) {
       });
 }
 
+function isScrolledIntoView(elem) {
+    var docViewTop = $(window).scrollTop();
+    var docViewBottom = docViewTop + $(window).height();
+
+    var elemTop = $(elem).offset().top;
+    var elemBottom = elemTop + $(elem).height();
+
+    return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+}
+
 function clear_textbox(textbox_id, textbox_value) {
     var text = $("#" + textbox_id);
     if (text.val() == textbox_value) {
@@ -333,11 +343,15 @@ function MediaSlider(sliderWrapper, slideShowPauseDelay, slideShowDelay, animati
         rightControl.fadeOut();
     }
 
-    (function () {
-        setTimeout(function () {
-            _this.automateSlideshow();
-        }, slideShowDelay);
-    })();
+    $(window).scroll(function () {
+        if (isScrolledIntoView(sliderWrapper)) {
+            (function () {
+                setTimeout(function () {
+                    _this.automateSlideshow();
+                }, slideShowDelay);
+            })();
+        }
+    });
 }
 
 //Fix nav controls to hover state when on mobile devices for greater visibility

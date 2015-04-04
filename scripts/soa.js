@@ -343,11 +343,13 @@ function MediaSlider(sliderWrapper, slideShowPauseDelay, slideShowDelay, animati
         rightControl.fadeOut();
     }
 
+    var _isAutomated = false;
     $(window).scroll(function () {
-        if (isScrolledIntoView(sliderWrapper)) {
+        if (isScrolledIntoView(sliderWrapper) && !_isAutomated) {
             (function () {
                 setTimeout(function () {
                     _this.automateSlideshow();
+                    _isAutomated = true;
                 }, slideShowDelay);
             })();
         }

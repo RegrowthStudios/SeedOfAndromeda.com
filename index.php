@@ -228,13 +228,13 @@ function echo_disqus($title = "", $url = "", $id = "") {
     var disqus_shortname = "seedofandromeda";
     var disqus_identifier = "' . $id . '";
     var disqus_title = "' . $title . '";
-    var disqus_url = "http://www.seedofandromeda.com/' . $url . '";
+    var disqus_url = "https://www.seedofandromeda.com/' . $url . '";
     		
 		var disqus_config = function() {
     		
     this.sso = {
           name:   "SoA Forum Login",
-          button:  "http://www.seedofandromeda.com/Assets/images/disquslogin_new.png",
+          button:  "https://www.seedofandromeda.com/assets/images/disquslogin_new.png",
           url:        "' . XenForo_Link::buildPublicLink ( "canonical:login", $userinfo, array (
 			'redirect' => '/closewindow.php' 
 	) ) . '",
@@ -252,7 +252,7 @@ function echo_disqus($title = "", $url = "", $id = "") {
 				"id" => "soa-" . $userinfo ['user_id'],
 				"username" => $userinfo ['username'],
 				"email" => $userinfo ['email'],
-				"avatar" => "http://www.seedofandromeda.com/community/avatar.php?userid=" . $userinfo ['user_id'] . "&size=l",
+				"avatar" => "https://www.seedofandromeda.com/community/avatar.php?userid=" . $userinfo ['user_id'] . "&size=l",
 				"url" => XenForo_Link::buildPublicLink ( 'canonical:members', $userinfo ) 
 		);
 	}
@@ -274,7 +274,7 @@ function echo_disqus($title = "", $url = "", $id = "") {
 </script>
 <noscript>
 	Please enable JavaScript to view the <a
-		href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+		href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
 </noscript>
 <?php
 }

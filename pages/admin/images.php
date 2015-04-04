@@ -87,14 +87,12 @@ if (isset ( $_REQUEST ['delete'] )) {
                                 </div>';
                     } else {
                                 
-                        if ( ! file_exists( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "seedofandromeda_com/assets/images/screenshots/" . $_REQUEST ['imageid'] . $extension ) ) {
-                            mkdir ( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "seedofandromeda_com/assets/images/screenshots/" . $_REQUEST ['imageid'] . $extension, 0755, true );
-                        } else if ( file_exists( dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "seedofandromeda_com/assets/images/screenshots/" . $_REQUEST ['imageid'] . $extension ) ) {
-                            unlink (dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "seedofandromeda_com/assets/images/screenshots/" . $_REQUEST ['imageid'] . $extension );
+                        if ( file_exists( $_SERVER{'DOCUMENT_ROOT'} . "/assets/images/screenshots/i" . $_REQUEST ['imageid'] . "." . $extension ) ) {
+                            unlink ( $_SERVER{'DOCUMENT_ROOT'} . "/assets/images/screenshots/i" . $_REQUEST ['imageid'] . "." . $extension );
                         }
-                                
+                        
                         move_uploaded_file( $_FILES['image']['tmp_name'],
-                            dirname ( $_SERVER{'DOCUMENT_ROOT'} ) . "seedofandromeda_com/assets/images/screenshots/" . $_REQUEST ['imageid'] . $extension ); 
+                            $_SERVER{'DOCUMENT_ROOT'} . "/assets/images/screenshots/i" . $_REQUEST ['imageid'] . "." . $extension ); 
                                
                     }
                 }
@@ -213,7 +211,7 @@ if (isset ( $_REQUEST ['delete'] )) {
 	$id = $connection->lastInsertId ();
     $query = $connection->prepare ( "UPDATE images SET img_url = ? WHERE id = " . $id );
     $query->execute ( array ( 
-        "/assets/images/screenshots/" . $id . ".jpg"
+        "/assets/images/screenshots/i" . $id . ".jpg"
     ) );
 	header ( "Location: /" . $pageurl . "?images&imageid=" . $id );
 } else {
@@ -223,7 +221,8 @@ if (isset ( $_REQUEST ['delete'] )) {
         <div class="col double-col-2">
             <div class="text">
                 <br/>
-                ' . insertButton("New Image", "/" . $pageurl . "?images&newimage&notemplate", "right");
+                '; 
+        insertButton("New Image", "/" . $pageurl . "?images&newimage&notemplate", "right");
         $query;
         if (isset ( $_REQUEST ['show'] ) && $_REQUEST ['show'] == "published") {
             insertButton("All Images", "/" . $pageurl . "?images", "right");
@@ -234,14 +233,14 @@ if (isset ( $_REQUEST ['delete'] )) {
             ) );
         } else if (isset ( $_REQUEST ['show'] ) && $_REQUEST ['show'] == "private") {
             insertButton("All Images", "/" . $pageurl . "?images", "right");
-            insertButton("Public Images", "/" . $pageurl . "?images&show=published", "right");
+            insertButton("Public<br> Images", "/" . $pageurl . "?images&show=published", "right");
             $query = $connection->prepare ( "SELECT * FROM images WHERE published = ? ORDER BY id DESC" );
 		    $query->execute( array (
                 0
             ) );
         } else {
             insertButton("Private Images", "/" . $pageurl . "?images&show=private", "right");
-            insertButton("Public Images", "/" . $pageurl . "?images&show=published", "right");
+            insertButton("Public<br> Images", "/" . $pageurl . "?images&show=published", "right");
             $query = $connection->prepare ( "SELECT * FROM images ORDER BY id DESC" );
 		    $query->execute();
         }

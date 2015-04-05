@@ -349,8 +349,8 @@ function MediaSlider(sliderWrapper, slideShowPauseDelay, slideShowDelay, animati
             (function () {
                 setTimeout(function () {
                     _this.automateSlideshow();
-                    _isAutomated = true;
                 }, slideShowDelay);
+                _isAutomated = true;
             })();
         }
     });

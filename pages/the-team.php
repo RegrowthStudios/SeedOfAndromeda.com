@@ -195,14 +195,13 @@
 </div>
 
 <div class="row clearfix the-team">
-    <div class="header"><h1 class="name">Jeremy Fischer</h1><h3 class="title">&nbsp;- Programmer / Media</h3></div>
+    <div class="header"><h1 class="name">Jeremy Fischer</h1><h3 class="title">&nbsp;- Media and Connectivity</h3></div>
     <div class="col tri-col-2">
         <div class="text">
-                Jeremy is an extremely intelligent and technically minded
-            person. He has experience with network programming and server management, and
-            he is going to host the first dedicated SoA team server when multiplayer is
-            implemented! Jeremy's dedication and talent ensure that he will grow into
-            a very skilled game programmer!
+                Jeremy is the producer of video media we create and release. He has experience 
+                with audio and vdeo editing as well as server management - he is going to host 
+                the first dedicated SoA team server when multiplayer is implemented! Jeremy's 
+                dedication and talent will ensure our media is of the highest quality!
             </div>
     </div>
     <div class="col tri-col-1">

@@ -589,6 +589,7 @@
     <Folder Include="JereNet\" />
     <Folder Include="JereNet\api\" />
     <Folder Include="loaders\" />
+    <Folder Include="cloudflare\" />
     <Folder Include="pages\" />
     <Folder Include="pages\admin\" />
     <Folder Include="scripts\" />
@@ -852,6 +853,12 @@
     <Content Include="assets\lightbox\loading_blue.gif" />
     <Content Include="assets\lightbox\next.png" />
     <Content Include="assets\lightbox\prev.png" />
+    <Content Include="cloudflare\static_error10xx.html" />
+    <Content Include="cloudflare\static_alwaysonline.html" />
+    <Content Include="cloudflare\static_error5xx.html" />
+    <Content Include="cloudflare\static_imunderattack.html" />
+    <Content Include="cloudflare\static_dnsresolutionerror.html" />
+    <Content Include="cloudflare\static_securitycheck.html" />
     <Content Include="community\.gitignore" />
     <Content Include="community\.htpasswd" />
     <Content Include="community\favicon.ico" />

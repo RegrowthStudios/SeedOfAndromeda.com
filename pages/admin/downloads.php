@@ -246,7 +246,12 @@ if (isset ( $_REQUEST ['delete'] )) {
 action="/<?php echo $pageurl . '?downloads&downloadid=' . $download ["id"]; ?>&submit&notemplate"
 enctype="multipart/form-data" method="post">
     <div class="row clearfix">
-        <div class="header"><h1><p id="download-version" class="edittitle"><?php echo $download["version"];?></p></h1></div>
+        <div class="header"><h1><p id="download-name" class="edittitle"><?php echo $download["name"];?></p></h1></div>
+        <div class="col double-col-2">
+            <div class="text">
+	            <div id="download-version" class="edittitle"><?php echo $download["version"];?></div>
+            </div>
+        </div>
         <div class="col double-col-2">
             <div class="text">
 	            <div id="download-description" class="editpost"><?php echo $download["description"];?></div>

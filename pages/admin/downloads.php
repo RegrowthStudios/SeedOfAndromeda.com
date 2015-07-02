@@ -49,8 +49,21 @@ if (isset ( $_REQUEST ['delete'] )) {
                 </div>';
 	} else {
 		if (isset ( $_REQUEST ['submit'] )) {
-            $success = true;   
-            if (! isset ( $_REQUEST ['download-version'] ) || ! isset ( $_REQUEST ['download-description'] )) {
+            $success = true;
+            $newDownloads = array();
+            if (! isset ( $_REQUEST ['download-number'] )) {
+                echo '
+                    <div class="row clearfix">
+                        <div class="header"><h1 class="error">Download Editor - Error</h1></div>
+                        <div class="col double-col-2">
+                            <div class="text">
+                                <h3 class="error">A critical error occurred!</h3>
+                                <br/><br/>
+                                <h3><a href="/' . $pageurl . '?downloads&downloadid=' . $_REQUEST ['downloadid'] . '">Return</a></h3>
+                            </div>
+                        </div>';
+                $success = false;   
+            } elseif (! isset ( $_REQUEST ['download-version'] ) || ! isset ( $_REQUEST ['download-description'] )) {
 				echo '
                     <div class="row clearfix">
                         <div class="header"><h1 class="error">Download Editor - Error</h1></div>
@@ -62,50 +75,65 @@ if (isset ( $_REQUEST ['delete'] )) {
                             </div>
                         </div>';
                 $success = false;   
+            } elseif (! isset ( $_REQUEST ['download-name'] ) && ( isset ( $_REQUEST ['disp-name'] ) && $_REQUEST ['disp-name'] == 1 )) {
+				echo '
+                    <div class="row clearfix">
+                        <div class="header"><h1 class="error">Download Editor - Error</h1></div>
+                        <div class="col double-col-2">
+                            <div class="text">
+                                <h3 class="error">Download name must be provided if it is to be shown!</h3>
+                                <br/><br/>
+                                <h3><a href="/' . $pageurl . '?downloads&downloadid=' . $_REQUEST ['downloadid'] . '">Return</a></h3>
+                            </div>
+                        </div>';
+                $success = false; 
             } else {
                 if ( ! file_exists( dirname( $_SERVER{'DOCUMENT_ROOT'} ) . "/files_seedofandromeda_com/game/" . $_REQUEST ['downloadid'] ) ) {
                     mkdir ( dirname( $_SERVER{'DOCUMENT_ROOT'} ) . "/files_seedofandromeda_com/game/" . $_REQUEST ['downloadid'], 0755, true );
                 }
                 $extension;
-                if ( isset ( $_FILES['download'] ) && $_FILES['download']['size'] > 0 ) {
+                for ($i = 1; $i <= ( $_REQUEST ['download-number'] ); $i++) {
+                    $downloadIdentifier = 'download-' . $i;
+                    if ( isset ( $_FILES[$downloadIdentifier] ) && $_FILES[$downloadIdentifier]['size'] > 0 ) {
                     
-                    $allowedExts = array("zip", "exe");
-                    $temp = explode(".", $_FILES['download']['name']);
-                    $extension = end($temp);
+                        $allowedExts = array("zip");
+                        $temp = explode(".", $_FILES[$downloadIdentifier]['name']);
+                        $extension = "zip";
                             
-                    if (! in_array ( $extension, $allowedExts ) ) {
-                        echo '
-                            <div class="row clearfix">
-                                <div class="header"><h1 class="error">Download Editor - Error</h1></div>
-                                <div class="col double-col-2">
-                                    <div class="text">
-                                        <h3 class="error">Download file must be a zip or executable!</h3>
-                                        <br/><br/>
-                                        <h3><a href="/' . $pageurl . '?downloads&downloadid=' . $_REQUEST ['downloadid'] . '">Return</a></h3>
-                                    </div>
-                                </div>';
-                        $success = false;  
-                    } else if ( $_FILES['download']['error'] > 0 ) {
-                        echo '
-                            <div class="row clearfix">
-                                <div class="header"><h1 class="error">Download Editor - Error</h1></div>
-                                <div class="col double-col-2">
-                                    <div class="text">
-                                        <h3 class="error">Error: ' . $_FILES['download']['error'] . '</h3>
-                                        <br/><br/>
-                                        <h3><a href="/' . $pageurl . '?downloads&downloadid=' . $_REQUEST ['downloadid'] . '">Return</a></h3>
-                                    </div>
-                                </div>';
-                        $success = false;  
-                    } else {
+                        if (! in_array ( $extension, $allowedExts ) ) {
+                            echo '
+                                <div class="row clearfix">
+                                    <div class="header"><h1 class="error">Download Editor - Error</h1></div>
+                                    <div class="col double-col-2">
+                                        <div class="text">
+                                            <h3 class="error">Download files must be zips or executables!</h3>
+                                            <br/><br/>
+                                            <h3><a href="/' . $pageurl . '?downloads&downloadid=' . $_REQUEST ['downloadid'] . '">Return</a></h3>
+                                        </div>
+                                    </div>';
+                            $success = false;  
+                        } else if ( $_FILES[$downloadIdentifier]['error'] > 0 ) {
+                            echo '
+                                <div class="row clearfix">
+                                    <div class="header"><h1 class="error">Download Editor - Error</h1></div>
+                                    <div class="col double-col-2">
+                                        <div class="text">
+                                            <h3 class="error">Error: ' . $_FILES[$downloadIdentifier]['error'] . '</h3>
+                                            <br/><br/>
+                                            <h3><a href="/' . $pageurl . '?downloads&downloadid=' . $_REQUEST ['downloadid'] . '">Return</a></h3>
+                                        </div>
+                                    </div>';
+                            $success = false;  
+                        } else {
+                            if ( file_exists( dirname( $_SERVER{'DOCUMENT_ROOT'} ) . "/files_seedofandromeda_com/game/" . $_REQUEST ['downloadid'] . "_" . $i . "/SoA." . $extension ) ) {
+                                unlink ( dirname( $_SERVER{'DOCUMENT_ROOT'} ) . "/files_seedofandromeda_com/game/" . $_REQUEST ['downloadid'] . "_" . $i . "/SoA." . $extension );
+                            }
                                 
-                        if ( file_exists( dirname( $_SERVER{'DOCUMENT_ROOT'} ) . "/files_seedofandromeda_com/game/" . $_REQUEST ['downloadid'] . "/SoA." . $extension ) ) {
-                            unlink ( dirname( $_SERVER{'DOCUMENT_ROOT'} ) . "/files_seedofandromeda_com/game/" . $_REQUEST ['downloadid'] . "/SoA." . $extension );
+                            move_uploaded_file($_FILES[$downloadIdentifier]['tmp_name'],
+                                dirname( $_SERVER{'DOCUMENT_ROOT'} ) . "/files_seedofandromeda_com/game/" . $_REQUEST ['downloadid'] . "_" . $i . "/SoA." . $extension);
+                                
+                            $newDownloads[] = $i;                            
                         }
-                                
-                        move_uploaded_file($_FILES['download']['tmp_name'],
-                            dirname( $_SERVER{'DOCUMENT_ROOT'} ) . "/files_seedofandromeda_com/game/" . $_REQUEST ['downloadid'] . "/SoA." . $extension); 
-                            
                     }
                 }
                 if ( isset ( $_FILES['bgImage'] ) && $_FILES['bgImage']['size'] > 0 ) {
@@ -150,13 +178,13 @@ if (isset ( $_REQUEST ['delete'] )) {
                     }
                 }
                 if (isset ( $_REQUEST ['published'] ) && $_REQUEST ['published'] == 1) {
-                    if ( ! file_exists( dirname( $_SERVER{'DOCUMENT_ROOT'} ) . "/files_seedofandromeda_com/game/" . $_REQUEST ['downloadid'] . "/SoA." . $extension ) ) {
+                    if ( ! file_exists( dirname( $_SERVER{'DOCUMENT_ROOT'} ) . "/files_seedofandromeda_com/game/" . $_REQUEST ['downloadid'] . "_1/SoA." . $extension ) ) {
                         echo '
                             <div class="row clearfix">
                                 <div class="header"><h1 class="error">Download Manager - Error</h1></div>
                                 <div class="col double-col-2">
                                     <div class="text">
-                                        <h3 class="error">A download must be provided to publish!</h3>
+                                        <h3 class="error">At least one download must be provided to publish!</h3>
                                         <br/><br/>
                                         <h3><a href="/' . $pageurl . '?downloads&downloadid=' . $_REQUEST ['downloadid'] . '">Return</a></h3>
                                     </div>
@@ -177,26 +205,21 @@ if (isset ( $_REQUEST ['delete'] )) {
                     }
                 }
                 if ( $success ) {
-                    if ( isset ( $_FILES['download'] ) && $_FILES['download']['size'] > 0 ) {
-                        $query = $connection->prepare ( "UPDATE downloads SET version = ?, description = ?, url = ?, updatetime = ?, published = ? WHERE id = ?" );
+                    foreach($newDownloads as $i) {
+                        $query = $connection->prepare ( "UPDATE downloads SET download-count = ?, download-" . $i . "-text = ? WHERE id = ?");
 				        $query->execute ( array (
-						        $_REQUEST ['download-version'],
-						        $_REQUEST ['download-description'],
-						        "game/" . $_REQUEST ['downloadid'] . "/SoA." . $extension,
-						        time (),
-                                isset ( $_REQUEST ['published'] ) && $_REQUEST ['published'] == 1,
-						        $_REQUEST ['downloadid']
-				        ) );
-                    } else {
-                        $query = $connection->prepare ( "UPDATE downloads SET version = ?, description = ?, updatetime = ?, published = ? WHERE id = ?" );
-				        $query->execute ( array (
-						        $_REQUEST ['download-version'],
-						        $_REQUEST ['download-description'],
-						        time (),
-                                isset ( $_REQUEST ['published'] ) && $_REQUEST ['published'] == 1,
+                                $_REQUEST ['download-' . $i . '-text'],
 						        $_REQUEST ['downloadid']
 				        ) );
                     }
+                    $query = $connection->prepare ( "UPDATE downloads SET version = ?, description = ?, updatetime = ?, published = ? WHERE id = ?" );
+				    $query->execute ( array (
+						    $_REQUEST ['download-version'],
+						    $_REQUEST ['download-description'],
+						    time (),
+                            isset ( $_REQUEST ['published'] ) && $_REQUEST ['published'] == 1,
+						    $_REQUEST ['downloadid']
+				    ) );
                     header ( "Location: /" . $pageurl . "?downloads");
                 }
             }
@@ -258,19 +281,41 @@ enctype="multipart/form-data" method="post">
             </div>
         </div>
     </div>
+    <input type="hidden" name="download-number" value="1"/>
+    <div class="row clearfix">
+        <div class="divider"></div>
+        <div class="col double-col-2">
+            <label for="download-1">File:</label> 
+            <input id="download-1" value="1"
+		        type="file" name="download-1" />
+            <br/>
+            <br/>
+            <div class="text">
+	            <div id="download-1-text" class="edittitle"><?php echo $download["download-1-text"];?></div>
+            </div>
+            <br/>
+            <br/>
+            <div id="add-download" class="btn">
+                <div class="btn-content">
+                    <a href="#" onclick="addDownload();">Add Download</a>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row clearfix">
         <div class="divider"></div>
         <div class="col double-col-2">
             <div id="download-settings" class="text clearfix">
-                <label for="download">File:</label> 
-                <input id="download" value="1"
-		            type="file" name="download" />
-                <br/>
-                <br/>
                 <label for="bgImage">Background Image:</label> 
                 <input id="bgImage" value="1"
 					type="file" name="bgImage" />
                 <br/>
+                <br/>
+                <span>Display Name:</span> <div class="checkbox"> <input id="disp-name" value="1"
+		            type="checkbox" name="disp-name" <?php if($download["disp-name"] == "1") echo "checked";?> />
+		            <label for="disp-name"></label>
+                </div>
+                <br/> 
                 <br/>
                 <span>Publish Download:</span> <div class="checkbox"> <input id="published" value="1"
 		            type="checkbox" name="published" <?php if($download["published"] == "1") echo "checked";?> />
@@ -288,10 +333,8 @@ enctype="multipart/form-data" method="post">
         }
     }
 } else if (isset ( $_REQUEST ['newdownload'] )) {
-	$query = $connection->prepare ( "INSERT INTO downloads (version, description, timestamp) VALUES (?, ?, ?)" );
+	$query = $connection->prepare ( "INSERT INTO downloads (timestamp) VALUES (?)" );
 	$query->execute ( array (
-		"0.0.0",
-		"<p>Click here to write up a description of the download.</p>",
 		time ()
 	) );
 	$id = $connection->lastInsertId ();

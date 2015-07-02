@@ -58,12 +58,11 @@
     </div>
     <div class="col tri-col-2">
         <div class="text">
-            Matthew is the creative force behind the Seed of Andromeda website, and he 
-            also assists in the design of the game. Between sessions working on the
-            website's design he works on forum posts that have more text than a
-            novel as well as having occasional cracks at developing systems for the
-            website. Matthew is one of the more active devs on the forum and is
-            always willing to offer his perspective on an idea!
+            Matthew is the creative force behind the Seed of Andromeda website and one 
+            of those forces behind the design of SoA. Between sessions working on the
+            game's and website's design he works on forum posts that have more text than a
+            novel. Matthew is one of the more active devs on the forum and is always willing 
+            to offer his perspective on an idea!
             </div>
     </div>
 </div>
@@ -105,13 +104,13 @@
     </div>
 </div>
 
-<div class="row clearfix the-team">
+<!-- <div class="row clearfix the-team">
     <div class="header"><h1 class="name">Jesse Leskinen</h1><h3 class="title">&nbsp;- Programmer and Web Developer</h3></div>
     <div class="col tri-col-2">
         <div class="text">
-            Jesse is an incredibly talented web developer, and is working on the backend of the website, 
+            Jesse is an incredibly talented web developer, and works on the backend of the website, 
             as well as integration between the game and the mod respository used by the forums. His work 
-            will help make the site become a much more smooth experience and bring a unique way of tackling 
+            helps make the site become a much more smooth experience and he brings a unique way of tackling 
             the challenges of such a project as this.
             </div>
     </div>
@@ -120,9 +119,9 @@
             <img src="/assets/images/profile_images/Jesses_dog_thumb_320x192.jpg" class="img medium-wide overflowfix"/>
         </a>
     </div>
-</div>
+</div> -->
 
-<div class="row clearfix the-team">
+<!-- <div class="row clearfix the-team">
     <div class="header"><h1 class="name">Patrick Cavanagh</h1><h3 class="title">&nbsp;- Community Manager</h3></div>
     <div class="col tri-col-1">
         <a href="/assets/images/profile_images/PatrickC.jpg" data-lightbox="images" title="Patrick Cavanagh">
@@ -137,7 +136,7 @@
             iron, so be warned - don't antagonise him, or a soft tickle may turn deadly.
             </div>
     </div>
-</div>
+</div> -->
 
 <!--<div class="row clearfix the-team">
     <div class="header"><h1 class="name">Nathan Matthews</h1><h3 class="title">&nbsp;- Programmer</h3></div>
@@ -161,10 +160,11 @@
     <div class="header"><h1 class="name">Cristian Zaloj</h1><h3 class="title">&nbsp;- Programmer</h3></div>
     <div class="col tri-col-2">
         <div class="text">
-                Cristian is a Romanian vampire ninja pirate currently studying
+            Cristian is a Romanian vampire ninja pirate currently studying
             at Cornell. He has a good background in game development, and he has
             even made a voxel RTS! Cristian knows quite a few programming languages,
-            and is going to surely be a great programmer on the team!
+            and is a massively contributing member of the team - having done much of 
+            the work developing the engine behind SoA.
             </div>
     </div>
     <div class="col tri-col-1">
@@ -183,13 +183,12 @@
     </div>
     <div class="col tri-col-2">
         <div class="text">
-                Brian is a seasoned software
-            engineer who has many years of programming experience. He has worked on
-            software for planes, trains, automobiles, biometric hand scanners, big data,
-            and more! Brian is quite a busy guy, but he has kindly offered his assistance
-            to the SoA team. Brian will help with systems programming, and will provide
+            Brian is a seasoned software engineer who has many years of programming experience. 
+            He has worked on software for planes, trains, automobiles, biometric hand scanners, 
+            big data, and more! Brian is quite a busy guy, but he has kindly offered his assistance
+            to the SoA team. Brian helps with systems programming, and provides
             the other devs with helpful software engineering advice. Brian's experience
-            will surely help us all grow as a team!
+            is helping us all grow as a team!
             </div>
     </div>
 </div>
@@ -201,7 +200,7 @@
                 Jeremy is the producer of video media we create and release. He has experience 
                 with audio and vdeo editing as well as server management - he is going to host 
                 the first dedicated SoA team server when multiplayer is implemented! Jeremy's 
-                dedication and talent will ensure our media is of the highest quality!
+                dedication and talent ensures our media is of the highest quality!
             </div>
     </div>
     <div class="col tri-col-1">
@@ -224,7 +223,7 @@
             who has been working on his own game engine in Java! He is the lead programmer for
             the robotics team associated with his high school, and he even teaches other students
             how to program! He has experience with a wide range of programming languages and
-            APIs, and he since he is a fast learner he will likely make great progress
+            APIs, and since he is a fast learner he has made great progress
             on the SoA team!
             </div>
     </div>
@@ -253,7 +252,7 @@
         <div class="text">
             Wisp is a hobbyist musician of awesome talent, making music 
             for the enjoyment of it! Alongside his personal music, Wisp 
-            will be making background music for the soundtrack of Seed of
+            makes background music for the soundtrack of Seed of
             Andromeda!
         </div>
     </div>
@@ -264,10 +263,47 @@
     </div>
 </div>
 
+<div class="row clearfix the-team">
+    <div class="header"><h1 class="name">Michael Abrams</h1><h3 class="title">&nbsp;- Community Manager</h3></div>
+    <div class="col tri-col-1">
+        <a href="/assets/images/profile_images/MichaelA.jpg" data-lightbox="images" title="Michael Abrams">
+            <img src="/assets/images/profile_images/MichaelA_thumb_320x192.jpg" class="img medium-wide overflowfix"/>
+        </a>
+    </div>
+    <div class="col tri-col-2">
+        <div class="text">
+            Michael has been good friends with Ben ever since they met in freshman year of
+            college in the Drumline for UTK. He's a fun guy with a great sense of humor,
+            and has the most glorious red beard ever. Michael manages social media and
+            community aspects such as the IndieDB, Facebook, Twitter, and helps organise
+            and create blog posts and videos!
+            </div>
+    </div>
+</div>
+
+<div class="row clearfix the-team">
+    <div class="header"><h1 class="name">Dylan Scheltens</h1><h3 class="title">&nbsp;- Intern Programmer</h3></div>
+    <div class="col tri-col-2">
+        <div class="text">
+            Dylan may be young, but he's a fast learner with lots of talent to boot! He
+            started programming with PHP when he was 9, making small apps and widgets, then
+            moved on to making more complex things. He has experience modding Minecraft,
+            and has even created his own simple voxel engines in Java, C#, and C++ with OpenGL!
+            </div>
+    </div>
+    <div class="col tri-col-1">
+        <a href="/assets/images/profile_images/DylanS.jpg" data-lightbox="images" title="Dylan Scheltens">
+            <img src="/assets/images/profile_images/DylanS_thumb_320x192.jpg" class="img medium-wide overflowfix"/>
+        </a>
+    </div>
+</div>
+
 <div class="row clearfix the-contributors">
     <div class="header"><h1>Contributors</h1></div>
     <div class="col double-col-2">
         <div class="text">
+            <h3 class="contributor">Jesse Leskinen</h3>
+            <h3 class="contributor">Patrick Cavanagh</h3>
             <h3 class="contributor">Isaque Dutra</h3>
             <h3 class="contributor">Nathan Matthews</h3>
         </div>

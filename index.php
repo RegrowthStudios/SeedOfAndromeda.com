@@ -8,8 +8,8 @@ $loggedIn = $sdk->isLoggedIn ();
 $userinfo = $sdk->getUser ();
 $visitor = $sdk->getVisitor ();
 
-$groups = explode ( ",", $userinfo ["secondary_group_ids"] );
-$groups [] = $userinfo ["user_group_id"];
+$groups = explode ( ",", $userinfo ["secondary_group_ids"] ?? "" );
+$groups [] = $userinfo ["user_group_id"] ?? array();
 $manageOwnBlogsGroups = array (
     7,
     13 
